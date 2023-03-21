@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainPageController;
 use App\Http\Controllers\LoginController;
@@ -25,3 +26,4 @@ Route::post('/login',[LoginController::class,'check']);
 Route::get('/homePage',[HomePageController::class,'index']);
 Route::post('/homePage',[HomePageController::class,'logout']);
 Route::get('/mainPage',[MainPageController::class,'index']);
+Route::get('/index',[Controller::class,'index']);
