@@ -1,10 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\tbl_account;
 use Illuminate\Http\Request;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Input;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Symfony\Component\Console\Helper\Table;
 use Validator;
 
@@ -16,20 +19,34 @@ class LoginController extends Controller
         return view('page.login');
     }
 
-    function login(Request $request)
-    {
-        $request->validate([
-            'email' => 'required',
-            'password' => 'required'
-        ]);
-
-        $credentials = $request->only('email','password');
-        if(!Auth::attempt($credentials)){ 
-            return redirect('login');
-        }else{
-            return redirect('homePage');
-        }
+    public function email(){
+        return 'email';
     }
+
+    function check(Request $request)
+    {
+    //    return $request->input();
+       
+       $request->validate([
+           'email' =>'required|email',
+           'password' =>'required|min:3',
+       ]);
+
+       $userInfo = tbl_account::where('email','=',$request->email)->first();
+
+       if(!$userInfo){
+            return redirect()->back()->with('fail','Email or Password invalid');
+       }else{
+            $password = Hash::check('password',$userInfo->password);
+        
+        if($userInfo && $password){
+            $request->session()->put('LoggedUser',$userInfo -> id);
+            return redirect('homePage');
+        }else{
+            return redirect()->back()->with('fail','Email or Password invalid');
+        }
+       }
+    } 
 
     function logout()
     {

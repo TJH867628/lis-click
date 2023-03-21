@@ -16,8 +16,9 @@
             <h1>Welcome to LIS system</h1>
         </div>
         <div>
-            <form action="homePage.php" method="post">  
-                <a href="mainPage.php"><button type="button" name="signOut">Sign Out</button></a>
+            <form action="homePage" method="post">  
+                @csrf
+                <button type="submit" name="signOut">Sign Out</button>
             </form>
         </div>
         <div>
