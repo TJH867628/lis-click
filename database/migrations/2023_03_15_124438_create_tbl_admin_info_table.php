@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('adminID');
             $table->string('IC_No');
-            $table->string('name');
+            $table->string('name',500);
             $table->string('email');
             $table->string('adminRole');
             $table->string('status');

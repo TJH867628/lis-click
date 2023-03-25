@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('reciewerID')->unique();
             $table->string('IC_No');
             $table->string('email');
-            $table->string('name');
+            $table->string('name',500);
             $table->string('title');
             $table->string('organizationName');
             $table->string('organizationAddress');

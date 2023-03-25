@@ -11,16 +11,4 @@ class MainPageController extends Controller
         return view('page.mainPage');
     }
 
-    function button()
-    {
-        if(isset($_POST['signUp']))
-        {
-            return redirect('/registration');
-            
-        }elseif(isset($_POST['login']))
-        {
-            return redirect('/login');
-        }
-    }
-
 }

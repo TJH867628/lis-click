@@ -17,7 +17,7 @@ class RegistrationController extends Controller
     public function store(request $request)
     {
         $email = $request -> input('email');//get email from user
-        // $password = $request -> input('password');
+        $password = $request -> input('password');
         $name = $request -> input('name');//get name from user
         $IC_No = $request -> input('IC_No');//get IC_No from user
         $phoneNumber = $request -> input('phoneNumber');//get Phone Number from user
@@ -28,7 +28,7 @@ class RegistrationController extends Controller
         $category = $request -> input('category');//get category from user
         $date = now();//get timestamp now
 
-        $hashedPassword = Hash::make('password');//encrypt the password that input by user using "Hash:make" function
+        $hashedPassword = Hash::make($password);//encrypt the password that input by user using "Hash:make" function
 
         //create a set of data that will be insert to database
         $data1 = array('email'=>$email,'password'=>$hashedPassword,'created_at'=>$date,'updated_at'=>$date);

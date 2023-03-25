@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('accountID');
             $table->string('email')->unique();
-            $table->string('password');
+            $table->string('password',255);
+            $table->boolean('isAdmin')->default(0);
             $table->integer('extra1')->nullable();
             $table->string('extra2')->nullable();
             $table->string('extra3')->nullable();

@@ -13,7 +13,7 @@
   <body>
     <div class="center">
       <h1>Login</h1>
-      <form method="post">
+      <form method="post" >
       @csrf
         <div class="txt_field">
           <input type="text" id="email" name="email" required>
@@ -25,10 +25,15 @@
           <span></span>
           <label>Password</label>
         </div>
-        <div class="pass">Forgot Password?</div>
+        @if(Session::get('fail'))
+        <div class="error">
+         <span>Email or Password Invalid</span><br>
+        </div>
+        @endif
+        <br><div class="pass">Forgot Password?</div>
         <input type="submit" value="Login">
         <div class="signup_link">
-          Don't have an account? <a href="#">Sign Up</a>
+          Don't have an account? <a href="registration">Sign Up</a>
         </div>
       </form>
     </div>

@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('tbl_participants_info', function (Blueprint $table) {
             $table->id();
             $table->integer('no');
-            $table->string('participantsID')->unique();
+            $table->string('participantsID')->unique()->nullable();
             $table->string('email')->unique();
             $table->string('IC_No');
-            $table->string('name');
+            $table->string('name',500);
             $table->string('title');
             $table->string('phoneNumber');
             $table->string('organizationAddress');

@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainPageController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\HomePageController;
+use App\Http\Controllers\RegisterAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,3 +29,6 @@ Route::get('/homePage',[HomePageController::class,'index']);
 Route::post('/homePage',[HomePageController::class,'logout']);
 Route::get('/mainPage',[MainPageController::class,'index']);
 Route::get('/index',[Controller::class,'index']);
+Route::get('/registerAdmin',[RegisterAdminController::class,'index']);
+Route::post('/registerAdmin',[RegisterAdminController::class,'store']);
+Route::get('/adminHomePage',[AdminController::class,'index']);

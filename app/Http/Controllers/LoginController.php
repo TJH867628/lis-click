@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\tbl_account;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Input;
+use Symfony\Component\Console\Input\Input;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\Console\Helper\Table;
@@ -25,27 +25,25 @@ class LoginController extends Controller
 
     function check(Request $request)
     {
-    //    return $request->input();
-       
-       $request->validate([
-           'email' =>'required|email',
-           'password' =>'required|min:3',
-       ]);
+        $email = $request->input('email');
+        $password = $request->input('password');
+        $userInfo = DB::table('tbl_account')->where('email', $email)->first();
 
-       $userInfo = tbl_account::where('email','=',$request->email)->first();
-
-       if(!$userInfo){
-            return redirect()->back()->with('fail','Email or Password invalid');
-       }else{
-            $password = Hash::check('password',$userInfo->password);
-        
-        if($userInfo && $password){
-            $request->session()->put('LoggedUser',$userInfo -> id);
+        if ($userInfo && Hash::check($password, $userInfo->password)) {
+            if($userInfo->isAdmin === 0)
+            {
+            $request->session()->put('LoggedUser', $userInfo->email);
             return redirect('homePage');
-        }else{
-            return redirect()->back()->with('fail','Email or Password invalid');
+            
+            } else if($userInfo->isAdmin === 1){
+
+                return redirect('adminHomePage');
+            }
+        }   else {
+
+            return redirect()->back()->with('fail','Email or Password is Invalid');
         }
-       }
+       
     } 
 
     function logout()
