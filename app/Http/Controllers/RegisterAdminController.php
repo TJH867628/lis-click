@@ -18,13 +18,9 @@ class RegisterAdminController extends Controller
         $name = $request -> input('name');//get name from Super Admin
         $IC_No = $request -> input('IC_No');//get IC_No from Super Admin
         $phoneNumber = $request -> input('phoneNumber');//get Phone Number from Super Admin
-        $title = $request -> input('title');//get title from Super Admin
-        $address = $request -> input('address');//get address from Super Admin
-        $postcode = $request -> input('postcode');//get postcode from Super Admin
-        $nation = $request -> input('nation');//get nation from Super Admin
         $date = now();//get timestamp now
 
-        $hashedPassword = Hash::make($password);//encrypt the password that input by user using "Hash:make" function
+        $hashedPassword = hash('sha512',$password);//encrypt the password that input by user using "Hash:make" function
 
         //create a set of data that will be insert to database
         $data1 = array('email'=>$email,'password'=>$hashedPassword,'isAdmin'=> 1 ,'created_at'=>$date,'updated_at'=>$date);

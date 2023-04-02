@@ -24,16 +24,17 @@ class RegistrationController extends Controller
         $title = $request -> input('title');//get title from user
         $address = $request -> input('address');//get address from user
         $postcode = $request -> input('postcode');//get postcode from user
-        $nation = $request -> input('nation');//get nation from user
+        $country = $request -> input('country');//get country from user
+        $state = $request -> input('state');//get state from user
         $category = $request -> input('category');//get category from user
         $date = now();//get timestamp now
 
-        $hashedPassword = Hash::make($password);//encrypt the password that input by user using "Hash:make" function
+        $hashedPassword = hash('sha512',$password);//encrypt the password that input by user using "Hash:make" function
 
         //create a set of data that will be insert to database
         $data1 = array('email'=>$email,'password'=>$hashedPassword,'created_at'=>$date,'updated_at'=>$date);
         //create a set of data that will be insert to database
-        $data2 = array('email'=>$email,'IC_No'=>$IC_No,'name'=>$name,'title'=>$title,'phoneNumber'=>$phoneNumber,'organizationAddress'=>$address,'postcode'=>$postcode,'nation'=>$nation,'participantsCategory'=>$category,'dateOfRegister'=>$date,'created_at'=>$date,'updated_at'=>$date);
+        $data2 = array('email'=>$email,'IC_No'=>$IC_No,'name'=>$name,'title'=>$title,'phoneNumber'=>$phoneNumber,'organizationAddress'=>$address,'postcode'=>$postcode,'state'=>$state,'country'=>$country,'participantsCategory'=>$category,'dateOfRegister'=>$date,'created_at'=>$date,'updated_at'=>$date);
         //insert the data to database with specified table and the dataset that have been create
         DB::table('tbl_account')->insert($data1);
         //insert the data to database with specified table and the dataset that have been create

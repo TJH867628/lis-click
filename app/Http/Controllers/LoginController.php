@@ -25,19 +25,26 @@ class LoginController extends Controller
 
     function check(Request $request)
     {
+
+        $this->middleware('never_cache');
         $email = $request->input('email');
-        $password = $request->input('password');
+        $password = hash('sha512',$request->input('password'));
         $userInfo = DB::table('tbl_account')->where('email', $email)->first();
 
-        if ($userInfo && Hash::check($password, $userInfo->password)) {
+        if ($userInfo && DB::table('tbl_account')->where($userInfo->password,$password)) {
             if($userInfo->isAdmin === 0)
             {
             $request->session()->put('LoggedUser', $userInfo->email);
             return redirect('homePage');
             
             } else if($userInfo->isAdmin === 1){
-
-                return redirect('adminHomePage');
+                $AdminInfo = DB::table('tbl_admin_info')->where('email',$email)->first();
+                if($AdminInfo->adminRole === "Super"){
+                    $request->session()->put('LoggedUser', $userInfo->email);
+                    return redirect('superAdminHomePage');
+                }else{
+                    return redirect('adminHomePage');
+                }
             }
         }   else {
 

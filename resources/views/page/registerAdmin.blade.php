@@ -35,8 +35,8 @@
                 <label for="title" class="register">Title</label><br>
                 <input type="text" name="title" id="title" placeholder="Dr./Mr/Mrs"><br>
                 
-                <label for="nation">Nation</label><br>
-                <select name="nation" id="nation">
+                <label for="country">Country</label><br>
+                <select name="country" id="country">
                     <option value="Malaysia">Malaysia</option>
                     <option value="Indonesia">Indonesia</option>
                 </select><br>

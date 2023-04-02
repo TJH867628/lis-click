@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('nation', function (Blueprint $table) {
-            //
+        Schema::table('tbl_participants_info', function (Blueprint $table) {
+            $table->renameColumn('country','nation');
         });
     }
 };

@@ -3,6 +3,11 @@
   <head>
     <meta charset="utf-8">
     <title>LOGIN</title>
+    <script>
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
+    </script>   
     <link rel="stylesheet" href="/css/loginpage_style.css">
     <style>
       
@@ -13,7 +18,7 @@
   <body>
     <div class="center">
       <h1>Login</h1>
-      <form method="post" >
+      <form method="post" autocomplete="off" >
       @csrf
         <div class="txt_field">
           <input type="text" id="email" name="email" required>
@@ -40,3 +45,5 @@
 
   </body>
 </html>
+
+ 
