@@ -3,11 +3,6 @@
   <head>
     <meta charset="utf-8">
     <title>LOGIN</title>
-    <script>
-        if (window.history.replaceState) {
-            window.history.replaceState(null, null, window.location.href);
-        }
-    </script>   
     <link rel="stylesheet" href="/css/loginpage_style.css">
     <style>
       

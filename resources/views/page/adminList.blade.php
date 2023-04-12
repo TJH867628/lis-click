@@ -65,30 +65,35 @@
                         <input type="text" onchange="filterTable(1, this.value)" placeholder="Search Name">
                     </th>
                     <th>
+                        Phone Number<br>
+                        <input type="text" onchange="filterTable(2, this.value)" placeholder="Search Phone Number">
+                    </th>
+                    <th>
                         Status<br>
-                        <input type="text" onchange="filterTable(2, this.value)" placeholder="Search Status">
+                        <input type="text" onchange="filterTable(3, this.value)" placeholder="Search Status">
                     </th>
                     <th>
                         Role<br>
-                        <input type="text" onchange="filterTable(3, this.value)" placeholder="Search Role">
+                        <input type="text" onchange="filterTable(4, this.value)" placeholder="Search Role">
                     </th>
                     <th>
                         Ic No<br>
-                        <input type="text" onchange="filterTable(4, this.value)" placeholder="Search IC No">
+                        <input type="text" onchange="filterTable(5, this.value)" placeholder="Search IC No">
                     </th>
                     <th>
                         Created At<br>
-                        <input type="text" onchange="filterTable(5, this.value)" placeholder="Search Created At">
+                        <input type="text" onchange="filterTable(6, this.value)" placeholder="Search Created At">
                     </th>
                     <th>
                         Updated At<br>
-                        <input type="text" onchange="filterTable(6, this.value)" placeholder="Search Updated At">
+                        <input type="text" onchange="filterTable(7, this.value)" placeholder="Search Updated At">
                     </th>
                 </tr>
                 @foreach($admin as $admin)
                 <tr>
                     <td>{{ $admin->email }}</td>
                     <td>{{ $admin->name }}</td>
+                    <td>{{ $admin->phoneNumber }}</td>
                     <td>{{ $admin->status }}</td>
                     <td>{{ $admin->adminRole }}</td>
                     <td>{{ $admin->IC_No }}</td>

@@ -39,11 +39,16 @@ class LoginController extends Controller
             
             } else if($userInfo->isAdmin === 1){
                 $AdminInfo = DB::table('tbl_admin_info')->where('email',$email)->first();
-                if($AdminInfo->adminRole === "Super"){
-                    $request->session()->put('LoggedUser', $userInfo->email);
-                    return redirect('superAdminHomePage');
+                if($AdminInfo->status === 1){//check the status of admin
+                    if($AdminInfo->adminRole === "Super"){//check the role of admin
+                        $request->session()->put('LoggedUser', $userInfo->email);
+                        return redirect('superAdminHomePage');
+                    }else{
+                        return redirect('adminHomePage');
+                    }
                 }else{
-                    return redirect('adminHomePage');
+                    // return redirect("login")
+                    echo '<h1>You Admin Status Is Not Active.<br>please contact with LIS admin department</h1>';
                 }
             }
         }   else {
