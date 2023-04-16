@@ -7,6 +7,7 @@ use App\Http\Controllers\MainPageController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\HomePageController;
+use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegisterAdminController;
 use App\Http\Controllers\SuperAdminController;
 
@@ -35,3 +36,4 @@ Route::post('/registerAdmin',[RegisterAdminController::class,'store']);
 Route::get('/adminHomePage',[AdminController::class,'index']);
 Route::get('/superAdminHomePage',[SuperAdminController::class,'index']);
 Route::get('/adminList',[SuperAdminController::class,'adminList'])->name('adminList');
+Route::get('/logout',[LogoutController::class,'logout']);

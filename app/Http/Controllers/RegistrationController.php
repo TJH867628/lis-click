@@ -11,6 +11,7 @@ class RegistrationController extends Controller
     //   
     function index()
     {
+        session()->start();
         return view('page.registration');
     }
 

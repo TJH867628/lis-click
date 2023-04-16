@@ -19,6 +19,7 @@
                 border: 1px solid black;
             }
             
+            
             table{
                 margin-top: 50px;
                 display: flex;
@@ -107,19 +108,19 @@
     <!-- Bootstrap core JS-->
     <script>
        function filterTable(columnIndex, inputText) {
-    var table = document.querySelector("table");
-    var rows = table.getElementsByTagName("tr");
-    for (var i = 1; i < rows.length; i++) {
-        var row = rows[i];
-        var cell = row.getElementsByTagName("td")[columnIndex];
-        if (cell) {
-            var cellText = cell.textContent.toLowerCase() || cell.innerText.toLowerCase();
-            if (cellText.indexOf(inputText.toLowerCase()) > -1) {
-                row.style.display = "";
-            } else {
-                row.style.display = "none";
+            var table = document.querySelector("table");
+            var rows = table.getElementsByTagName("tr");
+            for (var i = 1; i < rows.length; i++) {
+                var row = rows[i];
+                var cell = row.getElementsByTagName("td")[columnIndex];
+                if (cell) {
+                    var cellText = cell.textContent.toLowerCase() || cell.innerText.toLowerCase();
+                    if (cellText.indexOf(inputText.toLowerCase()) > -1) {
+                        row.style.display = "";
+                    } else {
+                        row.style.display = "none";
+                    }
+                }
             }
         }
-    }
-}
     </script>

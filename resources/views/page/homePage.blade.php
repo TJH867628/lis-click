@@ -18,7 +18,10 @@
             <!-- Navigation-->
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div class="container px-5">
-                    <a class="navbar-brand" href="index.html">Liga Ilmu Serantau</a>
+                    <a class="navbar-brand" href="/homePage">Liga Ilmu Serantau</a>
+                    <div style="color:white; font-size:30px; position:fixed; margin-left:200px;">
+                        <p>Hi , {{ $userSession }}</p>
+                    </div>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -38,7 +41,7 @@
                             <li class="nav-item"><a class="nav-link" href="pricing.html">Registration</a></li>
                             <li class="nav-item"><a class="nav-link" href="faq.html">Contact Us</a></li>
                             <div class="d-grid gap-8 d-sm-flex justify-content-sm-center justify-content-xl-start">
-                                <!-- <a class="btn btn-primary btn-lg px-4 me-3" href="login.html">Login</a> -->
+                                <a class="btn btn-primary btn-lg px-4 me-3" href="/logout">logout</a>
                             </div>
                         </ul>
                     </div>

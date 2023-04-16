@@ -8,13 +8,24 @@ class SuperAdminController extends Controller
 {
     //
     public function index(){
-        return view('page.superAdmin_homePage');
+        if(session()->has("LoggedSuperAdmin")){
+            session()->start();
+            $adminSession = session()->get('LoggedSuperAdmin');
+            return view('page.superAdmin_HomePage',['adminSession'=>$adminSession]);
+        }else{
+            return redirect('login')->with('fail','Login Session Expire,Please Login again');
+        }
     }
 
     public function adminList(){
-        $adminInfo = tbl_admin_info::all();
-
-        return view('page.adminList',['admin' => $adminInfo]);
+        if(session()->has("LoggedSuperAdmin")){
+            session()->start();
+            $adminSession = session()->get('LoggedSuperAdmin');
+            $adminInfo = tbl_admin_info::all();
+            return view('page.adminList',['adminSession'=>$adminSession,'admin' => $adminInfo]);
+        }else{
+            return redirect('login')->with('fail','Login Session Expire,Please Login again');
+        }
     }
 
    

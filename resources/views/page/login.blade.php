@@ -25,9 +25,9 @@
           <span></span>
           <label>Password</label>
         </div>
-        @if(Session::get('fail'))
+        @if($message = Session::get('fail'))
         <div class="error">
-         <span>Email or Password Invalid</span><br>
+         <span>{{ $message }}</span><br>
         </div>
         @endif
         <br><div class="pass">Forgot Password?</div>

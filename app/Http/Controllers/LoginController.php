@@ -25,8 +25,7 @@ class LoginController extends Controller
 
     function check(Request $request)
     {
-
-        $this->middleware('never_cache');
+        $request->session()->start();
         $email = $request->input('email');
         $password = hash('sha512',$request->input('password'));
         $userInfo = DB::table('tbl_account')->where('email', $email)->first();
@@ -38,17 +37,18 @@ class LoginController extends Controller
             return redirect('homePage');
             
             } else if($userInfo->isAdmin === 1){
+                
                 $AdminInfo = DB::table('tbl_admin_info')->where('email',$email)->first();
                 if($AdminInfo->status === 1){//check the status of admin
                     if($AdminInfo->adminRole === "Super"){//check the role of admin
-                        $request->session()->put('LoggedUser', $userInfo->email);
+                        $request->session()->put('LoggedSuperAdmin', $userInfo->email);
                         return redirect('superAdminHomePage');
                     }else{
+                        $request->session()->put('LoggedAdmin', $userInfo->email);
                         return redirect('adminHomePage');
                     }
                 }else{
-                    // return redirect("login")
-                    echo '<h1>You Admin Status Is Not Active.<br>please contact with LIS admin department</h1>';
+                    return redirect()->back()->with('fail','Your Admin Status is not Active,Please contact with managment department');
                 }
             }
         }   else {
@@ -58,9 +58,5 @@ class LoginController extends Controller
        
     } 
 
-    function logout()
-    {
-        Auth::logout();
-        return redirect('mainPage');
-    }
+    
 }

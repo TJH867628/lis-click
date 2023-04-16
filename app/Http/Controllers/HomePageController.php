@@ -8,7 +8,15 @@ class homepageController extends Controller
 {
     function index()
     {
-        return view('page.homePage');
+        session()->start();
+        if(session()->has('LoggedUser')){
+            $userSession = session()->get('LoggedUser');
+            
+            return view('page.homePage',['userSession' => $userSession]);
+        }else
+        {
+            return redirect('login')->with('fail','Login expired,Please Login Again');
+        }
     }
 
     function logout()

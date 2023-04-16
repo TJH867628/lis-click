@@ -1,3 +1,7 @@
+<?php
+session()
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -19,6 +23,9 @@
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div class="container px-5">
                     <a class="navbar-brand" href="index.html">Liga Ilmu Serantau</a>
+                    <div style="color:white; font-size:30px; position:fixed; margin-left:500px;">
+                        <p>Hi ,{{ $adminSession }}</p>
+                    </div>
                     <h1 style="color:aqua; font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">Super Admin</h1>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -31,6 +38,9 @@
                                     <li><a class="dropdown-item" href="adminList">Admin List</a></li>
                                 </ul>
                             </li>
+                            <div class="d-grid gap-8 d-sm-flex justify-content-sm-center justify-content-xl-start">
+                                <a class="btn btn-primary btn-lg px-4 me-3" href="/logout">logout</a>
+                            </div>
                         </ul>
                     </div>
                 </div>
@@ -45,7 +55,6 @@
                                 <h1 class="display-5 fw-bolder text-white mb-2">Liga Ilmu Serantau 2023 9th International Conference</h1>
                                 <p class="lead fw-normal text-white-50 mb-4">Welcome to the 9th annual Liga Ilmu Serantau 2023, a milestone event that celebrates almost a decade of research, and collaboration. Since its inception, this conference has brought together experts, researchers, practitioners, and enthusiasts from across industries to explore the latest developments and trends in many fields. </p>
                                 <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
-                                    <a class="btn btn-primary btn-lg px-4 me-sm-3" href="#features">Register now</a>
                                 </div>
                             </div>
                         </div>

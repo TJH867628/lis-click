@@ -8,7 +8,12 @@ use Illuminate\Support\Facades\DB;
 class RegisterAdminController extends Controller
 {
     function index(){
-        return view('page.registerAdmin');
+        if(session()->has("LoggedSuperAdmin")){
+            $adminSession = session()->get('LoggedSuperAdmin');
+            return view('page.registerAdmin',['LoggedSuperAdmin',$adminSession]);
+        }else{
+            return redirect('login')->with('fail','Login Session Expire,Please Login again');
+        }
     }
     
     public function store(request $request)
@@ -32,6 +37,6 @@ class RegisterAdminController extends Controller
         DB::table('tbl_admin_info')->insert($data2);
 
         //redirect the user to login page
-        return redirect('login');
+        return redirect('superAdminHomePage');
     }
 }
