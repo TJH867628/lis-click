@@ -10,6 +10,9 @@ use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegisterAdminController;
 use App\Http\Controllers\SuperAdminController;
+use App\Http\Controllers\ConferencesController;
+use App\Http\Controllers\FaqController;
+use App\Http\Controllers\PublicationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,3 +40,7 @@ Route::get('/adminHomePage',[AdminController::class,'index']);
 Route::get('/superAdminHomePage',[SuperAdminController::class,'index']);
 Route::get('/adminList',[SuperAdminController::class,'adminList'])->name('adminList');
 Route::get('/logout',[LogoutController::class,'logout']);
+Route::get('/conferencesInfo',[ConferencesController::class,'conferencesInfo']);
+Route::get('/conferencesDownload',[ConferencesController::class,'conferencesDownload']);
+Route::get('/faq',[FaqController::class,'index']);
+Route::get('/publicationInfo',[PublicationController::class,'index']);
