@@ -18,7 +18,7 @@
             <!-- Navigation-->
             <nav class="shadow-sm navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container px-5">
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="/homePage">
                         <img src="images/Logo1 (1).png" width="200px" alt="logoLIS2023" />
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
@@ -33,7 +33,7 @@
                             </ul>
                             <li class="nav-item"><a class="nav-link" href="/publicationInfo">Publication</a></li>
                             <li class="nav-item"><a class="nav-link" href="/faq">Contact Us</a></li>
-                            <a href="login.html" class="btn btn-primary">Hi , {{$userSession}}</a>
+                            <a href="/account" class="btn btn-primary">Hi , {{$userSession}}</a>
                             </div>
                         </ul>
                     </div>
@@ -48,9 +48,6 @@
                             <div class="my-5 text-center text-xl-start">
                                 <h1 class="display-5 fw-bolder text-black mb-2">Liga Ilmu Serantau 2023 9th International Conference</h1>
                                 <p class="lead fw-normal text-black-50 mb-4">Welcome to the 9th annual Liga Ilmu Serantau 2023, a milestone event that celebrates almost a decade of research, and collaboration. Since its inception, this conference has brought together experts, researchers, practitioners, and enthusiasts from across industries to explore the latest developments and trends in many fields. </p>
-                                <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
-                                    <a class="btn btn-primary btn-lg px-4 me-sm-3" href="#features">Register now</a>
-                                </div>
                             </div>
                         </div>
                         <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-5" src="images/backdrop1.jpg" alt="..." /></div>

@@ -17,23 +17,24 @@
     <body class="d-flex flex-column h-100">
         <main class="flex-shrink-0">
             <!-- Navigation-->
-            <nav class="shadow-sm navbar navbar-expand-lg navbar-light bg-light">
+            <nav id="dashboard" class="shadow-sm navbar navbar-expand-lg navbar-light bg-light fixed-top">
                 <div class="container px-5">
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="/">
                         <img src="images/Logo1 (1).png" width="200px" alt="logoLIS2023" />
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/homePage">Home</a></li>
                             <li class="nav-item dropdown">
-                            <ul class="dropdown-menu dropdown-menu-end bg-light" aria-labelledby="navbarDropdownBlog">      
-                                <li><a class="dropdown-item" href="/conferencesInfo">Conference Info</a></li>
-                                <li><a class="dropdown-item" href="/conferencesDownload">Downloads</a></li>
-                            </ul>
-                            <li class="nav-item"><a class="nav-link" href="/publicationInfo">Publication</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/faq">Contact Us</a></li>
-                            <a href="login.html" class="btn btn-primary">Hi , {{$userSession}}</a>
+                            <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Conference</a>
+                                <ul class="dropdown-menu dropdown-menu-end bg-light" aria-labelledby="navbarDropdownBlog">
+                                    <li><a class="dropdown-item" href="/conferencesInfo">Conference Info</a></li>
+                                    <li><a class="dropdown-item" href="/conferencesDownload">Downloads</a></li>
+                                    </ul>
+                                <li class="nav-item"><a class="nav-link" href="/publicationInfo">Publication</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/faq">Contact Us</a></li>
+                            <a href="/logout" class="btn btn-primary">Logout</a>
                             </div>
                         </ul>
                     </div>
@@ -42,7 +43,7 @@
 
             <!-- Header-->
             <header class="bg-light py-5">
-                <div class="container px-5">
+                <div class="container px-5 py-5 mt-5">
                     
                     <div class="text-center text-dark my-5">
                         <h2 class="fw-bolder">E-Jurnal</h2>
@@ -53,57 +54,58 @@
                                         <th scope="col">No</th>
                                         <th scope="col">List of Jurnal</th>
                                         <th scope="col"></th>
+                                        
                                     </tr>
                                     </thead>
                                     <tbody class="table-light">
                                     <tr>
                                         <th scope="row">1</th>
-                                        <td>LIS2015: Kelestarian Pendidikan Tanpa Sempadan</td>
+                                        <td>EDISI KHAS LIGA ILMU SERANTAU 2022</td>
                                         <td>
-                                            <a href="assets/Download/LIS2015.pdf" class="btn btn-primary mb-4" download="">Download</a>
+                                        <a href="conferences_info\Edisi Khas LIS22.pdf" class="btn btn-primary mb-4" download="">Download</a>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th scope="row">2</th>
-                                        <td>E-Jurnal LiS2016: Kelestarian Pendidikan Tanpa Sempadan</td>
+                                        <td>E-Jurnal LiS2021 : Empowering Research in The Pandemic Phase: Oppurtunies and Challenges</td>
                                         <td>
-                                        <a href="assets/Download/LIS 2016 Kota Batam.pdf" class="btn btn-primary mb-4" download="">Download</a>
+                                        <a href="conferences_info\Published LIS 2021 ISBN_eISSN.pdf" class="btn btn-primary mb-4" download="">Download</a>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th scope="row">3</th>
-                                        <td>E-Jurnal LiS2017: Mewacanakan Kebitaraan Ilmu</td>
+                                        <td>E-Jurnal LiS2019 : Enriching The Creativity of Research and Innovation Towards The Industrial Revolution of IR4.0</td>
                                         <td>
-                                        <a href="assets/Download/LIS2017.pdf" class="btn btn-primary mb-4" download="">Download</a>
+                                        <a href="conferences_info\JILID 1 E-JURNAL LIS2019.pdf" class="btn btn-primary mb-4" download="">Download</a>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th scope="row">4</th>
                                         <td>E-Jurnal LiS2018: Implementation of Competitive Research Toward Local Resources Based Industrialization </td>
                                         <td>
-                                        <a href="assets/Download/Prosiding_LIS_e-_Jurnal_LIS_Liga_Ilmu_Serantau_2018.pdf" class="btn btn-primary mb-4" download="">Download</a>
+                                        <a href="conferences_info\Prosiding_LIS_e-_Jurnal_LIS_Liga_Ilmu_Serantau_2018.pdf" class="btn btn-primary mb-4" download="">Download</a>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th scope="row">5</th>
-                                        <td>E-Jurnal LiS2019 : Enriching The Creativity of Research and Innovation Towards The Industrial Revolution of IR4.0</td>
+                                        <td>E-Jurnal LiS2017: Mewacanakan Kebitaraan Ilmu</td>
                                         <td>
-                                        <a href="assets/Download/JILID 1 E-JURNAL LIS2019.pdf" class="btn btn-primary mb-4" download="">Download</a>
+                                        <a href="conferences_info\LIS2017.pdf" class="btn btn-primary mb-4" download="">Download</a>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th scope="row">6</th>
-                                        <td>E-Jurnal LiS2021 : Empowering Research in The Pandemic Phase: Oppurtunies and Challenges</td>
+                                        <td>E-Jurnal LiS2016: Kelestarian Pendidikan Tanpa Sempadan</td>
                                         <td>
-                                        <a href="assets/Download/Published LIS 2021 ISBN_eISSN.pdf" class="btn btn-primary mb-4" download="">Download</a>
+                                        <a href="conferences_info\LIS 2016 Kota Batam.pdf" class="btn btn-primary mb-4" download="">Download</a>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th scope="row">7</th>
-                                        <td>EDISI KHAS LIGA ILMU SERANTAU 2022</td>
+                                        <td>LIS2015: Kelestarian Pendidikan Tanpa Sempadan</td>
                                         <td>
-                                        <a href="assets/Download/Edisi Khas LIS22.pdf" class="btn btn-primary mb-4" download="">Download</a>
-                                        </td>
+                                        <a href="conferences_info\LIS2015.pdf" class="btn btn-primary mb-4" download="">Download</a>
+                                        </td>                                      
                                     </tr>
                                     </tbody>
                                 </table>
@@ -129,7 +131,7 @@
                                         </div>
                                     </div>
                                     <div class="carousel-item">
-                                        <img class="d-block w-100 " src="assets/organizationchart2.png" alt="Second slide">
+                                        <img class="d-block w-100" src="assets/organizationchart2.png" alt="Second slide">
                                     </div>
                                 </div>
                                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -188,17 +190,25 @@
             </section>
         </main>
 
-        <!-- Footer-->
+       <!-- Footer-->
         <footer class="bg-dark py-4 mt-auto">
-            <div class="container px-5">
+            <div class="container px-2">
                 <div class="row align-items-center justify-content-between flex-column flex-sm-row">
                     <div class="col-auto"><div class="small m-0 text-white">© 2023 LIGA ILMU SERANTAU 2023. All Rights Reserved. Design by Politeknik Mersing</div></div>
                     <div class="col-auto">
-                        <a class="link-light small" href="#!">Privacy</a>
+                        <a class="link-light small" href="index.html">Home</a>
                         <span class="text-white mx-1">&middot;</span>
-                        <a class="link-light small" href="#!">Terms</a>
+                        <a class="link-light small" href="FeConference.html">Conference</a>
+                        <span class="text-white mx-1">&middot;</span>
+                        <a class="link-light small" href="FeDownload.html">Download</a>
+                        <span class="text-white mx-1">&middot;</span>
+                        <a class="link-light small" href="FePublication.html">Publication</a>
+                        <span class="text-white mx-1">&middot;</span>
+                        <a class="link-light small" href="FeRegistration.html">Register</a>
                         <span class="text-white mx-1">&middot;</span>
                         <a class="link-light small" href="FeFaq.html">Contact</a>
+                        <span class="text-white mx-1">&middot;</span>
+                        <a class="link-light small" href="FePrivacy.html">Privacy</a>
                     </div>
                 </div>
             </div>

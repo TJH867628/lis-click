@@ -23,6 +23,7 @@ class RegistrationController extends Controller
         $IC_No = $request -> input('IC_No');//get IC_No from user
         $phoneNumber = $request -> input('phoneNumber');//get Phone Number from user
         $title = $request -> input('title');//get title from user
+        $organizationName = $request -> input("organizationName");//get organizationName from user
         $address = $request -> input('address');//get address from user
         $postcode = $request -> input('postcode');//get postcode from user
         $country = $request -> input('country');//get country from user
@@ -35,7 +36,7 @@ class RegistrationController extends Controller
         //create a set of data that will be insert to database
         $data1 = array('email'=>$email,'password'=>$hashedPassword,'created_at'=>$date,'updated_at'=>$date);
         //create a set of data that will be insert to database
-        $data2 = array('email'=>$email,'IC_No'=>$IC_No,'name'=>$name,'title'=>$title,'phoneNumber'=>$phoneNumber,'organizationAddress'=>$address,'postcode'=>$postcode,'state'=>$state,'country'=>$country,'participantsCategory'=>$category,'dateOfRegister'=>$date,'created_at'=>$date,'updated_at'=>$date);
+        $data2 = array('email'=>$email,'IC_No'=>$IC_No,'name'=>$name,'title'=>$title,'phoneNumber'=>$phoneNumber,'organizationName'=>$organizationName,'organizationAddress'=>$address,'postcode'=>$postcode,'state'=>$state,'country'=>$country,'participantsCategory'=>$category,'dateOfRegister'=>$date,'created_at'=>$date,'updated_at'=>$date);
         //insert the data to database with specified table and the dataset that have been create
         DB::table('tbl_account')->insert($data1);
         //insert the data to database with specified table and the dataset that have been create

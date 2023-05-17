@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\tbl_participants_info;
 use Illuminate\Http\Request;
 
 class FaqController extends Controller
@@ -9,10 +10,12 @@ class FaqController extends Controller
     function index(){session()->start();
         if(session()->has('LoggedUser')){
             $userSession = session()->get('LoggedUser');
-            return view('page.faq',['userSession' => $userSession]);
+            $user = tbl_participants_info::where('email',$userSession)->first();
+            return view('page.faq',['userSession' => $userSession,'user' => $user]);
+
         }else
         {
-            return redirect('login')->with('fail','Login expired,Please Login Again');
+            return view('page.faqVisitor');
         }
     }
 }

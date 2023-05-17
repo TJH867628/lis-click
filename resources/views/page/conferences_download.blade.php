@@ -18,7 +18,7 @@
             <!-- Navigation-->
             <nav class="shadow-sm navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container px-5">
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="/homePage">
                         <img src="images/Logo1 (1).png" width="200px" alt="logoLIS2023" />
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
@@ -62,35 +62,35 @@
                                       <th scope="row">1</th>
                                       <td>LIS 2023 Author Guideline</td>
                                       <td>
-                                          <a href="assets/Download/LIS 2023 AUTHORs GUIDELINE .docx" class="btn btn-primary mb-4" download="">Download</a>
+                                          <a href="conferences_info\LIS 2023 AUTHORs GUIDELINE .docx" class="btn btn-primary mb-4" download="">Download</a>
                                       </td>
                                   </tr>
                                   <tr>
                                       <th scope="row">2</th>
                                       <td>LIS 2023 Full Paper Template</td>
                                       <td>
-                                      <a href="assets/Download/LIS2023_FULL-PAPER-TEMPLATE.docx" class="btn btn-primary mb-4 " download="">Download</a>
+                                      <a href="conferences_info\LIS2023_FULL-PAPER-TEMPLATE.docx" class="btn btn-primary mb-4 " download="">Download</a>
                                       </td>
                                   </tr>
                                   <tr>
                                       <th scope="row">3</th>
                                       <td>LIS 2023 Abstract Template</td>
                                       <td>
-                                      <a href="assets/Download/LIS2023_ABSTRACT-TEMPLATE.docx" class="btn btn-primary mb-4" download="">Download</a>
+                                      <a href="conferences_info\LIS2023_ABSTRACT-TEMPLATE.docx" class="btn btn-primary mb-4" download="">Download</a>
                                       </td>
                                   </tr>
                                   <tr>
                                       <th scope="row">4</th>
                                       <td>LIS 2023 Poster Guideline</td>
                                       <td>
-                                      <a href="assets/Download/LIS 2023 POSTER PRESENTATION GUIDELINE.docx" class="btn btn-primary mb-4" download="">Download</a>
+                                      <a href="conferences_info\LIS 2023 POSTER PRESENTATION GUIDELINE.docx" class="btn btn-primary mb-4" download="">Download</a>
                                       </td>
                                   </tr>
                                   <tr>
                                       <th scope="row">5</th>
                                       <td>LIS 2023 Poster Template</td>
                                       <td>
-                                      <a href="assets/Download/LIS 2023 poster presentation template.pptx" class="btn download btn-primary mb-4" download="">Download</a>
+                                      <a href="conferences_info\LIS 2023 POSTER PRESENTATION GUIDELINE.docx" class="btn download btn-primary mb-4" download="">Download</a>
                                       </td>
                                   </tr>
                                   </tbody>

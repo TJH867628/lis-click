@@ -28,9 +28,10 @@ class LoginController extends Controller
         $request->session()->start();
         $email = $request->input('email');
         $password = hash('sha512',$request->input('password'));
+        // print password
         $userInfo = DB::table('tbl_account')->where('email', $email)->first();
 
-        if ($userInfo && DB::table('tbl_account')->where($userInfo->password,$password)) {
+        if ($userInfo && $userInfo->password == $password) {
             if($userInfo->isAdmin === 0)
             {
             $request->session()->put('LoggedUser', $userInfo->email);

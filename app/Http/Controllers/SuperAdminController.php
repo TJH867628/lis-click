@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\tbl_admin_info;
+use App\Models\tbl_participants_info;
 use Illuminate\Http\Request;
 
 class SuperAdminController extends Controller
@@ -21,8 +22,19 @@ class SuperAdminController extends Controller
         if(session()->has("LoggedSuperAdmin")){
             session()->start();
             $adminSession = session()->get('LoggedSuperAdmin');
-            $adminInfo = tbl_admin_info::all();
+            $adminInfo  = tbl_admin_info::all();
             return view('page.adminList',['adminSession'=>$adminSession,'admin' => $adminInfo]);
+        }else{
+            return redirect('login')->with('fail','Login Session Expire,Please Login again');
+        }
+    }
+
+    public function participantsList(){
+        if(session()->has("LoggedSuperAdmin")){
+            session()->start();
+            $adminSession = session()->get('LoggedSuperAdmin');
+            $participantsInfo  = tbl_participants_info::all();
+            return view('page.participantsList',['adminSession'=>$adminSession,'participants' => $participantsInfo]);
         }else{
             return redirect('login')->with('fail','Login Session Expire,Please Login again');
         }

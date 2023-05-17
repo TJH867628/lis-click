@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
@@ -13,6 +14,7 @@ use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\ConferencesController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\PublicationController;
+use App\Http\Controllers\FullpaperController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,3 +46,9 @@ Route::get('/conferencesInfo',[ConferencesController::class,'conferencesInfo']);
 Route::get('/conferencesDownload',[ConferencesController::class,'conferencesDownload']);
 Route::get('/faq',[FaqController::class,'index']);
 Route::get('/publicationInfo',[PublicationController::class,'index']);
+Route::get('/fullpaper',[FullpaperController::class,'index']);
+Route::get('/account',[AccountController::class,'index']);
+Route::post('/updateProfile',[AccountController::class,'updateProfile'])->name('account.updateProfile');
+Route::post('/updatePassword',[AccountController::class,'updatePassword'])->name('account.updatePassword');
+Route::get('/participantsList',[SuperAdminController::class,'participantsList']);
+
