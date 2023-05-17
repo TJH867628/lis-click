@@ -33,6 +33,7 @@
                             </ul>
                             <li class="nav-item"><a class="nav-link" href="/publicationInfo">Publication</a></li>
                             <li class="nav-item"><a class="nav-link" href="/faq">Contact Us</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/account">My Profile</a></li>
                             <a href="/logout" class="btn btn-primary">Logout</a>
                             </div>
                         </ul>

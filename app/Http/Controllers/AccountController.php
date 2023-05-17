@@ -9,6 +9,8 @@ use App\Mail\VerificationCodeMail;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
+
 
 class AccountController extends Controller
 {
@@ -48,8 +50,21 @@ class AccountController extends Controller
             $updateData = array('IC_No'=>$IC_No,'name'=>$name,'title'=>$title,'phoneNumber'=>$phoneNumber,'organizationName'=>$organizationName,'organizationAddress'=>$address,'postcode'=>$postcode,'country'=>$country,'updated_at'=>$date);
             //insert the data to database with specified table and the dataset that have been create
             DB::table('tbl_participants_info')->where('email',$userSession)->update($updateData);
-
-            return redirect('account'); 
+            
+            if ($request->hasFile('profile_picture')) {
+                // Delete existing profile picture if it exists
+                if ($user->profile_picture) {
+                    Storage::disk('public')->delete($user->profile_picture);
+                }
+            
+                $file = $request->file('profile_picture');
+                $fileName = uniqid() . '.' . $file->getClientOriginalExtension();
+                $file->storeAs('profile_pictures', $fileName, 'public');
+            
+                // Update the profile picture path in the database
+                $user->profile_picture = 'storage/profile_pictures/' . $fileName;
+                $user->save();
+            }return redirect('account')->with('account-success','Profile Updated Successfully');
         }else{
             return redirect('login')->with('fail','Login Session Expire,Please Login again');
         }

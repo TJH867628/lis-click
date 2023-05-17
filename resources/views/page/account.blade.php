@@ -113,7 +113,7 @@
                                     </a>
                                     @endif
                                 </div>
-                                <form action="{{ route('account.updateProfile') }}" method="post">
+                                <form action="{{ route('account.updateProfile') }}" method="post" enctype="multipart/form-data">
                                     @csrf
                                     <div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
                                         @if (!Session::get('password-fail') && !Session::get('password-success'))    
@@ -122,8 +122,17 @@
                                         <div class="tab-pane fade" id="account" role="tabpanel" aria-labelledby="account-tab">
                                         @endif
                                             <h3 class="mb-4">Profile Settings</h3>
-                                            <div class="profile-picture">
-                                                <img src="images/ProfilePic.png" alt="Profile Picture" />
+                                            <div>
+                                                <div class="profile-picture">
+                                                    @if ($user->profile_picture)
+                                                        <img src="{{ asset($user->profile_picture) }}" alt="Profile Picture">
+                                                    @else
+                                                        <img src="images/ProfilePic.png" alt="Profile Picture" />
+                                                    @endif
+                                                </div>
+                                                <div>
+                                                    <input type="file" name="profile_picture" class="form-control">
+                                                </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-3">
@@ -229,6 +238,14 @@
                                                 });
                                                 </script>
                                             
+                                            </div>
+                                            @if(Session::get('account-success'))
+                                            <div class="success">
+                                                <span style="color: blue;">{{ Session::get('account-success') }}</span><br>
+                                            </div>
+                                            @endif
+                                            <div>
+                                                
                                             </div>
                                             <div>
                                                 <button class="btn btn-primary">Update</button>
