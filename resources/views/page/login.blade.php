@@ -20,6 +20,21 @@
             text-align: center;
             margin-bottom: 10px;
           }
+
+          .success{
+            border: 1px solid lightblue;
+            border-radius: 20px;
+            background-color: lightblue;
+            text-align: center;
+            margin-bottom: 10px;
+          }
+
+          .successText{
+            border-radius: 20px;
+            color: blue;
+            text-align: center;
+            margin-bottom: 10px;
+          }
         </style>
     </head>
     <body class="d-flex flex-column h-100 bg-light">
@@ -65,8 +80,12 @@
                 <div class="error">
                   <span class="errorText">{{ $message }}</span><br> 
                 </div>
+                @elseif ($message = Session::get('resetSuccess'))
+                <div class="success">
+                  <span class="successText">{{ $message }}</span><br> 
+                </div>
                 @endif
-                <div class="pass">Forgot Password?</div>
+                <a class="pass" href="/forgotPassword">Forgot Password?</a>
                 <input type="submit" value="Login">
                 <div class="signup_link">
                   Don't have an account? <a href="/registration">Sign Up</a>

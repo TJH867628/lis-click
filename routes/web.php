@@ -13,6 +13,7 @@ use App\Http\Controllers\RegisterAdminController;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\ConferencesController;
 use App\Http\Controllers\FaqController;
+use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\FullpaperController;
 
@@ -51,4 +52,11 @@ Route::get('/account',[AccountController::class,'index']);
 Route::post('/updateProfile',[AccountController::class,'updateProfile'])->name('account.updateProfile');
 Route::post('/updatePassword',[AccountController::class,'updatePassword'])->name('account.updatePassword');
 Route::get('/participantsList',[SuperAdminController::class,'participantsList']);
+Route::get('/forgotPassword',[ForgotPasswordController::class,'index']);
+Route::post('/forgotPassword',[ForgotPasswordController::class,'sendOTP']);
+Route::get('/confirmOTP', [ForgotPasswordController::class,'indexConfirmOTP'])->name("confirmOTP");
+Route::post('/confirmOTP', [ForgotPasswordController::class,'confirmOTP']);
+Route::get('/changePassword', [ForgotPasswordController::class,'indexChangePassword']);
+Route::post('/changePassword', [ForgotPasswordController::class,'changePassword']);
+
 
