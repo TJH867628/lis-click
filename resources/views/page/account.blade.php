@@ -65,9 +65,8 @@
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Registration</a>
                                         <ul class="dropdown-menu dropdown-menu-end bg-light" aria-labelledby="navbarDropdownBlog">
-                                            <li><a class="dropdown-item" href="FeLISregister.html">LIS Registration</a></li>
                                             <li><a class="dropdown-item" href="FePoster.html">Poster Submission</a></li>
-                                            <li><a class="dropdown-item" href="FeFullPaper.html">Full Paper Submission</a></li>
+                                            <li><a class="dropdown-item" href="/fullpaper">Full Paper Submission</a></li>
                                             <li><a class="dropdown-item" href="FeSubmissionList.html">Submission Status</a></li>
                                             </ul>
                                 <li class="nav-item"><a class="nav-link" href="/account">My Profile</a></li>

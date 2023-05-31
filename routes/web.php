@@ -48,6 +48,7 @@ Route::get('/conferencesDownload',[ConferencesController::class,'conferencesDown
 Route::get('/faq',[FaqController::class,'index']);
 Route::get('/publicationInfo',[PublicationController::class,'index']);
 Route::get('/fullpaper',[FullpaperController::class,'index']);
+Route::post('/fullpaper',[FullpaperController::class,'storeFullpaper']);
 Route::get('/account',[AccountController::class,'index']);
 Route::post('/updateProfile',[AccountController::class,'updateProfile'])->name('account.updateProfile');
 Route::post('/updatePassword',[AccountController::class,'updatePassword'])->name('account.updatePassword');
@@ -58,8 +59,4 @@ Route::get('/confirmOTP', [ForgotPasswordController::class,'indexConfirmOTP'])->
 Route::post('/confirmOTP', [ForgotPasswordController::class,'confirmOTP']);
 Route::get('/changePassword', [ForgotPasswordController::class,'indexChangePassword']);
 Route::post('/changePassword', [ForgotPasswordController::class,'changePassword']);
-Route::get('file',[FileController::class, 'index']);
-Route::post('upload',[FileController::class, 'upload']);
 
-
-// uyewqvbcxuiwhudcb iqebcewieuqc

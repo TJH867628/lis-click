@@ -61,19 +61,20 @@
                             <div class="row-register">
                                 <div class="col-lg-7">	
                                     <div class="contact">
-                                        <form class="form" name="enq" method="post" action="contact.php" onsubmit="return validation();">
+                                        <form class="form" name="form" enctype="multipart/form-data" method="post" onsubmit="return validation();">
+                                        @csrf
                                             <div class="row">
                                                 <!--Dropdown-->
                                                 <div class="form-group col-md-3">
                                                     <label class="category">Please CHOOSE your category :</label>
                                                     <select class="dropdown-option" name="category"  onclick="removeChooseoption()">
                                                         <option selected disabled>Choose</option>
-                                                        <option value="presenter">Paper Presentation & Publication</option>
-                                                        <option value="presenter">Paper Presentation ONLY</option>
-                                                        <option value="presenter">Poster Presentation ONLY</option>
-                                                        <option value="presenter">Publication ONLY</option>
-                                                        <option value="student">Student Presenter</option>
-                                                        <option value="audience">Audience Presenter</option>
+                                                        <option value="presenter & publication">Paper Presentation & Publication</option>
+                                                        <option value="paper presenter only">Paper Presentation ONLY</option>
+                                                        <option value="poster presenter only">Poster Presentation ONLY</option>
+                                                        <option value="publication only">Publication ONLY</option>
+                                                        <option value="student presenter">Student Presenter</option>
+                                                        <option value="audience presenter">Audience Presenter</option>
                                                     </select><br>
                                                 </div>
                                                 <!--End Dropdown-->
@@ -103,7 +104,7 @@
                                                 <!--Dropdown-->
                                                 <div class="form-group col-md-3">
                                                     <label class="category">Country :</label>
-                                                    <select id="country" class="dropdown-option" name="category"  onclick="removeChooseoption()">
+                                                    <select id="country" class="dropdown-option" name="country"  onclick="removeChooseoption()">
                                                         <option selected disabled>Choose</option>
                                                         <option value="malaysia">Malaysia</option>
                                                         <option value="indonesia">Indonesia</option>
@@ -117,7 +118,7 @@
                                                 <!--Dropdown-->
                                                 <div class="form-group col-md-4">
                                                     <label for="state">State :</label>
-                                                    <select id="state" class="dropdown-option" name="category"  onclick="removeChooseoption()">
+                                                    <select id="state" class="dropdown-option" name="country"  onclick="removeChooseoption()">
                                                         <option selected disabled>Choose</option>
                                                         <option value="">-- Select State --</option>
                                                     </select><br>
@@ -151,10 +152,10 @@
                                             </script>
 
                                                 <div class="form-group col-md-12">
-                                                    <input type="text" name="2nd-name" class="form-control" placeholder="Second Author's Name (CAPITAL LETTER)" required="required">
+                                                    <input type="text" name="2nd-name" class="form-control" placeholder="Second Author's Name (CAPITAL LETTER)" required="required" oninput="this.value = this.value.toUpperCase()">
                                                 </div>
                                                 <div class="form-group col-md-12">
-                                                    <input type="text" name="3rd-name" class="form-control" placeholder="Third Author's Name (CAPITAL LETTER)" required="required">
+                                                    <input type="text" name="3rd-name" class="form-control" placeholder="Third Author's Name (CAPITAL LETTER)" required="required" oninput="this.value = this.value.toUpperCase()">
                                                 </div>
                                                 <div class="form-group col-md-12">
                                                     <input type="text" name="paper-title" class="form-control" placeholder="FULL PAPER Title" required="required">
@@ -179,19 +180,17 @@
 
                                                 <!-- HTML button element that will trigger the file upload -->
                                                 <label class="upload">Please Upload FULL Paper :</label>
-                                                <p><em>Format : ".docx"</em></p>
+                                                <p><em>Format : ".docx / .pdf"</em></p>
                                                 <p><em>For more information, please <a href="FeDownload.html">click here.</a></em></p>
-                                                <form>
                                                 <div class="upload-sect">
-                                                    <input type="file" id="file-upload" name="file-upload">
+                                                    <input type="file" id="file-upload" name="file_upload">
                                                 </div>
-                                                </form>
 
                                                 <!-- HTML modal popup element -->
                                                 <div id="myModal" class="modal">
                                                 <div class="modal-content">
                                                     <span class="close">&times;</span>
-                                                    <p>Please upload a .docx file.</p>
+                                                    <p>Please upload a .docx or a .pdf file.</p>
                                                 </div>
                                                 </div>
 
@@ -211,10 +210,12 @@
                                                     const fileType = file.type;
 
                                                     // If the file type is not .docx, show the modal popup
-                                                    if (fileType !== "application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
-                                                    modal.style.display = "block";
-                                                    // Clear the file upload input
-                                                    this.value = null;
+                                                    if (fileType == "application/vnd.openxmlformats-officedocument.wordprocessingml.document" || fileType == "application/pdf") {
+                                                        null;
+                                                    }else{
+                                                        modal.style.display = "block";
+                                                        // Clear the file upload input
+                                                        this.value = null;
                                                     }
                                                 });
 
@@ -238,11 +239,12 @@
 
                                                 </div>
                                             </div>
-                                        </form>
                                         <!-- HTML button element that will trigger the modal popup -->
                                         <div class="col-md-12 text-center">
                                             <button type="submit" id="submitButton" class="button-submit" title="Submit your form!">Submit</button>
                                         </div>
+                                        </form>
+
                                         
                                         <!-- HTML modal popup element -->
                                         <div id="btn-myModal" class="sub-modal">
@@ -251,29 +253,6 @@
                                             <p>Thank you for submitting!</p>
                                             </div>
                                         </div>
-                                        
-                                        <!-- JavaScript code that will create and show the popup -->
-                                        <script>
-                                            // Get a reference to the submit button element
-                                            const submitButton = document.getElementById("submitButton");
-                                        
-                                            // Get a reference to the modal popup element and the close button
-                                            const btnmodal = document.getElementById("btn-myModal");
-                                            const submitcloseButton = btnmodal.getElementsByClassName("sub-close")[0];
-                                        
-                                            // Add a click event listener to the submit button
-                                            submitButton.addEventListener("click", function() {
-                                            // Show the modal popup
-                                            btnmodal.style.display = "block";
-                                            });
-                                        
-                                            // Add a click event listener to the close button
-                                            submitcloseButton.addEventListener("click", function() {
-                                            // Hide the modal popup
-                                            btnmodal.style.display = "none";
-                                            // Redirect to another page using window.location
-                                            window.location.href = "FeLISregister.html";
-                                            });
                                         </script>
                                         
                             </div><!--- END ROW -->

@@ -32,8 +32,16 @@
                                 <li><a class="dropdown-item" href="/conferencesDownload">Downloads</a></li>
                             </ul>
                             <li class="nav-item"><a class="nav-link" href="/publicationInfo">Publication</a></li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Registration</a>
+                                    <ul class="dropdown-menu dropdown-menu-end bg-light" aria-labelledby="navbarDropdownBlog">
+                                        <li><a class="dropdown-item" href="FePoster.html">Poster Submission</a></li>
+                                        <li><a class="dropdown-item" href="/fullpaper">Full Paper Submission</a></li>
+                                        <li><a class="dropdown-item" href="FeSubmissionList.html">Submission Status</a></li>
+                                    </ul>
                             <li class="nav-item"><a class="nav-link" href="/faq">Contact Us</a></li>
-                            <a href="/account" class="btn btn-primary">Hi , {{$userSession}}</a>
+                            <li class="nav-item"><a class="nav-link" href="/account">My Profile</a></li>
+                            <a href="/logout" class="btn btn-primary">Logout</a>
                             </div>
                         </ul>
                     </div>
@@ -92,6 +100,8 @@
                     </div>
                 </div>
             </div>
+
+            <li class="nav-item"><a class="nav-link" href="/account">My Profile</a></li>
 
             <!-- Blog preview section-->
             <section class="py-5">
