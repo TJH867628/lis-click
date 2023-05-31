@@ -62,3 +62,4 @@ Route::get('file',[FileController::class, 'index']);
 Route::post('upload',[FileController::class, 'upload']);
 
 
+// uyewqvbcxuiwhudcb iqebcewieuqc
