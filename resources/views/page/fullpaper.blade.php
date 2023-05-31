@@ -67,7 +67,7 @@
                                                 <!--Dropdown-->
                                                 <div class="form-group col-md-3">
                                                     <label class="category">Please CHOOSE your category :</label>
-                                                    <select class="dropdown-option" name="category"  onclick="removeChooseoption()">
+                                                    <select class="dropdown-option" name="category"  onclick="removeChooseoption()" value="{{ $user -> category }}">
                                                         <option selected disabled>Choose</option>
                                                         <option value="presenter & publication">Paper Presentation & Publication</option>
                                                         <option value="paper presenter only">Paper Presentation ONLY</option>
@@ -80,25 +80,25 @@
                                                 <!--End Dropdown-->
                                                 
                                                 <div class="form-group col-md-12">
-                                                    <input type="text" name="name" class="form-control" placeholder="Presenter's Full Name (CAPITAL LETTER)" required="required" readonly>
+                                                    <input type="text" name="name" class="form-control" placeholder="Presenter's Full Name (CAPITAL LETTER)" required="required" value="{{ $user -> participants1 }}" readonly >
                                                 </div>
                                                 <div class="form-group col-md-12">
-                                                    <input type="text" name="IC" class="form-control" placeholder="Presenter's Identification Number (MyKad) *without -" required="required" readonly>
+                                                    <input type="text" name="IC" class="form-control" placeholder="Presenter's Identification Number (MyKad) *without -" required="required" value="{{ $user -> IC_No }}" readonly>
                                                 </div>
                                                 <div class="form-group col-md-12">
-                                                    <input type="text" name="number" class="form-control" placeholder="Presenter's Contact number" required="required" readonly>
+                                                    <input type="text" name="number" class="form-control" placeholder="Presenter's Contact number" required="required" value="{{ $user -> phoneNumber }}" readonly>
                                                 </div>
                                                 <div class="form-group col-md-12">
-                                                    <input type="text" name="email" class="form-control" placeholder="Presenter's Email Address" required="required" readonly>
+                                                    <input type="text" name="email" class="form-control" placeholder="Presenter's Email Address" required="required" value="{{ $user -> email }}" readonly>
                                                 </div>
                                                 <div class="form-group col-md-12">
-                                                    <input type="text" name="address" class="form-control" placeholder="Presenter's Organization Name" required="required">
+                                                    <input type="text" name="address" class="form-control" placeholder="Presenter's Organization Name" value="{{ $user -> organizationName }}" required="required">
                                                 </div>
                                                 <div class="form-group col-md-12">
-                                                    <textarea rows="6" name="message" class="form-control" placeholder="Address" required="required" readonly></textarea>
+                                                    <textarea rows="6" name="message" class="form-control" placeholder="Address" required="required" value="{{ $user -> address }}"  readonly></textarea>
                                                 </div>
                                                 <div class="form-group col-md-3">
-                                                    <input type="text" name="poscode" class="form-control" placeholder="Poscode" required="required" readonly>
+                                                    <input type="text" name="poscode" class="form-control" placeholder="Poscode" required="required" value="{{ $user -> postcode }}" readonly>
                                                 </div>
 
                                                 <!--Dropdown-->
@@ -152,13 +152,15 @@
                                             </script>
 
                                                 <div class="form-group col-md-12">
-                                                    <input type="text" name="2nd-name" class="form-control" placeholder="Second Author's Name (CAPITAL LETTER)" required="required" oninput="this.value = this.value.toUpperCase()">
+                                                    <input type="text" name="2nd-name" class="form-control" placeholder="Second Author's Name (CAPITAL LETTER)" required="required" value="{{ $user -> participants2 }}" oninput="this.value = this.value.toUpperCase()">
+
                                                 </div>
                                                 <div class="form-group col-md-12">
-                                                    <input type="text" name="3rd-name" class="form-control" placeholder="Third Author's Name (CAPITAL LETTER)" required="required" oninput="this.value = this.value.toUpperCase()">
+                                                    <input type="text" name="3rd-name" class="form-control" placeholder="Third Author's Name (CAPITAL LETTER)" required="required" value="{{ $user -> participants3 }}" oninput="this.value = this.value.toUpperCase()">
+
                                                 </div>
                                                 <div class="form-group col-md-12">
-                                                    <input type="text" name="paper-title" class="form-control" placeholder="FULL PAPER Title" required="required">
+                                                    <input type="text" name="paper-title" class="form-control" placeholder="FULL PAPER Title" required="required" value="{{ $user -> submissionTitle }}">
                                                 </div>
 
                                                 <!--Dropdown-->
