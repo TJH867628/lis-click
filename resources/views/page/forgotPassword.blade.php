@@ -4,8 +4,24 @@
     <meta charset="utf-8">
     <title>LOGIN</title>
     <link href="css/styles.css" rel="stylesheet" />
-  </head>
+    <style>
+          .error{
+            border: 1px solid red;
+            border-radius: 20px;
+            background-color: red;
+            text-align: center;
+            margin-bottom: 10px;
+          }
 
+          .success{
+            border: 1px solid lightblue;
+            border-radius: 20px;
+            background-color: lightblue;
+            text-align: center;
+            margin-bottom: 10px;
+          }
+    </style>
+  </head>
   <body>
     <!DOCTYPE html>
 <html lang="en">
@@ -62,9 +78,14 @@
                   <span></span>
                   <label>Email Address</label>
                 </div>
+                @if($message = Session::get('error'))
+                    <div class="error">
+                        <span class="error">{{ $message }}</span><br> 
+                    </div>
+                @endif
                 <input type="submit" value="Continue">
                 <div class="signup_link">
-                  Don't have an account? <a href="#">Sign Up</a>
+                  Don't have an account? <a href="/registration">Sign Up</a>
                 </div>
               </form>
             </div>

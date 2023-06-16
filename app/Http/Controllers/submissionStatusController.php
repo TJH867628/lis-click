@@ -17,6 +17,10 @@ class submissionStatusController extends Controller
                     ->orWhere('participants3', $userSession) 
                     ->get();
                 return view('page.submissionStatusPage',['userSession'=>$userSession,'userSubmissionInfo' => $userSubmissionInfo]);
+            }elseif(session()->has('LoggedSuperAdmin')){
+                $userSession = session()->get('LoggedSuperAdmin');
+                $allSubmissionInfo = tbl_submission::all();
+                return view('page.submissionStatusPage(Super Admin)',['userSession'=>$userSession,'userSubmissionInfo' => $allSubmissionInfo]);
             }else{
                 return redirect('login')->with('fail','Login Session Expire,Please Login again');
             }

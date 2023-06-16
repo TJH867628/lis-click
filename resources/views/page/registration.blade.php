@@ -27,6 +27,24 @@
         element.style.display='none';
         }
         </script>
+        <style>
+          .error{
+            border: 1px solid red;
+            border-radius: 20px;
+            background-color: red;
+            text-align: center;
+            margin-bottom: 10px;
+            color: white;
+          }
+
+          .success{
+            border: 1px solid lightblue;
+            border-radius: 20px;
+            background-color: lightblue;
+            text-align: center;
+            margin-bottom: 10px;
+          }
+    </style>
     </head>
     <body>
         <!-- Your HTML code goes here -->
@@ -49,7 +67,6 @@
                        <li class="nav-item"><a class="nav-link" href="/faq">Contact Us</a></li>
                        <li class="nav-item"><a class="nav-link" href="/registration">Register</a></li>
                                 </ul>
-                            
                             </div>
                             <a href="/login" class="btn btn-primary">Login</a>
                         </ul>
@@ -64,9 +81,6 @@
                         <div class="container py-5">										
                             <div class="section-title text-center fw-bold">
                                 <h1>REGISTER</h1>
-                               
-                                
-
                                 
                             </div>
                             <form method="post">
@@ -108,12 +122,19 @@
                                                 <div class="form-group col-md-12">
                                                     <input type="text" name="name" id="name" class="form-control name" placeholder="Full Name" required="required">
                                                 </div>
+
                                                  <div class="form-group col-md-7">
                                                     <input type="text" name="organizationName" id="organizationName"  class="form-control organizationName" placeholder="Organization Name" required="required">
                                                 </div>
                                                 <div class="form-group col-md-5">
                                                     <input type="text" name="email" id="email" class="form-control email" placeholder="Email Address" required="required">
+                                                    @if($message = Session::get('error'))
+                                                    <div class="error">
+                                                        <span class="error">{{ $message }}</span><br> 
+                                                    </div>
+                                                    @endif
                                                 </div> 
+
                                                 <div class="form-group col-md-6">
                                                     <input type="text" name="IC_No" id="IC_No" class="form-control IC_No" placeholder="IC Number " required="required">
                                                 </div>

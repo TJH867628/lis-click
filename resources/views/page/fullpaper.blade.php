@@ -236,7 +236,6 @@
                                     </form>
                             </div><!--- END ROW -->
                         </div><!--- END CONTAINER -->	
-                        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
                     </div>
                 </div>
             </header>

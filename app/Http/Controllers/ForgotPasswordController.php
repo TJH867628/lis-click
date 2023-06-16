@@ -39,7 +39,9 @@ class ForgotPasswordController extends Controller
         $email = $request->input('email');  
         session()->put('email' , $email);
         $user = tbl_account::where('email', $email)->first();
-        if ($user) {
+        if (!$user) {
+            return redirect()->back()->with('error','Email Not Found!');
+        }else{
             $otpData = $this->generateMixedCode(6, 5);
             $otp = strtoupper($otpData['otp']);
             $expiresAt = $otpData['expires_at'];

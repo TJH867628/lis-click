@@ -16,7 +16,7 @@ class AccountController extends Controller
 {
     public function index(){
         session()->start();
-        if(session()->has('LoggedUser')){
+        if(session()->has('LoggedUser') || session()->has("LoggedSuperAdmin")){
             $userSession = session()->get('LoggedUser');
             $user = tbl_participants_info::where('email',$userSession)->first();
             return view('page.account',['userSession'=>$userSession,'user' => $user]);
@@ -25,9 +25,9 @@ class AccountController extends Controller
         }
     }
 
-    public function updateProfile(request $request){
+    public function updateProfile(request $request){    
         $request->session()->start();
-        if(session()->has('LoggedUser')){
+        if(session()->has('LoggedUser') || session()->has("LoggedSuperAdmin")){
             $userSession = session()->get('LoggedUser');
             $name = $request -> input('name');//get name from user
             $IC_No = $request -> input('IC_No');//get IC_No from user

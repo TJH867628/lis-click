@@ -63,5 +63,9 @@ Route::post('/changePassword', [ForgotPasswordController::class,'changePassword'
 Route::get('/submissionStatus', [submissionStatusController::class,'index']);
 Route::get('downloadSubmission/{filename}',  [submissionStatusController::class,'download'])->name('downloadSubmission');
 Route::get('downloadJurnal/{filename}',  [PublicationController::class,'download'])->name('downloadJurnal');
+Route::get('participants',  [SuperAdminController::class,'participantsList']);
+Route::get('active/{adminEmail}',  [SuperAdminController::class,'activeAdmin'])->name('activeAdmin');
+Route::get('deactive/{adminEmail}',  [SuperAdminController::class,'deactiveAdmin'])->name('deactiveAdmin');
+
 
 

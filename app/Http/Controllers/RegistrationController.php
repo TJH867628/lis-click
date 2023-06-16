@@ -6,6 +6,7 @@ use App\Models\homepage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\tbl_account;
 class RegistrationController extends Controller
 {
     //   
@@ -18,7 +19,8 @@ class RegistrationController extends Controller
     public function store(request $request)
     {
         $email = $request -> input('email');//get email from user
-        $password = $request -> input('password');
+        if(!$email = tbl_account::where('email', $email)->first()){
+            $password = $request -> input('password');
         $name = $request -> input('name');//get name from user
         $IC_No = $request -> input('IC_No');//get IC_No from user
         $phoneNumber = $request -> input('phoneNumber');//get Phone Number from user
@@ -44,5 +46,8 @@ class RegistrationController extends Controller
 
         //redirect the user to login page
         return redirect('login');
+        }else{
+            return redirect()->back()->with('error','Email Already Exist!');
+        }
     }
 }
