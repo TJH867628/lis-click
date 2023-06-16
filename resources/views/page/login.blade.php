@@ -50,7 +50,7 @@
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                             <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
                             <li class="nav-item dropdown">
-                            <li class="nav-item"><a class="nav-link" href="/faq">Contact Us</a></li> 
+                            <li class="nav-item"><a class="nav-link" href="/faqVisitor">Contact Us</a></li> 
                             <li class="nav-item"><a class="nav-link" href="/registration">Register</a></li>
                                 </ul>
                             

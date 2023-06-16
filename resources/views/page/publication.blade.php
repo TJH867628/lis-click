@@ -20,7 +20,7 @@
             <nav id="dashboard" class="shadow-sm navbar navbar-expand-lg navbar-light bg-light fixed-top">
                 <div class="container px-5">
                     <a class="navbar-brand" href="/">
-                        <img src="images/Logo1 (1).png" width="200px" alt="logoLIS2023" />
+                        <img src="images/Logo1 (1).png" width="200px" alt="logoLIS2023" />  
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -34,6 +34,7 @@
                                     </ul>
                                 <li class="nav-item"><a class="nav-link" href="/publicationInfo">Publication</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/faq">Contact Us</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/account">My Profile</a></li>
                             <a href="/logout" class="btn btn-primary">Logout</a>
                             </div>
                         </ul>
@@ -62,49 +63,49 @@
                                         <th scope="row">1</th>
                                         <td>EDISI KHAS LIGA ILMU SERANTAU 2022</td>
                                         <td>
-                                        <a href="conferences_info\Edisi Khas LIS22.pdf" class="btn btn-primary mb-4" download="">Download</a>
+                                        <a href="{{ route('downloadJurnal', ['filename' => 'Edisi Khas LIS22.pdf']) }}" class="btn btn-primary mb-4" download="">Download</a>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th scope="row">2</th>
                                         <td>E-Jurnal LiS2021 : Empowering Research in The Pandemic Phase: Oppurtunies and Challenges</td>
                                         <td>
-                                        <a href="conferences_info\Published LIS 2021 ISBN_eISSN.pdf" class="btn btn-primary mb-4" download="">Download</a>
+                                        <a href="{{ route('downloadJurnal', ['filename' => 'Published LIS 2021 ISBN_eISSN.pdf']) }}" class="btn btn-primary mb-4" download="">Download</a>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th scope="row">3</th>
                                         <td>E-Jurnal LiS2019 : Enriching The Creativity of Research and Innovation Towards The Industrial Revolution of IR4.0</td>
                                         <td>
-                                        <a href="conferences_info\JILID 1 E-JURNAL LIS2019.pdf" class="btn btn-primary mb-4" download="">Download</a>
+                                        <a href="{{ route('downloadJurnal', ['filename' => 'JILID 1 E-JURNAL LIS2019.pdf']) }}" class="btn btn-primary mb-4" download="">Download</a>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th scope="row">4</th>
                                         <td>E-Jurnal LiS2018: Implementation of Competitive Research Toward Local Resources Based Industrialization </td>
                                         <td>
-                                        <a href="conferences_info\Prosiding_LIS_e-_Jurnal_LIS_Liga_Ilmu_Serantau_2018.pdf" class="btn btn-primary mb-4" download="">Download</a>
+                                        <a href="{{ route('downloadJurnal', ['filename' => 'Prosiding_LIS_e-_Jurnal_LIS_Liga_Ilmu_Serantau_2018.pdf']) }}" class="btn btn-primary mb-4" download="">Download</a>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th scope="row">5</th>
                                         <td>E-Jurnal LiS2017: Mewacanakan Kebitaraan Ilmu</td>
                                         <td>
-                                        <a href="conferences_info\LIS2017.pdf" class="btn btn-primary mb-4" download="">Download</a>
+                                        <a href="{{ route('downloadJurnal', ['filename' => 'LIS2017.pdf']) }}" class="btn btn-primary mb-4" download="">Download</a>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th scope="row">6</th>
                                         <td>E-Jurnal LiS2016: Kelestarian Pendidikan Tanpa Sempadan</td>
                                         <td>
-                                        <a href="conferences_info\LIS 2016 Kota Batam.pdf" class="btn btn-primary mb-4" download="">Download</a>
+                                        <a href="{{ route('downloadJurnal', ['filename' => 'LIS 2016 Kota Batam.pdf']) }}" class="btn btn-primary mb-4" download="">Download</a>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th scope="row">7</th>
                                         <td>LIS2015: Kelestarian Pendidikan Tanpa Sempadan</td>
                                         <td>
-                                        <a href="conferences_info\LIS2015.pdf" class="btn btn-primary mb-4" download="">Download</a>
+                                        <a href="{{ route('downloadJurnal', ['filename' => 'LIS2015.pdf']) }}" class="btn btn-primary mb-4" download="">Download</a>
                                         </td>                                      
                                     </tr>
                                     </tbody>

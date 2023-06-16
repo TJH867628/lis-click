@@ -15,8 +15,7 @@
     </head>
     <body class="d-flex flex-column h-100">
         <main class="flex-shrink-0">
-            <!-- Navigation-->
-            <nav class="shadow-sm navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="shadow-sm navbar navbar-expand-lg navbar-light bg-light fixed-top">
                 <div class="container px-5">
                     <a class="navbar-brand" href="/homePage">
                         <img src="images/Logo1 (1).png" width="200px" alt="logoLIS2023" />
@@ -27,14 +26,21 @@
                             <li class="nav-item"><a class="nav-link" href="/homePage">Home</a></li>
                             <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Conference</a>
-                            <ul class="dropdown-menu dropdown-menu-end bg-light" aria-labelledby="navbarDropdownBlog">      
-                                <li><a class="dropdown-item" href="/conferencesInfo">Conference Info</a></li>
-                                <li><a class="dropdown-item" href="/conferencesDownload">Downloads</a></li>
-                            </ul>
-                            <li class="nav-item"><a class="nav-link" href="/publicationInfo">Publication</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/faq">Contact Us</a></li>
-                                
-                            <a href="login.html" class="btn btn-primary">Hi , {{$userSession}}</a>
+                                <ul class="dropdown-menu dropdown-menu-end bg-light" aria-labelledby="navbarDropdownBlog">
+                                    <li><a class="dropdown-item" href="/conferencesInfo">Conference Info</a></li>
+                                    <li><a class="dropdown-item" href="/conferencesDownload">Downloads</a></li>
+                                </ul>
+                                <li class="nav-item"><a class="nav-link" href="/publicationInfo">Publication</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/faq">Contact Us</a></li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Registration</a>
+                                        <ul class="dropdown-menu dropdown-menu-end bg-light" aria-labelledby="navbarDropdownBlog">
+                                            <li><a class="dropdown-item" href="FePoster.html">Poster Submission</a></li>
+                                            <li><a class="dropdown-item" href="/fullpaper">Full Paper Submission</a></li>
+                                            <li><a class="dropdown-item" href="/submissionStatus">Submission Status</a></li>
+                                        </ul>
+                                <li class="nav-item"><a class="nav-link" href="/account">My Profile</a></li>
+                                <a href="/logout" class="btn btn-primary">Logout</a>
                             </div>
                         </ul>
                     </div>
@@ -62,7 +68,7 @@
                                       <th scope="row">1</th>
                                       <td>LIS 2023 Author Guideline</td>
                                       <td>
-                                          <a href="conferences_info\LIS 2023 AUTHORs GUIDELINE .docx" class="btn btn-primary mb-4" download="">Download</a>
+                                          <a href="conferences_info\LIS 2023 AUTHORs GUIDELINE.docx" class="btn btn-primary mb-4" download="">Download</a>
                                       </td>
                                   </tr>
                                   <tr>
@@ -90,7 +96,7 @@
                                       <th scope="row">5</th>
                                       <td>LIS 2023 Poster Template</td>
                                       <td>
-                                      <a href="conferences_info\LIS 2023 POSTER PRESENTATION GUIDELINE.docx" class="btn download btn-primary mb-4" download="">Download</a>
+                                      <a href="storage\public\fullpaper\ENG_20230615190942_648af1766a2ee.pdf" class="btn download btn-primary mb-4" download="">Download</a>
                                       </td>
                                   </tr>
                                   </tbody>

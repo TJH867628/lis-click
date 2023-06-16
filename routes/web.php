@@ -16,7 +16,7 @@ use App\Http\Controllers\FaqController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\FullpaperController;
-
+use App\Http\Controllers\submissionStatusController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -46,6 +46,7 @@ Route::get('/logout',[LogoutController::class,'logout']);
 Route::get('/conferencesInfo',[ConferencesController::class,'conferencesInfo']);
 Route::get('/conferencesDownload',[ConferencesController::class,'conferencesDownload']);
 Route::get('/faq',[FaqController::class,'index']);
+Route::get('/faqVisitor',[FaqController::class,'visitor']);
 Route::get('/publicationInfo',[PublicationController::class,'index']);
 Route::get('/fullpaper',[FullpaperController::class,'index']);
 Route::post('/fullpaper',[FullpaperController::class,'storeFullpaper']);
@@ -59,4 +60,8 @@ Route::get('/confirmOTP', [ForgotPasswordController::class,'indexConfirmOTP'])->
 Route::post('/confirmOTP', [ForgotPasswordController::class,'confirmOTP']);
 Route::get('/changePassword', [ForgotPasswordController::class,'indexChangePassword']);
 Route::post('/changePassword', [ForgotPasswordController::class,'changePassword']);
+Route::get('/submissionStatus', [submissionStatusController::class,'index']);
+Route::get('downloadSubmission/{filename}',  [submissionStatusController::class,'download'])->name('downloadSubmission');
+Route::get('downloadJurnal/{filename}',  [PublicationController::class,'download'])->name('downloadJurnal');
+
 

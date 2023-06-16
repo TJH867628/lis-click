@@ -13,9 +13,10 @@ class FaqController extends Controller
             $user = tbl_participants_info::where('email',$userSession)->first();
             return view('page.faq',['userSession' => $userSession,'user' => $user]);
 
-        }else
-        {
-            return view('page.faqVisitor');
         }
+    }
+
+    function visitor(){
+        return view('page.faqVisitor');
     }
 }

@@ -15,4 +15,5 @@ class AdminController extends Controller
             return redirect('login')->with('fail','Login Session Expire,Please Login again');
         }
     }
+
 }

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>LIS-Click Reset Password</title>
     <style>
-        .otp{
+        .submission{
             width: max-content;
             margin: 50px;
             margin-left: 100px;
@@ -19,13 +19,12 @@
     </style>
 </head>
 <body style="background-color: white;">
-    <h2>LIS-CLICK Account Password Reset</h2>
-    <h3>LIS-CLICK</h3>
-    <div class="otp">
-        <p style="font-weight: bold; color:black; margin-left:20px; font-size: 30px;">Your OTP is: </p>
-        <div style="background-color:darkblue; width:max-content; margin:50px; margin-left:80px; justify-content:center; text-align:center;">
-            <p style="color: white; font-size:50px; font-weight:bold; margin:10px;">{{ $otp }}</p>
-        </div>
+    <h2>LIS-CLICK</h2>
+    <div class="submission">
+        <p style="font-weight: bold; color:black; margin-left:20px; font-size: 30px;">Your Submission is completed !!! </p>
+        <p style="color: black; font-size:50px; font-weight:bold; margin:10px; background-color:aquamarine;">Your Submission Code is <br>{{ $submissionCode }}</p>
+
+    </div>
         <p>Thank you for using LIS-CLICK!</p>
     </div>
     

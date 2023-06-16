@@ -41,7 +41,7 @@
                       </ul>
               <li class="nav-item"><a class="nav-link" href="/publicationInfo">Publication</a></li>
               <li class="nav-item"><a class="nav-link" href="/registration">Registration</a></li>
-              <li class="nav-item"><a class="nav-link" href="/faq">Contact Us</a></li>
+              <li class="nav-item"><a class="nav-link" href="/faqVisitor">Contact Us</a></li>
               <a href="/login" class="btn btn-primary">Login</a>
               </div>
           </ul>
@@ -72,7 +72,7 @@
                 @endif
                 <input type="submit" value="Continue">
                 <div class="signup_link">
-                  Don't have an account? <a href="#">Sign Up</a>
+                  Don't have an account? <a href="/registration">Sign Up</a>
                 </div>
               </form>
             </div>

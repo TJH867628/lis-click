@@ -67,10 +67,10 @@
                                         <ul class="dropdown-menu dropdown-menu-end bg-light" aria-labelledby="navbarDropdownBlog">
                                             <li><a class="dropdown-item" href="FePoster.html">Poster Submission</a></li>
                                             <li><a class="dropdown-item" href="/fullpaper">Full Paper Submission</a></li>
-                                            <li><a class="dropdown-item" href="FeSubmissionList.html">Submission Status</a></li>
-                                            </ul>
+                                            <li><a class="dropdown-item" href="/submissionStatus">Submission Status</a></li>
+                                        </ul>
                                 <li class="nav-item"><a class="nav-link" href="/account">My Profile</a></li>
-                            
+                                <a href="/logout" class="btn btn-primary">Logout</a>
                             </div>
                         </ul>
                     </div>

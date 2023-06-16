@@ -14,16 +14,16 @@ return new class extends Migration
         Schema::create('tbl_submission', function (Blueprint $table) {
             $table->id();
             $table->integer('submissionID')->unique();;
-            $table->string('submissionCode');
+            $table->string('submissionCode')->nullable();
             $table->string('submissionTitle');
             $table->string('submissionType');
             $table->string('paperLink');
             $table->string('posterLink');
             $table->string('abstractLink');
-            $table->string('returnPaperLink');
+            $table->string('returnPaperLink')->nullable();
             $table->string('participants1');
-            $table->string('participants2');
-            $table->string('participants3');
+            $table->string('participants2')->nullable();
+            $table->string('participants3')->nullable();
             $table->string('categoryCode');
             $table->string('reviewStatus');
             $table->string('paymentID');

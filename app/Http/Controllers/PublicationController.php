@@ -15,5 +15,10 @@ class PublicationController extends Controller
             return redirect('login')->with('fail','Login expired,Please Login Again');
         }
     }
+
+    function download($filename){
+        $path = 'conferences_info/' . $filename;
+        return response()->download($path, $filename);
+    }
     
 }

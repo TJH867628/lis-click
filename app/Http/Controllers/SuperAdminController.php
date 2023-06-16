@@ -12,7 +12,7 @@ class SuperAdminController extends Controller
         if(session()->has("LoggedSuperAdmin")){
             session()->start();
             $adminSession = session()->get('LoggedSuperAdmin');
-            return view('page.superAdmin_HomePage',['adminSession'=>$adminSession]);
+            return view('page.superAdmin_homePage',['adminSession'=>$adminSession]);
         }else{
             return redirect('login')->with('fail','Login Session Expire,Please Login again');
         }
@@ -40,5 +40,4 @@ class SuperAdminController extends Controller
         }
     }
 
-   
 }

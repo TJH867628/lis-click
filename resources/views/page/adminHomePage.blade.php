@@ -38,6 +38,8 @@
                                     </ul>
                             <li class="nav-item"><a class="nav-link" href="pricing.html">Registration</a></li>
                             <li class="nav-item"><a class="nav-link" href="faq.html">Contact Us</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/account">My Profile</a></li>
+                            <a href="/logout" class="btn btn-primary">Logout</a>
                             <div class="d-grid gap-8 d-sm-flex justify-content-sm-center justify-content-xl-start">
                                 <!-- <a class="btn btn-primary btn-lg px-4 me-3" href="login.html">Login</a> -->
                             </div>
