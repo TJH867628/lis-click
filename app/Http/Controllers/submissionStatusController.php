@@ -21,8 +21,8 @@ class submissionStatusController extends Controller
             }elseif(session()->has('LoggedSuperAdmin')){
                 $userSession = session()->get('LoggedSuperAdmin');
                 $allSubmissionInfo = tbl_submission::all();
-                $allReviewerInfo = tbl_admin_info::where('adminRole','Reviewer');
-                return view('page.submissionStatusPage(Super Admin)',['userSession'=>$userSession,'userSubmissionInfo' => $allSubmissionInfo,'reviewerInfo' => $allReviewerInfo]);
+                $allReviewerInfo = tbl_admin_info::where('adminRole','Reviewer')->get();
+                return view('page.submissionStatusPage(Super Admin)',['userSession'=>$userSession,'userSubmissionInfo' => $allSubmissionInfo,'allReviewerInfo' => $allReviewerInfo]);
             }elseif(session()->has('LoggedJKReviewer')){
                 $userSession = session()->get('LoggedJKReviewer');
                 $allSubmissionInfo = tbl_submission::all();

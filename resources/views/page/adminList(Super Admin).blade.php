@@ -74,20 +74,18 @@
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                             <li class="nav-item"><a class="nav-link" href="/superAdminHomePage">Home</a></li>
                             <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Conference</a>
-                            <ul class="dropdown-menu dropdown-menu-end bg-light" aria-labelledby="navbarDropdownBlog">      
-                                <li><a class="dropdown-item" href="/conferencesInfo">Conference Info</a></li>
-                                <li><a class="dropdown-item" href="/conferencesDownload">Downloads</a></li>
-                            </ul>
-                            <li class="nav-item"><a class="nav-link" href="/publicationInfo">Publication</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/adminList">adminList</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/participants">Participants</a></li>
+                                <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Admin</a>
+                                <ul class="dropdown-menu dropdown-menu-end bg-light" aria-labelledby="navbarDropdownBlog">
+                                    <li><a class="dropdown-item" href="/adminList">Admin List</a></li>
+                                    <li><a class="dropdown-item" href="/adminRegister">Register New Admin</a></li>
+                                </ul>
+                                </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Submission</a>
+                                <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Registration</a>
                                     <ul class="dropdown-menu dropdown-menu-end bg-light" aria-labelledby="navbarDropdownBlog">
                                         <li><a class="dropdown-item" href="/submissionStatus">Submission Status</a></li>
                                     </ul>
-                            <li class="nav-item"><a class="nav-link" href="/faq">Contact Us</a></li>
+                                </li>
                             <li class="nav-item"><a class="nav-link" href="/account">My Profile</a></li>
                             <a href="/logout" class="btn btn-primary">Logout</a>
                             </div>
@@ -99,7 +97,7 @@
             <div class="table-container">
                 <h2 style="color: black ;">Admin List</h2>
                 @if($message = Session::get('updateSuccess'))
-                    <span class="success">{{ $message }}</td>
+                    <span class="success">{{ $message }}</span>
                 @endif
                 @if($admin)
                 <table>

@@ -7,16 +7,6 @@ use Illuminate\Http\Request;
 
 class SuperAdminController extends Controller
 {
-    //
-    public function index(){
-        if(session()->has("LoggedSuperAdmin")){
-            session()->start();
-            $adminSession = session()->get('LoggedSuperAdmin');
-            return view('page.superAdmin_homePage',['adminSession'=>$adminSession]);
-        }else{
-            return redirect('login')->with('fail','Login Session Expire,Please Login again');
-        }
-    }
 
     public function adminList(){
         if(session()->has("LoggedSuperAdmin")){

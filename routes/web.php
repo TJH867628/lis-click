@@ -17,6 +17,7 @@ use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\FullpaperController;
 use App\Http\Controllers\JKReviewerController;
+use App\Http\Controllers\JkParticipantController;
 use App\Http\Controllers\submissionStatusController;
 /*
 |--------------------------------------------------------------------------
@@ -38,10 +39,10 @@ Route::get('/homePage',[HomePageController::class,'index']);
 Route::post('/homePage',[HomePageController::class,'logout']);
 Route::get('/mainPage',[MainPageController::class,'index']);
 Route::get('/index',[Controller::class,'index']);
-Route::get('/registerAdmin',[RegisterAdminController::class,'index']);
+Route::get('/adminRegister',[RegisterAdminController::class,'index']);
 Route::post('/registerAdmin',[RegisterAdminController::class,'store']);
-Route::get('/adminHomePage',[AdminController::class,'index']);
-Route::get('/superAdminHomePage',[SuperAdminController::class,'index']);
+Route::get('/adminHomePage',[HomePageController::class,'index']);
+Route::get('/superAdminHomePage',[HomePageController::class,'index']);
 Route::get('/adminList',[SuperAdminController::class,'adminList'])->name('adminList');
 Route::get('/logout',[LogoutController::class,'logout']);
 Route::get('/conferencesInfo',[ConferencesController::class,'conferencesInfo']);
@@ -67,8 +68,8 @@ Route::get('downloadJurnal/{filename}',  [PublicationController::class,'download
 Route::get('participants',  [SuperAdminController::class,'participantsList']);
 Route::get('active/{adminEmail}',  [SuperAdminController::class,'activeAdmin'])->name('activeAdmin');
 Route::get('deactive/{adminEmail}',  [SuperAdminController::class,'deactiveAdmin'])->name('deactiveAdmin');
-Route::get('/JKReviewerHomePage',  [JKReviewerController::class,'index']);
+Route::get('/JKReviewerHomePage',  [HomePageController::class,'index']);
 Route::post('updateReviewer/{submissionCode}',  [JKReviewerController::class,'updateReviewer'])->name('updateReviewer');
-Route::get('cancelReviewer/{submissionCode}',  [JKReviewerController::class,'cancelReviewer'])->name('cancelReviewer');
-
-
+Route::get('cancelReviewer/{submissionCode}',  [JKReviewerController::class,'cancelReviewer'])->name('cancelReviewer');Route::get('/JkParticipantHomePage',[JkParticipantController::class,'index']);
+Route::get('/JKParticipantsHomePage',[HomePageController::class,'index']);
+Route::get('/participantsList',  [JkParticipantController::class,'participantsList']);

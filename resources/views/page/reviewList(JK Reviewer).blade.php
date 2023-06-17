@@ -125,7 +125,12 @@
                             <td>{{ $submissionInfo->presentMode }}</td>
                             <td>{{ $submissionInfo->reviewStatus }}</td>
                             <td>
+                                <p>Reviewer</p>
                                 <h5>{{ $submissionInfo->reviewerID }} </h5>
+                                @if($submissionInfo->reviewer2ID != NULL)
+                                    <p>Reviewer 2</p>
+                                    <h5>{{ $submissionInfo->reviewer2ID }} </h5>
+                                @endif
                             </td>
                             <td>
                             <form action="{{ route('updateReviewer', ['submissionCode' => $submissionInfo->submissionCode]) }}" method="POST">
@@ -134,6 +139,12 @@
                                     @foreach($allReviewerInfo as $reviewerInfo)
                                         <option value="{{ $reviewerInfo->email }}">{{ $reviewerInfo->name }}</option>
                                     @endforeach
+                                </select>
+                                <select name="reviewer2" id="reviewer2">
+                                        <option value="None">None</option>
+                                        @foreach($allReviewerInfo as $reviewerInfo)
+                                            <option value="{{ $reviewerInfo->email }}">{{ $reviewerInfo->name }}</option>
+                                        @endforeach
                                 </select>
                                 <button type="submit" class="btn btn-primary mb-4">Update Reviewer</button>
                             </form>

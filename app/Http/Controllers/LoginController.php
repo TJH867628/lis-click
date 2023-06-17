@@ -30,7 +30,13 @@ class LoginController extends Controller
         $password = hash('sha512',$request->input('password'));
         // print password
         $userInfo = DB::table('tbl_account')->where('email', $email)->first();
-
+        $request->session()->remove('LoggedUser');
+        $request->session()->remove('LoggedAdmin');
+        $request->session()->remove('LoggedSuperAdmin');
+        $request->session()->remove('LoggedJKReviewer');
+        $request->session()->remove('LoggedJKParticipants');
+        $request->session()->remove('LoggedReviewer');
+        
         if ($userInfo && $userInfo->password == $password) {
             if($userInfo->isAdmin === 0)
             {
@@ -41,17 +47,18 @@ class LoginController extends Controller
                 
                 $AdminInfo = DB::table('tbl_admin_info')->where('email',$email)->first();
                 if($AdminInfo->status === 1){//check the status of admin
-                    if($AdminInfo->adminRole === "Super"){//check the role of admin
-                        $request->session()->put('LoggedSuperAdmin', $userInfo->email);
+                    if($AdminInfo->adminRole == "Super"){//check the role of admin
+                        $request->session()->put('LoggedSuperAdmin', $AdminInfo->email);
                         return redirect('superAdminHomePage');
-                    }elseif($AdminInfo->adminRole === "JK Reviewer"){//check the role of admin
-                        $request->session()->put('LoggedJKReviewer', $userInfo->email);
+                    }elseif($AdminInfo->adminRole == "JK Reviewer"){//check the role of admin
+                        $request->session()->put('LoggedJKReviewer', $AdminInfo->email);
                         return redirect('JKReviewerHomePage');
                     }
-                    else{
-                        $request->session()->put('LoggedAdmin', $userInfo->email);
-                        return redirect('adminHomePage');
+                    elseif($AdminInfo->adminRole == "JK Participants"){//check the role of admin
+                        $request->session()->put('LoggedJKParticipants', $AdminInfo->email);
+                        return redirect('JKParticipantsHomePage');
                     }
+                    
                 }else{
                     return redirect()->back()->with('fail','Your Admin Status is not Active,Please contact with managment department');
                 }

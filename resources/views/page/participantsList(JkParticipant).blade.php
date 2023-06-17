@@ -13,6 +13,11 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
         <style>
+            .success{
+                color: white;
+                background-color: blue;
+            }
+
             tr td{
                 padding: 10px;
                 margin: 10px;
@@ -32,6 +37,7 @@
                 align-items: center;
                 justify-content: center;
                 text-align: center;
+                margin-bottom: 100px;
             }
             
             table{
@@ -67,35 +73,16 @@
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                            <li class="nav-item"><a class="nav-link" href="/superAdminHomePage">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/homePage">Home</a></li>
                             <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Conference</a>
-                            <ul class="dropdown-menu dropdown-menu-end bg-light" aria-labelledby="navbarDropdownBlog">      
-                                <li><a class="dropdown-item" href="/conferencesInfo">Conference Info</a></li>
-                                <li><a class="dropdown-item" href="/conferencesDownload">Downloads</a></li>
-                            </ul>
-                            <li class="nav-item"><a class="nav-link" href="/publicationInfo">Publication</a></li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Admin</a>
-                                <ul class="dropdown-menu dropdown-menu-end bg-light" aria-labelledby="navbarDropdownBlog">
-                                    <li><a class="dropdown-item" href="/adminList">Admin List</a></li>
-                                    <li><a class="dropdown-item" href="/adminRegister">Register New Admin</a></li>
-                                </ul>
-                                </li>
-                            <li class="nav-item"><a class="nav-link" href="/participants">Participants</a></li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Submission</a>
-                                    <ul class="dropdown-menu dropdown-menu-end bg-light" aria-labelledby="navbarDropdownBlog">
-                                        <li><a class="dropdown-item" href="/submissionStatus">Submission Status</a></li>
-                                    </ul>
-                            <li class="nav-item"><a class="nav-link" href="/faq">Contact Us</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/account">My Profile</a></li>
-                            <a href="/logout" class="btn btn-primary">Logout</a>
+                            <li class="nav-item"><a class="nav-link" href="/participantsList">Participants</a></li>
+                                <a href="/logout" class="btn btn-primary">Logout</a>
                             </div>
                         </ul>
                     </div>
                 </div>
             </nav>
+
             <div class="table-container">
                 <h2 style="color: black ;">Participants List</h2>
                 @if($participants)
@@ -151,9 +138,6 @@
                         <p style="color: black;">No record found.</p>
                     @endif
             </div>
-                
-            <br><br><br><br><br><br>
-        </main>
 
             <!-- Footer-->
         <footer class="bg-dark py-4 mt-auto">
@@ -174,5 +158,6 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <!--<script src="js/scripts.js"></script>-->
+        </main>
     </body>
 </html>

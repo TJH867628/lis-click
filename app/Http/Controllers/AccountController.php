@@ -10,24 +10,50 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use App\Models\tbl_admin_info;
 
 
 class AccountController extends Controller
 {
     public function index(){
         session()->start();
-        if(session()->has('LoggedUser') || session()->has("LoggedSuperAdmin")){
+        
+        if(session()->has('LoggedUser')){
             $userSession = session()->get('LoggedUser');
             $user = tbl_participants_info::where('email',$userSession)->first();
             return view('page.account',['userSession'=>$userSession,'user' => $user]);
-        }else{
+        }elseif(session()->has("LoggedSuperAdmin")){
+            $adminSession = session()->get('LoggedSuperAdmin');
+            $admin = tbl_admin_info::where('email',$adminSession)->first();
+            
+            return view('page.account(Admin)',['adminSession'=>$adminSession,'admin' => $admin]);
+        }elseif(session()->has('LoggedJKParticipants')){
+            $adminSession = session()->get('LoggedJKParticipants');
+            $admin = tbl_admin_info::where('email',$adminSession)->first();
+            dd($adminSession);
+            
+            return view('page.account(Admin)',['adminSession'=>$adminSession,'admin' => $admin]);
+        }
+        elseif(session()->has('LoggedJKReviewer')){
+            $adminSession = session()->get('LoggedJKReviewer');
+            $admin = tbl_admin_info::where('email',$adminSession)->first();
+            
+            return view('page.account(Admin)',['adminSession'=>$adminSession,'admin' => $admin]);
+        }
+        elseif(session()->has('LoggedReviewer')){
+            $adminSession = session()->get('LoggedReviewer');
+            $admin = tbl_admin_info::where('email',$adminSession)->first();
+            
+            return view('page.account(Admin)',['adminSession'=>$adminSession,'admin' => $admin]);
+        }
+        else{
             return redirect('login')->with('fail','Login Session Expire,Please Login again');
         }
     }
 
     public function updateProfile(request $request){    
         $request->session()->start();
-        if(session()->has('LoggedUser') || session()->has("LoggedSuperAdmin")){
+        if(session()->has('LoggedUser')){
             $userSession = session()->get('LoggedUser');
             $name = $request -> input('name');//get name from user
             $IC_No = $request -> input('IC_No');//get IC_No from user
@@ -60,20 +86,61 @@ class AccountController extends Controller
                 $file = $request->file('profile_picture');
                 $fileName = uniqid() . '.' . $file->getClientOriginalExtension();
                 $file->storeAs('profile_pictures', $fileName, 'public');
-            
                 // Update the profile picture path in the database
                 $user->profile_picture = 'storage/profile_pictures/' . $fileName;
                 $user->save();
+                
             }return redirect('account')->with('account-success','Profile Updated Successfully');
+            
+        }elseif(session()->has("LoggedSuperAdmin") || session()->has('LoggedJKParticipants') || session()->has('LoggedJKReviewer') || session()->has('LoggedReviewer')){
+            if(session()->has("LoggedSuperAdmin")){
+                $adminSession = session()->get('LoggedSuperAdmin');
+            }elseif(session()->has('LoggedJKParticipants')){
+                $adminSession = session()->get('LoggedJKParticipants');
+            }
+            elseif(session()->has('LoggedJKReviewer')){
+                $adminSession = session()->get('LoggedJKReviewer');
+            }
+            elseif(session()->has('LoggedReviewer')){
+                $adminSession = session()->get('LoggedReviewer');
+            }
+            $name = $request -> input('name');//get name from user
+            $IC_No = $request -> input('IC_No');//get IC_No from user
+            $phoneNumber = $request -> input('phoneNumber');//get Phone Number from user
+            $title = $request -> input('title');//get title from user
+            $organizationName = $request -> input("organizationName");//get organizationName from user
+            $date = now();//get timestamp now
+            $user = tbl_participants_info::where('email',$adminSession)->first();
+
+            //create a set of data that will be update to database
+            $updateData = array('IC_No'=>$IC_No,'name'=>$name,'title'=>$title,'phoneNumber'=>$phoneNumber,'organizationName'=>$organizationName,'updated_at'=>$date);
+            //insert the data to database with specified table and the dataset that have been create
+            DB::table('tbl_admin_info')->where('email',$adminSession)->update($updateData);
+            
+            return redirect('account')->with('account-success','Profile Updated Successfully');
         }else{
             return redirect('login')->with('fail','Login Session Expire,Please Login again');
         }
     }
 
+
     public function updatePassword(request $request){
         $request->session()->start();
-        if(session()->has('LoggedUser')){
-            $userSession = session()->get('LoggedUser');
+        if(session()->has('LoggedUser') || session()->has('LoggedUser') || session()->has("LoggedSuperAdmin") || session()->has('LoggedJKParticipants') || session()->has('LoggedJKReviewer') || session()->has('LoggedReviewer')){
+            if(session()->has('LoggedUser')){
+                $userSession = session()->get('LoggedUser');
+            }
+            elseif(session()->has("LoggedSuperAdmin")){
+                $userSession = session()->get('LoggedSuperAdmin');
+            }elseif(session()->has('LoggedJKParticipants')){
+                $userSession = session()->get('LoggedJKParticipants');
+            }
+            elseif(session()->has('LoggedJKReviewer')){
+                $userSession = session()->get('LoggedJKReviewer');
+            }
+            elseif(session()->has('LoggedReviewer')){
+                $userSession = session()->get('LoggedReviewer');
+            }
             $date = now();//get timestamp now
             $user = DB::table('tbl_account')->where('email', $userSession)->first();
             $currentPassword = $request->input('password');
