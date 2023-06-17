@@ -16,6 +16,7 @@ use App\Http\Controllers\FaqController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\FullpaperController;
+use App\Http\Controllers\JkParticipantController;
 use App\Http\Controllers\submissionStatusController;
 /*
 |--------------------------------------------------------------------------
@@ -66,3 +67,5 @@ Route::get('downloadJurnal/{filename}',  [PublicationController::class,'download
 Route::get('participants',  [SuperAdminController::class,'participantsList']);
 Route::get('active/{adminEmail}',  [SuperAdminController::class,'activeAdmin'])->name('activeAdmin');
 Route::get('deactive/{adminEmail}',  [SuperAdminController::class,'deactiveAdmin'])->name('deactiveAdmin');
+Route::get('/JkParticipantHomePage',[JkParticipantController::class,'index']);
+Route::get('/participantsList',  [JkParticipantController::class,'participantsList']);
