@@ -44,7 +44,11 @@ class LoginController extends Controller
                     if($AdminInfo->adminRole === "Super"){//check the role of admin
                         $request->session()->put('LoggedSuperAdmin', $userInfo->email);
                         return redirect('superAdminHomePage');
-                    }else{
+                    }elseif($AdminInfo->adminRole === "JK Reviewer"){//check the role of admin
+                        $request->session()->put('LoggedJKReviewer', $userInfo->email);
+                        return redirect('JKReviewerHomePage');
+                    }
+                    else{
                         $request->session()->put('LoggedAdmin', $userInfo->email);
                         return redirect('adminHomePage');
                     }

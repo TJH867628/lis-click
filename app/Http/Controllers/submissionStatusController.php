@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\tbl_submission;
+use App\Models\tbl_admin_info;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Response;
@@ -20,7 +21,13 @@ class submissionStatusController extends Controller
             }elseif(session()->has('LoggedSuperAdmin')){
                 $userSession = session()->get('LoggedSuperAdmin');
                 $allSubmissionInfo = tbl_submission::all();
-                return view('page.submissionStatusPage(Super Admin)',['userSession'=>$userSession,'userSubmissionInfo' => $allSubmissionInfo]);
+                $allReviewerInfo = tbl_admin_info::where('adminRole','Reviewer');
+                return view('page.submissionStatusPage(Super Admin)',['userSession'=>$userSession,'userSubmissionInfo' => $allSubmissionInfo,'reviewerInfo' => $allReviewerInfo]);
+            }elseif(session()->has('LoggedJKReviewer')){
+                $userSession = session()->get('LoggedJKReviewer');
+                $allSubmissionInfo = tbl_submission::all();
+                $allReviewerInfo = tbl_admin_info::where('adminRole','Reviewer')->get();
+                return view('page.reviewList(JK Reviewer)',['userSession'=>$userSession,'userSubmissionInfo' => $allSubmissionInfo,'allReviewerInfo' => $allReviewerInfo]);
             }else{
                 return redirect('login')->with('fail','Login Session Expire,Please Login again');
             }
