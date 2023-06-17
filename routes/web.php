@@ -66,6 +66,3 @@ Route::get('downloadJurnal/{filename}',  [PublicationController::class,'download
 Route::get('participants',  [SuperAdminController::class,'participantsList']);
 Route::get('active/{adminEmail}',  [SuperAdminController::class,'activeAdmin'])->name('activeAdmin');
 Route::get('deactive/{adminEmail}',  [SuperAdminController::class,'deactiveAdmin'])->name('deactiveAdmin');
-
-
-
