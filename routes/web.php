@@ -19,6 +19,7 @@ use App\Http\Controllers\FullpaperController;
 use App\Http\Controllers\JKReviewerController;
 use App\Http\Controllers\JkParticipantController;
 use App\Http\Controllers\submissionStatusController;
+use App\Http\Controllers\ReviewerController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -73,7 +74,8 @@ Route::post('updateReviewer/{submissionCode}',  [JKReviewerController::class,'up
 Route::get('cancelReviewer/{submissionCode}',  [JKReviewerController::class,'cancelReviewer'])->name('cancelReviewer');Route::get('/JkParticipantHomePage',[JkParticipantController::class,'index']);
 Route::get('/JKParticipantsHomePage',[HomePageController::class,'index']);
 Route::get('/participantsList',  [JkParticipantController::class,'participantsList']);
-Route::get('/ReviewerHomePage',[ReviewerController::class,'index']);
+Route::get('/ReviewerHomePage',[HomePageController::class,'index']);
 Route::get('/pendingreview',  [ReviewerController::class,'pendingreviewlist']);
 Route::get('/donereview',  [ReviewerController::class,'donereviewlist']);
-Route::post('/upload', 'ReviewerController@uploadReviewSubmission')->name('uploadReviewSubmission');
+Route::post('/upload/{submissionCode}', [ReviewerController::class,'uploadReviewSubmission'])->name('uploadReviewSubmission');
+Route::get('downloadReviewedFile/{filename}',  [ReviewerController::class,'downloadReviewSubmission'])->name('downloadReviewedFile');

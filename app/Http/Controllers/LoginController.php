@@ -58,6 +58,10 @@ class LoginController extends Controller
                         $request->session()->put('LoggedJKParticipants', $AdminInfo->email);
                         return redirect('JKParticipantsHomePage');
                     }
+                    elseif($AdminInfo->adminRole == "Reviewer"){//check the role of admin
+                        $request->session()->put('LoggedReviewer', $AdminInfo->email);
+                        return redirect('ReviewerHomePage');
+                    }
                     
                 }else{
                     return redirect()->back()->with('fail','Your Admin Status is not Active,Please contact with managment department');

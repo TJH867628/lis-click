@@ -23,6 +23,7 @@
             }
             
             .table-container{
+                margin-top: 200px !important;
                 border: 2px solid black;
                 padding: 20px;
                 width: 90%;
@@ -83,7 +84,7 @@
 
             <div class="table-container">
                 <h2 style="color: black ;">Pending Rewiew List</h2>
-                @if($submission)
+                @if($submissionInfo)
                 <table>
                     <th>
                         Submission Code<br>
@@ -100,6 +101,9 @@
                     <th>
                         Present Mode<br>
                     </th>
+                    <th>
+                        Reviewer<br>
+                    </th>
                     <th>    
                         Download<br>
                     </th>
@@ -109,24 +113,36 @@
                     <th>    
                         Upload File<br>
                     </th>
-                    @foreach($submission as $submission)
-                    <tr>
-                        <td>{{ $submission->submissionCode }}</td>
-                        <td>{{ $submission->submissionTitle }}</td>
-                        <td>{{ $submission->submissionType }}</td>
-                        <td>{{ $submission->subTheme }}</td>
-                        <td>{{ $submission->presentMode }}</td>
-                        <td><a href="{{ route('downloadSubmission', ['filename' => $submission->file_name]) }}" class="btn btn-primary mb-4">Download</a></td>
-                        <td>{{ $submission->updated_at }}</td>
-                        <td>
-                            <form action="{{ route('uploadReviewSubmission') }}" method="POST" enctype="multipart/form-data">
-                                @csrf
-                                <input type="file" name="file" />
-                                <button type="submit">Upload</button>
-                            </form>
-                        </td>
-                    </tr>
+
+                    @foreach($submissionInfo as $submissionInfo)
+                        @if($submissionInfo->reviewStatus === 'pending')
+                        <tr>
+                            <td>{{ $submissionInfo->submissionCode }}</td>
+                            <td>{{ $submissionInfo->submissionTitle }}</td>
+                            <td>{{ $submissionInfo->submissionType }}</td>
+                            <td>{{ $submissionInfo->subTheme }}</td>
+                            <td>{{ $submissionInfo->presentMode }}</td>
+                            <td>
+                            <p>Reviewer</p>
+                                <h5>{{ $submissionInfo->reviewerID }} </h5>
+                                @if($submissionInfo->reviewer2ID != NULL)
+                                    <p>Reviewer 2</p>
+                                    <h5>{{ $submissionInfo->reviewer2ID }} </h5>
+                                @endif
+                            </td>
+                            <td><a href="{{ route('downloadSubmission', ['filename' => $submissionInfo->file_name]) }}" class="btn btn-primary mb-4">Download</a></td>
+                            <td>{{ $submissionInfo->updated_at }}</td>
+                            <td>
+                                <form action="{{ route('uploadReviewSubmission',['submissionCode' => $submissionInfo->submissionCode]) }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    <input type="file" name="file" />
+                                    <button type="submit">Upload</button>
+                                </form>
+                            </td>
+                        </tr>
+                        @endif
                     @endforeach
+                    
                 </table>
                     @else
                         <p style="color: black;">No record found.</p>
