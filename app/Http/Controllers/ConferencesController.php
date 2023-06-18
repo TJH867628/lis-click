@@ -32,4 +32,10 @@ class ConferencesController extends Controller
         }
        
     }
+
+    public function download($filename)
+    {
+        $path = public_path('conferences_info/' . $filename);
+        return response()->download($path, $filename);
+    }
 }

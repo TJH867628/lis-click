@@ -53,6 +53,11 @@
             body{
                 background-color: white;
             }
+
+            #searchInput{
+                margin: 10px;
+                width: 250px;
+            }
         </style>
     </head>
     <body class="d-flex flex-column h-100">
@@ -89,7 +94,8 @@
             </nav>
             <div class="table-container">
                 @if($userSubmissionInfo)
-                <table border>
+                <input type="text" id="searchInput" placeholder="Search by Submission Code" onkeyup="filterTable()" />
+                <table id="submissionTable" border>
                 <tr>
                     <th>
                         Submission Details<br>
@@ -201,4 +207,64 @@
         <!-- Core theme JS-->
         <!--<script src="js/scripts.js"></script>-->
     </body>
+    <script>
+    function rearrangeTable() {
+        var table = document.getElementById("submissionTable");
+        var rows = Array.from(table.getElementsByTagName("tr"));
+        var headerRow = rows.shift(); // Remove the header row
+
+        rows.sort(function(a, b) {
+        var aStatus = a.cells[5].innerText.toLowerCase();
+        var bStatus = b.cells[5].innerText.toLowerCase();
+
+        if (aStatus === "none") {
+            return -1;
+        } else if (bStatus === "none") {
+            return 1;
+        } else if (aStatus === "pending") {
+            return bStatus === "none" ? 1 : -1;
+        } else if (aStatus === "done") {
+            return bStatus === "none" || bStatus === "pending" ? 1 : -1;
+        }
+
+        return 0;
+        });
+
+        // Reinsert the header row
+        table.appendChild(headerRow);
+
+        // Reorder the rows in the table
+        for (var i = 0; i < rows.length; i++) {
+        table.appendChild(rows[i]);
+        }
+    }
+
+    // Call the sorting function when the page loads
+    window.addEventListener("load", function() {
+        rearrangeTable();
+    });
+
+    function filterTable() {
+    // Get input value and convert it to lowercase
+    var input = document.getElementById("searchInput");
+    var filter = input.value.toLowerCase();
+    
+    // Get the table and table rows
+    var table = document.getElementById("submissionTable");
+    var rows = table.getElementsByTagName("tr");
+    
+    // Loop through all rows, starting from index 1 to skip the table header
+    for (var i = 1; i < rows.length; i++) {
+      var submissionCode = rows[i].getElementsByTagName("td")[0].textContent || rows[i].getElementsByTagName("td")[0].innerText;
+      submissionCode = submissionCode.toLowerCase();
+      
+      // If the submission code matches the filter, display the row; otherwise, hide it
+      if (submissionCode.indexOf(filter) > -1) {
+        rows[i].style.display = "";
+      } else {
+        rows[i].style.display = "none";
+      }
+    }
+  }
+    </script>
 </html>

@@ -51,8 +51,8 @@ Route::get('/conferencesDownload',[ConferencesController::class,'conferencesDown
 Route::get('/faq',[FaqController::class,'index']);
 Route::get('/faqVisitor',[FaqController::class,'visitor']);
 Route::get('/publicationInfo',[PublicationController::class,'index']);
-Route::get('/fullpaper',[FullpaperController::class,'index']);
-Route::post('/fullpaper',[FullpaperController::class,'storeFullpaper']);
+Route::get('/registerSubmission',[FullpaperController::class,'index']);
+Route::post('/registerSubmission',[FullpaperController::class,'storeFullpaper']);
 Route::get('/account',[AccountController::class,'index']);
 Route::post('/updateProfile',[AccountController::class,'updateProfile'])->name('account.updateProfile');
 Route::post('/updatePassword',[AccountController::class,'updatePassword'])->name('account.updatePassword');
@@ -79,3 +79,4 @@ Route::get('/pendingreview',  [ReviewerController::class,'pendingreviewlist']);
 Route::get('/donereview',  [ReviewerController::class,'donereviewlist']);
 Route::post('/upload/{submissionCode}', [ReviewerController::class,'uploadReviewSubmission'])->name('uploadReviewSubmission');
 Route::get('downloadReviewedFile/{filename}',  [ReviewerController::class,'downloadReviewSubmission'])->name('downloadReviewedFile');
+Route::get('conferencesDownload/{filename}',  [ConferencesController::class,'download'])->name('conferencesDownload');

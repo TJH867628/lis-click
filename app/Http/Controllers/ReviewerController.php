@@ -24,7 +24,9 @@ class ReviewerController extends Controller
             session()->start();
             $adminSession = session()->get('LoggedReviewer');
             $reviewername = tbl_admin_info::where('email',$adminSession)->first();
-            $submissionInfo  = tbl_submission::where('reviewerID',$reviewername->name)->get();
+            $submissionInfo = tbl_submission::where('reviewerID', $reviewername->name)
+            ->orWhere('reviewer2ID', $reviewername->name)
+            ->get();
             return view('page.pendingreview',['adminSession'=>$adminSession,'submissionInfo' => $submissionInfo]);
         }else{
             return redirect('login')->with('fail','Login Session Expire,Please Login again');
@@ -36,7 +38,9 @@ class ReviewerController extends Controller
             session()->start();
             $adminSession = session()->get('LoggedReviewer');
             $reviewername = tbl_admin_info::where('email',$adminSession)->first();
-            $submissionInfo  = tbl_submission::where('reviewerID',$reviewername->name)->get();
+            $submissionInfo = tbl_submission::where('reviewerID', $reviewername->name)
+            ->orWhere('reviewer2ID', $reviewername->name)
+            ->get();
             return view('page.donereview',['adminSession'=>$adminSession,'submissionInfo' => $submissionInfo]);
         }else{
             return redirect('login')->with('fail','Login Session Expire,Please Login again');

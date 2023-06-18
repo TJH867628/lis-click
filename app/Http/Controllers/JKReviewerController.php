@@ -10,7 +10,7 @@ class JKReviewerController extends Controller
 {
 
     function updateReviewer(request $request, $submissionCode){
-        if(session()->has('LoggedJKReviewer')){
+        if(session()->has('LoggedJKReviewer') || session()->has('LoggedSuperAdmin')){
             session()->start();
             $adminSession = session()->get('LoggedJKReviewer');
             $selectedReviewer = $request->input('reviewer');
@@ -22,15 +22,16 @@ class JKReviewerController extends Controller
                 $reviewer2 = tbl_admin_info::where('email',$selectedReviewer2)->first();
                 $submission->reviewer2ID = $reviewer2->name;
             }
+            $submission->reviewStatus = 'pending';
             $submission->save();
             return redirect()->back();
         }else{
             return redirect('login')->with('fail','Login Session Expire,Please Login again');
         }
     }
-
+    
         function cancelReviewer($submissionCode){
-        if(session()->has('LoggedJKReviewer')){
+        if(session()->has('LoggedJKReviewer')|| session()->has('LoggedSuperAdmin')){
             session()->start();
             $adminSession = session()->get('LoggedJKReviewer');
             $submission = tbl_submission::where('submissionCode',$submissionCode)->first();

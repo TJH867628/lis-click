@@ -20,10 +20,22 @@
                 color: black;
                 background-color: aliceblue;
             }
-            
+
+            .table-container{
+                border: 2px solid black;
+                padding: 20px;
+                width: 90%;
+                margin: auto;
+                overflow-x: auto;
+                overflow-wrap: break-word;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            }
             
             table{
                 margin-top: 50px;
+                margin: auto;
                 overflow-x: auto;
                 align-items: center;
                 justify-content: center;
@@ -40,6 +52,11 @@
 
             body{
                 background-color: white;
+            }
+
+            #searchInput{
+                margin: 10px;
+                width: 250px;
             }
         </style>
     </head>
@@ -63,10 +80,9 @@
                             </ul>
                             <li class="nav-item"><a class="nav-link" href="/publicationInfo">Publication</a></li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Registration</a>
+                                <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Submission</a>
                                     <ul class="dropdown-menu dropdown-menu-end bg-light" aria-labelledby="navbarDropdownBlog">
-                                        <li><a class="dropdown-item" href="FePoster.html">Poster Submission</a></li>
-                                        <li><a class="dropdown-item" href="/fullpaper">Full Paper Submission</a></li>
+                                        <li><a class="dropdown-item" href="/registerSubmission">Register Submission</a></li>
                                         <li><a class="dropdown-item" href="/submissionStatus">Submission Status</a></li>
                                     </ul>
                             <li class="nav-item"><a class="nav-link" href="/faq">Contact Us</a></li>
@@ -77,9 +93,11 @@
                     </div>
                 </div>
             </nav>
-            
+            <br><br><br>    
+            <div class="table-container">
                 @if($userSubmissionInfo)
-                <table border>
+                <input type="text" id="searchInput" placeholder="Search by Submission Code" onkeyup="filterTable()" />
+                <table id="submissionTable" border>
                 <tr>
                     <th>
                         Submission Details<br>
@@ -106,6 +124,9 @@
                         Download<br>
 
                     </th>
+                    <th>
+                        Review Paper<br>
+                    </th>
                 </tr>
                     @foreach($userSubmissionInfo as $submissionInfo)
                         <tr>
@@ -125,14 +146,24 @@
                                     <p>Participants 3 :</p> {{ $submissionInfo->participants3 }}
                                 @else
                                     <p>Participants 3 :</p> No Record<br>
-                                
                                 @endif
 
                             </td>
                             <td>{{ $submissionInfo->reviewStatus }}</td>
-                            <td>{{ $submissionInfo->reviewerID }}</td>
+                            <td>
+                                <p>Reviewer</p>
+                                <h5>{{ $submissionInfo->reviewerID }} </h5>
+                                @if($submissionInfo->reviewer2ID != NULL)
+                                    <p>Reviewer 2</p>
+                                    <h5>{{ $submissionInfo->reviewer2ID }} </h5>
+                                @endif
+                            </td>
                             <td><a href="{{ route('downloadSubmission', ['filename' => $submissionInfo->file_name]) }}" class="btn btn-primary mb-4">Download</a></td>
-
+                            @if($submissionInfo->returnPaperLink == NULL)
+                                <td><a href="#" class="btn btn-primary mb-4" style="color: gray; pointer-events: none; ">Pending Review</a></td>
+                            @else
+                                <td><a href="{{ route('downloadReviewedFile', ['filename' => $submissionInfo->returnPaperLink]) }}" class="btn btn-primary mb-4">Download Return File</a></td>
+                            @endif
                         </tr>
                     @endforeach
                 @else
@@ -140,6 +171,7 @@
                 @endif
                 
             </table>
+        </div>
             <br><br><br><br><br><br>
         </main>
 
@@ -163,4 +195,67 @@
         <!-- Core theme JS-->
         <!--<script src="js/scripts.js"></script>-->
     </body>
+    <script>
+    function rearrangeTable() {
+        var table = document.getElementById("submissionTable");
+        var rows = Array.from(table.getElementsByTagName("tr"));
+        var headerRow = rows.shift(); // Remove the header row
+
+        rows.sort(function(a, b) {
+        var aStatus = a.cells[5].innerText.toLowerCase();
+        var bStatus = b.cells[5].innerText.toLowerCase();
+
+        if (aStatus === "none") {
+            return 1;
+        } else if (bStatus === "none") {
+            return -1;
+        } else if (aStatus === "pending") {
+            return bStatus === "none" ? -1 : 1;
+        } else if (aStatus === "done") {
+            return bStatus === "none" || bStatus === "pending" ? -1 : 1;
+        }
+
+
+
+
+        return 0;
+        });
+
+        // Reinsert the header row
+        table.appendChild(headerRow);
+
+        // Reorder the rows in the table
+        for (var i = 0; i < rows.length; i++) {
+        table.appendChild(rows[i]);
+        }
+    }
+
+    // Call the sorting function when the page loads
+    window.addEventListener("load", function() {
+        rearrangeTable();
+    });
+
+    function filterTable() {
+    // Get input value and convert it to lowercase
+    var input = document.getElementById("searchInput");
+    var filter = input.value.toLowerCase();
+    
+    // Get the table and table rows
+    var table = document.getElementById("submissionTable");
+    var rows = table.getElementsByTagName("tr");
+    
+    // Loop through all rows, starting from index 1 to skip the table header
+    for (var i = 1; i < rows.length; i++) {
+      var submissionCode = rows[i].getElementsByTagName("td")[0].textContent || rows[i].getElementsByTagName("td")[0].innerText;
+      submissionCode = submissionCode.toLowerCase();
+      
+      // If the submission code matches the filter, display the row; otherwise, hide it
+      if (submissionCode.indexOf(filter) > -1) {
+        rows[i].style.display = "";
+      } else {
+        rows[i].style.display = "none";
+      }
+    }
+  }
+    </script>
 </html>

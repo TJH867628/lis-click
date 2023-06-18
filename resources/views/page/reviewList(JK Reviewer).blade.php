@@ -88,8 +88,9 @@
             </nav>
 
             <div class="table-container">
+            <input type="text" id="searchInput" onkeyup="filterTable()" placeholder="Search by Submission Code" />
                 @if($userSubmissionInfo)
-                <table border>
+                <table id="submissionTable" border>
                 <tr>
                     <th>
                         Submission Details<br>
@@ -184,5 +185,60 @@
         <!--<script src="js/scripts.js"></script>-->
         </main>
     </body>
-    
+    <script>
+    function filterTable() {
+        var input = document.getElementById("searchInput");
+        var filter = input.value.toLowerCase();
+
+        var table = document.querySelector(".table-container table");
+        var rows = table.getElementsByTagName("tr");
+
+        for (var i = 1; i < rows.length; i++) {
+        var submissionCode = rows[i].getElementsByTagName("td")[0].textContent || rows[i].getElementsByTagName("td")[0].innerText;
+        submissionCode = submissionCode.toLowerCase();
+
+        if (submissionCode.indexOf(filter) > -1) {
+            rows[i].style.display = "";
+        } else {
+            rows[i].style.display = "none";
+        }
+        }
+    }
+
+        function rearrangeTable() {
+        var table = document.getElementById("submissionTable");
+        var rows = Array.from(table.getElementsByTagName("tr"));
+        var headerRow = rows.shift(); // Remove the header row
+
+        rows.sort(function(a, b) {
+        var aStatus = a.cells[4].innerText.toLowerCase();
+        var bStatus = b.cells[4].innerText.toLowerCase();
+
+        if (aStatus === "none") {
+            return -1;
+        } else if (bStatus === "none") {
+            return 1;
+        } else if (aStatus === "pending") {
+            return bStatus === "none" ? 1 : -1;
+        } else if (aStatus === "done") {
+            return bStatus === "none" || bStatus === "pending" ? 1 : -1;
+        }
+
+        return 0;
+        });
+
+        // Reinsert the header row
+        table.appendChild(headerRow);
+
+        // Reorder the rows in the table
+        for (var i = 0; i < rows.length; i++) {
+        table.appendChild(rows[i]);
+        }
+    }
+
+    // Call the sorting function when the page loads
+    window.addEventListener("load", function() {
+        rearrangeTable();
+    });
+    </script>
 </html>
