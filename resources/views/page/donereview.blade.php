@@ -103,9 +103,6 @@
                     <th>    
                         Download<br>
                     </th>
-                    <th>    
-                        Updated At<br>
-                    </th>
                     @foreach($submissionInfo as $submissionInfo)
                         @if($submissionInfo->reviewStatus == 'done')
                         <tr>
@@ -115,7 +112,6 @@
                             <td>{{ $submissionInfo->subTheme }}</td>
                             <td>{{ $submissionInfo->presentMode }}</td>
                             <td><a href="{{ route('downloadReviewedFile', ['filename' => $submissionInfo->returnPaperLink]) }}" class="btn btn-primary mb-4">Download</a></td>
-                            <td>{{ $submissionInfo->updated_at }}</td>
                         </tr>
                         @endif
                     @endforeach

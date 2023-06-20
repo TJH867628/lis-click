@@ -12,7 +12,7 @@ class LogoutController extends Controller
             $request->session()->remove('LoggedUser');
             return redirect('mainPage');
         }else if($request->session()->has('LoggedReviewer')){
-            $request->session()->remove('LoggedAdmin');
+            $request->session()->remove('LoggedReviewer');
             return redirect('mainPage');
         }else if($request->session()->has('LoggedSuperAdmin')){
             $request->session()->remove('LoggedSuperAdmin');

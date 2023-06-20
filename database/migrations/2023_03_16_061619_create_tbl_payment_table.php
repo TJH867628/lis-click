@@ -16,7 +16,7 @@ return new class extends Migration
             $table->integer('paymentID')->unique();
             $table->float('amount');
             $table->string('paymentStatus');
-            $table->timestamp('paymentDate');
+            $table->timestamp('paymentDate')->nullable();
             $table->string('proofOfPayment');
             $table->integer('extra1')->nullable();
             $table->string('extra2')->nullable();

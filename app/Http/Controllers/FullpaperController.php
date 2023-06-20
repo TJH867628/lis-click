@@ -24,7 +24,7 @@ class FullpaperController extends Controller
     }
 
     public function storeFullpaper(request $request){
-        try{
+        
             if(session()->has('LoggedUser')){
                 if ($request->hasFile('file_upload')) {
                     $userSession = session()->get('LoggedUser');
@@ -126,17 +126,14 @@ class FullpaperController extends Controller
                     $file->storeAs('paper', $fileName, 'public');
                     $insertData = array('submissionCode'=>$submissionCode,'submissionTitle'=>$submissionTitle,'submissionType'=>$category,'subTheme'=>$subTheme,'presentMode'=>$presentMode,'file_name'=>$fileName,'participants1'=>$participants1,'participants2'=>$participants2,'participants3'=>$participants3,'categoryCode'=>$categoryCode,'reviewStatus' => "None",'paymentID' => "unavailable",'reviewerID' => "pending",'publish'=>$publish,'created_at'=>$date,'updated_at'=>$date);
                     DB::table('tbl_submission')->where('participants1',$user->name)->insert($insertData);
+                    $insertData = array('submissionCode'=>$submissionCode,'paymentID'=>'unavailable','amount'=> 0 ,'paymentStatus'=>'Incomplete','paymentDate'=>null,'proofOfPayment'=>'unavailable');
+                    DB::table('tbl_payment')->insert($insertData);
                     $mail = new submission();
                     $mail->setSubmissionCode($submissionCode);
                     Mail::to($user->email)->send($mail);
                     return redirect()->back()->with('success','Submitted Succesfully');
                 }
             }
-        }
-        catch (\Exception $e){
-            dd($e);
-            return redirect()->back()->with('error','Submitted fail');
-        }
         
     }
 }

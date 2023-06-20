@@ -101,9 +101,6 @@
                     <th>
                         Present Mode<br>
                     </th>
-                    <th>
-                        Reviewer<br>
-                    </th>
                     <th>    
                         Download<br>
                     </th>
@@ -111,8 +108,9 @@
                         Updated At<br>
                     </th>
                     <th>    
-                        Upload File<br>
+                        Upload Reviewed Document<br>
                     </th>
+
 
                     @foreach($submissionInfo as $submissionInfo)
                         @if($submissionInfo->reviewStatus === 'pending')
@@ -122,14 +120,6 @@
                             <td>{{ $submissionInfo->submissionType }}</td>
                             <td>{{ $submissionInfo->subTheme }}</td>
                             <td>{{ $submissionInfo->presentMode }}</td>
-                            <td>
-                            <p>Reviewer</p>
-                                <h5>{{ $submissionInfo->reviewerID }} </h5>
-                                @if($submissionInfo->reviewer2ID != NULL)
-                                    <p>Reviewer 2</p>
-                                    <h5>{{ $submissionInfo->reviewer2ID }} </h5>
-                                @endif
-                            </td>
                             <td><a href="{{ route('downloadSubmission', ['filename' => $submissionInfo->file_name]) }}" class="btn btn-primary mb-4">Download</a></td>
                             <td>{{ $submissionInfo->updated_at }}</td>
                             <td>

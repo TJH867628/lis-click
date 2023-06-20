@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 use App\Models\tbl_submission;
 use App\Models\tbl_admin_info;
+use App\Models\tbl_payment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Response;
 
@@ -16,7 +18,11 @@ class submissionStatusController extends Controller
                 ->orWhere('participants2', $userSession)
                 ->orWhere('participants3', $userSession) 
                 ->get();
-            return view('page.submissionStatusPage',['userSession'=>$userSession,'userSubmissionInfo' => $userSubmissionInfo]);
+
+                foreach ($userSubmissionInfo as $submissionInfo) {
+                    $paymentStatus = tbl_payment::where('submissionCode', $submissionInfo->submissionCode)->first();
+                }
+            return view('page.submissionStatusPage',['userSession'=>$userSession,'userSubmissionInfo' => $userSubmissionInfo,'paymentInfo' => $paymentStatus]);
         }elseif(session()->has('LoggedSuperAdmin')){
             $userSession = session()->get('LoggedSuperAdmin');
             $allSubmissionInfo = tbl_submission::all();
@@ -38,5 +44,34 @@ class submissionStatusController extends Controller
         return response()->download($path, $filename);
     }
 
+    public function uploadReceipt(Request $request,$submissionCode){
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $filename = "Receipt_".$submissionCode;
+            $submissionInfo = tbl_submission::where('submissionCode',$submissionCode)->first();
+            $paymentInfo = tbl_payment::where('submissionCode',$submissionCode)->first();
+            $file->storeAs('uploads', $filename, 'public');
+            $paymentInfo->paymentStatus = "Pending For Verification";
+            if($paymentInfo->paymentID == $filename){
+                $filename = "Receipt_". uniqid() . "_" . $submissionCode;
+            }
+
+            if($paymentInfo->paymentID != 'unavailable' && $paymentInfo != 'Complete'){
+                $insertData = array('submissionCode'=>$submissionCode,'paymentID'=>$filename,'amount'=> 0 ,'paymentStatus'=>'Pending For Verification','paymentDate'=>now(),'proofOfPayment'=>$filename);
+                DB::table('tbl_payment')->insert($insertData);
+            }else{
+                $paymentInfo->proofOfPayment = $filename;
+                $paymentInfo->paymentID = $filename;
+                $paymentInfo->paymentDate = now();
+                $submissionInfo->paymentID = $filename;
+                $submissionInfo->save();
+                $paymentInfo->save();
+            }
+
+            return redirect()->back()->with('success', 'Receipt uploaded successfully.');
+        }
+
+        return redirect()->back()->with('error', 'No file was uploaded.');
+    }
 
 }

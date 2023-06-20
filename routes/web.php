@@ -80,3 +80,5 @@ Route::get('/donereview',  [ReviewerController::class,'donereviewlist']);
 Route::post('/upload/{submissionCode}', [ReviewerController::class,'uploadReviewSubmission'])->name('uploadReviewSubmission');
 Route::get('downloadReviewedFile/{filename}',  [ReviewerController::class,'downloadReviewSubmission'])->name('downloadReviewedFile');
 Route::get('conferencesDownload/{filename}',  [ConferencesController::class,'download'])->name('conferencesDownload');
+Route::post('uploadReceipt/{submissionCode}', [submissionStatusController::class,'uploadReceipt'])->name('uploadReceipt');
+

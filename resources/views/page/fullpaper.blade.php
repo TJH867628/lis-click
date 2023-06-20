@@ -71,7 +71,7 @@
                     <div id="contact" class="contact-area section-padding">
                         <div class="container">										
                             <div class="section-title text-center mt-5">
-                                <h1>LIS 2023 FULL PAPER</h1>
+                                <h1>LIS 2023 SUBMISSION</h1>
                                 <p>"DIGITAL TRANSFORMATION TOWARDS INFINITE POSSIBILITY"</p>
                             </div>					
                             <div class="row-register">
@@ -83,7 +83,7 @@
                                                 <!--Dropdown-->
                                                 <div class="form-group col-md-3">
                                                     <label class="category">Please CHOOSE your category :</label>
-                                                    <select class="dropdown-option" name="category"  onclick="removeChooseoption()" value="{{ $user -> category }}">
+                                                    <select class="dropdown-option" name="category"  onclick="removeChooseoption()" value="{{ $user -> category }}" required="required">
                                                         <option selected disabled>Choose</option>
                                                         <option value="Paper Presentation & Publication">Paper Presentation & Publication</option>
                                                         <option value="Paper Presentation ONLY">Paper Presentation ONLY</option>
@@ -138,7 +138,7 @@
 
                                                 </div>
                                                 <div class="form-group col-md-12">
-                                                    <input type="text" name="paper-title" class="form-control" placeholder="FULL PAPER Title" required  >
+                                                    <input type="text" name="paper-title" class="form-control" placeholder="Title" required  >
                                                 </div>
 
                                                 <!--Dropdown-->
@@ -159,7 +159,7 @@
                                                 <!--End Dropdown-->
 
                                                 <!-- HTML button element that will trigger the file upload -->
-                                                <label class="upload">Please Upload FULL Paper :</label>
+                                                <label class="upload">Please Upload File :</label>
                                                 <p><em>Format : ".docx / .pdf"</em></p>
                                                 <p><em>For more information, please <a href="/conferencesDownload">click here.</a></em></p>
                                                 <div class="upload-sect">

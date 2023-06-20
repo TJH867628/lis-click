@@ -93,8 +93,8 @@
                                                 
                                                 <!--Dropdown-->
                                                 <div class="form-group col-md-3">
-                                                    <label class="category">Title :</label>
-                                                    <select class="dropdown-option title" id="title" name="title">
+                                                    <label class="category">Salutation :</label>
+                                                    <select class="dropdown-option" id="salutation" name="salutation">
                                                         <option selected disabled>Choose</option>
                                                         <option value="Dr">Dr</option>
                                                         <option value="Mr">Mr</option>
@@ -106,7 +106,7 @@
                                                         <option value="Dr prof">Dr Prof</option>
                                                         <option value="Others">Others</option>
                                                     </select>
-                                                <input type="text" name="category" id="category" style='display:none;'/><br>
+                                                <input type="text" name="title" id="title" style='display:none;'/><br>
                                                 </div>
                                                 <!--End Dropdown-->
                                                 <!--Dropdown-->
@@ -203,7 +203,7 @@
                                             }
                                             $('#state').html(stateOptionsHtml);
                                         });
-                                        });
+                                    });
                                         </script>                                          
                                                 
                                                 <div class="col-md-12 text-center">
