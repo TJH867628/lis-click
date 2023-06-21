@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\tbl_admin_info;
 use App\Models\tbl_participants_info;
+use App\Models\tbl_page;
 use Illuminate\Http\Request;
 
 class SuperAdminController extends Controller
@@ -54,6 +55,18 @@ class SuperAdminController extends Controller
         }else{
             return redirect('login')->with('fail','Login Session Expire,Please Login again');
         }
+    }
+
+    public function pageList()
+    {
+        // if(session()->has("LoggedSuperAdmin")){
+        //     session()->start();
+            $pages = tbl_page::all();
+            $pageList = tbl_page::where('pageName','Page List')->first();
+            return view($pageList->pagePath,['pages'=>$pages]);
+            // }else{
+        //     return redirect('login')->with('fail','Login Session Expire,Please Login again');
+        // }
     }
 
 }

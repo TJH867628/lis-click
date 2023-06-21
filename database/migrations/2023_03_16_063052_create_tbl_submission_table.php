@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('submissionTitle');
             $table->string('submissionType');
             $table->string('paperLink');
-            $table->string('posterLink');
+            $table->string('posterLink')->nullable();
             $table->string('abstractLink');
             $table->string('returnPaperLink')->nullable();
             $table->string('participants1');

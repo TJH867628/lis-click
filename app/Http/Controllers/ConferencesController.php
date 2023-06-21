@@ -12,7 +12,7 @@ class ConferencesController extends Controller
         if(session()->has('LoggedUser')){
             $userSession = session()->get('LoggedUser');
             
-            return view('page.conferences_info',['userSession' => $userSession]);
+            return view('page.participants.conferencesInfo.conferencesInfo',['userSession' => $userSession]);
         }else
         {
             return redirect('login')->with('fail','Login expired,Please Login Again');

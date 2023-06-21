@@ -12,7 +12,7 @@ class homepageController extends Controller
         if(session()->has('LoggedUser')){
             $userSession = session()->get('LoggedUser');
             
-            return view('page.homePage',['userSession' => $userSession]);
+            return view('page.participants.homePage.homePage(Participants)',['userSession' => $userSession]);
         }elseif(session()->has("LoggedSuperAdmin")){
             session()->start();
             $adminSession = session()->get('LoggedSuperAdmin');

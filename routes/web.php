@@ -20,6 +20,7 @@ use App\Http\Controllers\JKReviewerController;
 use App\Http\Controllers\JkParticipantController;
 use App\Http\Controllers\submissionStatusController;
 use App\Http\Controllers\ReviewerController;
+use App\Http\Controllers\PageEditController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -71,7 +72,8 @@ Route::get('active/{adminEmail}',  [SuperAdminController::class,'activeAdmin'])-
 Route::get('deactive/{adminEmail}',  [SuperAdminController::class,'deactiveAdmin'])->name('deactiveAdmin');
 Route::get('/JKReviewerHomePage',  [HomePageController::class,'index']);
 Route::post('updateReviewer/{submissionCode}',  [JKReviewerController::class,'updateReviewer'])->name('updateReviewer');
-Route::get('cancelReviewer/{submissionCode}',  [JKReviewerController::class,'cancelReviewer'])->name('cancelReviewer');Route::get('/JkParticipantHomePage',[JkParticipantController::class,'index']);
+Route::get('cancelReviewer/{submissionCode}',  [JKReviewerController::class,'cancelReviewer'])->name('cancelReviewer');
+Route::get('/JkParticipantHomePage',[JkParticipantController::class,'index']);
 Route::get('/JKParticipantsHomePage',[HomePageController::class,'index']);
 Route::get('/participantsList',  [JkParticipantController::class,'participantsList']);
 Route::get('/ReviewerHomePage',[HomePageController::class,'index']);
@@ -81,4 +83,7 @@ Route::post('/upload/{submissionCode}', [ReviewerController::class,'uploadReview
 Route::get('downloadReviewedFile/{filename}',  [ReviewerController::class,'downloadReviewSubmission'])->name('downloadReviewedFile');
 Route::get('conferencesDownload/{filename}',  [ConferencesController::class,'download'])->name('conferencesDownload');
 Route::post('uploadReceipt/{submissionCode}', [submissionStatusController::class,'uploadReceipt'])->name('uploadReceipt');
+Route::get('/pageList',[SuperAdminController::class,'pageList']);
+Route::get('editPage/{page}', [PageEditController::class, 'editPage'])->name('editPage');
+Route::post('/editPage/{pageName}', [PageEditController::class, 'saveEdit'])->name('saveEdit');
 
