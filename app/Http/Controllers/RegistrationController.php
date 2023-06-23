@@ -27,6 +27,9 @@ class RegistrationController extends Controller
             $IC_No = $request -> input('IC_No');//get IC_No from user
             $phoneNumber = $request -> input('phoneNumber');//get Phone Number from user
             $salutation = $request -> input('salutation');//get title from user
+            if($salutation == "Others"){
+                $salutation = $request -> input('salutationInput');
+            }
             $organizationName = $request -> input("organizationName");//get organizationName from user
             $address = $request -> input('address');//get address from user
             $postcode = $request -> input('postcode');//get postcode from user

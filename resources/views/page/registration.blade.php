@@ -106,7 +106,7 @@
                                                         <option value="Dr prof">Dr Prof</option>
                                                         <option value="Others">Others</option>
                                                     </select>
-                                                <input type="text" name="title" id="title" style='display:none;'/><br>
+                                                <input type="text" name="salutationInput" id="salutationInput" style='display:none;'/><br>
                                                 </div>
                                                 <!--End Dropdown-->
                                                 <!--Dropdown-->
@@ -171,7 +171,7 @@
                                                 </div>
                                                 <!--End Dropdown-->
                                                 <div class="form-group col-md-4 pe-5" >
-                                                    <input type="text " name="password" id="password" class="form-control password" placeholder="password" required="required">
+                                                    <input type="password" name="password" id="password" class="form-control password" placeholder="password" required="required">
                                                 </div>
                                                 
                                                 
@@ -203,6 +203,13 @@
                                             }
                                             $('#state').html(stateOptionsHtml);
                                         });
+
+                                        $('#salutation').change(function(){
+                                            var selectedSalutation = $(this).val();
+                                            if (selectedSalutation === "Others") {
+                                                $('#salutationInput').show();
+                                            }
+                                        })
                                     });
                                         </script>                                          
                                                 
