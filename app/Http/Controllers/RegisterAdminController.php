@@ -13,7 +13,7 @@ class RegisterAdminController extends Controller
         if(session()->has("LoggedSuperAdmin")){
             $adminSession = session()->get('LoggedSuperAdmin');
             $role = tbl_role_jk::all();
-            return view('page.registerNewAdmin',['LoggedSuperAdmin'=>$adminSession,'adminRole'=>$role]);
+            return view('page.superadmin.registerNewAdmin.registerNewAdmin(SuperAdmin)',['LoggedSuperAdmin'=>$adminSession,'adminRole'=>$role]);
         }else{
             return redirect('login')->with('fail','Login Session Expire,Please Login again');
         }
@@ -26,7 +26,8 @@ class RegisterAdminController extends Controller
         if(!tbl_account::where('email',$email)->first()){
             $password = $request -> input('password');
             $name = $request -> input('name');//get name from Super Admin
-            $title = $request -> input('title');//get IC_No from Super Admin
+            $salutation = $request -> input('salutation');//get IC_No from Super Admin
+            $organizationName = $request -> input('organizationName');//get IC_No from Super Admin
             $IC_No = $request -> input('IC_No');//get IC_No from Super Admin
             $phoneNumber = $request -> input('phoneNumber');//get Phone Number from Super Admin
             $date = now();//get timestamp now
@@ -36,7 +37,7 @@ class RegisterAdminController extends Controller
             //create a set of data that will be insert to database
             $data1 = array('email'=>$email,'password'=>$hashedPassword,'isAdmin'=> 1 ,'created_at'=>$date,'updated_at'=>$date);
             //create a set of data that will be insert to database
-            $data2 = array('IC_No'=>$IC_No,'name'=>$name,'title'=>$title,'email'=>$email,'phoneNumber'=>$phoneNumber,'adminRole'=>$role,'status'=> 1,'created_at'=>$date,'updated_at'=>$date);
+            $data2 = array('IC_No'=>$IC_No,'name'=>$name,'salutation'=>$salutation,'organizationName'=>$organizationName,'email'=>$email,'phoneNumber'=>$phoneNumber,'adminRole'=>$role,'status'=> 1,'created_at'=>$date,'updated_at'=>$date);
             //insert the data to database with specified table and the dataset that have been create
             DB::table('tbl_account')->insert($data1);
             //insert the data to database with specified table and the dataset that have been create

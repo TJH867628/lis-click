@@ -14,16 +14,34 @@ return new class extends Migration
     {
         DB::table('tbl_page')->insert([
             [
-                'pageName' => 'participantsHomePage',
+                'pageName' => 'Participants HomePage',
                 'pagePath' => 'page.participants.homePage.homePage(Participants)',
                 'pageType' => 'participants',
                 'createdAt' => now(),
                 'updatedAt' => now(),
             ],
             [
-                'pageName' => 'pageList',
+                'pageName' => 'Page List',
                 'pagePath' => 'page.superadmin.pageList.pageList(superAdmin)',
                 'pageType' => 'superAdmin',
+                'createdAt' => now(),
+                'updatedAt' => now(),
+            ],
+            [
+                'pageName' => 'Conferences Info',
+                'pagePath' => 'page.participants.conferencesInfo.conferencesInfoContent',
+                'pageType' => 'participants',
+                'createdAt' => now(),
+                'updatedAt' => now(),
+            ],
+
+
+            
+            //template
+            [
+                'pageName' => "//pagename",
+                'pagePath' => "//pagePath example:'page.participants.conferencesInfo.conferencesInfoContent'",
+                'pageType' => "this page is for which role of user",
                 'createdAt' => now(),
                 'updatedAt' => now(),
             ],
