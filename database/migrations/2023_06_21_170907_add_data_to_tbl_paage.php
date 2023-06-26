@@ -34,6 +34,13 @@ return new class extends Migration
                 'createdAt' => now(),
                 'updatedAt' => now(),
             ],
+            [
+                'pageName' => 'JK Pendaftaran Home Page',
+                'pagePath' => 'page.JK_Pendaftaran.homePage(JK_Pendaftaran).homePageContent',
+                'pageType' => 'participants',
+                'createdAt' => now(),
+                'updatedAt' => now(),
+            ],
 
 
             
