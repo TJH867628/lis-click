@@ -18,10 +18,10 @@ class homepageController extends Controller
             $adminSession = session()->get('LoggedSuperAdmin');
             return view('page.superAdmin_homePage',['adminSession'=>$adminSession]);
             
-        }elseif(session()->has("LoggedJKParticipants")){
+        }elseif(session()->has("LoggedJKPendaftaran")){
             session()->start();
-            $adminSession = session()->get('LoggedJKParticipants');
-            return view('page.JkParticipant_HomePage',['adminSession'=>$adminSession]);
+            $adminSession = session()->get('LoggedJKPendaftaran');
+            return view('page.JK_Pendaftaran.homePage(JK_Pendaftaran).homePage(JK_Pendaftaran)',['adminSession'=>$adminSession]);
         }elseif(session()->has('LoggedJKReviewer')){
             session()->start();
             $adminSession = session()->get('LoggedJKReviewer');

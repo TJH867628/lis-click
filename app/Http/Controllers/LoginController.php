@@ -56,7 +56,7 @@ class LoginController extends Controller
                     }
                     elseif($AdminInfo->adminRole == "JK Pendaftaran"){//check the role of admin
                         $request->session()->put('LoggedJKPendaftaran', $AdminInfo->email);
-                        return redirect('JKPendaftaranHomePage');
+                        return redirect('JkPendaftaranHomePage');
                     }
                     elseif($AdminInfo->adminRole == "Reviewer"){//check the role of admin
                         $request->session()->put('LoggedReviewer', $AdminInfo->email);

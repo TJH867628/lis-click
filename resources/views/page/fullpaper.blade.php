@@ -160,7 +160,7 @@
 
                                                 <!-- HTML button element that will trigger the file upload -->
                                                 <label class="upload">Please Upload File :</label>
-                                                <p><em>Format : ".docx / .pdf"</em></p>
+                                                <p><em>Format : ".docx(word)"</em></p>
                                                 <p><em>For more information, please <a href="/conferencesDownload">click here.</a></em></p>
                                                 <div class="upload-sect">
                                                     <input type="file" id="file-upload" name="file_upload">
@@ -170,7 +170,7 @@
                                                 <div id="myModal" class="modal">
                                                 <div class="modal-content">
                                                     <span class="close">&times;</span>
-                                                    <p>Please upload a .docx or a .pdf file.</p>
+                                                    <p>Please upload .docx(worksheet) file only.</p>
                                                 </div>
                                                 </div>
 
@@ -190,7 +190,7 @@
                                                     const fileType = file.type;
 
                                                     // If the file type is not .docx, show the modal popup
-                                                    if (fileType == "application/vnd.openxmlformats-officedocument.wordprocessingml.document" || fileType == "application/pdf") {
+                                                    if (fileType == "application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
                                                         null;
                                                     }else{
                                                         modal.style.display = "block";

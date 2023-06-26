@@ -117,7 +117,7 @@ class FullpaperController extends Controller
                         }
                         $submissionCode = $currentYear . "_" . $categoryCode . str_pad( str($rows + 1), 4, '0', STR_PAD_LEFT);
                     }
-    
+
                     $participants1 = $user->email;//get name from user
                     $participants2 = $request -> input('participants2');
                     $participants3 = $request -> input('participants3');

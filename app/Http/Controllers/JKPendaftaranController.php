@@ -11,7 +11,7 @@ class JKPendaftaranController extends Controller
         if(session()->has("LoggedJKPendaftaran")){
             session()->start();
             $adminSession = session()->get('LoggedJKPendaftaran');
-            return view('page.JKPendaftaranHomePage',['adminSession'=>$adminSession]);
+            return view('page.JK_Pendaftaran.homePage(JK_Pendaftaran).homePage(JK_Pendaftaran)',['adminSession'=>$adminSession]);
         }else{
             return redirect('login')->with('fail','Login Session Expire,Please Login again');
         }
@@ -21,7 +21,7 @@ class JKPendaftaranController extends Controller
             session()->start();
             $adminSession = session()->get('LoggedJKPendaftaran');
             $submissionInfo  = tbl_submission::all();
-            return view('page.participantsList(JkParticipant)',['adminSession'=>$adminSession,'submissionInfo' => $submissionInfo]);
+            return view('page.JK_Pendaftaran.submissionList.submissionList',['adminSession'=>$adminSession,'submissionInfo' => $submissionInfo]);
         }else{
             return redirect('login')->with('fail','Login Session Expire,Please Login again');
         }
