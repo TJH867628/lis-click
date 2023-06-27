@@ -41,7 +41,20 @@ return new class extends Migration
                 'createdAt' => now(),
                 'updatedAt' => now(),
             ],
-
+            [
+                'pageName' => 'JK Reviewer Home Page',
+                'pagePath' => 'page.Jk_Reviewer.homePage(Jk_Reviewer).homePageContent',
+                'pageType' => 'JK Reviewer',
+                'createdAt' => now(),
+                'updatedAt' => now(),
+            ],
+            [
+                'pageName' => 'JK Reviewer Reviewer List Page',
+                'pagePath' => 'page.Jk_Reviewer.reviewerList.reviewListContent',
+                'pageType' => 'JK Reviewer',
+                'createdAt' => now(),
+                'updatedAt' => now(),
+            ],
 
             
             //template
