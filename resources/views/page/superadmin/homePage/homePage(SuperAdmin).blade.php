@@ -8,7 +8,7 @@
     <!-- Bootstrap Font Icon CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <!--CSS-->
-    <link href="resources/views/css/superAdmin.css" rel="stylesheet"/>
+    <link href="css/superAdmin.css" rel="stylesheet"/>
     <!--END CSS-->
     <title>Dashboard</title>
 </head>
@@ -17,7 +17,7 @@
         <header>
             <div class="image-text">
                 <span class="image">
-                    <img src="/assets/Logo1 (1).png">
+                    <img src="images/Logo1 (1).png">
                 </span>
 
             <!--   <div class="text header-text">
