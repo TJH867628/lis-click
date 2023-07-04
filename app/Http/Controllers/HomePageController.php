@@ -16,7 +16,7 @@ class homepageController extends Controller
         }elseif(session()->has("LoggedSuperAdmin")){
             session()->start();
             $adminSession = session()->get('LoggedSuperAdmin');
-            return view('page.superAdmin_homePage',['adminSession'=>$adminSession]);
+            return view('page.superadmin.homePage.homePage(SuperAdmin)',['adminSession'=>$adminSession]);
             
         }elseif(session()->has("LoggedJKPendaftaran")){
             session()->start();
