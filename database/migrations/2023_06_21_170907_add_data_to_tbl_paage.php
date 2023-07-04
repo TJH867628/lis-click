@@ -55,6 +55,27 @@ return new class extends Migration
                 'createdAt' => now(),
                 'updatedAt' => now(),
             ],
+            [
+                'pageName' => 'Participants Full Paper Submission Page',
+                'pagePath' => 'page.participants.fullpaperSubmission.fullpaperContent',
+                'pageType' => 'participants',
+                'createdAt' => now(),
+                'updatedAt' => now(),
+            ],
+            [
+                'pageName' => 'Participants Submission Status Page',
+                'pagePath' => 'page.participants.submissionstatus(participants).submissionStatusContent',
+                'pageType' => 'participants',
+                'createdAt' => now(),
+                'updatedAt' => now(),
+            ],
+            [
+                'pageName' => 'Super Admin Submission Status Page',
+                'pagePath' => 'page.superadmin.submissionstatus(SuperAdmin).submissionStatusContent',
+                'pageType' => 'superAdmin',
+                'createdAt' => now(),
+                'updatedAt' => now(),
+            ],
 
             
             //template
