@@ -90,6 +90,34 @@ return new class extends Migration
                 'createdAt' => now(),
                 'updatedAt' => now(),
             ],
+            [
+                'pageName' => 'Reviewer Done Review Page',
+                'pagePath' => 'page.reviewer.donereview.donereviewContent',
+                'pageType' => 'reviewer',
+                'createdAt' => now(),
+                'updatedAt' => now(),
+            ],
+            [
+                'pageName' => 'Super Admin Admin List Page',
+                'pagePath' => 'page.superadmin.adminList.adminListContent',
+                'pageType' => 'superAdmin',
+                'createdAt' => now(),
+                'updatedAt' => now(),
+            ],
+            [
+                'pageName' => 'JK Participant Participant List Page',
+                'pagePath' => 'page.JK_Participant.participantList.participantListContent',
+                'pageType' => 'JK Participant',
+                'createdAt' => now(),
+                'updatedAt' => now(),
+            ],
+            [
+                'pageName' => 'JK Participant Home Page',
+                'pagePath' => 'page.JK_Participant.homePage(JK_Participant).homePageContent',
+                'pageType' => 'JK Participant',
+                'createdAt' => now(),
+                'updatedAt' => now(),
+            ],
 
             
             //template
