@@ -76,6 +76,20 @@ return new class extends Migration
                 'createdAt' => now(),
                 'updatedAt' => now(),
             ],
+            [
+                'pageName' => 'Reviewer Home Page',
+                'pagePath' => 'page.reviewer.homePage(Reviewer).homePageContent',
+                'pageType' => 'reviewer',
+                'createdAt' => now(),
+                'updatedAt' => now(),
+            ],
+            [
+                'pageName' => 'Reviewer Pending Review Page',
+                'pagePath' => 'page.reviewer.pendingreview.pendingreviewContent',
+                'pageType' => 'reviewer',
+                'createdAt' => now(),
+                'updatedAt' => now(),
+            ],
 
             
             //template
