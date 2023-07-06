@@ -26,6 +26,7 @@
     </style>
 </head>
 <body>
+
     <form action="{{ route('evaluationForm', ['submissionCode' => $dataEvaluationForm->paper_id_number]) }}" method="post">
         @csrf
         <h2>8th INTERNATIONAL CONFERENCE</h2>

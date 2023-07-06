@@ -156,7 +156,8 @@ class ReviewerController extends Controller
                     'updated_at' => now()
                 );
                 DB::table('tbl_evaluation_form')->insert($data);
-                return view('page.reviewer.evaluationForm.evaluationForm',['submissionCode' => $submissionCode]);
+                $dataEvaluationForm = tbl_evaluation_form::where('paper_id_number',$submissionCode)->first();
+                return view('page.reviewer.evaluationForm.evaluationForm',['dataEvaluationForm' => $dataEvaluationForm]);
 
             }
         }else{
