@@ -17,7 +17,7 @@
         <main class="flex-shrink-0">
             @include('page.Jk_Reviewer.navigationBar')
             <br><br><br><br><br>
-            @include('page.Jk_Reviewer.HomePage(Jk_Reviewer).homePageContent')
+            @include('page.Jk_Reviewer.Homepage(Jk_Reviewer).homePageContent')
             @include('page.footer')
         </main>
         <!-- Bootstrap core JS-->
