@@ -25,11 +25,11 @@ class homepageController extends Controller
         }elseif(session()->has('LoggedJKReviewer')){
             session()->start();
             $adminSession = session()->get('LoggedJKReviewer');
-            return view('page.homePage(JK Reviewer)',['adminSession'=>$adminSession]);
+            return view('page.Jk_Reviewer.Homepage(JK_Reviewer).homePage(JK Reviewer)',['adminSession'=>$adminSession]);
         }elseif(session()->has('LoggedReviewer')){
             session()->start();
             $adminSession = session()->get('LoggedReviewer');
-            return view('page.reviewer_HomePage',['adminSession'=>$adminSession]);
+            return view('page.reviewer.homePage(Reviewer).homePage(Reviewer)',['adminSession'=>$adminSession]);
         }
         else{
             return redirect('login')->with('fail','Login expired,Please Login Again');

@@ -31,6 +31,9 @@
                     <th>    
                         Upload Reviewed Document<br>
                     </th>
+                    <th>
+                        Evaluation Form
+                    </th>
 
 
                     @foreach($submissionInfo as $submissionInfo)
@@ -49,6 +52,9 @@
                                     <input type="file" name="file" />
                                     <button type="submit">Upload</button>
                                 </form>
+                            </td>
+                            <td>
+                                <a href="{{ route('evaluationForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4">Evaluate Form</a>
                             </td>
                         </tr>
                         @endif

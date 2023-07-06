@@ -86,4 +86,6 @@ Route::post('uploadReceipt/{submissionCode}', [submissionStatusController::class
 Route::get('/pageList',[SuperAdminController::class,'pageList']);
 Route::get('editPage/{page}', [PageEditController::class, 'editPage'])->name('editPage');
 Route::post('/editPage/{pageName}', [PageEditController::class, 'saveEdit'])->name('saveEdit');
+Route::get('evaluationForm/{submissionCode}', [ReviewerController::class, 'evaluationForm'])->name('evaluationForm');
+Route::post('evaluationForm/{submissionCode}', [ReviewerController::class, 'submitEvaluationForm'])->name('evaluationForm');
 

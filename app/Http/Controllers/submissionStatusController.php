@@ -32,7 +32,7 @@ class submissionStatusController extends Controller
             $userSession = session()->get('LoggedJKReviewer');
             $allSubmissionInfo = tbl_submission::all();
             $allReviewerInfo = tbl_admin_info::where('adminRole','Reviewer')->get();
-            return view('page.reviewList(JK Reviewer)',['userSession'=>$userSession,'userSubmissionInfo' => $allSubmissionInfo,'allReviewerInfo' => $allReviewerInfo]);
+            return view('page.Jk_Reviewer.reviewerList.reviewList(JK Reviewer)',['userSession'=>$userSession,'userSubmissionInfo' => $allSubmissionInfo,'allReviewerInfo' => $allReviewerInfo]);
         }else{
             return redirect('login')->with('fail','Login Session Expire,Please Login again');
         }
