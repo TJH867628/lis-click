@@ -88,4 +88,6 @@ Route::get('editPage/{page}', [PageEditController::class, 'editPage'])->name('ed
 Route::post('/editPage/{pageName}', [PageEditController::class, 'saveEdit'])->name('saveEdit');
 Route::get('evaluationForm/{submissionCode}', [ReviewerController::class, 'evaluationForm'])->name('evaluationForm');
 Route::post('evaluationForm/{submissionCode}', [ReviewerController::class, 'submitEvaluationForm'])->name('evaluationForm');
+Route::post('/uploadEvaluationForm/{submissionCode}', [ReviewerController::class,'uploadEvaluationForm'])->name('uploadEvaluationForm');
+Route::get('downloadEvaluationForm/{filename}',  [ReviewerController::class,'downloadEvaluationForm'])->name('downloadEvaluationForm');
 

@@ -25,11 +25,14 @@ class ReviewerController extends Controller
         if(session()->has("LoggedReviewer")){
             session()->start();
             $adminSession = session()->get('LoggedReviewer');
-            $reviewername = tbl_admin_info::where('email',$adminSession)->first();
-            $submissionInfo = tbl_submission::where('reviewerID', $reviewername->name)
-            ->orWhere('reviewer2ID', $reviewername->name)
-            ->get();
-            return view('page.reviewer.pendingreview.pendingreview',['adminSession'=>$adminSession,'submissionInfo' => $submissionInfo]);
+            $reviewer = tbl_admin_info::where('email',$adminSession)->first();
+            $reviewername = $reviewer->name;
+            if(tbl_submission::where('reviewerID', $reviewername)->first()){
+                $submissionInfo = tbl_submission::where('reviewerID', $reviewername)->get();
+            }elseif(tbl_submission::where('reviewer2ID', $reviewername)->first()){
+                $submissionInfo = tbl_submission::where('reviewer2ID', $reviewername)->get();
+            }
+            return view('page.reviewer.pendingreview.pendingreview',['reviewername'=>$reviewername,'submissionInfo' => $submissionInfo]);
         }else{
             return redirect('login')->with('fail','Login Session Expire,Please Login again');
         }
@@ -39,11 +42,14 @@ class ReviewerController extends Controller
         if(session()->has("LoggedReviewer")){
             session()->start();
             $adminSession = session()->get('LoggedReviewer');
-            $reviewername = tbl_admin_info::where('email',$adminSession)->first();
-            $submissionInfo = tbl_submission::where('reviewerID', $reviewername->name)
-            ->orWhere('reviewer2ID', $reviewername->name)
-            ->get();
-            return view('page.donereview',['adminSession'=>$adminSession,'submissionInfo' => $submissionInfo]);
+            $reviewer = tbl_admin_info::where('email',$adminSession)->first();
+            $reviewername = $reviewer->name;
+            if(tbl_submission::where('reviewerID', $reviewername)->first()){
+                $submissionInfo = tbl_submission::where('reviewerID', $reviewername)->get();
+            }elseif(tbl_submission::where('reviewer2ID', $reviewername)->first()){
+                $submissionInfo = tbl_submission::where('reviewer2ID', $reviewername)->get();
+            }
+            return view('page.reviewer.donereview.donereview',['reviewername'=>$reviewername,'submissionInfo' => $submissionInfo]);
         }else{
             return redirect('login')->with('fail','Login Session Expire,Please Login again');
         }
@@ -53,15 +59,61 @@ class ReviewerController extends Controller
         if ($request->hasFile('file')) {
             $file = $request->file('file');
             $submissionInfo = tbl_submission::where('submissionCode',$submisisonCode)->first();
-            $filename = $submissionInfo->file_name . '_Reviewed.'.$file->getClientOriginalExtension();
+
+            $adminSession = session()->get('LoggedReviewer');
+            $reviewer = tbl_admin_info::where('email',$adminSession)->first();
+            $reviewername = $reviewer->name;
+            if($submissionInfo->reviewerID == $reviewername){
+                $filename = $submissionInfo->file_name . '_Reviewed.'.$file->getClientOriginalExtension();
+                $submissionInfo->returnPaperLink = $filename;
+            }elseif($submissionInfo->reviewer2ID == $reviewername){
+                $filename = $submissionInfo->file_name . '_Reviewed2.'.$file->getClientOriginalExtension();
+                $submissionInfo->returnPaperLink2 = $filename;
+            }
             $file->storeAs('uploads', $filename, 'public');
-            $submissionInfo->reviewStatus = 'done';
-            $submissionInfo->returnPaperLink = $filename;
             $submissionInfo->save();
             return redirect()->back()->with('success', 'File uploaded successfully.');
         }
 
         return redirect()->back()->with('error', 'No file was uploaded.');
+    }
+
+    public function uploadEvaluationForm(Request $request,$submisisonCode){
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $submissionInfo = tbl_submission::where('submissionCode',$submisisonCode)->first();
+
+            $adminSession = session()->get('LoggedReviewer');
+            $reviewer = tbl_admin_info::where('email',$adminSession)->first();
+            $reviewername = $reviewer->name;
+            if($submissionInfo->reviewerID == $reviewername){
+                $filename = $submissionInfo->file_name . '_EvaluationForm.'.$file->getClientOriginalExtension();
+                $submissionInfo->evaluationFormLink = $filename;
+                if($submissionInfo->reviewer2ID == null){
+                    $submissionInfo->reviewStatus = 'done';
+                }elseif($submissionInfo->reviewer2ID != null){
+                    if($submissionInfo->evaluationFormLink2 != null){
+                        $submissionInfo->reviewStatus = 'done';
+                    }
+                }
+            }elseif($submissionInfo->reviewer2ID == $reviewername){
+                $filename = $submissionInfo->file_name . '_EvaluationForm2.'.$file->getClientOriginalExtension();
+                $submissionInfo->evaluationFormLink2 = $filename;
+                if($submissionInfo->evaluationFormLink != null){
+                    $submissionInfo->reviewStatus = 'done';
+                }
+            }
+            $file->storeAs('EvaluationForm', $filename, 'public');
+            $submissionInfo->save();
+            return redirect()->back()->with('success', 'File uploaded successfully.');
+        }
+
+        return redirect()->back()->with('error', 'No file was uploaded.');
+    }
+
+    public function downloadEvaluationForm($filename){
+        $path = 'storage/EvaluationForm/' . $filename;
+        return response()->download($path, $filename);
     }
 
     public function downloadReviewSubmission($filename){

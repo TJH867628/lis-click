@@ -35,10 +35,66 @@
                         Evaluation Form
                     </th>
 
-
                     @foreach($submissionInfo as $submissionInfo)
                         @if($submissionInfo->reviewStatus === 'pending')
-                        <tr>
+                            @if($submissionInfo->reviewer2ID)
+                                @if($submissionInfo->reviewerID === $reviewername)
+                                    @if($submissionInfo->evaluationFormLink == null)
+                                    <tr>
+                                        <td>{{ $submissionInfo->submissionCode }}</td>
+                                        <td>{{ $submissionInfo->submissionTitle }}</td>
+                                        <td>{{ $submissionInfo->submissionType }}</td>
+                                        <td>{{ $submissionInfo->subTheme }}</td>
+                                        <td>{{ $submissionInfo->presentMode }}</td>
+                                        <td><a href="{{ route('downloadSubmission', ['filename' => $submissionInfo->file_name]) }}" class="btn btn-primary mb-4">Download</a></td>
+                                        <td>{{ $submissionInfo->updated_at }}</td>
+                                        <td>
+                                            <form action="{{ route('uploadReviewSubmission',['submissionCode' => $submissionInfo->submissionCode]) }}" method="POST" enctype="multipart/form-data">
+                                                @csrf
+                                                <input type="file" name="file" />
+                                                <button type="submit">Upload Reviewed Paper</button>
+                                            </form>
+                                            <form action="{{ route('uploadEvaluationForm',['submissionCode' => $submissionInfo->submissionCode]) }}" method="POST" enctype="multipart/form-data">
+                                                @csrf
+                                                <input type="file" name="file" />
+                                                <button type="submit">Upload Evaluation Form</button>
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <a href="{{ route('evaluationForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4">Evaluate Form</a>
+                                        </td>
+                                    </tr>
+                                    @endif
+                                @elseif($submissionInfo->reviewer2ID === $reviewername)
+                                    @if(!$submissionInfo->evaluationFormLink2)
+                                    <tr>
+                                        <td>{{ $submissionInfo->submissionCode }}</td>
+                                        <td>{{ $submissionInfo->submissionTitle }}</td>
+                                        <td>{{ $submissionInfo->submissionType }}</td>
+                                        <td>{{ $submissionInfo->subTheme }}</td>
+                                        <td>{{ $submissionInfo->presentMode }}</td>
+                                        <td><a href="{{ route('downloadSubmission', ['filename' => $submissionInfo->file_name]) }}" class="btn btn-primary mb-4">Download</a></td>
+                                        <td>{{ $submissionInfo->updated_at }}</td>
+                                        <td>
+                                            <form action="{{ route('uploadReviewSubmission',['submissionCode' => $submissionInfo->submissionCode]) }}" method="POST" enctype="multipart/form-data">
+                                                @csrf
+                                                <input type="file" name="file" />
+                                                <button type="submit">Upload Reviewed Paper</button>
+                                            </form>
+                                            <form action="{{ route('uploadEvaluationForm',['submissionCode' => $submissionInfo->submissionCode]) }}" method="POST" enctype="multipart/form-data">
+                                                @csrf
+                                                <input type="file" name="file" />
+                                                <button type="submit">Upload Evaluation Form</button>
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <a href="{{ route('evaluationForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4">Evaluate Form</a>
+                                        </td>
+                                    </tr>
+                                    @endif
+                                @endif
+                            @else
+                            <tr>
                             <td>{{ $submissionInfo->submissionCode }}</td>
                             <td>{{ $submissionInfo->submissionTitle }}</td>
                             <td>{{ $submissionInfo->submissionType }}</td>
@@ -50,17 +106,27 @@
                                 <form action="{{ route('uploadReviewSubmission',['submissionCode' => $submissionInfo->submissionCode]) }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <input type="file" name="file" />
-                                    <button type="submit">Upload</button>
+                                    <button type="submit">Upload Reviewed Paper</button>
+                                </form>
+                                <form action="{{ route('uploadEvaluationForm',['submissionCode' => $submissionInfo->submissionCode]) }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    <input type="file" name="file" />
+                                    <button type="submit">Upload Evaluation Form</button>
                                 </form>
                             </td>
                             <td>
                                 <a href="{{ route('evaluationForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4">Evaluate Form</a>
                             </td>
                         </tr>
+                            @endif
+                        
                         @endif
                     @endforeach
                     
                 </table>
+                <br>
+                <br>
+                <br>
                     @else
                         <p style="color: black;">No record found.</p>
                     @endif
