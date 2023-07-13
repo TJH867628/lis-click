@@ -35,23 +35,23 @@
         <table border>
             <tr>
                 <td><strong>Reviewer’s Name:</strong></td>
-                <td><input type="text" name="reviewer_name" value="{{ $dataEvaluationForm->reviewer_name }}"></td>
+                <td><input type="text" name="reviewer_name" value="{{ $dataEvaluationForm->reviewer_name }}" readonly></td>
             </tr>
             <tr>
                 <td><strong>Email:</strong></td>
-                <td><input type="text" name="email" value="{{ $dataEvaluationForm->email }}"></td>
+                <td><input type="text" name="email" value="{{ $dataEvaluationForm->email }}" readonly></td>
             </tr>
             <tr>
                 <td><strong>Paper Id Number:</strong></td>
-                <td><input type="text" name="paper_id_number" value="{{ $dataEvaluationForm->paper_id_number }}"></td>
+                <td><input type="text" name="paper_id_number" value="{{ $dataEvaluationForm->paper_id_number }}" readonly></td>
             </tr>
             <tr>
                 <td><strong>Title of Paper Reviewed:</strong></td>
-                <td><input type="text" name="title_of_paper_reviewed" value="{{ $dataEvaluationForm->title_of_paper_reviewed }}"></td>
+                <td><input type="text" name="title_of_paper_reviewed" value="{{ $dataEvaluationForm->title_of_paper_reviewed }}" readonly></td>
             </tr>
             <tr>
                 <td><strong>Date of Reviewed:</strong></td>
-                <td><input type="date" name="date_of_reviewed" value="{{ $dataEvaluationForm->date_of_reviewed }}"></td>
+                <td><input type="date" name="date_of_reviewed" value="{{ date('Y-m-d') }}" readonly></td>
             </tr>
         </table>
 

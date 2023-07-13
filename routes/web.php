@@ -21,6 +21,7 @@ use App\Http\Controllers\JKPendaftaranController;
 use App\Http\Controllers\submissionStatusController;
 use App\Http\Controllers\ReviewerController;
 use App\Http\Controllers\PageEditController;
+use App\Http\Controllers\JKTurnInController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -90,4 +91,5 @@ Route::get('evaluationForm/{submissionCode}', [ReviewerController::class, 'evalu
 Route::post('evaluationForm/{submissionCode}', [ReviewerController::class, 'submitEvaluationForm'])->name('evaluationForm');
 Route::post('/uploadEvaluationForm/{submissionCode}', [ReviewerController::class,'uploadEvaluationForm'])->name('uploadEvaluationForm');
 Route::get('downloadEvaluationForm/{filename}',  [ReviewerController::class,'downloadEvaluationForm'])->name('downloadEvaluationForm');
-
+Route::post('/uploadTurnInReport/{submissionCode}', [JKTurnInController::class,'uploadTurnInReport'])->name('uploadTurnInReport');
+Route::get('downloadTurnInReport/{filename}',  [JKTurnInController::class,'downloadTurnInReport'])->name('downloadTurnInReport');

@@ -12,15 +12,6 @@
                         Submission Details<br>
                     </th>
                     <th>
-                        Submission Type<br>
-                    </th>
-                    <th>
-                        Theme<br>
-                    </th>
-                    <th>
-                        Present Mode<br>
-                    </th>
-                    <th>
                         Participants<br>
                     </th>
                     <th>
@@ -39,13 +30,27 @@
                     <th>
                         Review Paper<br>
                     </th>
+                    <th>
+                        Evaluation Form<br>
+                    </th>
+                    <th>
+                        Turn In Report<br>
+                    </th>
                 </tr>
                     @foreach($userSubmissionInfo as $submissionInfo)
                         <tr>
-                            <td>{{ $submissionInfo->submissionCode }}</td>
-                            <td>{{ $submissionInfo->submissionType }}</td>
-                            <td>{{ $submissionInfo->subTheme }}</td>
-                            <td>{{ $submissionInfo->presentMode }}</td>
+                            <td>
+                                <p>Submission Code</p>
+                                {{$submissionInfo->submissionCode}}
+                                <p>Title</p>
+                                {{$submissionInfo->submissionTitle}}
+                                <p>Type</p>
+                                {{$submissionInfo->submissionType}}
+                                <p>Theme</p>
+                                {{$submissionInfo->subTheme}}
+                                <p>Present Mode</p>
+                                {{$submissionInfo->presentMode}}
+                            </td>
                             <td style="overflow-wrap:normal;">
                                     <p>Participants 1 :</p> {{ $submissionInfo->participants1 }}<br>
                                 @if($submissionInfo->participants2)
@@ -67,7 +72,7 @@
                                     <p>Payment ID : </p>
                                     {{ $submissionInfo->paymentStatus }}
                                 @elseif($paymentInfo->paymentStatus === "Pending For Verification")
-                                    Pending For Verification
+                                    Uncomplete
                                     <p>Payment ID:</p>
                                     {{ $paymentInfo->paymentStatus }}
                                 @else
@@ -93,6 +98,17 @@
                                 <td><a href="#" class="btn btn-primary mb-4" style="color: gray; pointer-events: none; ">Pending Review</a></td>
                             @else
                                 <td><a href="{{ route('downloadReviewedFile', ['filename' => $submissionInfo->returnPaperLink]) }}" class="btn btn-primary mb-4">Download Return File</a></td>
+                            @endif
+                            <td><a href="{{ route('evaluationForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4">Evaluate Form</a> </td>
+
+                            @if($submissionInfo->turnInReport)
+                            <td>
+                                <a href="{{ route('downloadTurnInReport', ['filename' => $submissionInfo->turnInReport]) }}" class="btn btn-primary mb-4">Download Turn In Report</a>
+                            </td>
+                            @else
+                            <td>
+                                Pending
+                            </td>
                             @endif
                         </tr>
                     @endforeach

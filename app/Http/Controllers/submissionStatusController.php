@@ -22,7 +22,7 @@ class submissionStatusController extends Controller
                 foreach ($userSubmissionInfo as $submissionInfo) {
                     $paymentStatus = tbl_payment::where('submissionCode', $submissionInfo->submissionCode)->first();
                 }
-            return view('page.submissionStatusPage',['userSession'=>$userSession,'userSubmissionInfo' => $userSubmissionInfo,'paymentInfo' => $paymentStatus]);
+            return view('page.participants.submissionstatus(participants).submissionstatus',['userSession'=>$userSession,'userSubmissionInfo' => $userSubmissionInfo,'paymentInfo' => $paymentStatus]);
         }elseif(session()->has('LoggedSuperAdmin')){
             $userSession = session()->get('LoggedSuperAdmin');
             $allSubmissionInfo = tbl_submission::all();

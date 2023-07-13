@@ -12,15 +12,6 @@
                         Submission Details<br>
                     </th>
                     <th>
-                        Submission Type<br>
-                    </th>
-                    <th>
-                        Theme<br>
-                    </th>
-                    <th>
-                        Present Mode<br>
-                    </th>
-                    <th>
                         Review Status<br>
                     </th>
                     <th>
@@ -30,17 +21,30 @@
                         Change Reviewer<br>
                     </th>
                     <th>    
-                        Download<br>
-
+                        Download Submission File<br>
+                    </th>
+                    <th>    
+                        View Evaluation Form<br>
+                    </th>
+                    <th>    
+                        Turn In Report<br>
                     </th>
                 </tr>
                     @foreach($userSubmissionInfo as $submissionInfo)
                         <tr>
-                            <td><h5>Submission Code: </h5> {{ $submissionInfo->submissionCode }}<br><h5>Title: </h5> {{ $submissionInfo->submissionTitle }}</td>
-                            <td>{{ $submissionInfo->submissionType }}</td>
-                            <td>{{ $submissionInfo->subTheme }}</td>
-                            <td>{{ $submissionInfo->presentMode }}</td>
-                            <td>{{ $submissionInfo->reviewStatus }}</td>
+                            <td>
+                                <p>Submission Code</p>
+                                {{$submissionInfo->submissionCode}}
+                                <p>Title</p>
+                                {{$submissionInfo->submissionTitle}}
+                                <p>Type</p>
+                                {{$submissionInfo->submissionType}}
+                                <p>Theme</p>
+                                {{$submissionInfo->subTheme}}
+                                <p>Present Mode</p>
+                                {{$submissionInfo->presentMode}}
+                            </td>
+                            <td>{{ $submissionInfo->reviewStatus}} </td>
                             <td>
                                 <p>Reviewer</p>
                                 <h5>{{ $submissionInfo->reviewerID }} </h5>
@@ -68,8 +72,25 @@
 
                                 <a href="{{ route('cancelReviewer', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4">Cancel Reviewer</a>
                             </td>
-                            <td><a href="{{ route('downloadSubmission', ['filename' => $submissionInfo->file_name]) }}" class="btn btn-primary mb-4">Download</a></td>
-
+                            <td>
+                                <a href="{{ route('downloadSubmission', ['filename' => $submissionInfo->file_name]) }}" class="btn btn-primary mb-4">Download Orginal File</a>
+                                <p>Download Reviewed Paper</p>
+                            </td>
+                            <td><a href="{{ route('evaluationForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4">Evaluate Form</a> </td>
+                            @if($submissionInfo->turnInReport)
+                            <td>
+                                <a href="{{ route('downloadTurnInReport', ['filename' => $submissionInfo->turnInReport]) }}" class="btn btn-primary mb-4">Download Turn In Report</a>
+                            </td>
+                            @else
+                            <td>
+                                <form action="{{ route('uploadTurnInReport',['submissionCode' => $submissionInfo->submissionCode]) }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    <input type="file" name="file" />
+                                    <button type="submit">Upload Turn In Report</button>
+                                </form>
+                            </td>
+                            @endif
+                            
                         </tr>
                     @endforeach
                 @else

@@ -179,7 +179,7 @@ class ReviewerController extends Controller
                         'email' => $reviewer->email,
                         'paper_id_number' => $submissionCode,
                         'title_of_paper_reviewed' => $submissionInfo->submissionTitle,
-                        'date_of_reviewed' => null,
+                        'date_of_reviewed' => now(),
                         'comments_abstract' => null,
                         'comments_introduction' => null,
                         'comments_literature_review' => null,
@@ -205,6 +205,14 @@ class ReviewerController extends Controller
                     return view('page.reviewer.evaluationForm.evaluationForm',['dataEvaluationForm' => $dataEvaluationForm]);
                 }
             }
+        }elseif(session()->has("LoggedJKReviewer")){
+            $dataEvaluationForm = tbl_evaluation_form::where('paper_id_number', $submissionCode)->first();
+            return view('page.Jk_Reviewer.evaluationForm.evaluationForm',['dataEvaluationForm' => $dataEvaluationForm]);
+
+        }elseif(session()->has("LoggedUser")){
+            $dataEvaluationForm = tbl_evaluation_form::where('paper_id_number', $submissionCode)->first();
+            return view('page.participants.evaluationForm.evaluationForm',['dataEvaluationForm' => $dataEvaluationForm]);
+
         }else{
             return redirect('login')->with('fail','Login Session Expire,Please Login again');
         }
