@@ -99,8 +99,11 @@
                             @else
                                 <td><a href="{{ route('downloadReviewedFile', ['filename' => $submissionInfo->returnPaperLink]) }}" class="btn btn-primary mb-4">Download Return File</a></td>
                             @endif
+                            @if($dataEvaluationForm)
                             <td><a href="{{ route('evaluationForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4">Evaluate Form</a> </td>
-
+                            @else
+                            <td><p>Pending</p></td>
+                            @endif
                             @if($submissionInfo->turnInReport)
                             <td>
                                 <a href="{{ route('downloadTurnInReport', ['filename' => $submissionInfo->turnInReport]) }}" class="btn btn-primary mb-4">Download Turn In Report</a>

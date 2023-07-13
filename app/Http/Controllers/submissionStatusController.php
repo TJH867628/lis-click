@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\tbl_submission;
 use App\Models\tbl_admin_info;
+use App\Models\tbl_evaluation_form;
 use App\Models\tbl_payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -21,18 +22,23 @@ class submissionStatusController extends Controller
 
                 foreach ($userSubmissionInfo as $submissionInfo) {
                     $paymentStatus = tbl_payment::where('submissionCode', $submissionInfo->submissionCode)->first();
+                    $dataEvaluationForm = tbl_evaluation_form::where('paper_id_number', $submissionInfo->submissionCode)->first();
                 }
-            return view('page.participants.submissionstatus(participants).submissionstatus',['userSession'=>$userSession,'userSubmissionInfo' => $userSubmissionInfo,'paymentInfo' => $paymentStatus]);
+            return view('page.participants.submissionStatus(participants).submissionStatus',['userSession'=>$userSession,'userSubmissionInfo' => $userSubmissionInfo,'paymentInfo' => $paymentStatus,'dataEvaluationForm'=>$dataEvaluationForm]);
         }elseif(session()->has('LoggedSuperAdmin')){
             $userSession = session()->get('LoggedSuperAdmin');
             $allSubmissionInfo = tbl_submission::all();
             $allReviewerInfo = tbl_admin_info::where('adminRole','Reviewer')->get();
-            return view('page.submissionStatusPage(Super Admin)',['userSession'=>$userSession,'userSubmissionInfo' => $allSubmissionInfo,'allReviewerInfo' => $allReviewerInfo]);
+            $dataEvaluationForm = tbl_evaluation_form::all();
+
+            return view('page.submissionStatusPage(Super Admin)',['userSession'=>$userSession,'userSubmissionInfo' => $allSubmissionInfo,'allReviewerInfo' => $allReviewerInfo,'dataEvaluationForm'=>$dataEvaluationForm]);
         }elseif(session()->has('LoggedJKReviewer')){
             $userSession = session()->get('LoggedJKReviewer');
             $allSubmissionInfo = tbl_submission::all();
             $allReviewerInfo = tbl_admin_info::where('adminRole','Reviewer')->get();
-            return view('page.Jk_Reviewer.reviewerList.reviewList(JK Reviewer)',['userSession'=>$userSession,'userSubmissionInfo' => $allSubmissionInfo,'allReviewerInfo' => $allReviewerInfo]);
+            $dataEvaluationForm = tbl_evaluation_form::all();
+
+            return view('page.Jk_Reviewer.reviewerList.reviewList(JK Reviewer)',['userSession'=>$userSession,'userSubmissionInfo' => $allSubmissionInfo,'allReviewerInfo' => $allReviewerInfo,'dataEvaluationForm'=>$dataEvaluationForm]);
         }else{
             return redirect('login')->with('fail','Login Session Expire,Please Login again');
         }

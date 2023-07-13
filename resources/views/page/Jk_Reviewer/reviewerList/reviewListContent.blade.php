@@ -76,7 +76,11 @@
                                 <a href="{{ route('downloadSubmission', ['filename' => $submissionInfo->file_name]) }}" class="btn btn-primary mb-4">Download Orginal File</a>
                                 <p>Download Reviewed Paper</p>
                             </td>
+                            @if($dataEvaluationForm)
                             <td><a href="{{ route('evaluationForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4">Evaluate Form</a> </td>
+                            @else
+                            <td><p>Pending</p></td>
+                            @endif
                             @if($submissionInfo->turnInReport)
                             <td>
                                 <a href="{{ route('downloadTurnInReport', ['filename' => $submissionInfo->turnInReport]) }}" class="btn btn-primary mb-4">Download Turn In Report</a>
