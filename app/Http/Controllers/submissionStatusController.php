@@ -24,7 +24,7 @@ class submissionStatusController extends Controller
                     $paymentStatus = tbl_payment::where('submissionCode', $submissionInfo->submissionCode)->first();
                     $dataEvaluationForm = tbl_evaluation_form::where('paper_id_number', $submissionInfo->submissionCode)->first();
                 }
-            return view('page.participants.submissionStatus(participants).submissionStatus',['userSession'=>$userSession,'userSubmissionInfo' => $userSubmissionInfo,'paymentInfo' => $paymentStatus,'dataEvaluationForm'=>$dataEvaluationForm]);
+            return view('page.participants.submissionstatus(participants).submissionStatus',['userSession'=>$userSession,'userSubmissionInfo' => $userSubmissionInfo,'paymentInfo' => $paymentStatus,'dataEvaluationForm'=>$dataEvaluationForm]);
         }elseif(session()->has('LoggedSuperAdmin')){
             $userSession = session()->get('LoggedSuperAdmin');
             $allSubmissionInfo = tbl_submission::all();
