@@ -103,6 +103,8 @@
                                 @if($submissionInfo->evaluationFormLink != NULL || $submissionInfo->evaluationFormLink2 != NULL)
                                     @if($dataEvaluationForm->paper_id_number == $submissionInfo->submissionCode)
                                         <td><a href="{{ route('evaluationForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4">Evaluate Form</a> </td>
+                                    @else
+                                        <td><p>Pending</p></td>
                                     @endif
                                 @else
                                 <td><p>Pending</p></td>
@@ -111,7 +113,8 @@
                                 @if($submissionInfo->evaluationFormLink != NULL)
                                     @if($dataEvaluationForm->paper_id_number == $submissionInfo->submissionCode)
                                         <td><a href="{{ route('evaluationForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4">Evaluate Form</a> </td>
-
+                                    @else
+                                        <td><p>Pending</p></td>
                                     @endif
                                 @else
                                     <td><p>Pending</p></td>
