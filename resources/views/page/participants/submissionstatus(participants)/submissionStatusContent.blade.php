@@ -99,11 +99,21 @@
                             @else
                                 <td><a href="{{ route('downloadReviewedFile', ['filename' => $submissionInfo->returnPaperLink]) }}" class="btn btn-primary mb-4">Download Return File</a></td>
                             @endif
-                            @if($submissionInfo->reviewStatus == "done")
-                                @if($dataEvaluationForm->paper_id_number == $submissionInfo->submissionCode)
-                                    <td><a href="{{ route('evaluationForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4">Evaluate Form</a> </td>
-                                @else
-                                    <td><p>Pending</p></td>
+                            @if($submissionInfo->reviewer2ID != NULL)
+                                @if($submissionInfo->evaluationFormLink != NULL || $submissionInfo->evaluationFormLink2 != NULL)
+                                    @if($dataEvaluationForm->paper_id_number == $submissionInfo->submissionCode)
+                                        <td><a href="{{ route('evaluationForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4">Evaluate Form</a> </td>
+                                    @else
+                                        <td><p>Pending</p></td>
+                                    @endif
+                                @endif
+                            @else
+                                @if($submissionInfo->evaluationFormLink != NULL)
+                                    @if($dataEvaluationForm->paper_id_number == $submissionInfo->submissionCode)
+                                        <td><a href="{{ route('evaluationForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4">Evaluate Form</a> </td>
+                                    @else
+                                        <td><p>Pending</p></td>
+                                    @endif
                                 @endif
                             @else
                                 <td><p>Pending</p></td>
