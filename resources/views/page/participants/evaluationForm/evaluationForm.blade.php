@@ -15,7 +15,6 @@
         
     </head>
     <body class="d-flex flex-column h-100" style="background-color: white; color:black;">
-        <main class="flex-shrink-0">
         @include('page.participants.navigationBar')
         <br><br><br><br><br>
         @include('page.participants.evaluationForm.evaluationFormContent')

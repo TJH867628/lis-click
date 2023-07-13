@@ -23,12 +23,19 @@
             width: 500px;
             height: 100px;
         }
+
+        #form-container{
+            margin: auto;
+            border: 3px solid black;
+            margin-bottom: 50px;
+        }
     </style>
 </head>
 <body>
+@foreach($dataEvaluationForm as $thisdataEvaluationForm)
+<div id="form-container">
     <h2>8th INTERNATIONAL CONFERENCE</h2>
     <h2>LIGA ILMU SERANTAU 2022 (LIS 2022)</h2>
-
     <table border>
         <tr>
             <td><strong>Reviewer’s Name:</strong></td>
@@ -40,11 +47,11 @@
         </tr>
         <tr>
             <td><strong>Paper Id Number:</strong></td>
-            <td><input type="text" name="paper_id_number" value="{{ $dataEvaluationForm->paper_id_number }}" readonly></td>
+            <td><input type="text" name="paper_id_number" value="{{ $thisdataEvaluationForm->paper_id_number }}" readonly></td>
         </tr>
         <tr>
             <td><strong>Title of Paper Reviewed:</strong></td>
-            <td><input type="text" name="title_of_paper_reviewed" value="{{ $dataEvaluationForm->title_of_paper_reviewed }}" readonly></td>
+            <td><input type="text" name="title_of_paper_reviewed" value="{{ $thisdataEvaluationForm->title_of_paper_reviewed }}" readonly></td>
         </tr>
         <tr>
             <td><strong>Date of Reviewed:</strong></td>
@@ -57,31 +64,31 @@
     <table border>
         <tr>
             <td><strong>Abstract:</strong></td>
-            <td><textarea name="comments_abstract" readonly>{{ $dataEvaluationForm->comments_abstract }}</textarea></td>
+            <td><textarea name="comments_abstract" readonly>{{ $thisdataEvaluationForm->comments_abstract }}</textarea></td>
         </tr>
         <tr>
             <td><strong>Introduction:</strong></td>
-            <td><textarea name="comments_introduction" readonly>{{ $dataEvaluationForm->comments_introduction }}</textarea></td>
+            <td><textarea name="comments_introduction" readonly>{{ $thisdataEvaluationForm->comments_introduction }}</textarea></td>
         </tr>
         <tr>
             <td><strong>Literature Review:</strong></td>
-            <td><textarea name="comments_literature_review" readonly>{{ $dataEvaluationForm->comments_literature_review }}</textarea></td>
+            <td><textarea name="comments_literature_review" readonly>{{ $thisdataEvaluationForm->comments_literature_review }}</textarea></td>
         </tr>
         <tr>
             <td><strong>Methodology:</strong></td>
-            <td><textarea name="comments_methodology" readonly>{{ $dataEvaluationForm->comments_methodology }}</textarea></td>
+            <td><textarea name="comments_methodology" readonly>{{ $thisdataEvaluationForm->comments_methodology }}</textarea></td>
         </tr>
         <tr>
             <td><strong>Results:</strong></td>
-            <td><textarea name="comments_results" readonly>{{ $dataEvaluationForm->comments_results }}</textarea></td>
+            <td><textarea name="comments_results" readonly>{{ $thisdataEvaluationForm->comments_results }}</textarea></td>
         </tr>
         <tr>
             <td><strong>Discussion:</strong></td>
-            <td><textarea name="comments_discussion" readonly>{{ $dataEvaluationForm->comments_discussion }}</textarea></td>
+            <td><textarea name="comments_discussion" readonly>{{ $thisdataEvaluationForm->comments_discussion }}</textarea></td>
         </tr>
         <tr>
             <td><strong>References:</strong></td>
-            <td><textarea name="comments_references" readonly>{{ $dataEvaluationForm->comments_references }}</textarea></td>
+            <td><textarea name="comments_references" readonly>{{ $thisdataEvaluationForm->comments_references }}</textarea></td>
         </tr>
     </table>
 
@@ -91,46 +98,46 @@
         <tr>
             <td><strong>Originality:</strong></td>
             <td>
-                <label><input type="radio" name="originality" value="1" <?php echo ($dataEvaluationForm->originality == 1) ? 'checked' : ''; ?> disabled> Excellent</label>
-                <label><input type="radio" name="originality" value="2" <?php echo ($dataEvaluationForm->originality == 2) ? 'checked' : ''; ?> disabled> Good</label>
-                <label><input type="radio" name="originality" value="3" <?php echo ($dataEvaluationForm->originality == 3) ? 'checked' : ''; ?> disabled> Fair</label>
-                <label><input type="radio" name="originality" value="4" <?php echo ($dataEvaluationForm->originality == 4) ? 'checked' : ''; ?> disabled> Poor</label>
+                <label><input type="radio" name="originality" value="1" <?php echo ($thisdataEvaluationForm->originality == 1) ? 'checked' : ''; ?> disabled> Excellent</label>
+                <label><input type="radio" name="originality" value="2" <?php echo ($thisdataEvaluationForm->originality == 2) ? 'checked' : ''; ?> disabled> Good</label>
+                <label><input type="radio" name="originality" value="3" <?php echo ($thisdataEvaluationForm->originality == 3) ? 'checked' : ''; ?> disabled> Fair</label>
+                <label><input type="radio" name="originality" value="4" <?php echo ($thisdataEvaluationForm->originality == 4) ? 'checked' : ''; ?> disabled> Poor</label>
             </td>
         </tr>
         <tr>
             <td><strong>Contribution To The Field:</strong></td>
             <td>
-                <label><input type="radio" name="contribution_to_field" value="1" <?php echo ($dataEvaluationForm->contribution_to_field == 1) ? 'checked' : ''; ?> disabled> Excellent</label>
-                <label><input type="radio" name="contribution_to_field" value="2" <?php echo ($dataEvaluationForm->contribution_to_field == 2) ? 'checked' : ''; ?> disabled> Good</label>
-                <label><input type="radio" name="contribution_to_field" value="3" <?php echo ($dataEvaluationForm->contribution_to_field == 3) ? 'checked' : ''; ?> disabled> Fair</label>
-                <label><input type="radio" name="contribution_to_field" value="4" <?php echo ($dataEvaluationForm->contribution_to_field == 4) ? 'checked' : ''; ?> disabled> Poor</label>
+                <label><input type="radio" name="contribution_to_field" value="1" <?php echo ($thisdataEvaluationForm->contribution_to_field == 1) ? 'checked' : ''; ?> disabled> Excellent</label>
+                <label><input type="radio" name="contribution_to_field" value="2" <?php echo ($thisdataEvaluationForm->contribution_to_field == 2) ? 'checked' : ''; ?> disabled> Good</label>
+                <label><input type="radio" name="contribution_to_field" value="3" <?php echo ($thisdataEvaluationForm->contribution_to_field == 3) ? 'checked' : ''; ?> disabled> Fair</label>
+                <label><input type="radio" name="contribution_to_field" value="4" <?php echo ($thisdataEvaluationForm->contribution_to_field == 4) ? 'checked' : ''; ?> disabled> Poor</label>
             </td>
         </tr>
         <tr>
             <td><strong>Technical Quality:</strong></td>
             <td>
-                <label><input type="radio" name="technical_quality" value="1" <?php echo ($dataEvaluationForm->technical_quality == 1) ? 'checked' : ''; ?> disabled> Excellent</label>
-                <label><input type="radio" name="technical_quality" value="2" <?php echo ($dataEvaluationForm->technical_quality == 2) ? 'checked' : ''; ?> disabled> Good</label>
-                <label><input type="radio" name="technical_quality" value="3" <?php echo ($dataEvaluationForm->technical_quality == 3) ? 'checked' : ''; ?> disabled> Fair</label>
-                <label><input type="radio" name="technical_quality" value="4" <?php echo ($dataEvaluationForm->technical_quality == 4) ? 'checked' : ''; ?> disabled> Poor</label>
+                <label><input type="radio" name="technical_quality" value="1" <?php echo ($thisdataEvaluationForm->technical_quality == 1) ? 'checked' : ''; ?> disabled> Excellent</label>
+                <label><input type="radio" name="technical_quality" value="2" <?php echo ($thisdataEvaluationForm->technical_quality == 2) ? 'checked' : ''; ?> disabled> Good</label>
+                <label><input type="radio" name="technical_quality" value="3" <?php echo ($thisdataEvaluationForm->technical_quality == 3) ? 'checked' : ''; ?> disabled> Fair</label>
+                <label><input type="radio" name="technical_quality" value="4" <?php echo ($thisdataEvaluationForm->technical_quality == 4) ? 'checked' : ''; ?> disabled> Poor</label>
             </td>
         </tr>
         <tr>
             <td><strong>Clarity Of Presentation:</strong></td>
             <td>
-                <label><input type="radio" name="clarity_of_presentation" value="1" <?php echo ($dataEvaluationForm->clarity_of_presentation == 1) ? 'checked' : ''; ?> disabled> Excellent</label>
-                <label><input type="radio" name="clarity_of_presentation" value="2" <?php echo ($dataEvaluationForm->clarity_of_presentation == 2) ? 'checked' : ''; ?> disabled> Good</label>
-                <label><input type="radio" name="clarity_of_presentation" value="3" <?php echo ($dataEvaluationForm->clarity_of_presentation == 3) ? 'checked' : ''; ?> disabled> Fair</label>
-                <label><input type="radio" name="clarity_of_presentation" value="4" <?php echo ($dataEvaluationForm->clarity_of_presentation == 4) ? 'checked' : ''; ?> disabled> Poor</label>
+                <label><input type="radio" name="clarity_of_presentation" value="1" <?php echo ($thisdataEvaluationForm->clarity_of_presentation == 1) ? 'checked' : ''; ?> disabled> Excellent</label>
+                <label><input type="radio" name="clarity_of_presentation" value="2" <?php echo ($thisdataEvaluationForm->clarity_of_presentation == 2) ? 'checked' : ''; ?> disabled> Good</label>
+                <label><input type="radio" name="clarity_of_presentation" value="3" <?php echo ($thisdataEvaluationForm->clarity_of_presentation == 3) ? 'checked' : ''; ?> disabled> Fair</label>
+                <label><input type="radio" name="clarity_of_presentation" value="4" <?php echo ($thisdataEvaluationForm->clarity_of_presentation == 4) ? 'checked' : ''; ?> disabled> Poor</label>
             </td>
         </tr>
         <tr>
             <td><strong>Depth Of Research:</strong></td>
             <td>
-                <label><input type="radio" name="depth_of_research" value="1" <?php echo ($dataEvaluationForm->depth_of_research == 1) ? 'checked' : ''; ?> disabled> Excellent</label>
-                <label><input type="radio" name="depth_of_research" value="2" <?php echo ($dataEvaluationForm->depth_of_research == 2) ? 'checked' : ''; ?> disabled> Good</label>
-                <label><input type="radio" name="depth_of_research" value="3" <?php echo ($dataEvaluationForm->depth_of_research == 3) ? 'checked' : ''; ?> disabled> Fair</label>
-                <label><input type="radio" name="depth_of_research" value="4" <?php echo ($dataEvaluationForm->depth_of_research == 4) ? 'checked' : ''; ?> disabled> Poor</label>
+                <label><input type="radio" name="depth_of_research" value="1" <?php echo ($thisdataEvaluationForm->depth_of_research == 1) ? 'checked' : ''; ?> disabled> Excellent</label>
+                <label><input type="radio" name="depth_of_research" value="2" <?php echo ($thisdataEvaluationForm->depth_of_research == 2) ? 'checked' : ''; ?> disabled> Good</label>
+                <label><input type="radio" name="depth_of_research" value="3" <?php echo ($thisdataEvaluationForm->depth_of_research == 3) ? 'checked' : ''; ?> disabled> Fair</label>
+                <label><input type="radio" name="depth_of_research" value="4" <?php echo ($thisdataEvaluationForm->depth_of_research == 4) ? 'checked' : ''; ?> disabled> Poor</label>
             </td>
         </tr>
     </table>
@@ -143,27 +150,31 @@
         </tr>
         <tr>
             <td><label for="accept">Accept As Is</label></td>
-            <td><input type="radio" id="accept" name="recommendation" value="accept" <?php echo ($dataEvaluationForm->recommendation == "accept") ? 'checked' : ''; ?> disabled></td>
+            <td><input type="radio" id="accept" name="recommendation" value="accept" <?php echo ($thisdataEvaluationForm->recommendation == "accept") ? 'checked' : ''; ?> disabled></td>
         </tr>
         <tr>
             <td><label for="minor">Requires Minor Corrections</label></td>
-            <td><input type="radio" id="minor" name="recommendation" value="minor" <?php echo ($dataEvaluationForm->recommendation == "minor") ? 'checked' : ''; ?> disabled></td>
+            <td><input type="radio" id="minor" name="recommendation" value="minor" <?php echo ($thisdataEvaluationForm->recommendation == "minor") ? 'checked' : ''; ?> disabled></td>
         </tr>
         <tr>
             <td><label for="moderate">Requires Moderate Revision</label></td>
-            <td><input type="radio" id="moderate" name="recommendation" value="moderate" <?php echo ($dataEvaluationForm->recommendation == "moderate") ? 'checked' : ''; ?> disabled></td>
+            <td><input type="radio" id="moderate" name="recommendation" value="moderate" <?php echo ($thisdataEvaluationForm->recommendation == "moderate") ? 'checked' : ''; ?> disabled></td>
         </tr>
         <tr>
             <td><label for="major">Requires Major Revision</label></td>
-            <td><input type="radio" id="major" name="recommendation" value="major" <?php echo ($dataEvaluationForm->recommendation == "major") ? 'checked' : ''; ?> disabled></td>
+            <td><input type="radio" id="major" name="recommendation" value="major" <?php echo ($thisdataEvaluationForm->recommendation == "major") ? 'checked' : ''; ?> disabled></td>
         </tr>
         <tr>
             <td><label for="reject">Reject On Ground of (Please Be Specific)</label></td>
-            <td><input type="radio" id="reject" name="recommendation" value="reject" <?php echo ($dataEvaluationForm->recommendation == "reject") ? 'checked' : ''; ?> disabled></td>
+            <td><input type="radio" id="reject" name="recommendation" value="reject" <?php echo ($thisdataEvaluationForm->recommendation == "reject") ? 'checked' : ''; ?> disabled></td>
         </tr>
     </table>
+    <button>This is the button to generated pdf</button>
     <br>
     <br>
     <br>
+</div>
+@endforeach
+
 </body>
 </html>

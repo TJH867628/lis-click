@@ -206,11 +206,11 @@ class ReviewerController extends Controller
                 }
             }
         }elseif(session()->has("LoggedJKReviewer")){
-            $dataEvaluationForm = tbl_evaluation_form::where('paper_id_number', $submissionCode)->first();
+            $dataEvaluationForm = tbl_evaluation_form::where('paper_id_number', $submissionCode)->get();
             return view('page.Jk_Reviewer.evaluationForm.evaluationForm',['dataEvaluationForm' => $dataEvaluationForm]);
 
         }elseif(session()->has("LoggedUser")){
-            $dataEvaluationForm = tbl_evaluation_form::where('paper_id_number', $submissionCode)->first();
+            $dataEvaluationForm = tbl_evaluation_form::where('paper_id_number', $submissionCode)->get();
             return view('page.participants.evaluationForm.evaluationForm',['dataEvaluationForm' => $dataEvaluationForm]);
 
         }else{

@@ -29,14 +29,20 @@ class submissionStatusController extends Controller
             $userSession = session()->get('LoggedSuperAdmin');
             $allSubmissionInfo = tbl_submission::all();
             $allReviewerInfo = tbl_admin_info::where('adminRole','Reviewer')->get();
-            $dataEvaluationForm = tbl_evaluation_form::all();
+            foreach ($allSubmissionInfo as $submissionInfo) {
+                $paymentStatus = tbl_payment::where('submissionCode', $submissionInfo->submissionCode)->first();
+                $dataEvaluationForm = tbl_evaluation_form::where('paper_id_number', $submissionInfo->submissionCode)->first();
+            }
 
             return view('page.submissionStatusPage(Super Admin)',['userSession'=>$userSession,'userSubmissionInfo' => $allSubmissionInfo,'allReviewerInfo' => $allReviewerInfo,'dataEvaluationForm'=>$dataEvaluationForm]);
         }elseif(session()->has('LoggedJKReviewer')){
             $userSession = session()->get('LoggedJKReviewer');
             $allSubmissionInfo = tbl_submission::all();
             $allReviewerInfo = tbl_admin_info::where('adminRole','Reviewer')->get();
-            $dataEvaluationForm = tbl_evaluation_form::all();
+            foreach ($allSubmissionInfo as $submissionInfo) {
+                $paymentStatus = tbl_payment::where('submissionCode', $submissionInfo->submissionCode)->first();
+                $dataEvaluationForm = tbl_evaluation_form::where('paper_id_number', $submissionInfo->submissionCode)->first();
+            }
 
             return view('page.Jk_Reviewer.reviewerList.reviewList(JK Reviewer)',['userSession'=>$userSession,'userSubmissionInfo' => $allSubmissionInfo,'allReviewerInfo' => $allReviewerInfo,'dataEvaluationForm'=>$dataEvaluationForm]);
         }else{
