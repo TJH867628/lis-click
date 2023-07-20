@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\tbl_admin_info;
+use App\Models\tbl_correction;
 use App\Models\tbl_submission;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class JKReviewerController extends Controller
@@ -31,16 +33,106 @@ class JKReviewerController extends Controller
     }
     
         function cancelReviewer($submissionCode){
-        if(session()->has('LoggedJKReviewer')|| session()->has('LoggedSuperAdmin')){
-            session()->start();
-            $adminSession = session()->get('LoggedJKReviewer');
+            if(session()->has('LoggedJKReviewer')|| session()->has('LoggedSuperAdmin')){
+                session()->start();
+                $adminSession = session()->get('LoggedJKReviewer');
+                $submission = tbl_submission::where('submissionCode',$submissionCode)->first();
+                $submission->reviewerID = "pending";
+                $submission->reviewer2ID = NULL;
+                $submission->save();
+                return redirect()->back();
+            }else{
+                return redirect('login')->with('fail','Login Session Expire,Please Login again');
+            }
+        }
+
+
+        function correctionForm($submissionCode){
+            if(session()->has('LoggedJKReviewer')|| session()->has('LoggedSuperAdmin')){
+                session()->start();
+                $adminSession = session()->get('LoggedJKReviewer');
+                $correction = tbl_correction::where('submissionCode',$submissionCode)->get();
+                $correctionCount = $correction->count();
+
+                $latestReturnCorrection = tbl_correction::where('numberOfTimes',$correctionCount)->first();
+                $submission = tbl_submission::where('submissionCode',$submissionCode)->first();
+
+                return view('page.Jk_Reviewer.correctionForm.correctionForm', ['correction' => $correction,'latestReturnCorrection' => $latestReturnCorrection,'submission' => $submission]);
+            }elseif(session()->has('LoggedUser')){
+                session()->start();
+                $correction = tbl_correction::where('submissionCode',$submissionCode)->get();
+                $correctionCount = $correction->count();
+                $submission = tbl_submission::where('submissionCode',$submissionCode)->first();
+                $latestCorrection = tbl_correction::where('numberOfTimes',$correctionCount)->first();
+
+                return view('page.participants.correctionForm.correctionForm', ['correction' => $correction,'latestCorrection'=>$latestCorrection,'submissionInfo' => $submission,'submissionCode' => $submissionCode]);
+
+            }else{
+                return redirect('login')->with('fail','Login Session Expire,Please Login again');
+            }
+        }
+
+        function uploadNewCorrection(Request $request,$submissionCode){
+            if(session()->has('LoggedJKReviewer')|| session()->has('LoggedSuperAdmin')){
+                session()->start();
+                $correction = tbl_correction::where('submissionCode',$submissionCode)->get();
+                $count = $correction->count();
+                $comment =  $request->input('commentForCorrection');
+                $data = array(
+                    'submissionCode' => $submissionCode,
+                    'numberOfTimes' => $count + 1,
+                    'commentForCorrection' => $comment,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                );
+                DB::table('tbl_correction')->insert($data);
+                return redirect()->back();
+            }else{
+                return redirect('login')->with('fail','Login Session Expire,Please Login again');
+            }
+        }
+
+        function uploadFileWithCorrection(Request $request,$submissionCode){
+            if(session()->has('LoggedUser')){
+                session()->start();
+                if ($request->hasFile('file')) {
+                    $file = $request->file('file');
+                    $submissionInfo = tbl_submission::where('submissionCode',$submissionCode)->first();
+                    $correction = tbl_correction::where('submissionCode',$submissionCode)->first();
+                    $count = $correction->count();
+                    $latestCorrection = tbl_correction::where('numberOfTimes',$count)->first();
+        
+                    $filename = 'Correction_'. $latestCorrection->numberOfTimes . '_'. $submissionInfo->submissionCode . ".". $file->getClientOriginalExtension();
+                    $latestCorrection->returnCorrectionLink = $filename;
+                    $latestCorrection->updated_at;
+                    $file->storeAs('returnCorrection', $filename, 'public');
+                    $latestCorrection->save();
+                    return redirect()->back()->with('success', 'File uploaded successfully.');
+                }else{
+                    return redirect()->back()->with('error', 'No File');
+                }
+            }else{
+                return redirect('login')->with('fail','Login Session Expire,Please Login again');
+            }
+        }
+    
+        public function downloadReturnCorrection($filename)
+        {
+            $path = 'storage/returnCorrection/' . $filename;
+            return response()->download($path, $filename);
+        }
+
+        public function doneCorrection($submissionCode){
             $submission = tbl_submission::where('submissionCode',$submissionCode)->first();
-            $submission->reviewerID = "pending";
-            $submission->reviewer2ID = NULL;
+            $submission->correctionPhase = "done";
             $submission->save();
             return redirect()->back();
-        }else{
-            return redirect('login')->with('fail','Login Session Expire,Please Login again');
         }
-    }
+    
+        public function unDoneCorrection($submissionCode){
+            $submission = tbl_submission::where('submissionCode',$submissionCode)->first();
+            $submission->correctionPhase = "pending";
+            $submission->save();
+            return redirect()->back();
+        }
 }

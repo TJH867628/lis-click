@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\tbl_admin_info;
 use App\Models\tbl_submission;
 use App\Models\tbl_evaluation_form;
+use App\Models\tbl_correction;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
@@ -82,7 +83,7 @@ class ReviewerController extends Controller
         if ($request->hasFile('file')) {
             $file = $request->file('file');
             $submissionInfo = tbl_submission::where('submissionCode',$submisisonCode)->first();
-
+            
             $adminSession = session()->get('LoggedReviewer');
             $reviewer = tbl_admin_info::where('email',$adminSession)->first();
             $reviewername = $reviewer->name;
@@ -91,16 +92,20 @@ class ReviewerController extends Controller
                 $submissionInfo->evaluationFormLink = $filename;
                 if($submissionInfo->reviewer2ID == null){
                     $submissionInfo->reviewStatus = 'done';
+                    $submissionInfo->correctionPhase = 'pending';
+                    
                 }elseif($submissionInfo->reviewer2ID != null){
                     if($submissionInfo->evaluationFormLink2 != null){
                         $submissionInfo->reviewStatus = 'done';
-                    }
+                        $submissionInfo->correctionPhase = 'pending';
+                }
                 }
             }elseif($submissionInfo->reviewer2ID == $reviewername){
                 $filename = $submissionInfo->file_name . '_EvaluationForm2.'.$file->getClientOriginalExtension();
                 $submissionInfo->evaluationFormLink2 = $filename;
                 if($submissionInfo->evaluationFormLink != null){
                     $submissionInfo->reviewStatus = 'done';
+                    $submissionInfo->correctionPhase = 'pending';
                 }
             }
             $file->storeAs('EvaluationForm', $filename, 'public');
@@ -274,6 +279,18 @@ class ReviewerController extends Controller
         }else{
             return redirect('login')->with('fail','Login Session Expire,Please Login again');
         }
+    }
+
+    public function doneCorrection($submissionCode){
+        $submission = tbl_submission::where('submissionCode',$submissionCode)->first();
+        $submission->correctionPhase = "done";
+        $submission->save();
+    }
+
+    public function unDoneCorrection($submissionCode){
+        $submission = tbl_submission::where('submissionCode',$submissionCode)->first();
+        $submission->correctionPhase = "pending";
+        $submission->save();
     }
 
 }

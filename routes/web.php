@@ -93,3 +93,9 @@ Route::post('/uploadEvaluationForm/{submissionCode}', [ReviewerController::class
 Route::get('downloadEvaluationForm/{filename}',  [ReviewerController::class,'downloadEvaluationForm'])->name('downloadEvaluationForm');
 Route::post('/uploadTurnInReport/{submissionCode}', [JKTurnInController::class,'uploadTurnInReport'])->name('uploadTurnInReport');
 Route::get('downloadTurnInReport/{filename}',  [JKTurnInController::class,'downloadTurnInReport'])->name('downloadTurnInReport');
+Route::get('correctionForm/{submissionCode}',  [JKReviewerController::class,'correctionForm'])->name('correctionForm');
+Route::post('/uploadNewCorrection/{submissionCode}', [JKReviewerController::class,'uploadNewCorrection'])->name('uploadNewCorrection');
+Route::post('/uploadFileWithCorrection/{submissionCode}', [JKReviewerController::class,'uploadFileWithCorrection'])->name('uploadFileWithCorrection');
+Route::get('downloadReturnCorrection/{filename}',  [JKReviewerController::class,'downloadReturnCorrection'])->name('downloadReturnCorrection');
+Route::get('doneCorrection/{submissionCode}',  [JKReviewerController::class,'doneCorrection'])->name('doneCorrection');
+Route::get('unDoneCorrection/{submissionCode}',  [JKReviewerController::class,'unDoneCorrection'])->name('unDoneCorrection');

@@ -36,6 +36,9 @@
                     <th>
                         Turn In Report<br>
                     </th>
+                    <th>
+                        Correction
+                    </th>
                 </tr>
                     @foreach($userSubmissionInfo as $submissionInfo)
                         <tr>
@@ -130,7 +133,20 @@
                             <td>
                                 Pending
                             </td>
+                            
                             @endif
+                            <td>
+                            @if($submissionInfo->correctionPhase == 'pending')
+                            @if( $correction->returnCorrectionLink != NULL)
+                                <h5>Pending For Comment</h5>
+                                @else
+                                <h5>Pending For Correction</h5>
+                                @endif
+                                <a href="{{ route('correctionForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4">Correction</a>
+                            @else
+                                <p>Pending</p>
+                            @endif
+                            </td>
                         </tr>
                     @endforeach
                 @else

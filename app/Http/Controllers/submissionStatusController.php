@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\tbl_submission;
 use App\Models\tbl_admin_info;
 use App\Models\tbl_evaluation_form;
+use App\Models\tbl_correction;
 use App\Models\tbl_payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -23,18 +24,24 @@ class submissionStatusController extends Controller
                 foreach ($userSubmissionInfo as $submissionInfo) {
                     $paymentStatus = tbl_payment::where('submissionCode', $submissionInfo->submissionCode)->first();
                     $dataEvaluationForm = tbl_evaluation_form::where('paper_id_number', $submissionInfo->submissionCode)->first();
+                    $correction = tbl_correction::where('submissionCode',$submissionInfo->submissionCode)->get();
+                    $correctionCount = $correction->count();
+                    $latestReturnCorrection = tbl_correction::where('numberOfTimes',$correctionCount)->first();
                 }
-            return view('page.participants.submissionstatus(participants).submissionStatus',['userSession'=>$userSession,'userSubmissionInfo' => $userSubmissionInfo,'paymentInfo' => $paymentStatus,'dataEvaluationForm'=>$dataEvaluationForm]);
+            return view('page.participants.submissionstatus(participants).submissionStatus',['userSession'=>$userSession,'userSubmissionInfo' => $userSubmissionInfo,'paymentInfo' => $paymentStatus,'dataEvaluationForm'=>$dataEvaluationForm,'correction' => $latestReturnCorrection]);
         }elseif(session()->has('LoggedSuperAdmin')){
             $userSession = session()->get('LoggedSuperAdmin');
             $allSubmissionInfo = tbl_submission::all();
             $allReviewerInfo = tbl_admin_info::where('adminRole','Reviewer')->get();
             foreach ($allSubmissionInfo as $submissionInfo) {
                 $paymentStatus = tbl_payment::where('submissionCode', $submissionInfo->submissionCode)->first();
+                $correction = tbl_correction::where('submissionCode',$submissionInfo->submissionCode)->get();
+                $correctionCount = $correction->count();
+                $latestReturnCorrection = tbl_correction::where('numberOfTimes',$correctionCount)->first();
                 $dataEvaluationForm = tbl_evaluation_form::where('paper_id_number', $submissionInfo->submissionCode)->first();
             }
 
-            return view('page.submissionStatusPage(Super Admin)',['userSession'=>$userSession,'userSubmissionInfo' => $allSubmissionInfo,'allReviewerInfo' => $allReviewerInfo,'dataEvaluationForm'=>$dataEvaluationForm]);
+            return view('page.submissionStatusPage(Super Admin)',['userSession'=>$userSession,'userSubmissionInfo' => $allSubmissionInfo,'allReviewerInfo' => $allReviewerInfo,'dataEvaluationForm'=>$dataEvaluationForm,'correction' => $latestReturnCorrection]);
         }elseif(session()->has('LoggedJKReviewer')){
             $userSession = session()->get('LoggedJKReviewer');
             $allSubmissionInfo = tbl_submission::all();
@@ -42,9 +49,12 @@ class submissionStatusController extends Controller
             foreach ($allSubmissionInfo as $submissionInfo) {
                 $paymentStatus = tbl_payment::where('submissionCode', $submissionInfo->submissionCode)->first();
                 $dataEvaluationForm = tbl_evaluation_form::where('paper_id_number', $submissionInfo->submissionCode)->first();
+                $correction = tbl_correction::where('submissionCode',$submissionInfo->submissionCode)->get();
+                $correctionCount = $correction->count();
+                $latestReturnCorrection = tbl_correction::where('numberOfTimes',$correctionCount)->first();
             }
 
-            return view('page.Jk_Reviewer.reviewerList.reviewList(JK Reviewer)',['userSession'=>$userSession,'userSubmissionInfo' => $allSubmissionInfo,'allReviewerInfo' => $allReviewerInfo,'dataEvaluationForm'=>$dataEvaluationForm]);
+            return view('page.Jk_Reviewer.reviewerList.reviewList(JK Reviewer)',['userSession'=>$userSession,'userSubmissionInfo' => $allSubmissionInfo,'allReviewerInfo' => $allReviewerInfo,'dataEvaluationForm'=>$dataEvaluationForm,'correction' => $latestReturnCorrection]);
         }else{
             return redirect('login')->with('fail','Login Session Expire,Please Login again');
         }
