@@ -85,7 +85,7 @@
         </tr>
         </table>
     @endif
-@else
+@elseif($submissionInfo->correctionPhase == 'done')
 <h5>Correction Phase Has Done</h5>
 @endif
     Correction History:

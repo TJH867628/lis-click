@@ -147,7 +147,7 @@
         <button type="submit" style="margin-right: 700px;" class="btn btn-primary mb-4">Submit</button>
     @endif
     </form>
-    @else
+    @elseif($submissionInfo->correctionPhase == 'done')
     <h5>Correction Phase is Done</h5>
     @endif
     <br><br><br>
