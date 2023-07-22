@@ -103,7 +103,10 @@
                                 @if($submissionInfo->reviewStatus == 'done')
                                     <p>Correction Phase :</p>
                                     @if( $submissionInfo->correctionPhase == 'pending' )
-                                        @if( $correction->returnCorrectionLink != NULL)
+                                    
+                                        @if($correction && $correction->returnCorrectionLink !== NULL)
+                                        <h5>Pending For Comment</h5>
+                                        @elseif(!$correction)
                                         <h5>Pending For Comment</h5>
                                         @else
                                         <h5>Pending For Correction</h5>
@@ -111,10 +114,12 @@
                                     @elseif( $submissionInfo->correctionPhase == 'done' )
                                         <h5>Done</h5>
                                     @endif
+                                    <a href="{{ route('correctionForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4">Correction</a>
                                 @else
                                     <p>Waiting for review</p>
+                                 
                                 @endif
-                                <a href="{{ route('correctionForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4">Correction</a>
+                               
                             </td>
                         </tr>
                     @endforeach
