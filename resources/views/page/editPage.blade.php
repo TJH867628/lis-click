@@ -24,7 +24,10 @@
       position: relative;
     }
   </style>
+  
   <body style="background-color: white; text-align:center;">
+<a href="/pageList">Page List</a>
+
 <!-- page.blade.php -->
 <form id="editForm" action="{{ route('saveEdit', ['pageName' => $pageName]) }}" method="POST" enctype="multipart/form-data">
   @csrf
