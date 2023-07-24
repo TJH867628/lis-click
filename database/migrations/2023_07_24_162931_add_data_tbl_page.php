@@ -199,6 +199,14 @@ return new class extends Migration
                 'createdAt' => now(),
                 'updatedAt' => now(),
             ],
+            [
+                'pageName' => 'Visitor FAQ',
+                'pagePath' => 'page.visitor.faq.faqContent',
+                'pageType' => 'Visitor',
+                'editable' => true,
+                'createdAt' => now(),
+                'updatedAt' => now(),
+            ],
 
             
             //template

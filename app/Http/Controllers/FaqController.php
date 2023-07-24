@@ -17,6 +17,6 @@ class FaqController extends Controller
     }
 
     function visitor(){
-        return view('page.faqVisitor');
+        return view('page.visitor.faq.faqVisitor');
     }
 }
