@@ -281,16 +281,6 @@ class ReviewerController extends Controller
         }
     }
 
-    public function doneCorrection($submissionCode){
-        $submission = tbl_submission::where('submissionCode',$submissionCode)->first();
-        $submission->correctionPhase = "done";
-        $submission->save();
-    }
 
-    public function unDoneCorrection($submissionCode){
-        $submission = tbl_submission::where('submissionCode',$submissionCode)->first();
-        $submission->correctionPhase = "pending";
-        $submission->save();
-    }
 
 }

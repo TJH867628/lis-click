@@ -32,6 +32,9 @@ class PageEditController extends Controller
     
         // Replace <a><img> tags with <img> tags only
         $editableContent = preg_replace('/<a[^>]*><img([^>]*)><\/a>/', '<img$1>', $editableContent);
+
+        // Remove the "fixed-top" class from the generated HTML
+        $editableContent = str_replace('fixed-top', '', $editableContent);
     
         return $editableContent;
     }

@@ -13,6 +13,7 @@
 <body>
     @include('page.superadmin.navigationBar')
     @include('page.superadmin.pageList.pageListContent')
+    <br><br><br><br><br><br>
     @include('page.footer')
     
 </body>

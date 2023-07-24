@@ -16,7 +16,7 @@ class LoginController extends Controller
     public $table = 'lis.account';
     function index()
     {
-        return view('page.login');
+        return view('page.visitor.login.login');
     }
 
     public function email(){

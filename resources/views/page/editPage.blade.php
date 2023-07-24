@@ -6,11 +6,29 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="css/styles.css" rel="stylesheet" />
   </head>
+  <style>
+    footer {
+      margin-top: 25%;
+      background-color: #212529;
+      color: white;
+      font-family: "Poppins", sans-serif;
+    }
+    
+    footer a{
+      text-decoration: none;
+      color: white;
+    }
+
+
+    #editContainer{
+      position: relative;
+    }
+  </style>
   <body style="background-color: white; text-align:center;">
 <!-- page.blade.php -->
 <form id="editForm" action="{{ route('saveEdit', ['pageName' => $pageName]) }}" method="POST" enctype="multipart/form-data">
   @csrf
-  <div style="background-color: black; border: 1px solid black; width: 80%; height: 60%; overflow: auto; margin:auto; margin-top:100px;" contenteditable="true">
+  <div id="editContainer" style="background-color: black; border: 1px solid black; width: 80%; height: 60%; overflow: auto; margin:auto; margin-top:100px;" contenteditable="true">
     {!! $editableContent !!}
   </div>
   <p style="margin: auto;">Maximum Image Size is 2MB</p>

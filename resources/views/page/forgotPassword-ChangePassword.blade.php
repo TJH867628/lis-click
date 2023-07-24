@@ -23,31 +23,7 @@
     </head>
     <body class="d-flex flex-column h-100">
         <main class="flex-shrink-0">
-<!-- Navigation-->
-<nav class="shadow-sm navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container px-5">
-      <a class="navbar-brand" href="index.html">
-          <img src="images/Logo1 (1).png" width="200px" alt="logoLIS2023" />
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-            <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-              <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Conference</a>
-                  <ul class="dropdown-menu dropdown-menu-end bg-light" aria-labelledby="navbarDropdownBlog">
-                      <li><a class="dropdown-item" href="/conferencesInfo">Conference Info</a></li>
-                      <li><a class="dropdown-item" href="/conferencesDownload">Download</a></li>
-                      </ul>
-              <li class="nav-item"><a class="nav-link" href="/publicationInfo">Publication</a></li>
-              <li class="nav-item"><a class="nav-link" href="/registration">Registration</a></li>
-              <li class="nav-item"><a class="nav-link" href="/faqVisitor">Contact Us</a></li>
-              <a href="/login" class="btn btn-primary">Login</a>
-              </div>
-          </ul>
-      </div>
-  </div>
-</nav>
+    @include('page.visitor.navigationBar')
             
             <!--login-->
             <div class="center">
@@ -77,29 +53,7 @@
               </form>
             </div>
 
-            <!-- Footer-->
-       <footer class="bg-dark py-4 mt-auto">
-        <div class="container px-5">
-            <div class="row align-items-center justify-content-between flex-column flex-sm-row">
-                <div class="col-auto"><div class="small m-0 text-white">© 2023 LIGA ILMU SERANTAU 2023. All Rights Reserved. Design by Politeknik Mersing</div></div>
-                <div class="col-auto">
-                    <a class="link-light small" href="index.html">Home</a>
-                    <span class="text-white mx-1">&middot;</span>
-                    <a class="link-light small" href="FeConference.html">Conference</a>
-                    <span class="text-white mx-1">&middot;</span>
-                    <a class="link-light small" href="FeDownload.html">Download</a>
-                    <span class="text-white mx-1">&middot;</span>
-                    <a class="link-light small" href="FePayment.html">Payment</a>
-                    <span class="text-white mx-1">&middot;</span>
-                    <a class="link-light small" href="FePublication.html">Publication</a>
-                    <span class="text-white mx-1">&middot;</span>
-                    <a class="link-light small" href="FeFaq.html">Contact</a>
-                    <span class="text-white mx-1">&middot;</span>
-                    <a class="link-light small" href="FePrivacy.html">Privacy</a>
-                </div>
-            </div>
-        </div>
-    </footer>
+        @include('page.footer')
             
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>

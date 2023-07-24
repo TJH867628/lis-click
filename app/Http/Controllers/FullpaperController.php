@@ -124,7 +124,7 @@ class FullpaperController extends Controller
                     // Generate the unique file name
                     $fileName = $categoryCode . '_' . $currentDateTime . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
                     $file->storeAs('paper', $fileName, 'public');
-                    $insertData = array('submissionCode'=>$submissionCode,'submissionTitle'=>$submissionTitle,'submissionType'=>$category,'subTheme'=>$subTheme,'presentMode'=>$presentMode,'file_name'=>$fileName,'participants1'=>$participants1,'participants2'=>$participants2,'participants3'=>$participants3,'categoryCode'=>$categoryCode,'reviewStatus' => "None",'paymentID' => "unavailable",'reviewerID' => "pending",'publish'=>$publish,'created_at'=>$date,'updated_at'=>$date);
+                    $insertData = array('submissionCode'=>$submissionCode,'submissionTitle'=>$submissionTitle,'submissionType'=>$category,'correctionPhase'=>'none','subTheme'=>$subTheme,'presentMode'=>$presentMode,'file_name'=>$fileName,'participants1'=>$participants1,'participants2'=>$participants2,'participants3'=>$participants3,'categoryCode'=>$categoryCode,'reviewStatus' => "None",'paymentID' => "unavailable",'reviewerID' => "pending",'publish'=>$publish,'created_at'=>$date,'updated_at'=>$date);
                     DB::table('tbl_submission')->where('participants1',$user->name)->insert($insertData);
                     $insertData = array('submissionCode'=>$submissionCode,'paymentID'=>'unavailable','amount'=> 0 ,'paymentStatus'=>'Incomplete','paymentDate'=>null,'proofOfPayment'=>'unavailable');
                     DB::table('tbl_payment')->insert($insertData);

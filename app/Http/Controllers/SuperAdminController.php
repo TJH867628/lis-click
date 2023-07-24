@@ -59,14 +59,15 @@ class SuperAdminController extends Controller
 
     public function pageList()
     {
-        // if(session()->has("LoggedSuperAdmin")){
-        //     session()->start();
+        if(session()->has("LoggedSuperAdmin")){
+            session()->start();
             $pages = tbl_page::all();
             $pageList = tbl_page::where('pageName','Page List')->first();
+            
             return view($pageList->pagePath,['pages'=>$pages]);
-            // }else{
-        //     return redirect('login')->with('fail','Login Session Expire,Please Login again');
-        // }
+            }else{
+            return redirect('login')->with('fail','Login Session Expire,Please Login again');
+        }
     }
 
 }

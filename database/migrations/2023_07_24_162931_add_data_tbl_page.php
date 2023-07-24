@@ -12,12 +12,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        
+        DB::table('tbl_page')->delete();
+
         DB::table('tbl_page')->insert([
             [
                 'pageName' => 'Participants HomePage',
-                'pagePath' => 'page.participants.homePage.homePage(Participants)',
+                'pagePath' => 'page.participants.homePage.homePageContent',
                 'pageType' => 'participants',
+                'editable' => true,
                 'createdAt' => now(),
                 'updatedAt' => now(),
             ],
@@ -25,6 +27,7 @@ return new class extends Migration
                 'pageName' => 'Page List',
                 'pagePath' => 'page.superadmin.pageList.pageList(superAdmin)',
                 'pageType' => 'superAdmin',
+                'editable' => false,
                 'createdAt' => now(),
                 'updatedAt' => now(),
             ],
@@ -32,6 +35,7 @@ return new class extends Migration
                 'pageName' => 'Conferences Info',
                 'pagePath' => 'page.participants.conferencesInfo.conferencesInfoContent',
                 'pageType' => 'participants',
+                'editable' => true,
                 'createdAt' => now(),
                 'updatedAt' => now(),
             ],
@@ -39,6 +43,7 @@ return new class extends Migration
                 'pageName' => 'JK Pendaftaran Home Page',
                 'pagePath' => 'page.JK_Pendaftaran.homePage(JK_Pendaftaran).homePageContent',
                 'pageType' => 'participants',
+                'editable' => true,
                 'createdAt' => now(),
                 'updatedAt' => now(),
             ],
@@ -46,6 +51,7 @@ return new class extends Migration
                 'pageName' => 'JK Reviewer Home Page',
                 'pagePath' => 'page.Jk_Reviewer.homePage(Jk_Reviewer).homePageContent',
                 'pageType' => 'JK Reviewer',
+                'editable' => true,
                 'createdAt' => now(),
                 'updatedAt' => now(),
             ],
@@ -53,6 +59,7 @@ return new class extends Migration
                 'pageName' => 'JK Reviewer Reviewer List Page',
                 'pagePath' => 'page.Jk_Reviewer.reviewerList.reviewListContent',
                 'pageType' => 'JK Reviewer',
+                'editable' => false,
                 'createdAt' => now(),
                 'updatedAt' => now(),
             ],
@@ -60,6 +67,7 @@ return new class extends Migration
                 'pageName' => 'Participants Full Paper Submission Page',
                 'pagePath' => 'page.participants.fullpaperSubmission.fullpaperContent',
                 'pageType' => 'participants',
+                'editable' => false,
                 'createdAt' => now(),
                 'updatedAt' => now(),
             ],
@@ -67,6 +75,7 @@ return new class extends Migration
                 'pageName' => 'Participants Submission Status Page',
                 'pagePath' => 'page.participants.submissionstatus(participants).submissionStatusContent',
                 'pageType' => 'participants',
+                'editable' => false,
                 'createdAt' => now(),
                 'updatedAt' => now(),
             ],
@@ -74,6 +83,7 @@ return new class extends Migration
                 'pageName' => 'Super Admin Submission Status Page',
                 'pagePath' => 'page.superadmin.submissionstatus(SuperAdmin).submissionStatusContent',
                 'pageType' => 'superAdmin',
+                'editable' => false,
                 'createdAt' => now(),
                 'updatedAt' => now(),
             ],
@@ -81,6 +91,7 @@ return new class extends Migration
                 'pageName' => 'Reviewer Home Page',
                 'pagePath' => 'page.reviewer.homePage(Reviewer).homePageContent',
                 'pageType' => 'reviewer',
+                'editable' => true,
                 'createdAt' => now(),
                 'updatedAt' => now(),
             ],
@@ -88,6 +99,7 @@ return new class extends Migration
                 'pageName' => 'Reviewer Pending Review Page',
                 'pagePath' => 'page.reviewer.pendingreview.pendingreviewContent',
                 'pageType' => 'reviewer',
+                'editable' => false,
                 'createdAt' => now(),
                 'updatedAt' => now(),
             ],
@@ -95,6 +107,7 @@ return new class extends Migration
                 'pageName' => 'Reviewer Done Review Page',
                 'pagePath' => 'page.reviewer.donereview.donereviewContent',
                 'pageType' => 'reviewer',
+                'editable' => false,
                 'createdAt' => now(),
                 'updatedAt' => now(),
             ],
@@ -102,6 +115,7 @@ return new class extends Migration
                 'pageName' => 'Super Admin Admin List Page',
                 'pagePath' => 'page.superadmin.adminList.adminListContent',
                 'pageType' => 'superAdmin',
+                'editable' => false,
                 'createdAt' => now(),
                 'updatedAt' => now(),
             ],
@@ -109,6 +123,7 @@ return new class extends Migration
                 'pageName' => 'JK Participant Participant List Page',
                 'pagePath' => 'page.JK_Participant.participantList.participantListContent',
                 'pageType' => 'JK Participant',
+                'editable' => false,
                 'createdAt' => now(),
                 'updatedAt' => now(),
             ],
@@ -116,19 +131,85 @@ return new class extends Migration
                 'pageName' => 'JK Participant Home Page',
                 'pagePath' => 'page.JK_Participant.homePage(JK_Participant).homePageContent',
                 'pageType' => 'JK Participant',
+                'editable' => true,
+                'createdAt' => now(),
+                'updatedAt' => now(),
+            ],
+            [
+                'pageName' => 'footer',
+                'pagePath' => 'page.footer',
+                'pageType' => 'JK Participant',
+                'editable' => true,
+                'createdAt' => now(),
+                'updatedAt' => now(),
+            ],
+            [
+                'pageName' => 'JK_Participant Navigation Bar',
+                'pagePath' => 'page.JK_Participant.navigationBar',
+                'pageType' => 'JK Participant',
+                'editable' => true,
+                'createdAt' => now(),
+                'updatedAt' => now(),
+            ],
+            [
+                'pageName' => 'JK_Pendaftaran Navigation Bar',
+                'pagePath' => 'page.JK_Pendaftaran.navigationBar',
+                'pageType' => 'JK Pendaftaran',
+                'editable' => true,
+                'createdAt' => now(),
+                'updatedAt' => now(),
+            ],
+            [
+                'pageName' => 'Jk_Reviewer Navigation Bar',
+                'pagePath' => 'page.Jk_Reviewer.navigationBar',
+                'pageType' => 'JK Reviewer',
+                'editable' => true,
+                'createdAt' => now(),
+                'updatedAt' => now(),
+            ],
+            [
+                'pageName' => 'JK_Participant Navigation Bar',
+                'pagePath' => 'page.JK_Participant.navigationBar',
+                'pageType' => 'JK Participant',
+                'editable' => true,
+                'createdAt' => now(),
+                'updatedAt' => now(),
+            ],
+            [
+                'pageName' => 'Participants Navigation Bar',
+                'pagePath' => 'page.participants.navigationBar',
+                'pageType' => 'Participants',
+                'editable' => true,
+                'createdAt' => now(),
+                'updatedAt' => now(),
+            ],
+            [
+                'pageName' => 'Reviewer Navigation Bar',
+                'pagePath' => 'page.reviewer.navigationBar',
+                'pageType' => 'Reviewer',
+                'editable' => true,
+                'createdAt' => now(),
+                'updatedAt' => now(),
+            ],
+            [
+                'pageName' => 'Visitor Navigation Bar',
+                'pagePath' => 'page.visitor.navigationBar',
+                'pageType' => 'Visitor',
+                'editable' => true,
                 'createdAt' => now(),
                 'updatedAt' => now(),
             ],
 
             
             //template
-            [
-                'pageName' => "//pagename",
-                'pagePath' => "//pagePath example:'page.participants.conferencesInfo.conferencesInfoContent'",
-                'pageType' => "this page is for which role of user",
-                'createdAt' => now(),
-                'updatedAt' => now(),
-            ],
+            // [
+            //     'pageName' => "//pagename",
+            //     'pagePath' => "//pagePath example:'page.participants.conferencesInfo.conferencesInfoContent'",
+            //     'pageType' => "this page is for which role of user",
+            //'editable' => true/false,
+            //     'createdAt' => now(),
+            //     'updatedAt' => now(),
+            // ],
             // Add more data as needed
         ]);
     }
@@ -138,8 +219,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('tbl_paage', function (Blueprint $table) {
-            //
-        });
+        DB::table('tbl_page')->delete();
     }
 };

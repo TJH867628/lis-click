@@ -76,7 +76,7 @@
 
                                                 </div>
                                                 <div class="form-group col-md-12">
-                                                    <input type="text" name="paper-title" class="form-control" placeholder="Title" required  >
+                                                    <input type="text" name="paper-title" class="form-control" placeholder="Title" required>
                                                 </div>
 
                                                 <!--Dropdown-->

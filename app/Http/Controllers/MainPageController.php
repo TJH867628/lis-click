@@ -25,7 +25,7 @@ class MainPageController extends Controller
             }
             
         }
-        return view('page.mainPage');
+        return view('page.visitor.mainPage.mainPage');
     }
 
 }

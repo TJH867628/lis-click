@@ -104,7 +104,7 @@
                             @endif
                             @if($submissionInfo->reviewer2ID != NULL)
                                 @if($submissionInfo->evaluationFormLink != NULL || $submissionInfo->evaluationFormLink2 != NULL)
-                                    @if($dataEvaluationForm->paper_id_number == $submissionInfo->submissionCode)
+                                    @if($dataEvaluationForm && $dataEvaluationForm->paper_id_number == $submissionInfo->submissionCode)
                                         <td><a href="{{ route('evaluationForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4">Evaluate Form</a> </td>
                                     @else
                                         <td><p>Pending</p></td>
@@ -114,7 +114,7 @@
                                 @endif
                             @elseif($submissionInfo->reviewer2ID == NULL)
                                 @if($submissionInfo->evaluationFormLink != NULL)
-                                    @if($dataEvaluationForm->paper_id_number == $submissionInfo->submissionCode)
+                                    @if($dataEvaluationForm && $dataEvaluationForm->paper_id_number == $submissionInfo->submissionCode)
                                         <td><a href="{{ route('evaluationForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4">Evaluate Form</a> </td>
                                     @else
                                         <td><p>Pending</p></td>
@@ -137,7 +137,7 @@
                             @endif
                             <td>
                             @if($submissionInfo->correctionPhase == 'pending')
-                            @if( $correction->returnCorrectionLink != NULL)
+                            @if($correction && $correction->returnCorrectionLink != NULL)
                                 <h5>Pending For Comment</h5>
                                 @else
                                 <h5>Pending For Correction</h5>
