@@ -8,6 +8,7 @@
         flex-wrap: wrap;
     }
 </style>
+<a href="/pageList">Page List</a>
 <div style="text-align: center; background-color: white; height:100%; display:flex; overflow:auto; flex-wrap: wrap;">
     @foreach($pages as $page)
         @if($page->editable == true)
