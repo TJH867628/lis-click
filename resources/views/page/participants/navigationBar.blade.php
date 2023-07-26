@@ -21,6 +21,7 @@
                         <li><a class="dropdown-item" href="/conferencesDownload">Downloads</a></li>
                     </ul>
                     <li class="nav-item"><a class="nav-link" href="/publicationInfo">Publication</a></li>
+                <li class="nav-item"><a class="nav-link" href="/gallery">Gallery</a></li>
                     <li class="nav-item"><a class="nav-link" href="/faq">Contact Us</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Registration</a>

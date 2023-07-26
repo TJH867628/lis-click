@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\File;
 use App\Models\tbl_page;
+use App\Models\tbl_gallery;
 use Illuminate\Http\Exceptions\PostTooLargeException;
 use App\Models\Page;
 use Illuminate\Http\Request;
@@ -13,13 +14,20 @@ class PageEditController extends Controller
 
     public function editPage($pageName)
     {
-        $page = tbl_page::where('pageName', $pageName)->first();
-        $pagePath = $page->pagePath;
-        $view = view($pagePath);
-        $fileContents = $view->render();
-        $editableContent = $this->generateEditableHTML($fileContents);
-        $wrappedContent = $editableContent;
-        return view('page.editPage', ['editableContent' => $wrappedContent,'pageName' => $pageName]);
+        session()->start();
+        if($pageName == 'Gallery'){
+            $gallery = tbl_gallery::all();
+            return view('page.superadmin.editGallery.editGallery',['gallery' => $gallery]);
+        }else{
+            $page = tbl_page::where('pageName', $pageName)->first();
+            $pagePath = $page->pagePath;
+            $view = view($pagePath);
+            $fileContents = $view->render();
+            $editableContent = $this->generateEditableHTML($fileContents);
+            $wrappedContent = $editableContent;
+            return view('page.editPage', ['editableContent' => $wrappedContent,'pageName' => $pageName]);
+        }
+
     }
 
     public function generateEditableHTML($content)

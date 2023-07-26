@@ -22,6 +22,7 @@ use App\Http\Controllers\submissionStatusController;
 use App\Http\Controllers\ReviewerController;
 use App\Http\Controllers\PageEditController;
 use App\Http\Controllers\JKTurnInController;
+use App\Http\Controllers\GalleryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -99,3 +100,7 @@ Route::post('/uploadFileWithCorrection/{submissionCode}', [JKReviewerController:
 Route::get('downloadReturnCorrection/{filename}',  [JKReviewerController::class,'downloadReturnCorrection'])->name('downloadReturnCorrection');
 Route::get('doneCorrection/{submissionCode}',  [JKReviewerController::class,'doneCorrection'])->name('doneCorrection');
 Route::get('unDoneCorrection/{submissionCode}',  [JKReviewerController::class,'unDoneCorrection'])->name('unDoneCorrection');
+Route::get('/gallery',[GalleryController::class,'index']);
+Route::post('/pageEdit/Gallery/uploadNewPost',  [GalleryController::class,'uploadNewPost'])->name('uploadNewPost');
+Route::post('/pageEdit/Gallery/editExistingPost/{id}',  [GalleryController::class,'editExistingPost'])->name('editExistingPost');
+Route::get('/pageEdit/Gallery/changeVisible/{id}',  [GalleryController::class,'changeVisible'])->name('changeVisible');
