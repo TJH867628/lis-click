@@ -16,6 +16,7 @@ class submissionStatusController extends Controller
     function index(){
         if(session()->has('LoggedUser')){
             $userSession = session()->get('LoggedUser');
+            $correctionCount = 0;
             $userSubmissionInfo = tbl_submission::where('participants1', $userSession)
                 ->orWhere('participants2', $userSession)
                 ->orWhere('participants3', $userSession) 
@@ -24,11 +25,18 @@ class submissionStatusController extends Controller
                 foreach ($userSubmissionInfo as $submissionInfo) {
                     $paymentStatus = tbl_payment::where('submissionCode', $submissionInfo->submissionCode)->first();
                     $dataEvaluationForm = tbl_evaluation_form::where('paper_id_number', $submissionInfo->submissionCode)->first();
-                    $correction = tbl_correction::where('submissionCode',$submissionInfo->submissionCode)->get();
-                    $correctionCount = $correction->count();
-                    $latestReturnCorrection = tbl_correction::where('numberOfTimes',$correctionCount)->first();
+                    if($submissionInfo->participants1 == $userSession){
+                        $thisUser = $submissionInfo->where('participants1', $userSession)->get();
+                    }else if($submissionInfo->participants2 == $userSession){
+                        $thisUser = $submissionInfo->where('participants2', $userSession)->get();
+                    }elseif($submissionInfo->participants3 == $userSession){
+                        $thisUser = $submissionInfo->where('participants3', $userSession)->get();
+                    }
                 }
-            return view('page.participants.submissionstatus(participants).submissionStatus',['userSession'=>$userSession,'userSubmissionInfo' => $userSubmissionInfo,'paymentInfo' => $paymentStatus,'dataEvaluationForm'=>$dataEvaluationForm,'correction' => $latestReturnCorrection]);
+                $correction = tbl_correction::all();
+
+
+            return view('page.participants.submissionstatus(participants).submissionStatus',['userSession'=>$userSession,'userSubmissionInfo' => $userSubmissionInfo,'paymentInfo' => $paymentStatus,'dataEvaluationForm'=>$dataEvaluationForm,'correction' => $correction]);
         }elseif(session()->has('LoggedSuperAdmin')){
             $userSession = session()->get('LoggedSuperAdmin');
             $allSubmissionInfo = tbl_submission::all();

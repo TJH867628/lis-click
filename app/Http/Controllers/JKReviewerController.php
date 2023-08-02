@@ -124,7 +124,7 @@ class JKReviewerController extends Controller
 
         public function doneCorrection($submissionCode){
             $submission = tbl_submission::where('submissionCode',$submissionCode)->first();
-            $submission->correctionPhase = "done";
+            $submission->correctionPhase = "readyForPresent";
             $submission->save();
             return redirect()->back();
         }

@@ -88,6 +88,7 @@
 @elseif($submissionInfo->correctionPhase == 'done')
 <h5>Correction Phase Has Done</h5>
 @endif
+
     Correction History:
     @foreach($correction as $correction)
             @if($correction->numberOfTimes != $latestCorrection->numberOfTimes)

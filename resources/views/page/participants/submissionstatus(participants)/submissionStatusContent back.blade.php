@@ -136,17 +136,16 @@
                             @endif
                             <td>
                             @if($submissionInfo->correctionPhase == 'pending')
-                            @foreach($correction as $thisCorrection)
-                                @if($thisCorrection->submissionCode == $submissionInfo->submissionCode)
-                                    @if($thisCorrection->numberOfTimes == $thisCorrection->count())
-                                        @if($thisCorrection->returnCorrectionLink != NULL)
-                                            <h5>Pending For Comment</h5>
-                                        @elseif($thisCorrection->returnCorrectionLink == NULL)
-                                            <h5>Pending For Correction</h5>
-                                        @endif
+                                @foreach($correction as $correction)
+
+                                @if($correction['latestReturnCorrection']->submissionCode == $submissionInfo->submissionCode)
+                                    @if($correction['latestReturnCorrection'] && $correction['latestReturnCorrection']->returnCorrectionLink != NULL)
+                                        <h5>Pending For Comment</h5>
+                                    @elseif($correction['latestReturnCorrection'] && $correction['latestReturnCorrection']->returnCorrectionLink == NULL)
+                                        <h5>Pending For Correction</h5>
                                     @endif
                                 @endif
-                            @endforeach
+                                @endforeach
                                 <a href="{{ route('correctionForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4">Correction</a>
                             @elseif($submissionInfo->correctionPhase == 'readyForPresent')
                                 <a href="{{ route('correctionForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4">Correction</a>
@@ -162,5 +161,4 @@
                 @endif
                 
             </table>
-            <br><br><br><br><br><br>
         </div>
