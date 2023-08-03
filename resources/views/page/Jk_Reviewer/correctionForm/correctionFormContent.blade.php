@@ -65,7 +65,7 @@
                 </tr>
                 <tr>
                     <td>
-                        Evaluation Form
+                        File From Reviewer
                     </td>
                     <td>
                         @if($submission->reviewer2ID == NULL)
@@ -87,6 +87,11 @@
             </table>
             <button type="submit" style="margin-right: 700px;" class="btn btn-primary mb-4">Submit</button>
         <br><br><br>
+        @if($submission->correctionPhase == 'pending')
+            <a href="{{ route('doneCorrection', ['submissionCode' => $submission->submissionCode]) }}" class="btn btn-primary mb-4">Done Submission</a>
+        @elseif($submission->correctionPhase == 'done')
+            <a href="{{ route('unDoneCorrection', ['submissionCode' => $submission->submissionCode]) }}" class="btn btn-primary mb-4">Undone Submission</a>
+        @endif
         @elseif($latestReturnCorrection->returnCorrectionLink != NULL)
         <table>
             <tr>
@@ -99,7 +104,7 @@
             </tr>
             <tr>
                 <td>
-                    Evaluation Form
+                    File From Reviewer
                 </td>
                 <td>
                     @if($submission->reviewer2ID == NULL)
@@ -193,6 +198,8 @@
     @elseif($submission->correctionPhase == 'done')
     <a href="{{ route('unDoneCorrection', ['submissionCode' => $correction->submissionCode]) }}" class="btn btn-primary mb-4">Undone Submission</a>
     @endif
+@elseif($submission->correctionPhase == 'readyForPresent')
+    <h5>Correction Phase is Done</h5>
 @endif
 <br><br><br>
 <br><br><br>

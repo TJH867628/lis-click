@@ -63,7 +63,7 @@
                         <input type="text" name="description">
                     </td>
                 </tr>
-                <tr>
+                <!-- <tr>
                     <td>Visibility</td>
                     <td>
                         <select name="visible" id="visible">
@@ -71,7 +71,7 @@
                             <option value="false">False</option>
                         </select>
                     </td>
-                </tr>
+                </tr> -->
                 <tr>
                     <td colspan="2">
                         <button>Submit Change</button>

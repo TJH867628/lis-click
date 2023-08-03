@@ -15,14 +15,11 @@
                         Participants<br>
                     </th>
                     <th>
-                        Payment Status
-                    </th>
-                    <th>
                         Review Status<br>
                     </th>
-                    <th>
+                    <!-- <th>
                         Reviewer<br>
-                    </th>
+                    </th> -->
                     <th>    
                         Download<br>
                     </th>
@@ -37,6 +34,9 @@
                     </th>
                     <th>
                         Correction
+                    </th>
+                    <th>
+                        Payment Status
                     </th>
                 </tr>
                     @foreach($userSubmissionInfo as $submissionInfo)
@@ -68,33 +68,16 @@
                                 @endif
 
                             </td>
-                            <td>
-                                @if($paymentInfo->paymentStatus === "Complete")
-                                    Complete
-                                    <p>Payment ID : </p>
-                                    {{ $submissionInfo->paymentStatus }}
-                                @elseif($paymentInfo->paymentStatus === "Pending For Verification")
-                                    Uncomplete
-                                    <p>Payment ID:</p>
-                                    {{ $paymentInfo->paymentStatus }}
-                                @else
-                                    Incomplete
-                                    <form action="{{ route('uploadReceipt', ['submissionCode' => $submissionInfo->submissionCode]) }}" method="POST" enctype="multipart/form-data">
-                                    @csrf
-                                    <input type="file" name="file" />
-                                    <button type="submit">Upload</button>
-                                </form>
-                                @endif
-                            </td> 
+
                             <td>{{ $submissionInfo->reviewStatus }}</td>
-                            <td>
+                            <!-- <td>
                                 <p>Reviewer</p>
                                 <h5>{{ $submissionInfo->reviewerID }} </h5>
                                 @if($submissionInfo->reviewer2ID != NULL)
                                     <p>Reviewer 2</p>
                                     <h5>{{ $submissionInfo->reviewer2ID }} </h5>
                                 @endif
-                            </td>
+                            </td> -->
                             <td><a href="{{ route('downloadSubmission', ['filename' => $submissionInfo->file_name]) }}" class="btn btn-primary mb-4">Download</a></td>
                             @if($submissionInfo->returnPaperLink == NULL)
                                 <td><a href="#" class="btn btn-primary mb-4" style="color: gray; pointer-events: none; ">Pending Review</a></td>
@@ -155,6 +138,24 @@
                                 <p>Pending</p>
                             @endif
                             </td>
+                            <td>
+                                @if($paymentInfo->paymentStatus === "Complete")
+                                    Complete
+                                    <p>Payment ID : </p>
+                                    {{ $submissionInfo->paymentStatus }}
+                                @elseif($paymentInfo->paymentStatus === "Pending For Verification")
+                                    Uncomplete
+                                    <p>Payment ID:</p>
+                                    {{ $paymentInfo->paymentStatus }}
+                                @else
+                                    Incomplete
+                                    <form action="{{ route('uploadReceipt', ['submissionCode' => $submissionInfo->submissionCode]) }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    <input type="file" name="file" />
+                                    <button type="submit">Upload</button>
+                                </form>
+                                @endif
+                            </td> 
                         </tr>
                     @endforeach
                 @else       
