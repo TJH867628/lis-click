@@ -82,6 +82,8 @@
                         @if($submission->reviewer2ID == NULL)
                             @if($submission->returnPaperLink != NULL)
                                 <a href="{{ route('downloadReviewedFile', ['filename' => $submission->returnPaperLink]) }}" class="btn btn-primary mb-4">Download Reviewed Paper</a>
+                            @else
+                                no file here
                             @endif
                         @else
                             @if($submission->returnPaperLink != NULL)
@@ -89,6 +91,9 @@
                             @endif
                             @if($submission->returnPaperLink2 != NULL)
                                 <a href="{{ route('downloadReviewedFile', ['filename' => $submission->returnPaperLink2]) }}" class="btn btn-primary mb-4">Download Reviewed Paper</a>
+                            @endif
+                            @if($submission->returnPaperLink == NULL && $submission->returnPaperLink2 == NULL)
+                                no file here
                             @endif
                         @endif
                     </td>
@@ -137,6 +142,8 @@
                     @if($submission->reviewer2ID == NULL)
                         @if($submission->returnPaperLink != NULL)
                             <a href="{{ route('downloadReviewedFile', ['filename' => $submission->returnPaperLink]) }}" class="btn btn-primary mb-4">Download Reviewed Paper</a>
+                        @else
+                            no file here
                         @endif
                     @else
                         @if($submission->returnPaperLink != NULL)
@@ -144,6 +151,9 @@
                         @endif
                         @if($submission->returnPaperLink2 != NULL)
                             <a href="{{ route('downloadReviewedFile', ['filename' => $submission->returnPaperLink2]) }}" class="btn btn-primary mb-4">Download Reviewed Paper</a>
+                        @endif
+                        @if($submission->returnPaperLink == NULL && $submission->returnPaperLink2 == NULL)
+                            no file here
                         @endif
                     @endif
                 </td>
