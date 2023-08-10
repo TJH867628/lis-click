@@ -129,10 +129,16 @@
             <tr>
                 <td>
                     @if($submission->reviewer2ID == NULL)
-                        <a href="{{ route('downloadReviewedFile', ['filename' => $submission->returnPaperLink]) }}" class="btn btn-primary mb-4">Download Reviewed Paper</a>
+                        @if($submission->returnPaperLink != NULL)
+                            <a href="{{ route('downloadReviewedFile', ['filename' => $submission->returnPaperLink]) }}" class="btn btn-primary mb-4">Download Reviewed Paper</a>
+                        @endif
                     @else
-                        <a href="{{ route('downloadReviewedFile', ['filename' => $submission->returnPaperLink2]) }}" class="btn btn-primary mb-4">Download Reviewed Paper 2</a>
-                        <a href="{{ route('downloadReviewedFile', ['filename' => $submission->returnPaperLink]) }}" class="btn btn-primary mb-4">Download Reviewed Paper</a>
+                        @if($submission->returnPaperLink != NULL)
+                            <a href="{{ route('downloadReviewedFile', ['filename' => $submission->returnPaperLink]) }}" class="btn btn-primary mb-4">Download Reviewed Paper</a>
+                        @endif
+                        @if($submission->returnPaperLink2 != NULL)
+                            <a href="{{ route('downloadReviewedFile', ['filename' => $submission->returnPaperLink2]) }}" class="btn btn-primary mb-4">Download Reviewed Paper</a>
+                        @endif
                     @endif
                 </td>
             </tr>
