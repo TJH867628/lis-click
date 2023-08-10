@@ -73,7 +73,7 @@ class JKReviewerController extends Controller
         }
 
         function uploadNewCorrection(Request $request,$submissionCode){
-            if(session()->has('LoggedJKReviewer')|| session()->has('LoggedSuperAdmin')){
+            if(session()->has('LoggedJKReviewer') || session()->has('LoggedSuperAdmin')){
                 session()->start();
                 $correction = tbl_correction::where('submissionCode',$submissionCode)->get();
                 $count = $correction->count();

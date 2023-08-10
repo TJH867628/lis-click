@@ -91,19 +91,16 @@
                                 <p>Pending</p>
                             @endif
                             </td>
-                            @if($submissionInfo->turnInReport)
                             <td>
-                                <a href="{{ route('downloadTurnInReport', ['filename' => $submissionInfo->turnInReport]) }}" class="btn btn-primary mb-4">Download Turn In Report</a>
-                            </td>
-                            @else
-                            <td>
+                                @if($submissionInfo->turnInReport)
+                                    <a href="{{ route('downloadTurnInReport', ['filename' => $submissionInfo->turnInReport]) }}" class="btn btn-primary mb-4">Download Turn In Report</a>
+                                @endif
                                 <form action="{{ route('uploadTurnInReport',['submissionCode' => $submissionInfo->submissionCode]) }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <input type="file" name="file" />
                                     <button type="submit">Upload Turn In Report</button>
                                 </form>
                             </td>
-                            @endif
                             <td>
                                 @if($submissionInfo->reviewStatus == 'done')
                                     <p>Correction Phase :</p>

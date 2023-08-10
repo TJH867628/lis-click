@@ -19,12 +19,12 @@ class GalleryController extends Controller
         $img = $request->file('image');
         $title = $request->input('title');
         $description = $request->input('description');
-        $visible = $request->input('visible');
-        if($visible == "true"){
-            $visible = 1;
-        }else{
-            $visible = 0;
-        }
+        $visible = 1;
+        // if($visible == "true"){
+        //     $visible = 1;
+        // }else{
+        //     $visible = 0;
+        // }
 
         $date = now();
         $formatted_date = $date->format('YmdHis');

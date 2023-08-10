@@ -64,7 +64,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td rowspan="2">
                         File From Reviewer
                     </td>
                     <td>
@@ -73,6 +73,17 @@
                         @else
                             <a href="{{ route('downloadEvaluationForm', ['filename' => $submission->evaluationFormLink2]) }}" class="btn btn-primary mb-4">Download Evaluation Form 2</a>
                             <a href="{{ route('downloadEvaluationForm', ['filename' => $submission->evaluationFormLink]) }}" class="btn btn-primary mb-4">Download Evaluation Form</a>
+                        @endif
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>
+                        @if($submission->reviewer2ID == NULL)
+                            <a href="{{ route('downloadReviewedFile', ['filename' => $submission->returnPaperLink]) }}" class="btn btn-primary mb-4">Download Reviewed Paper</a>
+                        @else
+                            <a href="{{ route('downloadReviewedFile', ['filename' => $submission->returnPaperLink2]) }}" class="btn btn-primary mb-4">Download Reviewed Paper 2</a>
+                            <a href="{{ route('downloadReviewedFile', ['filename' => $submission->returnPaperLink]) }}" class="btn btn-primary mb-4">Download Reviewed Paper</a>
                         @endif
                     </td>
                 </tr>
@@ -103,15 +114,25 @@
                 </td>
             </tr>
             <tr>
-                <td>
+                <td rowspan="2">
                     File From Reviewer
                 </td>
                 <td>
                     @if($submission->reviewer2ID == NULL)
-                    <a href="{{ route('downloadEvaluationForm', ['filename' => $submission->evaluationFormLink]) }}" class="btn btn-primary mb-4">Download Evaluation Form</a>
+                        <a href="{{ route('downloadEvaluationForm', ['filename' => $submission->evaluationFormLink]) }}" class="btn btn-primary mb-4">Download Evaluation Form</a>
                     @else
                         <a href="{{ route('downloadEvaluationForm', ['filename' => $submission->evaluationFormLink2]) }}" class="btn btn-primary mb-4">Download Evaluation Form 2</a>
                         <a href="{{ route('downloadEvaluationForm', ['filename' => $submission->evaluationFormLink]) }}" class="btn btn-primary mb-4">Download Evaluation Form</a>
+                    @endif
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @if($submission->reviewer2ID == NULL)
+                        <a href="{{ route('downloadReviewedFile', ['filename' => $submission->returnPaperLink]) }}" class="btn btn-primary mb-4">Download Reviewed Paper</a>
+                    @else
+                        <a href="{{ route('downloadReviewedFile', ['filename' => $submission->returnPaperLink2]) }}" class="btn btn-primary mb-4">Download Reviewed Paper 2</a>
+                        <a href="{{ route('downloadReviewedFile', ['filename' => $submission->returnPaperLink]) }}" class="btn btn-primary mb-4">Download Reviewed Paper</a>
                     @endif
                 </td>
             </tr>
@@ -195,11 +216,16 @@
     @endforeach
     @if($submission->correctionPhase == 'pending')
     <a href="{{ route('doneCorrection', ['submissionCode' => $correction->submissionCode]) }}" class="btn btn-primary mb-4">Done Submission</a>
-    @elseif($submission->correctionPhase == 'done')
+    @elseif($submission->correctionPhase == 'readyForPresent')
     <a href="{{ route('unDoneCorrection', ['submissionCode' => $correction->submissionCode]) }}" class="btn btn-primary mb-4">Undone Submission</a>
     @endif
 @elseif($submission->correctionPhase == 'readyForPresent')
     <h5>Correction Phase is Done</h5>
+    @if($submission->correctionPhase == 'pending')
+    <a href="{{ route('doneCorrection', ['submissionCode' => $submission->submissionCode]) }}" class="btn btn-primary mb-4">Done Submission</a>
+    @elseif($submission->correctionPhase == 'readyForPresent')
+    <a href="{{ route('unDoneCorrection', ['submissionCode' => $submission->submissionCode]) }}" class="btn btn-primary mb-4">Undone Submission</a>
+    @endif
 @endif
 <br><br><br>
 <br><br><br>

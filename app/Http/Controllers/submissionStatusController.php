@@ -35,7 +35,6 @@ class submissionStatusController extends Controller
                 }
                 $correction = tbl_correction::all();
 
-
             return view('page.participants.submissionstatus(participants).submissionStatus',['userSession'=>$userSession,'userSubmissionInfo' => $userSubmissionInfo,'paymentInfo' => $paymentStatus,'dataEvaluationForm'=>$dataEvaluationForm,'correction' => $correction]);
         }elseif(session()->has('LoggedSuperAdmin')){
             $userSession = session()->get('LoggedSuperAdmin');

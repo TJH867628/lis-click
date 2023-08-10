@@ -10,10 +10,10 @@ class JKTurnInController extends Controller
     public function uploadTurnInReport(Request $request,$submisisonCode){
         if ($request->hasFile('file')) {
             $file = $request->file('file');
-            
+            $datetime = now()->format('YmdHis');
             $submissionInfo = tbl_submission::where('submissionCode',$submisisonCode)->first();
 
-            $filename = 'Turn In Report_'. $submissionInfo->submissionCode . ".". $file->getClientOriginalExtension();
+            $filename = 'Turn In Report_'. $submissionInfo->submissionCode . "_" . $datetime . "." .  $file->getClientOriginalExtension();
             $submissionInfo->turnInReport = $filename;
             $file->storeAs('turnInReport', $filename, 'public');
             $submissionInfo->save();
