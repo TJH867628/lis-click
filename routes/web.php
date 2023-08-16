@@ -104,3 +104,5 @@ Route::get('/gallery',[GalleryController::class,'index']);
 Route::post('/pageEdit/Gallery/uploadNewPost',  [GalleryController::class,'uploadNewPost'])->name('uploadNewPost');
 Route::post('/pageEdit/Gallery/editExistingPost/{id}',  [GalleryController::class,'editExistingPost'])->name('editExistingPost');
 Route::get('/pageEdit/Gallery/changeVisible/{id}',  [GalleryController::class,'changeVisible'])->name('changeVisible');
+Route::post('/uploadCertificate/{submissionCode}',  [JKReviewerController::class,'uploadCertificate'])->name('uploadCertificate');
+

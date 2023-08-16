@@ -32,6 +32,9 @@
                     <th>
                         Correction
                     </th>
+                    <th>
+                        Certificate
+                    </th>
                 </tr>
                     @foreach($userSubmissionInfo as $submissionInfo)
                         <tr>
@@ -82,11 +85,11 @@
 
                             <td>
                             @if($dataEvaluationForm)
-                            @if($dataEvaluationForm->paper_id_number == $submissionInfo->submissionCode)
-                                <a href="{{ route('evaluationForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4">Evaluate Form</a>
-                            @else
-                                <p>Pending</p>
-                            @endif
+                                @if($dataEvaluationForm->paper_id_number == $submissionInfo->submissionCode)
+                                    <a href="{{ route('evaluationForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4">Evaluate Form</a>
+                                @else
+                                    <p>Pending</p>
+                                @endif
                             @else
                                 <p>Pending</p>
                             @endif
@@ -105,7 +108,6 @@
                                 @if($submissionInfo->reviewStatus == 'done')
                                     <p>Correction Phase :</p>
                                     @if( $submissionInfo->correctionPhase == 'pending' )
-                                    
                                         @if($correction && $correction->returnCorrectionLink !== NULL)
                                         <h5>Pending For Comment</h5>
                                         @elseif(!$correction)
@@ -113,15 +115,29 @@
                                         @else
                                         <h5>Pending For Correction</h5>
                                         @endif
-                                    @elseif( $submissionInfo->correctionPhase == 'done' )
-                                        <h5>Done</h5>
+                                    @elseif( $submissionInfo->correctionPhase == 'readyForPresent' )
+                                        <h5>Ready For Present</h5>
                                     @endif
                                     <a href="{{ route('correctionForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4">Correction</a>
                                 @else
                                     <p>Waiting for review</p>
                                  
                                 @endif
-                               
+                            </td>
+                            <td>
+                                @if($submissionInfo->correctionPhase == 'readyForPresent')
+                                    @if($submissionInfo->certificate == 'pending')
+                                    <form method="post" action="{{ route('uploadCertificate', ['submissionCode' => $submissionInfo->submissionCode]) }}" enctype="multipart/form-data">
+                                        @csrf
+                                        <input type="file" name="file" accept="application/pdf">
+                                        <button type="submit">Upload Certificate</button>
+                                    </form>
+                                    @else
+                                        <p>Click To Download Certificate: <a href="{{ asset('storage/certificate/' . $submissionInfo->certificate) }}" download="{{ $submissionInfo->certificate }}">{{ $submissionInfo->certificate }}</a></p>
+                                    @endif
+                                @else
+                                    <p>Not Ready</p>
+                                @endif
                             </td>
                         </tr>
                     @endforeach

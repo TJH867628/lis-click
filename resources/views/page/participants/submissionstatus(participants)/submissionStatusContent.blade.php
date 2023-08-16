@@ -36,6 +36,9 @@
                         Correction
                     </th>
                     <th>
+                        Certificate
+                    </th>
+                    <th>
                         Payment Status
                     </th>
                 </tr>
@@ -137,6 +140,19 @@
                             @else
                                 <p>Pending</p>
                             @endif
+                            </td>
+                            <td>
+                                <!-- download certificate -->
+                                @if($submissionInfo->correctionPhase == 'readyForPresent')
+                                    @if($submissionInfo->certificate == 'pending')
+                                        <p>Pending</p>
+                                    @else
+                                        <p>Click To Download Certificate: <a href="{{ asset('storage/certificate/' . $submissionInfo->certificate) }}" download="{{ $submissionInfo->certificate }}">{{ $submissionInfo->certificate }}</a></p>
+                                    @endif
+                                @else
+                                    <p>Not Ready</p>
+                                @endif
+
                             </td>
                             <td>
                                 @if($paymentInfo->paymentStatus === "Complete")

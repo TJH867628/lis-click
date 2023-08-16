@@ -135,4 +135,26 @@ class JKReviewerController extends Controller
             $submission->save();
             return redirect()->back();
         }
+
+        public function uploadCertificate(Request $request,$submissionCode){
+            if(session()->has('LoggedJKReviewer') || session()->has('LoggedSuperAdmin')){
+                session()->start();
+                $submission = tbl_submission::where('submissionCode',$submissionCode)->first();
+                if ($request->hasFile('file')) {
+                    $file = $request->file('file');
+                    $timestamp = time();
+                    $dateString = date('YmdHis', $timestamp);
+                    $filename = 'Certificate_'. $submission->submissionCode . "_" . $dateString . ".". $file->getClientOriginalExtension();
+                    $submission->certificate = $filename;
+                    $file->storeAs('certificate', $filename, 'public');
+                    $submission->save();
+                    return redirect()->back()->with('success', 'File uploaded successfully.');
+                }else{
+                    return redirect()->back();
+                }
+            }else{
+                return redirect('login')->with('fail','Login Session Expire,Please Login again');
+            }
+        }
+        
 }
