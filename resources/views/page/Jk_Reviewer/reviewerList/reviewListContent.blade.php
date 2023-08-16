@@ -81,7 +81,7 @@
                             <td>
                                 <a href="{{ route('downloadSubmission', ['filename' => $submissionInfo->file_name]) }}" class="btn btn-primary mb-4">Download Orginal File</a>
                                 @if($submissionInfo->returnPaperLink == NULL)
-                                    <td><a href="#" class="btn btn-primary mb-4" style="color: gray; pointer-events: none; ">Return Paper Unavailable</a></td>
+                                    <td>Return Paper Unavailable</td>
                                 @else
                                     <td><a href="{{ route('downloadReviewedFile', ['filename' => $submissionInfo->returnPaperLink]) }}" class="btn btn-primary mb-4">Download Return File</a></td>
                                 @endif
