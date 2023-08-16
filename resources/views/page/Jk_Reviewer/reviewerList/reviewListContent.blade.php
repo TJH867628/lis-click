@@ -23,6 +23,9 @@
                     <th>    
                         Download Submission File<br>
                     </th>
+                    <th>
+                        Reviewed File<br>
+                    </th>
                     <th>    
                         View Evaluation Form<br>
                     </th>
