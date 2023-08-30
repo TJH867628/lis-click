@@ -19,9 +19,10 @@
                     <ul class="dropdown-menu dropdown-menu-end bg-light" aria-labelledby="navbarDropdownBlog">
                         <li><a class="dropdown-item" href="/conferencesInfo">Conference Info</a></li>
                         <li><a class="dropdown-item" href="/conferencesDownload">Downloads</a></li>
+                        <li><a class="dropdown-item" href="#">Presentation Schedule</a></li>
                     </ul>
                     <li class="nav-item"><a class="nav-link" href="/publicationInfo">Publication</a></li>
-                <li class="nav-item"><a class="nav-link" href="/gallery">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/gallery">Gallery</a></li>
                     <li class="nav-item"><a class="nav-link" href="/faq">Contact Us</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Registration</a>

@@ -13,7 +13,7 @@ class RegistrationController extends Controller
     function index()
     {
         session()->start();
-        return view('page.registration');
+        return view('page.visitor.registration.registration');
     }
 
     public function store(request $request)

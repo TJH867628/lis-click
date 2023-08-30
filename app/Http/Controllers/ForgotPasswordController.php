@@ -29,7 +29,7 @@ class ForgotPasswordController extends Controller
         ];
     }
     public function index(){
-        return view("page.forgotPassword");
+        return view("page.visitor.forgotPassword.forgotPassword");
     }
 
 
@@ -59,7 +59,7 @@ class ForgotPasswordController extends Controller
     public function indexConfirmOTP()
     {
         $email = session()->get('email');
-        return view("page.confirmOtp",['email'=> $email]);
+        return view("page.visitor.forgotPassword.confirmOTP",['email'=> $email]);
     }
 
     public function confirmOTP(Request $request)
@@ -81,7 +81,7 @@ class ForgotPasswordController extends Controller
     public function indexchangePassword()
     {
         $email = session()->get('email');
-        return view('page.forgotPassword-ChangePassword',['email'=>$email]);
+        return view('page.visitor.forgotPassword.changePassword',['email'=>$email]);
     }
 
     public function changePassword(Request $request)

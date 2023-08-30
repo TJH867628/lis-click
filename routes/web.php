@@ -23,6 +23,7 @@ use App\Http\Controllers\ReviewerController;
 use App\Http\Controllers\PageEditController;
 use App\Http\Controllers\JKTurnInController;
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\JKBendahariController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -105,4 +106,8 @@ Route::post('/pageEdit/Gallery/uploadNewPost',  [GalleryController::class,'uploa
 Route::post('/pageEdit/Gallery/editExistingPost/{id}',  [GalleryController::class,'editExistingPost'])->name('editExistingPost');
 Route::get('/pageEdit/Gallery/changeVisible/{id}',  [GalleryController::class,'changeVisible'])->name('changeVisible');
 Route::post('/uploadCertificate/{submissionCode}',  [JKReviewerController::class,'uploadCertificate'])->name('uploadCertificate');
+Route::get('/JKBendahariHomePage',[HomePageController::class,'index']);
+Route::get('/feesPaymentQR',[JKBendahariController::class,'paymentQR']);
+Route::post('/uploadNewPaymentQR',[JKBendahariController::class,'uploadNewPaymentQR'])->name('uploadNewPaymentQR');
+
 

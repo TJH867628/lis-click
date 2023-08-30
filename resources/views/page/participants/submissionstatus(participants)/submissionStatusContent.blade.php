@@ -23,9 +23,9 @@
                     <th>    
                         Download<br>
                     </th>
-                    <th>
+                    <!-- <th>
                         Review Paper<br>
-                    </th>
+                    </th> -->
                     <th>
                         Evaluation Form<br>
                     </th>
@@ -72,7 +72,14 @@
 
                             </td>
 
-                            <td>{{ $submissionInfo->reviewStatus }}</td>
+                            <td>
+                                {{ $submissionInfo->reviewStatus }}<br>
+                                @if($submissionInfo->returnPaperLink == NULL)
+                                    <p>Return Paper Unavailable</p>
+                                @else
+                                    <a href="{{ route('downloadReviewedFile', ['filename' => $submissionInfo->returnPaperLink]) }}" class="btn btn-primary mb-4">Download Return File</a>
+                                @endif
+                            </td>
                             <!-- <td>
                                 <p>Reviewer</p>
                                 <h5>{{ $submissionInfo->reviewerID }} </h5>
@@ -82,11 +89,6 @@
                                 @endif
                             </td> -->
                             <td><a href="{{ route('downloadSubmission', ['filename' => $submissionInfo->file_name]) }}" class="btn btn-primary mb-4">Download</a></td>
-                            @if($submissionInfo->returnPaperLink == NULL)
-                                <td>Return Paper Unavailable</td>
-                            @else
-                                <td><a href="{{ route('downloadReviewedFile', ['filename' => $submissionInfo->returnPaperLink]) }}" class="btn btn-primary mb-4">Download Return File</a></td>
-                            @endif
                             @if($submissionInfo->reviewer2ID != NULL)
                                 @if($submissionInfo->evaluationFormLink != NULL || $submissionInfo->evaluationFormLink2 != NULL)
                                     @if($dataEvaluationForm && $dataEvaluationForm->paper_id_number == $submissionInfo->submissionCode)
@@ -155,21 +157,26 @@
 
                             </td>
                             <td>
-                                @if($paymentInfo->paymentStatus === "Complete")
-                                    Complete
-                                    <p>Payment ID : </p>
-                                    {{ $submissionInfo->paymentStatus }}
-                                @elseif($paymentInfo->paymentStatus === "Pending For Verification")
-                                    Uncomplete
-                                    <p>Payment ID:</p>
-                                    {{ $paymentInfo->paymentStatus }}
+                                @if($submissionInfo->correctionPhase == 'readyForPresent')
+                                    @if($paymentInfo->paymentStatus === "Complete")
+                                        Complete
+                                        <p>Payment ID : </p>
+                                        {{ $submissionInfo->paymentStatus }}
+                                    @elseif($paymentInfo->paymentStatus === "Pending For Verification")
+                                        Uncomplete
+                                        <p>Payment ID:</p>
+                                        {{ $paymentInfo->paymentStatus }}
+                                    @else
+                                        Please upload your payment receipt
+                                        <button onclick="showPopup()">Show Payment Method</button>
+                                        <form action="{{ route('uploadReceipt', ['submissionCode' => $submissionInfo->submissionCode]) }}" method="POST" enctype="multipart/form-data">
+                                            @csrf
+                                            <input type="file" name="file" />
+                                            <button type="submit">Upload</button>
+                                        </form>
+                                    @endif
                                 @else
-                                    Incomplete
-                                    <form action="{{ route('uploadReceipt', ['submissionCode' => $submissionInfo->submissionCode]) }}" method="POST" enctype="multipart/form-data">
-                                    @csrf
-                                    <input type="file" name="file" />
-                                    <button type="submit">Upload</button>
-                                </form>
+                                    <p>Waiting To Done The Correction Phase</p>
                                 @endif
                             </td> 
                         </tr>
@@ -181,3 +188,15 @@
             </table>
             <br><br><br><br><br><br>
         </div>
+        <script>
+            function showPopup() {
+        // Create a new window
+        var popup = window.open("Payment QR", "Payment QR", "width=400,height=400");
+        // Add an image and some text to the window
+        popup.document.write("<img style='max-height:100px; max-width:100px;' src='{{ asset('paymentQR/'.$paymentQR->masterdata_value) }}'><br>");
+        popup.document.write("Please save your receipt for futher use");
+
+        // Center the window on the screen
+        popup.moveTo((screen.width - popup.outerWidth) / 2, (screen.height - popup.outerHeight) / 2);
+    }
+        </script>

@@ -26,6 +26,10 @@ class homepageController extends Controller
             session()->start();
             $adminSession = session()->get('LoggedJKReviewer');
             return view('page.Jk_Reviewer.homePage(Jk_Reviewer).homePage(Jk_Reviewer)',['adminSession'=>$adminSession]);
+        }elseif(session()->has('LoggedJKBendahari')){
+            session()->start();
+            $adminSession = session()->get('LoggedJKBendahari');
+            return view('page.JK_Bendahari.homePage(JK_Bendahari).homePage(JK_Bendahari)',['adminSession'=>$adminSession]);
         }elseif(session()->has('LoggedReviewer')){
             session()->start();
             $adminSession = session()->get('LoggedReviewer');

@@ -114,26 +114,28 @@
     });
 
     function filterTable() {
-    // Get input value and convert it to lowercase
-    var input = document.getElementById("searchInput");
-    var filter = input.value.toLowerCase();
-    
-    // Get the table and table rows
-    var table = document.getElementById("submissionTable");
-    var rows = table.getElementsByTagName("tr");
-    
-    // Loop through all rows, starting from index 1 to skip the table header
-    for (var i = 1; i < rows.length; i++) {
-      var submissionCode = rows[i].getElementsByTagName("td")[0].textContent || rows[i].getElementsByTagName("td")[0].innerText;
-      submissionCode = submissionCode.toLowerCase();
-      
-      // If the submission code matches the filter, display the row; otherwise, hide it
-      if (submissionCode.indexOf(filter) > -1) {
-        rows[i].style.display = "";
-      } else {
-        rows[i].style.display = "none";
-      }
+        // Get input value and convert it to lowercase
+        var input = document.getElementById("searchInput");
+        var filter = input.value.toLowerCase();
+        
+        // Get the table and table rows
+        var table = document.getElementById("submissionTable");
+        var rows = table.getElementsByTagName("tr");
+        
+        // Loop through all rows, starting from index 1 to skip the table header
+        for (var i = 1; i < rows.length; i++) {
+        var submissionCode = rows[i].getElementsByTagName("td")[0].textContent || rows[i].getElementsByTagName("td")[0].innerText;
+        submissionCode = submissionCode.toLowerCase();
+        
+        // If the submission code matches the filter, display the row; otherwise, hide it
+        if (submissionCode.indexOf(filter) > -1) {
+            rows[i].style.display = "";
+        } else {
+            rows[i].style.display = "none";
+        }
+        }
     }
-  }
+
+    
     </script>
 </html>

@@ -53,17 +53,16 @@ class LoginController extends Controller
                     }elseif($AdminInfo->adminRole == "JK Reviewer"){//check the role of admin
                         $request->session()->put('LoggedJKReviewer', $AdminInfo->email);
                         return redirect('JKReviewerHomePage');
-                    }
-                    elseif($AdminInfo->adminRole == "JK Pendaftaran"){//check the role of admin
+                    }elseif($AdminInfo->adminRole == "JK Pendaftaran"){//check the role of admin
                         $request->session()->put('LoggedJKPendaftaran', $AdminInfo->email);
                         return redirect('JkPendaftaranHomePage');
-                    }
-                    elseif($AdminInfo->adminRole == "Reviewer"){//check the role of admin
+                    }elseif($AdminInfo->adminRole == "JK Bendahari"){//check the role of admin
+                        $request->session()->put('LoggedJKBendahari', $AdminInfo->email);
+                        return redirect('JKBendahariHomePage');
+                    }elseif($AdminInfo->adminRole == "Reviewer"){//check the role of admin
                         $request->session()->put('LoggedReviewer', $AdminInfo->email);
                         return redirect('ReviewerHomePage');
                     }
-                    
-                    
                 }else{
                     return redirect()->back()->with('fail','Your Admin Status is not Active,Please contact with managment department');
                 }

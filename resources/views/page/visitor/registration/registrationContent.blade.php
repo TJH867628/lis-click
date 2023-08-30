@@ -44,6 +44,60 @@
             text-align: center;
             margin-bottom: 10px;
           }
+
+          .txt_field {
+            position: relative;
+        }
+
+        .password-toggle {
+            padding: 5px;
+            position: absolute;
+            width: 2.1em;
+            align-items: center;
+            border-radius: 50%;
+            text-align: center;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            transition: color 0.5s, background-color 0.5s; /* Faster transition */
+        }
+
+        /* Adjust padding for input fields with the icon */
+        .txt_field input[type="password"] {
+            padding-right: 15%; /* Initial padding */
+        }
+
+        /* Adjust padding when the icon is visible */
+        .txt_field.password-visible input[type="password"] {
+            padding-right: 20%; /* Increased padding */
+        }
+
+          /* Adjust padding for input fields with the icon */
+          .txt_field input[type="text"] {
+            padding-right: 15%; /* Initial padding */
+        }
+
+        /* Adjust padding when the icon is visible */
+        .txt_field.password-visible input[type="text"] {
+            padding-right: 20%; /* Increased padding */
+        }
+
+        /* Add a circle around the icon on hover */
+        .password-toggle:hover {
+            padding: 5px;
+            color: grey;
+            align-items: center;
+            text-align: center;
+            border-radius: 50%;
+            width: 2.1em;
+            background-color: rgba(128, 128, 128, 0.2); /* Grey with opacity */
+            transition: color 0.5s, background-color 0.5s; /* Faster transition */
+        }
+
+        .form-group{
+            position: relative;
+        }
     </style>
     </head>
     <body>
@@ -54,25 +108,6 @@
     </head>
     <body class="d-flex flex-column h-100">
         <main class="flex-shrink-0">
-            <!-- Navigation-->
-            <nav class="shadow-sm navbar navbar-expand-lg navbar-light bg-light fixed-top">
-                <div class="container px-5">
-                    <a class="navbar-brand" href="/">
-                        <img src="images/Logo1 (1).png" width="200px" alt="logoLIS2023" />
-                    </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                            <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-                       <li class="nav-item"><a class="nav-link" href="/faqVisitor">Contact Us</a></li>
-                       <li class="nav-item"><a class="nav-link" href="/registration">Register</a></li>
-                                </ul>
-                            </div>
-                            <a href="/login" class="btn btn-primary">Login</a>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
 
             <!-- Header-->
             <header class="bg-light text text-dark py-5">
@@ -171,13 +206,16 @@
                                                 </div>
                                                 <!--End Dropdown-->
                                                 <div class="form-group col-md-4 pe-5" >
-                                                    <input type="password" name="password" id="password" class="form-control password" placeholder="password" required="required">
+                                                    <input type="password" name="password1" id="password1" class="form-control password" placeholder="Password" required="required">
+                                                    <i class="bi-eye password-toggle" id="togglePassword1" style="color: black;"></i>
+                                                </div>
+
+                                                <!--End Dropdown-->
+                                                <div class="form-group col-md-4 pe-5" >
+                                                    <input type="password" name="password2" id="password2" class="form-control password" placeholder="Please Confirm Your Password" required="required">
+                                                    <i class="bi-eye password-toggle" id="togglePassword2" style="color: black;"></i>
                                                 </div>
                                                 
-                                                
-                                                
-                                              
-
                                         <script>
                                         $(document).ready(function() {
                                         // Define an object that maps countries to states
@@ -245,6 +283,73 @@
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
+        <script>
+            $(document).ready(function () {
+                var passwordVisible1 = false; // Track password1 visibility state
+                var passwordVisible2 = false; // Track password2 visibility state
+
+                // Toggle password visibility for password1
+                $("#togglePassword1").on("click", function () {
+                    var inputField = $("#password1");
+                    var icon = $("#togglePassword1");
+                    togglePasswordVisibility1(inputField,icon,passwordVisible1);
+                });
+
+                // Toggle password visibility for password2
+                $("#togglePassword2").on("click", function () {
+                    var inputField = $("#password2");
+                    var icon = $("#togglePassword2");
+                    togglePasswordVisibility2(inputField,icon,passwordVisible2);
+                });
+
+                function togglePasswordVisibility1(inputField,icon) {
+                    if (inputField.attr("type") === "password") {
+                        passwordVisible1 = true;
+                        inputField.attr("type", "text");
+                        icon.addClass("bi-eye-slash").removeClass("bi-eye");
+                    }else if (passwordVisible1 == false){
+                        console.log(1);
+                        inputField.attr("type", "password");
+                        icon.addClass("bi-eye-slash").removeClass("bi-eye");
+                    }
+                }
+
+                function togglePasswordVisibility2(inputField,icon) {
+                    if (inputField.attr("type") === "password") {
+                        passwordVisible2 = true;
+                        inputField.attr("type", "text");
+                        icon.addClass("bi-eye-slash").removeClass("bi-eye");
+                    }else if (passwordVisible2 == false){
+                        console.log(1);
+                        inputField.attr("type", "password");
+                        icon.addClass("bi-eye-slash").removeClass("bi-eye");
+                    }
+                }
+
+                
+            $("#togglePassword1").hover(
+                    function () {
+                        var inputField = $("#password1");
+                        var icon = $("#togglePassword1");
+                        if (passwordVisible1 == true) {
+                            passwordVisible1 = false; // Toggle visibility state
+                            togglePasswordVisibility1(inputField, icon,passwordVisible1,passwordVisible1); 
+                        }
+                    },
+                );
+
+                $("#togglePassword2").hover(
+                    function () {
+                        var inputField = $("#password2");
+                        var icon = $("#togglePassword2");
+                        if (passwordVisible2 == true) {
+                            passwordVisible2 = false; // Toggle visibility state
+                            togglePasswordVisibility2(inputField, icon,passwordVisible2); 
+                        }
+                    },
+                );
+            });
+        </script>
         <!--<script src="js/scripts.js"></script>-->
     </body>
 </html>

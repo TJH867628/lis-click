@@ -6,6 +6,7 @@ use App\Models\tbl_admin_info;
 use App\Models\tbl_evaluation_form;
 use App\Models\tbl_correction;
 use App\Models\tbl_payment;
+use App\Models\tbl_masterdata;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -33,9 +34,10 @@ class submissionStatusController extends Controller
                         $thisUser = $submissionInfo->where('participants3', $userSession)->get();
                     }
                 }
-                $correction = tbl_correction::all();
+            $correction = tbl_correction::all();
+            $paymentQR = tbl_masterdata::where('masterdata_name','paymentQR')->first();
 
-            return view('page.participants.submissionstatus(participants).submissionStatus',['userSession'=>$userSession,'userSubmissionInfo' => $userSubmissionInfo,'paymentInfo' => $paymentStatus,'dataEvaluationForm'=>$dataEvaluationForm,'correction' => $correction]);
+            return view('page.participants.submissionstatus(participants).submissionStatus',['userSession'=>$userSession,'userSubmissionInfo' => $userSubmissionInfo,'paymentInfo' => $paymentStatus,'dataEvaluationForm'=>$dataEvaluationForm,'correction' => $correction,'paymentQR' => $paymentQR]);
         }elseif(session()->has('LoggedSuperAdmin')){
             $userSession = session()->get('LoggedSuperAdmin');
             $allSubmissionInfo = tbl_submission::all();

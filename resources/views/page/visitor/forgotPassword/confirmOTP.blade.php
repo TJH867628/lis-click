@@ -17,9 +17,9 @@
     </head>
     <body class="d-flex flex-column h-100">
         <main class="flex-shrink-0">
-            @csrf
+        @csrf
         @include('page.visitor.navigationBar')
-        @include('page.visitor.gallery.galleryContent')
+        @include('page.visitor.forgotPassword.confirmOTPContent')
         @include('page.footer')
         <!-- Bootstrap core JS-->
         <!-- Core theme JS-->
