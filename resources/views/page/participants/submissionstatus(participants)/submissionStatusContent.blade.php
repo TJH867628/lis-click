@@ -171,7 +171,7 @@
                                         <button onclick="showPopup()">Show Payment Method</button>
                                         <form action="{{ route('uploadReceipt', ['submissionCode' => $submissionInfo->submissionCode]) }}" method="POST" enctype="multipart/form-data">
                                             @csrf
-                                            <input type="file" name="file" />
+                                            <input type="file" name="file" accept=".jpeg,.jpg,.png,application/pdf"/>
                                             <button type="submit">Upload</button>
                                         </form>
                                     @endif
