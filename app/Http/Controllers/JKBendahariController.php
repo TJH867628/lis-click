@@ -52,4 +52,18 @@ class JKBendahariController extends Controller
                 return redirect()->back()->with('success','Text Upload Succesfully');
             }
     }
+
+    public function removePaymentQR(){
+        $qrCode = tbl_masterdata::where('masterdata_name','paymentQR')->first();
+        $qrCode->masterdata_value = NULL;
+        $qrCode->save();
+        return redirect()->back()->with('success','Image Remove Succesfully');
+    }
+
+    public function removePaymentDetails(){
+        $qrCode = tbl_masterdata::where('masterdata_name','paymentQR')->first();
+        $qrCode->masterdata_details = NULL;
+        $qrCode->save();
+        return redirect()->back()->with('success','Text Remove Succesfully');
+    }
 }

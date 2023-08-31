@@ -110,6 +110,8 @@ Route::post('/uploadCertificate/{submissionCode}',  [JKReviewerController::class
 Route::get('/JKBendahariHomePage',[HomePageController::class,'index']);
 Route::get('/feesPaymentQR',[JKBendahariController::class,'paymentQR']);
 Route::post('/uploadNewPaymentQR',[JKBendahariController::class,'uploadNewPaymentQR'])->name('uploadNewPaymentQR');
+Route::get('/removePaymentQR',[JKBendahariController::class,'removePaymentQR'])->name('removePaymentQR');
+Route::get('/removePaymentDetails',[JKBendahariController::class,'removePaymentDetails'])->name('removePaymentDetails');
 Route::get('/FloorManagerHomePage',[HomePageController::class,'index']);
 
 

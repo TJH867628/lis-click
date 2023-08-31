@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('tbl_masterdata', function (Blueprint $table) {
             $table->id();
-            $table->string('masterdata_name');
-            $table->string('masterdata_value');
+            $table->string('masterdata_name')->nullable();
+            $table->string('masterdata_value')->nullable();
             $table->timestamps();
         });
     }
