@@ -27,6 +27,7 @@ class JKBendahariController extends Controller
                     'masterdata_value' => $fileName,
                     'masterdata_details' => $paymentDetails,
                 ];
+
                 if($qrCode == NULL){
                     tbl_masterdata::create($data);
                 }else{

@@ -11,6 +11,7 @@ class tbl_masterdata extends Model
     protected $table = 'tbl_masterdata';
     protected $fillable = [
     'masterdata_name',
-    'masterdata_value'
+    'masterdata_value',
+    'masterdata_details',
     ];
 }
