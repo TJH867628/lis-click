@@ -193,7 +193,7 @@
             // Create a new window
             var popup = window.open("Payment QR", "Payment QR", "width=400,height=400");
             // Add an image and some text to the window
-            popup.document.write("@if($$paymentQR->masterdata_value)<img style='max-height:100px; max-width:100px; margin:auto;' src='{{ asset('paymentQR/'.$paymentQR->masterdata_value) }}'><br><label>{{ $paymentQR->masterdata_details }}</label><br>@else <h1>Payment QR is not available,please contact with the customer service</h1>@endif");
+            popup.document.write("@if($paymentQR->masterdata_value)<img style='max-height:100px; max-width:100px; margin:auto;' src='{{ asset('paymentQR/'.$paymentQR->masterdata_value) }}'><br><label>{{ $paymentQR->masterdata_details }}</label><br>@else <h1>Payment QR is not available,please contact with the customer service</h1>@endif");
             popup.document.write("Please save your receipt for upload");
 
             // Center the window on the screen
