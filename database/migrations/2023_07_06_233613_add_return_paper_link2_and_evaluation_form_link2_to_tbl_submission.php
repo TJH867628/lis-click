@@ -23,8 +23,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('tbl_submission', function (Blueprint $table) {
-            $table->removeColumn('returnPaperLink2');
-            $table->removeColumn('evaluationFormLink2');
+            $table->dropColumn('returnPaperLink2');
+            $table->dropColumn('evaluationFormLink2');
         });
     }
 };

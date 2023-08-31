@@ -21,7 +21,9 @@ return new class extends Migration
             ['name' => 'JK Reviewer', 'description' => 'JK Reviewer role'],
             ['name' => 'Super', 'description' => 'Super role'],
             ['name' => 'Reviewer', 'description' => 'Reviewer role'],
-            ['name' => 'JK Bendahari', 'description' => 'JK Bendahari role']
+            ['name' => 'JK Bendahari', 'description' => 'JK Bendahari role'],
+            ['name' => 'Floor Manager', 'description' => 'Floor Manager role'],
+
         ];
 
         foreach ($roles as $role) {
@@ -48,7 +50,8 @@ return new class extends Migration
             'JK Reviewer',
             'Super',
             'Reviewer',
-            'JK Bendahari'
+            'JK Bendahari',
+            'Floor Manager',
         ])->delete();
     }
 };

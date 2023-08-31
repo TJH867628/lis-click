@@ -34,8 +34,11 @@ class homepageController extends Controller
             session()->start();
             $adminSession = session()->get('LoggedReviewer');
             return view('page.reviewer.homePage(Reviewer).homePage(Reviewer)',['adminSession'=>$adminSession]);
-        }
-        else{
+        }elseif(session()->has('LoggedFloorManager')){
+            session()->start();
+            $adminSession = session()->get('LoggedFloorManager');
+            return view('page.Floor_Manager.homePage(Floor_Manager).homePage(Floor_Manager)',['adminSession'=>$adminSession]);
+        }else{
             return redirect('login')->with('fail','Login expired,Please Login Again');
         }
     }

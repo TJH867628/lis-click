@@ -22,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('tbl_admin_info', function (Blueprint $table) {
-            $table->removeColumn('phoneNumber');
+            $table->dropColumn('phoneNumber');
         });
     }
 };

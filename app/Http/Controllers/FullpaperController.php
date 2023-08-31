@@ -17,7 +17,7 @@ class FullpaperController extends Controller
         if(session()->has('LoggedUser')){
             $userSession = session()->get('LoggedUser');
             $user = tbl_participants_info::where('email',$userSession)->first();
-            return view('page.fullpaper',['userSession'=>$userSession,'user' => $user]);
+            return view('page.participants.fullpaperSubmission.fullpaper',['userSession'=>$userSession,'user' => $user]);
         }else{
             return redirect('login')->with('fail','Login Session Expire,Please Login again');
         }

@@ -13,6 +13,7 @@ use App\Http\Controllers\RegisterAdminController;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\ConferencesController;
 use App\Http\Controllers\FaqController;
+use App\Http\Controllers\FloorManagerController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\FullpaperController;
@@ -109,5 +110,7 @@ Route::post('/uploadCertificate/{submissionCode}',  [JKReviewerController::class
 Route::get('/JKBendahariHomePage',[HomePageController::class,'index']);
 Route::get('/feesPaymentQR',[JKBendahariController::class,'paymentQR']);
 Route::post('/uploadNewPaymentQR',[JKBendahariController::class,'uploadNewPaymentQR'])->name('uploadNewPaymentQR');
+Route::get('/FloorManagerHomePage',[HomePageController::class,'index']);
+
 
 

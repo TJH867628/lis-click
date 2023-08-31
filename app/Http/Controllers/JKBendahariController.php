@@ -14,15 +14,19 @@ class JKBendahariController extends Controller
     }
 
     public function uploadNewPaymentQR(Request $request){
+            $file = $request->file('image');
+            $paymentDetails = $request->input('details');
+            $qrCode = tbl_masterdata::where('masterdata_name','paymentQR')->first();
+
+
             if($request->hasFile('image')){
-                $file = $request->file('image');
                 $fileName = "PaymentQR_" . time().'.'.$file->getClientOriginalExtension();
                 $file->move(public_path('paymentQR'),$fileName);
                 $data = [
                     'masterdata_name' => 'paymentQR',
                     'masterdata_value' => $fileName,
+                    'masterdata_details' => $paymentDetails,
                 ];
-                $qrCode = tbl_masterdata::where('masterdata_name','paymentQR')->first();
                 if($qrCode == NULL){
                     tbl_masterdata::create($data);
                 }else{
@@ -31,12 +35,20 @@ class JKBendahariController extends Controller
                     unlink($existingFilePath);
 
                     $qrCode->masterdata_value = $fileName;
+                    $qrCode->masterdata_details = $paymentDetails;
                     $qrCode->save();
                 }
                 
                 return redirect()->back()->with('success','QR Code Uploaded Successfully');
             }else{
-                return redirect()->back()->with('fail','QR Code Upload Failed');
+                if($qrCode == NULL){
+                    return redirect()->back()->with('error','Please upload a QR Code');
+                }else{
+
+                    $qrCode->masterdata_details = $paymentDetails;
+                    $qrCode->save();
+                }
+                return redirect()->back()->with('success','Text Upload Succesfully');
             }
     }
 }

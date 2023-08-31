@@ -25,7 +25,7 @@
                     <li class="nav-item"><a class="nav-link" href="/gallery">Gallery</a></li>
                     <li class="nav-item"><a class="nav-link" href="/faq">Contact Us</a></li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Registration</a>
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Paper Submission</a>
                             <ul class="dropdown-menu dropdown-menu-end bg-light" aria-labelledby="navbarDropdownBlog">
                                 <li><a class="dropdown-item" href="/registerSubmission">Full Paper Submission</a></li>
                                 <li><a class="dropdown-item" href="/submissionStatus">Submission Status</a></li>

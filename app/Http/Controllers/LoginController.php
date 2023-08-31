@@ -62,6 +62,9 @@ class LoginController extends Controller
                     }elseif($AdminInfo->adminRole == "Reviewer"){//check the role of admin
                         $request->session()->put('LoggedReviewer', $AdminInfo->email);
                         return redirect('ReviewerHomePage');
+                    }elseif($AdminInfo->adminRole == "Floor Manager"){//check the role of admin
+                        $request->session()->put('LoggedFloorManager', $AdminInfo->email);
+                        return redirect('FloorManagerHomePage');
                     }
                 }else{
                     return redirect()->back()->with('fail','Your Admin Status is not Active,Please contact with managment department');

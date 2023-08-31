@@ -24,6 +24,7 @@ class LogoutController extends Controller
             $request->session()->remove('LoggedJKParticipants');
             return redirect('mainPage');
         }else{
+            $request->session()->flush();
             return redirect('mainPage');
         }
     }

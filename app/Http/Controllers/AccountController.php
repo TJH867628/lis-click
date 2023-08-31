@@ -33,20 +33,22 @@ class AccountController extends Controller
             dd($adminSession);
             
             return view('page.account(Admin)',['adminSession'=>$adminSession,'admin' => $admin]);
-        }
-        elseif(session()->has('LoggedJKReviewer')){
+        }elseif(session()->has('LoggedJKReviewer')){
             $adminSession = session()->get('LoggedJKReviewer');
             $admin = tbl_admin_info::where('email',$adminSession)->first();
             
             return view('page.account(Admin)',['adminSession'=>$adminSession,'admin' => $admin]);
-        }
-        elseif(session()->has('LoggedReviewer')){
+        }elseif(session()->has('LoggedReviewer')){
             $adminSession = session()->get('LoggedReviewer');
             $admin = tbl_admin_info::where('email',$adminSession)->first();
             
             return view('page.account(Admin)',['adminSession'=>$adminSession,'admin' => $admin]);
-        }
-        else{
+        }elseif(session()->has('LoggedFloorManager')){
+            $adminSession = session()->get('LoggedFloorManager');
+            $admin = tbl_admin_info::where('email',$adminSession)->first();
+            
+            return view('page.account(Admin)',['adminSession'=>$adminSession,'admin' => $admin]);
+        }else{
             return redirect('login')->with('fail','Login Session Expire,Please Login again');
         }
     }
