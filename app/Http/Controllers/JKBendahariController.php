@@ -33,7 +33,7 @@ class JKBendahariController extends Controller
                 }else{
                     $existingFileName = $qrCode->masterdata_value;
                     $existingFilePath = public_path('paymentQR') . '/' . $existingFileName;
-                    if($existingFileName){
+                    if($existingFileName != NULL){
                         unlink($existingFilePath);
                     }
 
