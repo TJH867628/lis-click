@@ -13,10 +13,10 @@
                 <h1>QR Code is not available</h1>
                 <form action="{{ route('uploadNewPaymentQR') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    UPLOAD NEW QR CODE
                     <br>
                     <label for="details">Please type the payment details below</label><br>
                     <textarea style="width: 500px; height:200px;" name="details" type="text"></textarea><br>
+                    UPLOAD NEW QR CODE
                     <input style="margin:auto;" type="file" name="image" accept=".jpeg,.jpg,.png">
                     <button type="submit">Upload</button>
                 </form>
