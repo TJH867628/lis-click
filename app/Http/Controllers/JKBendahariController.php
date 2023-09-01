@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\tbl_masterdata;
+use App\Models\tbl_payment;
+use App\Models\tbl_submission;
+use App\Models\tbl_participants_info;
 use Illuminate\Support\Facades\Storage;
 
 class JKBendahariController extends Controller
@@ -17,7 +20,6 @@ class JKBendahariController extends Controller
             $file = $request->file('image');
             $paymentDetails = $request->input('details');
             $qrCode = tbl_masterdata::where('masterdata_name','paymentQR')->first();
-
 
             if($request->hasFile('image')){
                 $fileName = "PaymentQR_" . time().'.'.$file->getClientOriginalExtension();
@@ -59,6 +61,11 @@ class JKBendahariController extends Controller
         $qrCode = tbl_masterdata::where('masterdata_name','paymentQR')->first();
         $qrCode->masterdata_value = NULL;
         $qrCode->save();
+        $existingFileName = $qrCode->masterdata_value;
+        $existingFilePath = public_path('paymentQR') . '/' . $existingFileName;
+        if($existingFileName != NULL){
+            unlink($existingFilePath);
+        }
         return redirect()->back()->with('success','Image Remove Succesfully');
     }
 
@@ -67,5 +74,41 @@ class JKBendahariController extends Controller
         $qrCode->masterdata_details = NULL;
         $qrCode->save();
         return redirect()->back()->with('success','Text Remove Succesfully');
+    }
+
+    public function paymentStatus(){
+        if(session()->has('LoggedJKBendahari')){
+            session()->start();
+            $paymentDetails = tbl_payment::all();
+            foreach($paymentDetails as $key => $eachPaymentStatus){
+                if($eachPaymentStatus != NULL){
+                    $paymentDetails[$key]->paymentReceipt = "Yes";
+                    $submissionInfo = tbl_submission::where('submissionCode',$eachPaymentStatus->submissionCode)->first();
+                    $participantsInfo = tbl_participants_info::where('email',$submissionInfo->participants1)->first();
+
+                    $paymentDetails[$key]->submissionInfo = $submissionInfo;
+                    $paymentDetails[$key]->participantsInfo = $participantsInfo;
+                }
+            }
+
+
+
+            return view('page.JK_Bendahari.paymentStatus.paymentStatus',['paymentDetails' => $paymentDetails]);
+        }
+    }
+
+    public function paymentStatusControl(Request $request,$submissionCode){
+        $paymentStatus = $request->input('statusInput');
+        $paymentDetails = tbl_payment::where('submissionCode',$submissionCode)->first();
+        $paymentDetails->paymentStatus = $paymentStatus;
+        $now = now();
+        if ($paymentDetails->paymentStatus == 'Complete') {
+            $paymentDetails->confirmPaymentDate = $now->format('Y-m-d H:i:s');
+        }else{
+            $paymentDetails->confirmPaymentDate = NULL;
+        }
+        $paymentDetails->save();
+
+        return redirect()->back()->with('success','Payment Status Updated Successfully');
     }
 }

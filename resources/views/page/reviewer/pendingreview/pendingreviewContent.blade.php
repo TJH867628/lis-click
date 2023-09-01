@@ -34,10 +34,9 @@
                     <th>
                         Evaluation Form
                     </th>
-
                     @foreach($submissionInfo as $submissionInfo)
                         @if($submissionInfo->reviewStatus === 'pending')
-                            @if($submissionInfo->reviewer2ID)
+                            @if($submissionInfo->reviewer2ID != NULL)
                                 @if($submissionInfo->reviewerID === $reviewername)
                                     @if($submissionInfo->evaluationFormLink == null)
                                     <tr>
@@ -94,6 +93,7 @@
                                     @endif
                                 @endif
                             @else
+
                             <tr>
                             <td>{{ $submissionInfo->submissionCode }}</td>
                             <td>{{ $submissionInfo->submissionTitle }}</td>

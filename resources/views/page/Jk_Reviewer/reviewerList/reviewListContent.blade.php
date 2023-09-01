@@ -91,14 +91,12 @@
                             </td>
 
                             <td>
-                            @if($dataEvaluationForm)
-                                @if($dataEvaluationForm->paper_id_number == $submissionInfo->submissionCode)
-                                    <a href="{{ route('evaluationForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4">Evaluate Form</a>
-                                @else
-                                    <p>Pending</p>
-                                @endif
-                            @else
+                            @if(empty($submissionInfo->dataEvaluationForm->paper_id_number))
                                 <p>Pending</p>
+                            @else
+                                @if($submissionInfo->dataEvaluationForm->paper_id_number == $submissionInfo->submissionCode)
+                                    <a href="{{ route('evaluationForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4">Evaluate Form</a>
+                                @endif
                             @endif
                             </td>
                             <td>
@@ -115,12 +113,12 @@
                                 @if($submissionInfo->reviewStatus == 'done')
                                     <p>Correction Phase :</p>
                                     @if( $submissionInfo->correctionPhase == 'pending' )
-                                        @if($correction && $correction->returnCorrectionLink !== NULL)
-                                        <h5>Pending For Comment</h5>
-                                        @elseif(!$correction)
-                                        <h5>Pending For Comment</h5>
+                                        @if($submissionInfo->latestReturnCorrection && $submissionInfo->latestReturnCorrection->returnCorrectionLink !== NULL)
+                                            <h5>Pending For Comment</h5>
+                                        @elseif(!$submissionInfo->latestReturnCorrection)
+                                            <h5>Pending For Comment</h5>
                                         @else
-                                        <h5>Pending For Correction</h5>
+                                            <h5>Pending For Correction</h5>
                                         @endif
                                     @elseif( $submissionInfo->correctionPhase == 'readyForPresent' )
                                         <h5>Ready For Present</h5>

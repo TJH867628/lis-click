@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\tbl_admin_info;
 use App\Models\tbl_correction;
 use App\Models\tbl_submission;
+use App\Models\tbl_payment;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+
+use function PHPUnit\Framework\isNull;
 
 class JKReviewerController extends Controller
 {
@@ -23,6 +26,8 @@ class JKReviewerController extends Controller
             if($selectedReviewer2 != "None"){
                 $reviewer2 = tbl_admin_info::where('email',$selectedReviewer2)->first();
                 $submission->reviewer2ID = $reviewer2->name;
+            }else{
+                $submission->reviewer2ID = NULL;
             }
             $submission->reviewStatus = 'pending';
             $submission->save();
@@ -126,6 +131,15 @@ class JKReviewerController extends Controller
             $submission = tbl_submission::where('submissionCode',$submissionCode)->first();
             $submission->correctionPhase = "readyForPresent";
             $submission->save();
+
+            //add payment details to tbl_payment
+            $payment = new tbl_payment;
+            $payment->submissionCode = $submissionCode;
+            $payment->paymentStatus = "incomplete";
+            $payment->paymentID = "unavailable";
+            $payment->proofOfPayment = 'unavailable';
+            $payment->save();
+
             return redirect()->back();
         }
     
@@ -133,6 +147,13 @@ class JKReviewerController extends Controller
             $submission = tbl_submission::where('submissionCode',$submissionCode)->first();
             $submission->correctionPhase = "pending";
             $submission->save();
+
+            //remove payment details from tbl_payment
+            $payment = tbl_payment::where('submissionCode',$submissionCode)->first();
+            if($payment != NULL){
+                $payment->delete();
+            }
+
             return redirect()->back();
         }
 

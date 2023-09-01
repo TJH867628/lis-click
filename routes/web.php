@@ -87,6 +87,8 @@ Route::post('/upload/{submissionCode}', [ReviewerController::class,'uploadReview
 Route::get('downloadReviewedFile/{filename}',  [ReviewerController::class,'downloadReviewSubmission'])->name('downloadReviewedFile');
 Route::get('conferencesDownload/{filename}',  [ConferencesController::class,'download'])->name('conferencesDownload');
 Route::post('uploadReceipt/{submissionCode}', [submissionStatusController::class,'uploadReceipt'])->name('uploadReceipt');
+Route::get('downloadPaymentReceipt/{proofOfPayment}', [submissionStatusController::class,'downloadPaymentReceipt'])->name('downloadPaymentReceipt');
+Route::post('paymentStatusControl/{submissionCode}', [JKBendahariController::class,'paymentStatusControl'])->name('paymentStatusControl');
 Route::get('/pageList',[SuperAdminController::class,'pageList']);
 Route::get('editPage/{page}', [PageEditController::class, 'editPage'])->name('editPage');
 Route::post('/editPage/{pageName}', [PageEditController::class, 'saveEdit'])->name('saveEdit');
@@ -108,6 +110,7 @@ Route::post('/pageEdit/Gallery/editExistingPost/{id}',  [GalleryController::clas
 Route::get('/pageEdit/Gallery/changeVisible/{id}',  [GalleryController::class,'changeVisible'])->name('changeVisible');
 Route::post('/uploadCertificate/{submissionCode}',  [JKReviewerController::class,'uploadCertificate'])->name('uploadCertificate');
 Route::get('/JKBendahariHomePage',[HomePageController::class,'index']);
+Route::get('/paymentStatus',[JKBendahariController::class,'paymentStatus']);
 Route::get('/feesPaymentQR',[JKBendahariController::class,'paymentQR']);
 Route::post('/uploadNewPaymentQR',[JKBendahariController::class,'uploadNewPaymentQR'])->name('uploadNewPaymentQR');
 Route::get('/removePaymentQR',[JKBendahariController::class,'removePaymentQR'])->name('removePaymentQR');

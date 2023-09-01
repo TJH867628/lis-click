@@ -91,7 +91,7 @@
                             <td><a href="{{ route('downloadSubmission', ['filename' => $submissionInfo->file_name]) }}" class="btn btn-primary mb-4">Download</a></td>
                             @if($submissionInfo->reviewer2ID != NULL)
                                 @if($submissionInfo->evaluationFormLink != NULL || $submissionInfo->evaluationFormLink2 != NULL)
-                                    @if($dataEvaluationForm && $dataEvaluationForm->paper_id_number == $submissionInfo->submissionCode)
+                                    @if($submissionInfo->dataEvaluationForm && $submissionInfo->dataEvaluationForm->paper_id_number == $submissionInfo->submissionCode)
                                         <td><a href="{{ route('evaluationForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4">Evaluate Form</a> </td>
                                     @else
                                         <td><p>Pending</p></td>
@@ -101,7 +101,7 @@
                                 @endif
                             @elseif($submissionInfo->reviewer2ID == NULL)
                                 @if($submissionInfo->evaluationFormLink != NULL)
-                                    @if($dataEvaluationForm && $dataEvaluationForm->paper_id_number == $submissionInfo->submissionCode)
+                                    @if($submissionInfo->dataEvaluationForm && $submissionInfo->dataEvaluationForm->paper_id_number == $submissionInfo->submissionCode)
                                         <td><a href="{{ route('evaluationForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4">Evaluate Form</a> </td>
                                     @else
                                         <td><p>Pending</p></td>
@@ -124,17 +124,19 @@
                             @endif
                             <td>
                             @if($submissionInfo->correctionPhase == 'pending')
-                            @foreach($correction as $thisCorrection)
-                                @if($thisCorrection->submissionCode == $submissionInfo->submissionCode)
-                                    @if($thisCorrection->numberOfTimes == $thisCorrection->count())
-                                        @if($thisCorrection->returnCorrectionLink != NULL)
-                                            <h5>Pending For Comment</h5>
-                                        @elseif($thisCorrection->returnCorrectionLink == NULL)
-                                            <h5>Pending For Correction</h5>
+                                @if(empty($submissionInfo->latestCorrection->submissionCode))
+                                    <h5>Pending For Comment</h5>
+                                @else
+                                    @if($submissionInfo->latestCorrection->submissionCode == $submissionInfo->submissionCode)
+                                        @if($submissionInfo->latestCorrection->numberOfTimes == $submissionInfo->correction->count())
+                                            @if($submissionInfo->latestCorrection->returnCorrectionLink != NULL)
+                                                <h5>Pending For Comment</h5>
+                                            @elseif($submissionInfo->latestCorrection->returnCorrectionLink == NULL)
+                                                <h5>Pending For Correction</h5>
+                                            @endif
                                         @endif
                                     @endif
                                 @endif
-                            @endforeach
                                 <a href="{{ route('correctionForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4">Correction</a>
                             @elseif($submissionInfo->correctionPhase == 'readyForPresent')
                                 <a href="{{ route('correctionForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4">Correction</a>
@@ -158,17 +160,29 @@
                             </td>
                             <td>
                                 @if($submissionInfo->correctionPhase == 'readyForPresent')
-                                    @if($paymentInfo->paymentStatus === "Complete")
-                                        Complete
-                                        <p>Payment ID : </p>
-                                        {{ $submissionInfo->paymentStatus }}
-                                    @elseif($paymentInfo->paymentStatus === "Pending For Verification")
-                                        Uncomplete
-                                        <p>Payment ID:</p>
-                                        {{ $paymentInfo->paymentStatus }}
-                                    @else
-                                        Please upload your payment receipt
-                                        <button onclick="showPopup()">Show Payment Method</button>
+                                    @foreach($submissionInfo->paymentStatus as $submissionInfo->paymentStatus)
+                                        @if($submissionInfo->paymentStatus->paymentStatus === 'Complete')
+                                            Complete
+                                            <p>Payment ID : </p>
+                                            {{ $submissionInfo->paymentStatus }}
+                                            <a href="{{route('downloadPaymentReceipt', $thisPaymentDetails->proofOfPayment)}}">Download Receipt</a>
+                                        @elseif($submissionInfo->paymentStatus->paymentStatus === "Pending For Verification")
+                                            {{ $submissionInfo->paymentStatus->paymentStatus }}
+                                            <p>Payment ID:</p>
+                                            {{ $submissionInfo->paymentStatus->paymentID }}
+                                            <a href="{{route('downloadPaymentReceipt',  $submissionInfo->paymentStatus->proofOfPayment)}}">Download</a>
+                                        @else
+                                            Please upload your payment receipt
+                                            <button onclick="showPopup()">Show Payment Method</button>
+                                            <form action="{{ route('uploadReceipt', ['submissionCode' => $submissionInfo->submissionCode]) }}" method="POST" enctype="multipart/form-data">
+                                                @csrf
+                                                <input type="file" name="file" accept=".jpeg,.jpg,.png,application/pdf"/>
+                                                <button type="submit">Upload</button>
+                                            </form>
+                                        @endif
+                                    @endforeach
+                                    @if($submissionInfo->paymentStatus->paymentStatus === "Pending For Verification")
+                                        <br><br><br>Upload New Receipt
                                         <form action="{{ route('uploadReceipt', ['submissionCode' => $submissionInfo->submissionCode]) }}" method="POST" enctype="multipart/form-data">
                                             @csrf
                                             <input type="file" name="file" accept=".jpeg,.jpg,.png,application/pdf"/>
@@ -177,6 +191,7 @@
                                     @endif
                                 @else
                                     <p>Waiting To Done The Correction Phase</p>
+
                                 @endif
                             </td> 
                         </tr>
