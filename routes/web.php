@@ -117,4 +117,3 @@ Route::get('/removePaymentQR',[JKBendahariController::class,'removePaymentQR'])-
 Route::get('/removePaymentDetails',[JKBendahariController::class,'removePaymentDetails'])->name('removePaymentDetails');
 Route::get('/FloorManagerHomePage',[HomePageController::class,'index']);
 Route::get('/reverseToLastEdition/{pageName}', [PageEditController::class, 'reversePage'])->name('reverseToLastEdition');
-
