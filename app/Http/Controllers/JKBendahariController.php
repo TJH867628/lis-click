@@ -66,6 +66,7 @@ class JKBendahariController extends Controller
         if($existingFileName != NULL){
             unlink($existingFilePath);
         }
+
         return redirect()->back()->with('success','Image Remove Succesfully');
     }
 
@@ -91,15 +92,13 @@ class JKBendahariController extends Controller
                 }
             }
 
-
-
             return view('page.JK_Bendahari.paymentStatus.paymentStatus',['paymentDetails' => $paymentDetails]);
         }
     }
 
-    public function paymentStatusControl(Request $request,$submissionCode){
+    public function paymentStatusControl(Request $request,$paymentID){
         $paymentStatus = $request->input('statusInput');
-        $paymentDetails = tbl_payment::where('submissionCode',$submissionCode)->first();
+        $paymentDetails = tbl_payment::where('paymentID',$paymentID)->first();
         $paymentDetails->paymentStatus = $paymentStatus;
         $now = now();
         if ($paymentDetails->paymentStatus == 'Complete') {

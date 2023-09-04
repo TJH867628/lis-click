@@ -24,7 +24,7 @@
                 @if($qrCode->masterdata_value != NULL)
                     <h1 style="color: white;">Current QR Code</h1>
                     <img src="{{ asset('paymentQR/'.$qrCode->masterdata_value) }}" style="max-height: 100px; max-width:100px; " alt="QR Code"><br>
-                    <button><a style="margin:auto;" href="/removePaymentDetails">Remove Current Payment QR</a></button>
+                    <button><a style="margin:auto;" href="/removePaymentQR  ">Remove Current Payment QR</a></button>
                 @else
                     <h1 style="color: white;">No QR Code</h1>
                 @endif

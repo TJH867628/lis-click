@@ -55,7 +55,7 @@
                         </a>
                     </li>
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="/pageList">
                             <i class="bi bi-kanban-fill icon"></i>
                             <span class="text nav-text">Management</span>
                         </a>

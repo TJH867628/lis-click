@@ -145,6 +145,8 @@
                         <p> Participant HP : </p>{{$thisPaymentDetails->participantsInfo->phoneNumber}}<br>
                     </td>
                     <td>
+                        <p> Payment ID : </p>
+                        {{ $thisPaymentDetails->paymentID }}<br>
                         <p> Payment Status : </p>
                         @if($thisPaymentDetails->paymentStatus == 'Complete')<br>
                             <p style="color: green;">Complete</p><br>
@@ -156,15 +158,15 @@
                             <p style="color: orange;">{{$thisPaymentDetails->paymentStatus}}</p><br>
                             <p> Payment Date : </p>{{ $thisPaymentDetails->paymentDate }}<br>
                         @endif
-                        <form action="{{ route('paymentStatusControl', ['submissionCode' => $thisPaymentDetails->submissionCode]) }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('paymentStatusControl', ['paymentID' => $thisPaymentDetails->paymentID]) }}" method="POST">
                             @csrf
-                            <select name="statusOption" id="statusOption" >
-                                <option value="incomplete" selected>Incomplete</option>
+                            <input type="hidden" name="statusInput" value="">
+                            <select class="statusOption" name="statusOption">
                                 <option value="Complete">Complete</option>
-                                <option value="Pending For Verification">Pending For Verification</option>
-                                <option value="others">Others</option>
+                                <option value="Pending For Verification" selected>Pending For Verification</option>
+                                <option value="incomplete">Incomplete</option>
                             </select>
-                            <input type="text" id="statusInput" name="statusInput" style="display: none;">
+                            <input type="text" class="statusInput" id="statusInput" name="statusInput" style="display: none;">
                             <br><button>Submit</button>
                         </form>
                     </td>
@@ -182,19 +184,29 @@
         </table>
     </body>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    
     <script>
-        const statusOption = document.getElementById('statusOption');
-        const statusInput = document.getElementById('statusInput');
-        statusInput.value = statusOption.value;
+       document.addEventListener('DOMContentLoaded', function () {
+        const paymentRows = document.querySelectorAll('.payment-row');
 
-        statusOption.addEventListener('change', () => {
-            if (statusOption.value === 'incomplete' || statusOption.value === 'Complete' || statusOption.value === 'Pending For Verification') {
-                statusInput.value = statusOption.value;
-                statusInput.style.display = 'none';
-            } else if (statusOption.value === 'others') {
-                statusInput.value = '';
-                statusInput.style.display = 'block';
-            }
+        paymentRows.forEach((paymentRow) => {
+            const statusOption = paymentRow.querySelector('.statusOption');
+            const statusInput = paymentRow.querySelector('.statusInput');
+
+            statusInput.value = statusOption.value;
+
+            statusOption.addEventListener('change', () => {
+                if (statusOption.value === 'Complete' || statusOption.value === 'Pending For Verification') {
+                    statusInput.value = statusOption.value;
+                    statusInput.style.display = 'none';
+                } else if (statusOption.value === 'incomplete') {
+                    statusInput.value = '';
+                    statusInput.style.display = 'block';
+                    }
+                console.log(statusInput.value);
+
+                });
+            });
         });
 
         const paymentRows = document.querySelectorAll('.payment-row');

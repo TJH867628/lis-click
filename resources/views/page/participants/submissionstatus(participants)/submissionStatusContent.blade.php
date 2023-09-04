@@ -160,35 +160,43 @@
                             </td>
                             <td>
                                 @if($submissionInfo->correctionPhase == 'readyForPresent')
+                                    @php
+                                        $i = 0;
+                                        $allComplete = false;
+                                    @endphp
                                     @foreach($submissionInfo->paymentStatus as $submissionInfo->paymentStatus)
+                                    @php
+                                        $i++;
+                                    @endphp
+                                        <a href="{{route('downloadPaymentReceipt', $submissionInfo->paymentStatus->proofOfPayment)}}">Receipt {{ $i }}</a>
                                         @if($submissionInfo->paymentStatus->paymentStatus === 'Complete')
-                                            Complete
-                                            <p>Payment ID : </p>
-                                            {{ $submissionInfo->paymentStatus }}
-                                            <a href="{{route('downloadPaymentReceipt', $thisPaymentDetails->proofOfPayment)}}">Download Receipt</a>
+                                            Verified payment<br><br>
+                                            @php
+                                                $allComplete = true;
+                                            @endphp
                                         @elseif($submissionInfo->paymentStatus->paymentStatus === "Pending For Verification")
                                             {{ $submissionInfo->paymentStatus->paymentStatus }}
-                                            <p>Payment ID:</p>
-                                            {{ $submissionInfo->paymentStatus->paymentID }}
-                                            <a href="{{route('downloadPaymentReceipt',  $submissionInfo->paymentStatus->proofOfPayment)}}">Download</a>
+                                            @php
+                                                $allComplete = false;
+                                            @endphp
                                         @else
-                                            Please upload your payment receipt
-                                            <button onclick="showPopup()">Show Payment Method</button>
-                                            <form action="{{ route('uploadReceipt', ['submissionCode' => $submissionInfo->submissionCode]) }}" method="POST" enctype="multipart/form-data">
-                                                @csrf
-                                                <input type="file" name="file" accept=".jpeg,.jpg,.png,application/pdf"/>
-                                                <button type="submit">Upload</button>
-                                            </form>
+                                            {{ $submissionInfo->paymentStatus->paymentStatus }}<br>
+                                            @php
+                                                $allComplete = false;
+                                            @endphp
                                         @endif
                                     @endforeach
-                                    @if($submissionInfo->paymentStatus->paymentStatus === "Pending For Verification")
+                                        @if(( $allComplete === false))
                                         <br><br><br>Upload New Receipt
+                                        <button onclick="showPopup()">Show Payment Method</button>
                                         <form action="{{ route('uploadReceipt', ['submissionCode' => $submissionInfo->submissionCode]) }}" method="POST" enctype="multipart/form-data">
                                             @csrf
                                             <input type="file" name="file" accept=".jpeg,.jpg,.png,application/pdf"/>
                                             <button type="submit">Upload</button>
                                         </form>
-                                    @endif
+                                        @else
+                                        <br><br><h3> All Payment Done</h3>
+                                        @endif
                                 @else
                                     <p>Waiting To Done The Correction Phase</p>
 

@@ -88,7 +88,7 @@ Route::get('downloadReviewedFile/{filename}',  [ReviewerController::class,'downl
 Route::get('conferencesDownload/{filename}',  [ConferencesController::class,'download'])->name('conferencesDownload');
 Route::post('uploadReceipt/{submissionCode}', [submissionStatusController::class,'uploadReceipt'])->name('uploadReceipt');
 Route::get('downloadPaymentReceipt/{proofOfPayment}', [submissionStatusController::class,'downloadPaymentReceipt'])->name('downloadPaymentReceipt');
-Route::post('paymentStatusControl/{submissionCode}', [JKBendahariController::class,'paymentStatusControl'])->name('paymentStatusControl');
+Route::post('paymentStatusControl/{paymentID}', [JKBendahariController::class,'paymentStatusControl'])->name('paymentStatusControl');
 Route::get('/pageList',[SuperAdminController::class,'pageList']);
 Route::get('editPage/{page}', [PageEditController::class, 'editPage'])->name('editPage');
 Route::post('/editPage/{pageName}', [PageEditController::class, 'saveEdit'])->name('saveEdit');
@@ -116,6 +116,6 @@ Route::post('/uploadNewPaymentQR',[JKBendahariController::class,'uploadNewPaymen
 Route::get('/removePaymentQR',[JKBendahariController::class,'removePaymentQR'])->name('removePaymentQR');
 Route::get('/removePaymentDetails',[JKBendahariController::class,'removePaymentDetails'])->name('removePaymentDetails');
 Route::get('/FloorManagerHomePage',[HomePageController::class,'index']);
-
+Route::get('/reverseToLastEdition/{pageName}', [PageEditController::class, 'reversePage'])->name('reverseToLastEdition');
 
 

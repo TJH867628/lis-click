@@ -36,7 +36,7 @@ class submissionStatusController extends Controller
             $correction = tbl_correction::all();
             $paymentQR = tbl_masterdata::where('masterdata_name','paymentQR')->first();
 
-            return view('page.participants.submissionstatus(participants).submissionStatus',['userSession'=>$userSession,'userSubmissionInfo' => $userSubmissionInfo]);
+            return view('page.participants.submissionstatus(participants).submissionStatus',['userSession'=>$userSession,'userSubmissionInfo' => $userSubmissionInfo,'paymentQR' => $paymentQR]);
         }elseif(session()->has('LoggedSuperAdmin')){
             $userSession = session()->get('LoggedSuperAdmin');
             $allSubmissionInfo = tbl_submission::all();
@@ -97,18 +97,21 @@ class submissionStatusController extends Controller
             $file->move(public_path('storage/receipt'), $filename);
 
             $paymentInfo = tbl_payment::where('submissionCode',$submissionCode)->first();
+            $totalPaymentReceipt = tbl_payment::where('submissionCode',$submissionCode)->get()->count();
+            $thisPaymentID = $paymentID . "_" . $totalPaymentReceipt + 1;
+
 
             if($paymentInfo != NULL && $paymentInfo->proofOfPayment == 'unavailable'){
                 $paymentInfo->paymentStatus = "Pending For Verification";
                 $paymentInfo->proofOfPayment = $filename;
-                $paymentInfo->paymentID = $paymentID;
+                $paymentInfo->paymentID = $thisPaymentID;
                 $paymentInfo->paymentDate = $now;
                 $paymentInfo->updated_at = $now;
                 $paymentInfo->save();
             }elseif($paymentInfo != NULL && $paymentInfo->proofOfPayment != 'unavailable'){ 
                 $paymentInfo = new tbl_payment;
                 $paymentInfo->submissionCode = $submissionCode;
-                $paymentInfo->paymentID = $paymentID;
+                $paymentInfo->paymentID = $thisPaymentID;
                 $paymentInfo->paymentStatus = "Pending For Verification";
                 $paymentInfo->paymentDate = $now;
                 $paymentInfo->proofOfPayment = $filename;
