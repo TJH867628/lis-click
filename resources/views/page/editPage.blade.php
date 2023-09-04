@@ -37,7 +37,7 @@
   <p style="margin: auto;">Maximum Image Size is 2MB</p>
   <button id="saveChanges" type="submit">Save Changes</button>
 </form>
-<a id="originalBuild" type="submit" href="{{ route('reversePage', ['pageName' => $pageName]) }}">Reverse to orginal build</a>
+<a id="originalBuild" type="submit" href="{{ route('reverseToLastEdition', ['pageName' => $pageName]) }}">Reverse to last build</a>
 <script>
   var form = document.getElementById('editForm');
   var divContainer = document.querySelector('div');

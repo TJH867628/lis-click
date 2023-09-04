@@ -116,5 +116,5 @@ Route::post('/uploadNewPaymentQR',[JKBendahariController::class,'uploadNewPaymen
 Route::get('/removePaymentQR',[JKBendahariController::class,'removePaymentQR'])->name('removePaymentQR');
 Route::get('/removePaymentDetails',[JKBendahariController::class,'removePaymentDetails'])->name('removePaymentDetails');
 Route::get('/FloorManagerHomePage',[HomePageController::class,'index']);
-Route::get('/editPage/{pageName}', [PageEditController::class, 'reversePage'])->name('reversePage');
+Route::get('/reverseToLastEdition/{pageName}', [PageEditController::class, 'reversePage'])->name('reverseToLastEdition');
 

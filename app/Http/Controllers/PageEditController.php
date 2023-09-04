@@ -19,7 +19,7 @@ class PageEditController extends Controller
             $gallery = tbl_gallery::all();
             return view('page.superadmin.editGallery.editGallery',['gallery' => $gallery]);
         }else{
-            $page = tbl_page::where('pageName', $pageName)->first();
+            $page = tbl_page::where('pageName', $pageName)->first(); 
             $pagePath = $page->pagePath;
             $view = view($pagePath);
             $fileContents = $view->render();
@@ -104,14 +104,12 @@ class PageEditController extends Controller
         return $updatedContent;
     }
     
-    public function reversePage(Request $pageName)
+    public function reversePage($pageName)
     {
         $page = tbl_page::where('pageName', $pageName)->first();
         $backupFilePath = resource_path('views/' . str_replace('.', '/', $page->pagePath) . '_backup' . '.blade.php');
-        
         // Read the content of the backup file
         $backupContent = File::get($backupFilePath);
-        
         // Get the path of the original file
         $originalFilePath = resource_path('views/' . str_replace('.', '/', $page->pagePath) . '.blade.php');
 
@@ -119,14 +117,8 @@ class PageEditController extends Controller
         File::put($originalFilePath, $backupContent);
         
         // Delete the original file
-        File::delete($originalFilePath);
+        unlink($backupFilePath);
         
-        // Remove the "_backup" of the backup file name
-        $newBackupFilePath = str_replace('_backup', '', $backupFilePath);
-        
-        // Rename the backup file to remove "_backup"
-        File::move($backupFilePath, $newBackupFilePath);
-
         return redirect()->back()->with('success', 'Page successfully reversed to the backup.');
     }
 }
