@@ -138,7 +138,7 @@
                     $scheduleCount++
                 @endphp
             <tr>
-                <form method="post" action="{{ route('editSchedule',['presentationGroup'=>$eachSchedule->presentationGroup]) }}" enctype="multipart/form-data">
+                <form method="post" action="{{ route('editSchedule',['group'=>$eachSchedule->presentationGroup]) }}" enctype="multipart/form-data">
                     @csrf
                     <td><input type="text" name="group" value="{{ $eachSchedule->presentationGroup }}"></td>
                     <td><input type="datetime-local" name="time" value="{{ $eachSchedule->presentationTime }}"></td>

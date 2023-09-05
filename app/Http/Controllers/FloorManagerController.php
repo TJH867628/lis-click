@@ -37,7 +37,7 @@ class FloorManagerController extends Controller
         }
     }
 
-    public function editSchedule(Request $request,$presentationGroup){
+    public function editSchedule(Request $request,$group){
         if(session()->has('LoggedFloorManager')){
             session()->start();
 
@@ -45,7 +45,7 @@ class FloorManagerController extends Controller
             $time = $request->input('time');
             $link = $request->input('link');
 
-            $schedule = tbl_presentation_schedule::where('presentationGroup',$presentationGroup)->first();
+            $schedule = tbl_presentation_schedule::where('presentationGroup',$group)->first();
             $schedule->presentationGroup = $group;
             $schedule->presentationTime = $time;
             $schedule->presentationLink = $link;
