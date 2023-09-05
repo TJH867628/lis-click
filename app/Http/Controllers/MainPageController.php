@@ -20,8 +20,8 @@ class MainPageController extends Controller
                 return redirect('JKReviewerHomePage');
             } elseif (session()->has('LoggedReviewer')) {
                 return redirect('ReviewerHomePage');
-            } else {
-                // Logic for when none of the session types are present
+            } elseif (session()->has('LoggedFloorManager')) {
+                return redirect('FloorManagerHomePage');
             }
             
         }

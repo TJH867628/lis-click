@@ -11560,6 +11560,7 @@ html {
     float: right;
     margin-right: 10px;
     margin-top: 5px;
+    width: max-content;
   }
   
   .dropdown-option {

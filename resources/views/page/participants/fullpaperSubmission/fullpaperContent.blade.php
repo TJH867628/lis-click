@@ -21,7 +21,7 @@
                                                 <!--Dropdown-->
                                                 <div class="form-group col-md-3">
                                                     <label class="category">Please CHOOSE your category :</label>
-                                                    <select class="dropdown-option" name="category"  onclick="removeChooseoption()" value="{{ $user -> category }}" required="required">
+                                                    <select class="dropdown-option" name="category" onclick="removeChooseoption()" value="{{ $user -> category }}" required="required">
                                                         <option selected disabled>Choose</option>
                                                         <option value="Paper Presentation & Publication">Paper Presentation & Publication</option>
                                                         <option value="Paper Presentation ONLY">Paper Presentation ONLY</option>
@@ -145,8 +145,8 @@
                                                 </script>
 
                                                 <!--Dropdown-->
-                                                <div class="form-group col-md-3">
-                                                    <label class="category">Please select the presentation mode you will choose for the session :</label>
+                                                <div class="form-group col-md-3 presentMode-Container">
+                                                    <label class="category presentMode-label">Please select the presentation mode you will choose for the session :</label>
                                                     <select class="dropdown-option" name="presentMode" onclick="removeChooseoption()">
                                                         <option selected disabled>Choose</option>
                                                         <option value="Face-to-Face">Face-to-Face</option>
@@ -157,6 +157,27 @@
 
                                                 </div>
                                             </div>
+                                            <script>
+                                                const categoryDropdown = document.querySelector('select[name="category"]');
+                                                const presentModeDropdown = document.querySelector('select[name="presentMode"]');
+                                                const presentModeFormGroup = document.querySelector('.presentMode-Container');
+
+                                                // Add change event listener to category dropdown
+                                                categoryDropdown.addEventListener('change', () => {
+                                                if (categoryDropdown.value === 'Publication ONLY') {
+                                                    // Hide presentMode dropdown and add "No Present" option
+                                                    presentModeFormGroup.style.display = 'none';
+                                                    presentModeDropdown.innerHTML += '<option value="No Present" selected>No Present</option>';
+                                                } else {
+                                                    // Show presentMode dropdown and remove "No Present" option
+                                                    presentModeFormGroup.style.display = 'block';
+                                                    const noPresentOption = presentModeDropdown.querySelector('option[value="No Present"]');
+                                                    if (noPresentOption) {
+                                                    noPresentOption.remove();
+                                                    }
+                                                }
+                                                });
+                                            </script>
                                             @if($message = Session::get('error'))
                                             <div class="error">
                                                 <span class="error">{{ $message }}</span><br> 

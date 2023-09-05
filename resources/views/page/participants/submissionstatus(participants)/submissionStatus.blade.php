@@ -13,52 +13,94 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
         <style>
-            tr td{
-                padding: 10px;
-                margin: 10px;
-                border: 1px solid black;
-                color: black;
-                background-color: aliceblue;
-            }
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
 
-            .table-container{
-                border: 2px solid black;
-                padding: 20px;
-                width: 90%;
-                margin: auto;
-                overflow-x: auto;
-                overflow-wrap: break-word;
-                align-items: center;
-                justify-content: center;
-                text-align: center;
-            }
-            
-            table{
-                margin-top: 50px;
-                margin: auto;
-                overflow-x: auto;
-                align-items: center;
-                justify-content: center;
-                text-align: center;
-            }
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+            margin-bottom: 30px;
+        }
 
-            table th{
-                text-align: center;
-                font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-                color: black;
-                background-color:aquamarine;
-                border: 1px solid black;
-            }
+        table {
+            margin: auto;
+            margin-top: 5%;
+            margin-bottom: 10%;
+            border-collapse: collapse;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            background-color: white;
+        }
 
-            body{
-                background-color: white;
-            }
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #dee2e6;
+        }
 
-            #searchInput{
-                margin: 10px;
-                width: 250px;
-            }
-        </style>
+        th {
+            background-color: #343a40;
+            color: white;
+        }
+
+        form {
+            color: black;
+            margin: auto;
+            margin-top: 50px;
+            margin-bottom: 30px;
+            width: 500px;
+            padding: 20px;
+            border: 1px solid #dee2e6;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            background-color: white;
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+        }
+
+        input[type="datetime-local"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 7px 25px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .deleteButton {
+            background-color: red;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        button:hover {
+            background-color: #0069d9;
+        }
+        
+        .title{
+            margin-top: 10%;
+        }
+    </style>
     </head>
     <body class="d-flex flex-column h-100">
         <main class="flex-shrink-0">
@@ -114,26 +156,47 @@
     });
 
     function filterTable() {
-        // Get input value and convert it to lowercase
-        var input = document.getElementById("searchInput");
-        var filter = input.value.toLowerCase();
-        
-        // Get the table and table rows
-        var table = document.getElementById("submissionTable");
-        var rows = table.getElementsByTagName("tr");
-        
-        // Loop through all rows, starting from index 1 to skip the table header
-        for (var i = 1; i < rows.length; i++) {
-        var submissionCode = rows[i].getElementsByTagName("td")[0].textContent || rows[i].getElementsByTagName("td")[0].innerText;
-        submissionCode = submissionCode.toLowerCase();
-        
-        // If the submission code matches the filter, display the row; otherwise, hide it
-        if (submissionCode.indexOf(filter) > -1) {
-            rows[i].style.display = "";
-        } else {
-            rows[i].style.display = "none";
+    // Declare variables
+    var input, filter, table, tr, submissionCodeDiv, i, txtValue, foundMatch;
+    input = document.getElementById("searchInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("submissionTable");
+    tr = table.getElementsByTagName("tr");
+    foundMatch = false;
+
+    // Loop through all table rows and hide those that don't match the search query
+    for (i = 1; i < tr.length; i++) { // Start from 1 to skip the table header row
+        submissionCodeDiv = tr[i].querySelector(".submissionCode"); // Find the div with class "submissionCode" within the row
+        if (submissionCodeDiv) {
+            txtValue = submissionCodeDiv.textContent || submissionCodeDiv.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+                foundMatch = true;
+1            } else {
+                tr[i].style.display = "none";
+            }
         }
+    }
+    var noRecordMessage = table.querySelector('.noRecord');
+
+// Check if no matches were found and display a "No record" message
+if (!foundMatch) {
+    if (!noRecordMessage) {
+            var noRecordMessage = document.createElement('p');
+            noRecordMessage.className = 'noRecord'
+            noRecordMessage.textContent = 'No records found';
+            noRecordMessage.style.textAlign = 'center';
+            noRecordMessage.style.fontWeight = 'bold';
+            noRecordMessage.style.color = 'black';
+            table.appendChild(noRecordMessage);
         }
+
+} else {
+  // Remove the "No record" message if it was previously displayed
+  if (noRecordMessage) {
+    noRecordMessage.remove();
+  }
+}
     }
 
     

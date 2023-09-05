@@ -117,3 +117,8 @@ Route::get('/removePaymentQR',[JKBendahariController::class,'removePaymentQR'])-
 Route::get('/removePaymentDetails',[JKBendahariController::class,'removePaymentDetails'])->name('removePaymentDetails');
 Route::get('/FloorManagerHomePage',[HomePageController::class,'index']);
 Route::get('/reverseToLastEdition/{pageName}', [PageEditController::class, 'reversePage'])->name('reverseToLastEdition');
+Route::get('/floorManager/presentationSchedule', [FloorManagerController::class, 'presentationSchedule'])->name('presentationSchedule');
+Route::post('/floorManager/presentationSchedule/newSchedule', [FloorManagerController::class, 'uploadNewSchedule'])->name('newSchedule');
+Route::post('/floorManager/presentationSchedule/editSchedule', [FloorManagerController::class, 'editSchedule'])->name('editSchedule');
+Route::get('/floorManager/presentationSchedule/deleteSchedule/{group}', [FloorManagerController::class, 'deleteSchedule'])->name('deleteSchedule');
+
