@@ -19,8 +19,7 @@
         table {
             margin: auto;
             margin-top: 5%;
-            margin-left: 5%;
-            margin-right: 5%;
+            margin-bottom: 10%;
             border-collapse: collapse;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
             background-color: white;
