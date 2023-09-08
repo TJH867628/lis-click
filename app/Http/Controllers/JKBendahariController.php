@@ -85,7 +85,8 @@ class JKBendahariController extends Controller
                 if($eachPaymentStatus != NULL){
                     $paymentDetails[$key]->paymentReceipt = "Yes";
                     $submissionInfo = tbl_submission::where('submissionCode',$eachPaymentStatus->submissionCode)->first();
-                    $participantsInfo = tbl_participants_info::where('email',$submissionInfo->participants1)->first();
+                    $participants = $submissionInfo->participants1;
+                    $participantsInfo = tbl_participants_info::where('email',$participants)->first();
 
                     $paymentDetails[$key]->submissionInfo = $submissionInfo;
                     $paymentDetails[$key]->participantsInfo = $participantsInfo;

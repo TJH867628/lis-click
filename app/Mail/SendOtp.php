@@ -39,6 +39,10 @@ class SendOtp extends Mailable implements ShouldQueue
             ->with([
                 'otp' => $this->otp,
             ]);
+            // ->attach(public_path('images/Logo1 (1).jpg'), [
+            //     'as' => 'Logo.jpg',
+            //     'mime' => 'image/jpeg',
+            // ]);
     }
 }
 
