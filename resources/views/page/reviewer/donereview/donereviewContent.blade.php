@@ -3,6 +3,73 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" wfd-invisible="true">
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="/css/styles.css" rel="stylesheet" wfd-invisible="true">
+<style>
+        body {
+            margin-top: 20px;
+            background-color: #f8f9fa!important;
+            font-family: Arial, sans-serif !important;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        table {
+            margin: auto;
+            border-collapse: collapse;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            background-color: white !important;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #dee2e6;
+        }
+
+        th {
+            background-color: #343a40 !important;
+            color: white !important;
+        }
+
+        td {
+            background-color: white !important;
+        }
+        form {
+            color: black;
+            margin: auto;
+            margin-bottom: 10px;
+            width: 400px;
+            padding: 20px;
+            border: 1px solid #dee2e6;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            background-color: white;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 7px 25px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0069d9;
+        }
+
+        .title {
+            margin-top: 10%;
+            text-align: center;
+        }
+
+        .title h2 {
+            font-size: 36px;
+            font-weight: bold;
+            color: #007bff;
+        }
+</style>
 <div class="table-container">
                 <h2 style="color: black ;">Done Rewiew List</h2>
                 @if($submissionInfo)

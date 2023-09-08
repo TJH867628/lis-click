@@ -3,6 +3,183 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" wfd-invisible="true">
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="/css/styles.css" rel="stylesheet" wfd-invisible="true">
+<style>
+    th, td{
+                padding: 10px;
+                margin: 10px;
+                text-align: center;
+                border: 1px solid #dee2e6 !important;
+                color: black;
+            }
+            
+            .table-container{
+                margin-top: 20px !important;
+                border: 2px solid black;
+                padding: 20px;
+                width: 90%;
+                margin: auto;
+                overflow-x: auto;
+                overflow-wrap: break-word;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            }
+        body {
+            background-color: #f8f9fa!important;
+            font-family: Arial, sans-serif !important;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        table {
+            margin: auto;
+            border-collapse: collapse;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            background-color: white;
+        }
+
+        th {
+            background-color: #343a40;
+            color: white;
+        }
+
+        form {
+            color: black;
+            margin: auto;
+            margin-top: 50px;
+            margin-bottom: 30px;
+            width: 200px;
+            padding-bottom: 150px;
+            padding-top: 10px;
+            border: 1px solid #dee2e6;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            background-color: white;
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+        }
+
+        input[type="datetime-local"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 7px 25px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .deleteButton {
+            background-color: red;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        button:hover {
+            background-color: #0069d9;
+        }
+        
+        .title {
+            margin-top: 10%;
+            text-align: center;
+        }
+
+        .title h2 {
+            font-size: 36px;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .file-upload-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .file-upload-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 200px;
+            height: 50px;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .file-upload-label:hover {
+            background-color: #0062cc;
+        }
+
+        .file-upload-label span {
+            margin-right: 10px;
+        }
+
+        #file-upload {
+            display: none;
+        }
+
+        .file-upload-button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: lightgray;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .file-upload-button:hover {
+            background-color: grey;
+        }
+
+        select {
+            margin: 10px;
+            padding: 3px;
+        }
+
+        .btnreview{
+            margin-top: 20px;
+            margin-right: 17px;
+        }
+
+        .downloadturnin{
+            margin-left: 9px;
+        }
+
+        .uploadturnin{
+            padding: 10px;
+        }
+        </style>
 <div class="table-container">
             <input type="text" id="searchInput" onkeyup="filterTable()" placeholder="Search by Submission Code" />
                 @if($userSubmissionInfo)
@@ -12,19 +189,13 @@
                         Submission Details<br>
                     </th>
                     <th>
-                        Review Status<br>
-                    </th>
-                    <th>
-                        Reviewer<br>
+                        Reviewer Info <br>
                     </th>
                     <th>
                         Change Reviewer<br>
                     </th>
                     <th>    
-                        Download Submission File<br>
-                    </th>
-                    <th>
-                        Reviewed File<br>
+                        Document<br>
                     </th>
                     <th>    
                         View Evaluation Form<br>
@@ -43,17 +214,20 @@
                         <tr>
                             <td>
                                 <p>Submission Code</p>
-                                {{$submissionInfo->submissionCode}}
-                                <p>Title</p>
+                                <a style="font-size:20px; font-weight:bold; color:black;  text-decoration:none;" href="#" class="submission-code" data-submission-code="{{$submissionInfo->submissionCode}}" data-submission-type="{{$submissionInfo->submissionType}}" data-submission-title="{{$submissionInfo->submissionTitle}}" data-submission-type="{{$submissionInfo->submissionTitle}}" data-sub-theme="{{$submissionInfo->subTheme}}" data-present-mode="{{$submissionInfo->presentMode}}">
+                                    <div class="submissionCode">
+                                        {{$submissionInfo->submissionCode}}
+                                    </div>
+                                </a>
+                                <br><p>Title</p>
                                 {{$submissionInfo->submissionTitle}}
-                                <p>Type</p>
+                                <br><br><p>Type</p>
                                 {{$submissionInfo->submissionType}}
-                                <p>Theme</p>
+                                <br><br><p>Theme</p>
                                 {{$submissionInfo->subTheme}}
-                                <p>Present Mode</p>
+                                <br><br><p>Present Mode</p>
                                 {{$submissionInfo->presentMode}}
                             </td>
-                            <td>{{ $submissionInfo->reviewStatus}} </td>
                             <td>
                                 <p>Reviewer</p>
                                 <h5>{{ $submissionInfo->reviewerID }} </h5>
@@ -61,7 +235,9 @@
                                     <p>Reviewer 2</p>
                                     <h5>{{ $submissionInfo->reviewer2ID }} </h5>
                                 @endif
-                            </td>
+                                <br><p>Reviewer Status</p>
+                                {{ $submissionInfo->reviewStatus}}
+                            </td>             
                             <td>
                             <form action="{{ route('updateReviewer', ['submissionCode' => $submissionInfo->submissionCode]) }}" method="POST">
                                 @csrf
@@ -76,17 +252,23 @@
                                             <option value="{{ $reviewerInfo->email }}">{{ $reviewerInfo->name }}</option>
                                         @endforeach
                                 </select>
-                                <button type="submit" class="btn btn-primary mb-4">Update Reviewer</button>
+                                <div class=btnreview>
+                                    <button type="submit" class="btn btn-primary mb-4">Update Reviewer</button>
+
+                                    <a href="{{ route('cancelReviewer', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4">Cancel Reviewer</a>
+                                </div>
                             </form>
 
-                                <a href="{{ route('cancelReviewer', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4">Cancel Reviewer</a>
+                                
                             </td>
                             <td>
+                                <p>Download Submission File</p>
                                 <a href="{{ route('downloadSubmission', ['filename' => $submissionInfo->file_name]) }}" class="btn btn-primary mb-4">Download Orginal File</a>
+                                <p>Reviewed File</p>
                                 @if($submissionInfo->returnPaperLink == NULL)
-                                    <td>Return Paper Unavailable</td>
+                                    Return Paper Unavailable
                                 @else
-                                    <td><a href="{{ route('downloadReviewedFile', ['filename' => $submissionInfo->returnPaperLink]) }}" class="btn btn-primary mb-4">Download Return File</a></td>
+                                    <a href="{{ route('downloadReviewedFile', ['filename' => $submissionInfo->returnPaperLink]) }}" class="btn btn-primary mb-4">Download Return File</a>
                                 @endif
                             </td>
 
@@ -101,12 +283,14 @@
                             </td>
                             <td>
                                 @if($submissionInfo->turnInReport)
+                                <div class="downloadturnin">
                                     <a href="{{ route('downloadTurnInReport', ['filename' => $submissionInfo->turnInReport]) }}" class="btn btn-primary mb-4">Download Turn In Report</a>
+                                </div>
                                 @endif
                                 <form action="{{ route('uploadTurnInReport',['submissionCode' => $submissionInfo->submissionCode]) }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <input type="file" name="file" />
-                                    <button type="submit">Upload Turn In Report</button>
+                                    <button type="submit" class="uploadturnin">Upload Turn In Report</button>
                                 </form>
                             </td>
                             <td>
