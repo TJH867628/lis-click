@@ -154,6 +154,10 @@
         .paymentStatus{
             margin-bottom: 5%;
         }
+
+        .btn-download{
+            width: 95%;
+        }
 </style>
 <div class="table-container">
     @if($userSubmissionInfo)
@@ -256,7 +260,7 @@
                                 @if($submissionInfo->returnPaperLink == NULL)
                                     <p>Return Paper Unavailable</p>
                                 @else
-                                    <a href="{{ route('downloadReviewedFile', ['filename' => $submissionInfo->returnPaperLink]) }}" class="btn btn-primary mb-4">Return File</a>
+                                    <a href="{{ route('downloadReviewedFile', ['filename' => $submissionInfo->returnPaperLink]) }}" class="btn btn-primary mb-4 btn-download">Return File</a>
                                 @endif
                                 </td>
                             </tr>
@@ -264,7 +268,7 @@
                                 <td style="width: max-content; color:black;">
                                     Orginal Paper
                                 </td>
-                                <td><a href="{{ route('downloadSubmission', ['filename' => $submissionInfo->file_name]) }}" class="btn btn-primary mb-4">Original File</a></td>
+                                <td><a href="{{ route('downloadSubmission', ['filename' => $submissionInfo->file_name]) }}" class="btn btn-primary mb-4 btn-download">Original File</a></td>
                             </tr>
                             <tr>
                                 <td style="width: max-content; color:black;">
@@ -272,7 +276,7 @@
                                 </td>
                                 <td>
                                     @if($submissionInfo->turnInReport)
-                                        <a href="{{ route('downloadTurnInReport', ['filename' => $submissionInfo->turnInReport]) }}" class="btn btn-primary mb-4">Turn In Report</a>
+                                        <a href="{{ route('downloadTurnInReport', ['filename' => $submissionInfo->turnInReport]) }}" class="btn btn-primary mb-4 btn-download">Turn In Report</a>
                                     @else
                                         <p> Pending </p>
                                     @endif
@@ -288,7 +292,7 @@
                                         @if($submissionInfo->certificate == 'pending')
                                             <p>Pending</p>
                                         @else
-                                            <br><a style="text-align: center; align-items:center; justify-content:center;" href="{{ asset('storage/certificate/' . $submissionInfo->certificate) }}" class="btn btn-primary mb-4" download="{{ $submissionInfo->certificate }}">Certificate</a>
+                                            <br><a style="text-align: center; align-items:center; justify-content:center;" href="{{ asset('storage/certificate/' . $submissionInfo->certificate) }}" class="btn btn-primary mb-4 btn-download" download="{{ $submissionInfo->certificate }}">Certificate</a>
                                         @endif
                                     @else
                                         <p>Not Ready</p>

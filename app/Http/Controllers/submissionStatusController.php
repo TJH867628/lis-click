@@ -100,28 +100,15 @@ class submissionStatusController extends Controller
             $totalPaymentReceipt = tbl_payment::where('submissionCode',$submissionCode)->get()->count();
             $thisPaymentID = $paymentID . "_" . $totalPaymentReceipt + 1;
 
-
-            if($paymentInfo != NULL && $paymentInfo->proofOfPayment == 'unavailable'){
-                $paymentInfo->paymentStatus = "Pending For Verification";
-                $paymentInfo->proofOfPayment = $filename;
-                $paymentInfo->paymentID = $thisPaymentID;
-                $paymentInfo->paymentDate = $now;
-                $paymentInfo->updated_at = $now;
-                $paymentInfo->save();
-            }elseif($paymentInfo != NULL && $paymentInfo->proofOfPayment != 'unavailable'){ 
-                $paymentInfo = new tbl_payment;
-                $paymentInfo->submissionCode = $submissionCode;
-                $paymentInfo->paymentID = $thisPaymentID;
-                $paymentInfo->paymentStatus = "Pending For Verification";
-                $paymentInfo->paymentDate = $now;
-                $paymentInfo->proofOfPayment = $filename;
-                $paymentInfo->updated_at = now();
-                $paymentInfo->save();
-
-            }else{
-                dump("Payment Info Not Found,Plese Contact Customer Service");
-            }
-
+            $paymentInfo = new tbl_payment;
+            $paymentInfo->submissionCode = $submissionCode;
+            $paymentInfo->paymentID = $thisPaymentID;
+            $paymentInfo->paymentStatus = "Pending For Verification";
+            $paymentInfo->paymentDate = $now;
+            $paymentInfo->proofOfPayment = $filename;
+            $paymentInfo->updated_at = now();
+            $paymentInfo->save();
+            
             return redirect()->back()->with('success', 'Receipt uploaded successfully.');
         }
 

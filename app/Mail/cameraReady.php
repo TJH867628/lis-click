@@ -9,8 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-
-class submission extends Mailable implements ShouldQueue
+class cameraReady extends Mailable
 {
     use Queueable, SerializesModels;
     public $submissionCode;
@@ -18,11 +17,12 @@ class submission extends Mailable implements ShouldQueue
     /**
      * Create a new message instance.
      *
-     * @param int $submissionCode
+     * @param string $submissionCode
      * @return void
      */
     public function __construct()
     {
+        //
 
     }
 
@@ -34,14 +34,18 @@ class submission extends Mailable implements ShouldQueue
     }
 
     /**
-     * Build the message.
-     *
-     * @return $this
+     * Get the message envelope.
      */
-    public function build()
+    public function envelope(): Envelope
     {
-        return $this->view('emails.submission')
-            ->subject('LIS-CLICK Paper Submission')
+        return new Envelope(
+            subject: 'Camera Ready',
+        );
+    }
+
+    public function build(){
+        return $this->view('emails.camera_ready.camera_ready')
+            ->subject('LIS-CLICK Submission Status Notification')
             ->with([
                 'submission' => $this->submissionCode,
             ]);
@@ -50,5 +54,24 @@ class submission extends Mailable implements ShouldQueue
             //     'mime' => 'image/jpeg',
             // ]);
     }
-}
 
+    /**
+     * Get the message content definition.
+     */
+    public function content(): Content
+    {
+        return new Content(
+            view: 'emails.camera_ready.camera_ready',
+        );
+    }
+
+    /**
+     * Get the attachments for the message.
+     *
+     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
+     */
+    public function attachments(): array
+    {
+        return [];
+    }
+}

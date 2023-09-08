@@ -6,10 +6,16 @@ use App\Models\tbl_admin_info;
 use App\Models\tbl_correction;
 use App\Models\tbl_submission;
 use App\Models\tbl_payment;
+
+use App\Mail\cameraReady;
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 
 use function PHPUnit\Framework\isNull;
+
 
 class JKReviewerController extends Controller
 {
@@ -132,13 +138,33 @@ class JKReviewerController extends Controller
             $submission->correctionPhase = "readyForPresent";
             $submission->save();
 
-            //add payment details to tbl_payment
-            $payment = new tbl_payment;
-            $payment->submissionCode = $submissionCode;
-            $payment->paymentStatus = "incomplete";
-            $payment->paymentID = "unavailable";
-            $payment->proofOfPayment = 'unavailable';
-            $payment->save();
+            $mailToUser = new cameraReady;
+            $mailToUser->setSubmissionCode($submissionCode);
+            $validator = Validator::make(['email' => $submission->participants1], [
+                'email' => 'email',
+            ]);
+
+            if ($validator->passes()) {
+                Mail::to($submission->participants1)->send($mailToUser);
+            // Validate and send the email to participants2 or participants3
+            if ($submission->participants2 != null) {
+                $validator = Validator::make(['email' => $submission->participants2], [
+                    'email' => 'email',
+                ]);
+            }
+
+                if ($validator->passes()) {
+                    Mail::to($submission->participants2)->send($mailToUser);
+                }
+            } elseif ($submission->participants3 != null) {
+                $validator = Validator::make(['email' => $submission->participants3], [
+                    'email' => 'email',
+                ]);
+
+                if ($validator->passes()) {
+                    Mail::to($submission->participants3)->send($mailToUser);
+                }
+            }
 
             return redirect()->back();
         }
