@@ -195,7 +195,7 @@
                                 {{$submissionInfo->submissionCode}}
                             </div>
                         </a>
-                        <div style="color:black;">
+                        <div style="color:black; align-items:left;">
                         <table>
                             <tr>
                                 <td>Participants 1 :</td> 
@@ -247,6 +247,20 @@
                                 </tr>
                             </table>
                         </div>
+                        @if($submission->submissionType != 'Publication ONLY')
+                            @if($submissionInfo->presentationGroup != null)
+                            <div style="margin-top: 10%;">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <p>Presentation Group:</p>
+                                        </td>
+                                        <td style="color: blue;">{{ $submissionInfo->presentationGroup }}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            @endif
+                        @endif
                     </td>
 
 

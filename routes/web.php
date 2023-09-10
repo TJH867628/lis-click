@@ -119,6 +119,8 @@ Route::get('/FloorManagerHomePage',[HomePageController::class,'index']);
 Route::get('/reverseToLastEdition/{pageName}', [PageEditController::class, 'reversePage'])->name('reverseToLastEdition');
 Route::get('/floorManager/presentationSchedule', [FloorManagerController::class, 'presentationSchedule'])->name('presentationSchedule');
 Route::post('/floorManager/presentationSchedule/newSchedule', [FloorManagerController::class, 'uploadNewSchedule'])->name('newSchedule');
-Route::post('/floorManager/presentationSchedule/editSchedule/{group}', [FloorManagerController::class, 'editSchedule'])->name('editSchedule');
+Route::post('/floorManager/presentationSchedule/editSchedule/{currentGroup}', [FloorManagerController::class, 'editSchedule'])->name('editSchedule');
 Route::get('/floorManager/presentationSchedule/deleteSchedule/{group}', [FloorManagerController::class, 'deleteSchedule'])->name('deleteSchedule');
+Route::get('/floorManager/presentationGroup', [FloorManagerController::class, 'presentationGroup'])->name('presentationGroup');
+Route::post('/floorManager/presentationGroup/editSubmissionPresentationGroup/{submissionCode}', [FloorManagerController::class, 'editSubmissionPresentationGroup'])->name('editSubmissionPresentationGroup');
 
