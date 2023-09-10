@@ -123,4 +123,5 @@ Route::post('/floorManager/presentationSchedule/editSchedule/{currentGroup}', [F
 Route::get('/floorManager/presentationSchedule/deleteSchedule/{group}', [FloorManagerController::class, 'deleteSchedule'])->name('deleteSchedule');
 Route::get('/floorManager/presentationGroup', [FloorManagerController::class, 'presentationGroup'])->name('presentationGroup');
 Route::post('/floorManager/presentationGroup/editSubmissionPresentationGroup/{submissionCode}', [FloorManagerController::class, 'editSubmissionPresentationGroup'])->name('editSubmissionPresentationGroup');
+Route::get('/participants/presentationSchedule', [FloorManagerController::class, 'presentationSchedule']);
 

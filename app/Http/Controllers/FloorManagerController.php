@@ -14,6 +14,11 @@ class FloorManagerController extends Controller
             session()->start();
             $schedule = tbl_presentation_schedule::all();
             return view('page.Floor_Manager.presentationSchedule.presentationSchedule',["schedule"=>$schedule]);
+        }else if(session()->has('LoggedUser')){
+            session()->start();
+            $schedule = tbl_presentation_schedule::all();
+            
+            return view('page.participants.presentationSchedule.presentationSchedule',["schedule"=>$schedule]);
         }else{
             return redirect('login')->with('fail','Login Session Expire,Please Login again');
         }
@@ -26,10 +31,11 @@ class FloorManagerController extends Controller
             $group = "Group " . $request->input('group');
             $time = $request->input('time');
             $link = $request->input('link');
+            $datetimeWithoutT = str_replace("T", " ", $time);
 
             $schedule = new tbl_presentation_schedule;
             $schedule->presentationGroup = $group;
-            $schedule->presentationTime = $time;
+            $schedule->presentationTime = $datetimeWithoutT;
             $schedule->presentationLink = $link;
             $schedule->save();
 
@@ -46,10 +52,11 @@ class FloorManagerController extends Controller
             $group = $request->input('group');
             $time = $request->input('time');
             $link = $request->input('link');
+            $datetimeWithoutT = str_replace("T", " ", $time);
 
             $schedule = tbl_presentation_schedule::where('presentationGroup',$currentGroup)->first();
             $schedule->presentationGroup = $group;
-            $schedule->presentationTime = $time;
+            $schedule->presentationTime = $datetimeWithoutT;
             $schedule->presentationLink = $link;
             $schedule->save();
 
@@ -106,4 +113,6 @@ class FloorManagerController extends Controller
             return redirect('login')->with('fail','Login Session Expire,Please Login again');
         }
     }
+
+
 }

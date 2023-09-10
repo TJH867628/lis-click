@@ -247,7 +247,7 @@
                                 </tr>
                             </table>
                         </div>
-                        @if($submission->submissionType != 'Publication ONLY')
+                        @if($submissionInfo->submissionType != 'Publication ONLY')
                             @if($submissionInfo->presentationGroup != null)
                             <div style="margin-top: 10%;">
                                 <table>
