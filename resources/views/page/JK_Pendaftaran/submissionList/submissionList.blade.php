@@ -15,13 +15,34 @@
             color: black;
             margin: auto;
             background-color: aquamarine;
-        }
-        table td,table th{
-            border: 1px solid black;
+            border-collapse: collapse;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
         }
         body {
-            background-color: white;
+            margin-top: 20px;
+            background-color: #f8f9fa!important;
+            font-family: Arial, sans-serif !important;
         }
+
+        h1 {
+            text-align: center;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #dee2e6!important;
+        }
+
+        th {
+            background-color: #343a40 !important;
+            color: white !important;
+        }
+
+        td {
+            background-color: white !important;
+        }
+        
     </style>
 </head>
 <body style="background-color:white;">;
