@@ -1,5 +1,6 @@
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico" wfd-invisible="true">
 <!-- Bootstrap icons-->
+
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" wfd-invisible="true">
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="/css/styles.css" rel="stylesheet" wfd-invisible="true">
@@ -50,12 +51,17 @@
             margin: auto;
             margin-top: 50px;
             margin-bottom: 30px;
-            width: 200px;
+            width: 170px;
             padding-bottom: 150px;
             padding-top: 10px;
             border: 1px solid #dee2e6;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
             background-color: white;
+        }
+
+        .formturnin{
+            width: 190px;
+            height: 180px;
         }
 
         input[type="text"], textarea {
@@ -169,7 +175,6 @@
 
         .btnreview{
             margin-top: 20px;
-            margin-right: 17px;
         }
 
         .downloadturnin{
@@ -287,10 +292,10 @@
                                     <a href="{{ route('downloadTurnInReport', ['filename' => $submissionInfo->turnInReport]) }}" class="btn btn-primary mb-4">Download Turn In Report</a>
                                 </div>
                                 @endif
-                                <form action="{{ route('uploadTurnInReport',['submissionCode' => $submissionInfo->submissionCode]) }}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('uploadTurnInReport',['submissionCode' => $submissionInfo->submissionCode]) }}" method="POST" enctype="multipart/form-data" class="formturnin">
                                     @csrf
-                                    <input type="file" name="file" />
-                                    <button type="submit" class="uploadturnin">Upload Turn In Report</button>
+                                    <br><input type="file" name="file" />
+                                    <br><button type="submit" class="uploadturnin">Upload Turn In Report</button>
                                 </form>
                             </td>
                             <td>
@@ -322,7 +327,8 @@
                                         <button type="submit">Upload Certificate</button>
                                     </form>
                                     @else
-                                        <p>Click To Download Certificate: <a href="{{ asset('storage/certificate/' . $submissionInfo->certificate) }}" download="{{ $submissionInfo->certificate }}">{{ $submissionInfo->certificate }}</a></p>
+                                        <p>Click To Download Certificate:</p>
+                                        <button onclick="window.location.href='{{ asset('storage/certificate/' . $submissionInfo->certificate) }}'" download="{{ $submissionInfo->certificate }}">Download Certificate</button>
                                     @endif
                                 @else
                                     <p>Not Ready</p>

@@ -42,6 +42,14 @@
         td {
             background-color: white !important;
         }
+
+        h2 {
+            font-size: 36px;
+            font-weight: bold;
+            color: #007bff;
+            margin-top: 10%;
+            text-align: center;
+        }
         
     </style>
 </head>
