@@ -138,10 +138,10 @@
                                                 <!--Dropdown-->
                                                 <div class="form-group col-md-7">
                                                     <label class="category">Participant Category :</label>
-                                                    <select class="dropdown-option category" name="category"  onclick="removeChooseoption()">
+                                                    <select class="dropdown-option category" name="category" id="" onclick="removeChooseoption()">
                                                         <option selected disabled>Choose</option>
                                                         <option value="presenter">Presenter</option>
-                                                        <option value="presenter">Audience</option>
+                                                        <option value="Audience">Audience</option>
                                                     </select><br>
                                                 </div>
                                                 <!--End Dropdown-->
@@ -242,6 +242,8 @@
                                             }
 
                                         })
+
+                                        $('')
                                     });
                                         </script>                                          
                                                 
