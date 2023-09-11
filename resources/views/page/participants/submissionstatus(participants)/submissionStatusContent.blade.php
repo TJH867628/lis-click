@@ -242,7 +242,7 @@
                                         <p style="color: #343a40; font-size:medium;">Presentation</p>
                                     </td>
                                     <td>
-                                            <h5 style="color:#007bff;">Function is being develop</h5>
+                                        <h5 style="color:#007bff;">Function is being develop</h5>
                                     </td>
                                 </tr>
                             </table>
@@ -383,6 +383,7 @@
                                 <th>Receipt</th>
                                 <th>Status</th>
                                 @foreach($submissionInfo->paymentStatus as $submissionInfo->paymentStatus)
+
                                 <tr>
                                     @php
                                         $i++;

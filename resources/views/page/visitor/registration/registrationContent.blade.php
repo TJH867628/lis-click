@@ -138,7 +138,7 @@
                                                 <!--Dropdown-->
                                                 <div class="form-group col-md-7">
                                                     <label class="category">Participant Category :</label>
-                                                    <select class="dropdown-option category" name="category" id="" onclick="removeChooseoption()">
+                                                    <select class="dropdown-option category" name="category" id="">
                                                         <option selected disabled>Choose</option>
                                                         <option value="presenter">Presenter</option>
                                                         <option value="Audience">Audience</option>
@@ -177,7 +177,7 @@
                                                 <!--Dropdown-->
                                                 <div class="form-group col-md-3">
                                                     <label class="category">Country :</label>
-                                                    <select id="country" class="dropdown-option country" name="country"  onclick="removeChooseoption()">
+                                                    <select id="country" class="dropdown-option country" name="country" >
                                                         <option selected disabled>Choose</option>
                                                         <option value="malaysia">Malaysia</option>
                                                         <option value="indonesia">Indonesia</option>
@@ -190,20 +190,20 @@
                                                 <!--Dropdown-->
                                                 <div class="form-group col-md-4">
                                                     <label for="state">State :</label>
-                                                    <select id="state" class="dropdown-option state" name="state"  onclick="removeChooseoption()">
+                                                    <select id="state" class="dropdown-option state" name="state" >
                                                         <option selected disabled>Choose</option>
                                                         <option value="">-- Select State --</option>
                                                     </select><br>
                                                 </div>
                                                 <!--End Dropdown-->
                                                 <div class="form-group col-md-4 pe-5" >
-                                                    <input type="password" name="password1" id="password1" class="form-control password" placeholder="Password" required="required">
+                                                    <input type="password" name="password1" id="password1" class="form-control password" placeholder="Password" minlength="6" required="required">
                                                     <i class="bi-eye password-toggle" id="togglePassword1" style="color: black;"></i>
                                                 </div>
 
                                                 <!--End Dropdown-->
                                                 <div class="form-group col-md-4 pe-5" >
-                                                    <input type="password" name="password2" id="password2" class="form-control password" placeholder="Please Confirm Your Password" required="required">
+                                                    <input type="password" name="password2" id="password2" class="form-control password" placeholder="Please Confirm Your Password" minlength="6" required="required">
                                                     <i class="bi-eye password-toggle" id="togglePassword2" style="color: black;"></i>
                                                 </div>
                                                 
@@ -344,6 +344,16 @@
                         }
                     },
                 );
+            });
+
+            var registrationForm = document.getElementById('registrationForm');
+            registrationForm.addEventListener('submit', function(event) {
+            var passwordInput = document.getElementById('password1');
+            if (passwordInput.value.length > 50) {
+                event.preventDefault(); // Prevent form submission
+                passwordInput.value = passwordInput.value.slice(0, 50);
+                alert('Password must be no more than 50 characters long.');
+            }
             });
         </script>
         <!--<script src="js/scripts.js"></script>-->
