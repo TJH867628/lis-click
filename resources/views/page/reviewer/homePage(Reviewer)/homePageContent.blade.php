@@ -56,8 +56,6 @@
                 </div>
             </div>
 
-            <li class="nav-item"><a class="nav-link" href="/account">My Profile</a></li>
-
             <!-- Blog preview section-->
             <section class="py-5">
                 <div class="container px-5 my-5">
