@@ -1,6 +1,6 @@
 <div class="table-container">
 <table>
-    <h2 style="color: black ;">Done Rewiew List</h2>
+    <h2 style="color: black ;">Submission List</h2>
     <th>Details</th>
     <th>Type</th>
     <th>Theme</th>
