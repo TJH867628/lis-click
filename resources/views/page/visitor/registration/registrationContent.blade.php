@@ -18,15 +18,6 @@
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 	    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-        <script>
-        function removeChooseoption(val){
-        var element=document.getElementById('category');
-        if(val=='others')
-        element.style.display='block';
-        else  
-        element.style.display='none';
-        }
-        </script>
         <style>
           .error{
             border: 1px solid red;
@@ -246,7 +237,10 @@
                                             var selectedSalutation = $(this).val();
                                             if (selectedSalutation === "Others") {
                                                 $('#salutationInput').show();
+                                            }else{
+                                                $('#salutationInput').hide();
                                             }
+
                                         })
                                     });
                                         </script>                                          
