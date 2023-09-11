@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\tbl_presentation_schedule;
+use App\Models\tbl_submission;
+use App\Models\presentationGroup;
 use Illuminate\Http\Request;
 
 class FloorManagerController extends Controller
@@ -12,6 +14,11 @@ class FloorManagerController extends Controller
             session()->start();
             $schedule = tbl_presentation_schedule::all();
             return view('page.Floor_Manager.presentationSchedule.presentationSchedule',["schedule"=>$schedule]);
+        }else if(session()->has('LoggedUser')){
+            session()->start();
+            $schedule = tbl_presentation_schedule::all();
+            
+            return view('page.participants.presentationSchedule.presentationSchedule',["schedule"=>$schedule]);
         }else{
             return redirect('login')->with('fail','Login Session Expire,Please Login again');
         }
@@ -24,10 +31,11 @@ class FloorManagerController extends Controller
             $group = "Group " . $request->input('group');
             $time = $request->input('time');
             $link = $request->input('link');
+            $datetimeWithoutT = str_replace("T", " ", $time);
 
             $schedule = new tbl_presentation_schedule;
             $schedule->presentationGroup = $group;
-            $schedule->presentationTime = $time;
+            $schedule->presentationTime = $datetimeWithoutT;
             $schedule->presentationLink = $link;
             $schedule->save();
 
@@ -37,17 +45,18 @@ class FloorManagerController extends Controller
         }
     }
 
-    public function editSchedule(Request $request,$group){
+    public function editSchedule(Request $request,$currentGroup){
         if(session()->has('LoggedFloorManager')){
             session()->start();
 
             $group = $request->input('group');
             $time = $request->input('time');
             $link = $request->input('link');
+            $datetimeWithoutT = str_replace("T", " ", $time);
 
-            $schedule = tbl_presentation_schedule::where('presentationGroup',$group)->first();
+            $schedule = tbl_presentation_schedule::where('presentationGroup',$currentGroup)->first();
             $schedule->presentationGroup = $group;
-            $schedule->presentationTime = $time;
+            $schedule->presentationTime = $datetimeWithoutT;
             $schedule->presentationLink = $link;
             $schedule->save();
 
@@ -69,4 +78,41 @@ class FloorManagerController extends Controller
             return redirect('login')->with('fail','Login Session Expire,Please Login again');
         }
     }
+
+    public function presentationGroup(){
+        if(session()->has('LoggedFloorManager')){
+            session()->start();
+
+            $schedule = tbl_presentation_schedule::all();
+            $submission = tbl_submission::all();
+            
+            return view('page.Floor_Manager.presentationGroup.presentationGroup',['schedule' => $schedule,'submission' => $submission]);
+        }else{
+            return redirect('login')->with('fail','Login Session Expire,Please Login again');
+        }
+    }
+
+    public function editSubmissionPresentationGroup(Request $request,$submissonCode){
+        if(session()->has('LoggedFloorManager')){
+            session()->start();
+            $submission = tbl_submission::where('submissionCode',$submissonCode)->first();
+
+            $group = $request->input('group');
+
+            if($group == 'Not Assigned'){
+                $submission->presentationGroup = null;
+                $submission->save();
+            }else{
+                $submission->presentationGroup = $group;
+                $submission->save();
+            }
+            
+
+            return redirect()->back()->with('success','Participants Group Edited');
+        }else{
+            return redirect('login')->with('fail','Login Session Expire,Please Login again');
+        }
+    }
+
+
 }

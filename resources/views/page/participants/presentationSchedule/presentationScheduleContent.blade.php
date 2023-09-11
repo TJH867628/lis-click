@@ -18,7 +18,7 @@
 
         table {
             margin: auto;
-            margin-top: 5%;
+            margin-top: 10%;
             margin-bottom: 10%;
             border-collapse: collapse;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
@@ -27,9 +27,11 @@
 
         th, td {
             padding: 10px;
+            width: 10%;
             text-align: center;
             border: 1px solid #dee2e6;
         }
+
 
         th {
             background-color: #343a40;
@@ -94,39 +96,29 @@
             text-align: center;
             width: max-content;
         }
+
+        label{
+            margin: 0;
+            padding: 0;
+            border: none;
+            font-size: 16px;
+            font-weight: bold;
+            color: #343a40;
+        }
     </style>
 </head>
 <body>
-    <h1 class="title">Presentation Schedule</h1>
-
-    <form method="post" action="{{ route('newSchedule') }}" enctype="multipart/form-data">
-        <h5 for="group">Add New Presentation Shchedule</h5>
-        @csrf
-        <label for="group">Group:</label>
-        <input type="text" name="group" id="group" required>
-
-        <label for="time">Time:</label>
-        <input type="datetime-local" name="time" id="time" required>
-
-        <label for="link">Link:</label>
-        <textarea name="link" id="link" rows="5" required></textarea>
-
-        <button type="submit">Add Schedule</button>
-    </form>
-
     <table>
-
         <thead>
             <tr>
                 <th colspan="4">
-                    <h3 style="color: white; text-align:center;">Schedule List</h3>
+                    <h3 style="color: white; text-align:center;">Presentation Schedule</h3>
                 </th>
             </tr>
             <tr>
                 <th>Group</th>
                 <th>Time</th>
                 <th>Link</th>
-                <th>Edit</th>
             </tr>
         </thead>
         <tbody>
@@ -138,16 +130,9 @@
                     $scheduleCount++
                 @endphp
             <tr>
-                <form method="post" action="{{ route('editSchedule',['currentGroup'=>$eachSchedule->presentationGroup]) }}" enctype="multipart/form-data">
-                    @csrf
-                    <td><input type="text" name="group" value="{{ $eachSchedule->presentationGroup }}"></td>
-                    <td><input type="datetime-local" name="time" value="{{ $eachSchedule->presentationTime }}"></td>
-                    <td><input type="text" name="link" value="{{ $eachSchedule->presentationLink }}"></td>
-                    <td>
-                        <button type="submit">Save</button>
-                        <a href="{{ route('deleteSchedule',['group'=>$eachSchedule->presentationGroup]) }}" onclick="return confirm('Are you sure you want to delete this schedule?')" class="deleteButton">Delete</a>
-                    </td>
-                </form>
+                <td><label type="text" name="group">{{ $eachSchedule->presentationGroup }}</label></td>
+                <td><label type="datetime-local" name="time" >{{ $eachSchedule->presentationTime }}</label></td>
+                <td><label type="text" name="link" >{{ $eachSchedule->presentationLink }}</label></td>
             </tr>
             @endforeach
             @if($scheduleCount == 0)
