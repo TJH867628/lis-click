@@ -25,7 +25,7 @@ class ConferencesController extends Controller
         if(session()->has('LoggedUser')){
             $userSession = session()->get('LoggedUser');
             
-            return view('page.conferences_download',['userSession' => $userSession]);
+            return view('page.participants.conferencesDownload.conferencesDownload',['userSession' => $userSession]);
         }else
         {
             return redirect('login')->with('fail','Login expired,Please Login Again');

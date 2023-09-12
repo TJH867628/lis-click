@@ -18,7 +18,7 @@
 
         body {
             min-height: 100vh;
-            background: url("../images/sunsetBackground.jpg") center / cover;
+            background: url("../images/tblBackground.jpg") center / cover;
             display: flex;
             justify-content: center;
         }
@@ -26,7 +26,7 @@
         main.table {
             margin-top: 3%;
             width: 82vw;
-            height: 70vh;
+            height: 60vh;
             background-color: #fff5;
             backdrop-filter: blur(7px);
             box-shadow: 0 .4rem .8rem #0005;

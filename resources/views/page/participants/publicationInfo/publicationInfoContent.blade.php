@@ -1,5 +1,7 @@
 <html>
     <head>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
     <style>
     * {
         margin: 0;
@@ -10,17 +12,16 @@
     }
 
     body {
-        margin-top: 5%;
-        min-height: 80%;
-        background: url("../images/sunsetBackground.jpg") center / cover;
+        min-height: 100vh;
+        background: url("../images/tblBackground.jpg") center / cover;
         display: flex;
         justify-content: center;
     }
 
     main.table {
-        margin-top: 3%;
+        margin-top: 11.5%;
         width: 82vw;
-        height: 80vh;
+        height: 60vh;
         background-color: #fff5;
         backdrop-filter: blur(7px);
         box-shadow: 0 .4rem .8rem #0005;
@@ -29,6 +30,7 @@
     }
 
     .table__header {
+        z-index:0;
         width: 100%;
         height: 15%;
         background-color: #fff4;
@@ -72,6 +74,7 @@
     }
 
     .table__body {
+        position: relative;
         width: 95%;
         max-height: calc(84% - 1.6rem);
         background-color: #fffb;
@@ -230,6 +233,8 @@
     }
 
     #button{
+        float: right;
+        margin-right: 50px;
         width: 170px;
         height: 50px;
         background: #0d6efd;
@@ -240,6 +245,9 @@
         outline: none;
         box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
         cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         transition: .7s ease-in-out;
     }
 
@@ -253,14 +261,20 @@
         background: #ededed;
     }
 
-    .progress-wrapper{
+    .progress-wrapper {
         position: absolute;
         width: 100px;
         height: 100px;
-        background: yellowgreen;
+        transform: scale(0);
+        transition: .7s;
+        transition-delay: .5s;
     }
 
-    .progress-wrapper .inner{
+    #button.active .progress-wrapper {
+        transform: scale(.6);
+    }
+
+    .progress-wrapper .inner {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -269,6 +283,13 @@
         height: 60px;
         background: #fff;
         border-radius: 50%;
+        z-index: 2;
+        transition: 1s ease;
+        transition-delay: 4s;
+    }
+
+    #button.active .progress-wrapper .inner {
+        transform: translate(-50%, -50%) scale(0);
     }
 
     .progress-wrapper .bar {
@@ -277,17 +298,83 @@
         height: 100%;
         background: #ededed;
         border-radius: 50%;
-        clip: rect(0px, 100px, 100px, 50px)
+        clip: rect(0px, 100px, 100px, 50px);
     }
 
     .circle .bar .progress {
         position: absolute;
         width: 100%;
         height: 100%;
-        background: #7d2ae8;
+        background: #0d6efd;
+        border-radius: 50%;
+        z-index: 1;
         clip: rect(0px, 50px, 100px, 0px);
     }
 
+    .circle .bar.left .progress{
+        transition: 1.5s linear;
+        transition-delay: 1s;
+    }
+
+    #button.active .circle .bar.left .progress {
+        transform: rotate(180deg);
+    }
+
+    .circle .right {
+        transform: rotate(180deg);
+    }
+
+    .circle .bar.right .progress{
+        transition: 1.5s linear;
+        transition-delay: 2.5s;
+    }
+
+    #button.active .circle .bar.right .progress {
+        transform: rotate(180deg);
+    }
+
+    .progress-wrapper .checkmark {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        z-index: 2;
+    }
+
+    .checkmark span {
+        position: absolute;
+        display: block;
+        width: 30px;
+        height: 7px;
+        background: #fff;
+        border-radius: 5px;
+        transform-origin: left;
+        transition: .5s;
+    }
+
+    .checkmark span:first-child {
+        top: 45px;
+        left: 22px;
+        width: 30px;
+        transform: rotate(45deg) scaleX(0);
+        transition-delay: 5s;
+    }
+
+    #button.active .checkmark span:first-child {
+        transform: rotate(45deg) scaleX(1);
+    }
+
+    .checkmark span:last-child {
+        top: 65px;
+        left: 40px;
+        width: 50px;
+        transform: rotate(-45deg) scaleX(0);
+        transition-delay: 5.5s;
+    }
+
+    #button.active .checkmark span:last-child {
+        transform: rotate(-45deg) scaleX(1);
+    }
     </style>
     </head>
     <body>
@@ -320,20 +407,19 @@
                 <td>
                 <a href="{{ route('downloadJurnal', ['filename' => 'Edisi Khas LIS22.pdf']) }}"><button id="button"><i class="fa-solid fa-download"></i>Download
                         <div class="progress-wrapper">
-                            <div class="inner">
-                                <div class="circle">
-                                    <div class="bar-left">
-
-                                        <div class="progress">
-                                        <div class="bar-right">
-
-                                        <div class="progress">
-                                        </div>
-                                    </div>
-                                        </div>
-                                    </div>
+                            <div class="inner"></div>
+                                <div class="checkmark">
+                                    <span></span>
+                                    <span></span>
                                 </div>
-                            </div>
+                                <div class="circle">
+                                    <div class="bar left">
+                                        <div class="progress"></div>
+                                    </div>
+                                    <div class="bar right">
+                                        <div class="progress"></div>
+                                    </div>                  
+                                </div>            
                         </div>
                     </button></a>
                 </td>
@@ -342,35 +428,110 @@
                     <th scope="row">2</th>
                     <td>E-Jurnal LiS2021 : Empowering Research in The Pandemic Phase: Oppurtunies and Challenges</td>
                     <td>
-                    <a href="{{ route('downloadJurnal', ['filename' => 'Published LIS 2021 ISBN_eISSN.pdf']) }}"><button id="button"><i class="fa-solid fa-download"></i>Download</button></a>
+                    <a href="{{ route('downloadJurnal', ['filename' => 'Published LIS 2021 ISBN_eISSN.pdf']) }}"><button id="button"><i class="fa-solid fa-download"></i>Download
+                    <div class="progress-wrapper">
+                            <div class="inner"></div>
+                                <div class="checkmark">
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                                <div class="circle">
+                                    <div class="bar left">
+                                        <div class="progress"></div>
+                                    </div>
+                                    <div class="bar right">
+                                        <div class="progress"></div>
+                                    </div>                  
+                                </div>            
+                        </div></button></a>
                     </td>
                 </tr>
                 <tr>
                     <th scope="row">3</th>
                     <td>E-Jurnal LiS2019 : Enriching The Creativity of Research and Innovation Towards The Industrial Revolution of IR4.0</td>
                     <td>
-                    <a href="{{ route('downloadJurnal', ['filename' => 'JILID 1 E-JURNAL LIS2019.pdf']) }}"><button id="button"><i class="fa-solid fa-download"></i>Download</button></a>
+                    <a href="{{ route('downloadJurnal', ['filename' => 'JILID 1 E-JURNAL LIS2019.pdf']) }}"><button id="button"><i class="fa-solid fa-download"></i>Download
+                    <div class="progress-wrapper">
+                            <div class="inner"></div>
+                                <div class="checkmark">
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                                <div class="circle">
+                                    <div class="bar left">
+                                        <div class="progress"></div>
+                                    </div>
+                                    <div class="bar right">
+                                        <div class="progress"></div>
+                                    </div>                  
+                                </div>            
+                        </div></button></a>
                     </td>
                 </tr>
                 <tr>
                     <th scope="row">4</th>
                     <td>E-Jurnal LiS2018: Implementation of Competitive Research Toward Local Resources Based Industrialization </td>
                     <td>
-                    <a href="{{ route('downloadJurnal', ['filename' => 'Prosiding_LIS_e-_Jurnal_LIS_Liga_Ilmu_Serantau_2018.pdf']) }}"><button id="button"><i class="fa-solid fa-download"></i>Download</button></a>
+                    <a href="{{ route('downloadJurnal', ['filename' => 'Prosiding_LIS_e-_Jurnal_LIS_Liga_Ilmu_Serantau_2018.pdf']) }}"><button id="button"><i class="fa-solid fa-download"></i>Download
+                    <div class="progress-wrapper">
+                            <div class="inner"></div>
+                                <div class="checkmark">
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                                <div class="circle">
+                                    <div class="bar left">
+                                        <div class="progress"></div>
+                                    </div>
+                                    <div class="bar right">
+                                        <div class="progress"></div>
+                                    </div>                  
+                                </div>            
+                        </div></button></a>
                     </td>
                 </tr>
                 <tr>
                     <th scope="row">5</th>
                     <td>E-Jurnal LiS2017: Mewacanakan Kebitaraan Ilmu</td>
                     <td>
-                    <a href="{{ route('downloadJurnal', ['filename' => 'LIS2017.pdf']) }}"><button id="button"><i class="fa-solid fa-download"></i>Download</button></a>
+                    <a href="{{ route('downloadJurnal', ['filename' => 'LIS2017.pdf']) }}"><button id="button"><i class="fa-solid fa-download"></i>Download
+                    <div class="progress-wrapper">
+                            <div class="inner"></div>
+                                <div class="checkmark">
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                                <div class="circle">
+                                    <div class="bar left">
+                                        <div class="progress"></div>
+                                    </div>
+                                    <div class="bar right">
+                                        <div class="progress"></div>
+                                    </div>                  
+                                </div>            
+                        </div></button></a>
                     </td>
                 </tr>
                 <tr>
                     <th scope="row">6</th>
                     <td>E-Jurnal LiS2016: Kelestarian Pendidikan Tanpa Sempadan</td>
                     <td>
-                    <a href="{{ route('downloadJurnal', ['filename' => 'LIS 2016 Kota Batam.pdf']) }}"><button id="button"><i class="fa-solid fa-download"></i>Download</button></a>
+                    <a href="{{ route('downloadJurnal', ['filename' => 'LIS 2016 Kota Batam.pdf']) }}"><button id="button"><i class="fa-solid fa-download"></i>Download
+                    <div class="progress-wrapper">
+                            <div class="inner"></div>
+                                <div class="checkmark">
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                                <div class="circle">
+                                    <div class="bar left">
+                                        <div class="progress"></div>
+                                    </div>
+                                    <div class="bar right">
+                                        <div class="progress"></div>
+                                    </div>                  
+                                </div>            
+                        </div></button></a>
                     </td>
                 </tr>
                 <tr>
@@ -378,23 +539,21 @@
                     <td>LIS2015: Kelestarian Pendidikan Tanpa Sempadan</td>
                     <td>
                     <a href="{{ route('downloadJurnal', ['filename' => 'LIS2015.pdf']) }}"><button id="button"><i class="fa-solid fa-download"></i>Download
-                <div class="progress-wrapper">
-                    <div class="inner">
-                        <div class="circle">
-                            <div class="bar-left">
-
-                                <div class="progress">
-                                <div class="bar-right">
-
-                                <div class="progress">
+                    <div class="progress-wrapper">
+                            <div class="inner"></div>
+                                <div class="checkmark">
+                                    <span></span>
+                                    <span></span>
                                 </div>
-                            </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> 
-            </button></a>
+                                <div class="circle">
+                                    <div class="bar left">
+                                        <div class="progress"></div>
+                                    </div>
+                                    <div class="bar right">
+                                        <div class="progress"></div>
+                                    </div>                  
+                                </div>            
+                        </div></button></a>
                     </td>                                    
                 </tr>
                 </tbody>
@@ -402,16 +561,13 @@
         </section>
     </main>
     <script>
-            const button = document.querySelector('#button');
+        const buttons = document.querySelectorAll('#button');
 
-            if (button) {
+        buttons.forEach((button) => {
             button.addEventListener('click', () => {
                 button.classList.add('active');
             });
-            } else {
-            console.error('Button element not found.');
-            }
-
-        </script>
+        });
+    </script>
     </body>
 </html>
