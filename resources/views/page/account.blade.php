@@ -72,19 +72,16 @@
                                         Password
                                     </a>
                                 </div>
-                                <form method="post">
-                                    @csrf
+                                <form method="post" action="/updateProfile">
+                                @csrf
                                 <div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
                                     <div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="account-tab">
                                         <h3 class="mb-4">Profile Settings</h3>
-                                        <div class="profile-picture">
-                                            <img src="assets/ProfilePic.png" alt="Profile Picture" />
-                                          </div>
                                           <div class="row">
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label>Title :</label>
-                                                    <input type="text" name="title" class="form-control" value="{{ $user -> title }}">
+                                                    <label>Salutation :</label>
+                                                    <input type="text" name="salutation" class="form-control" value="{{ $user -> salutation }}">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">

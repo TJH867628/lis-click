@@ -31,7 +31,7 @@
 <!-- page.blade.php -->
 <form id="editForm" action="{{ route('saveEdit', ['pageName' => $pageName]) }}" method="POST" enctype="multipart/form-data">
   @csrf
-  <div id="editContainer" style="background-color: black; border: 1px solid black; width: 80%; height: 60%; overflow: auto; margin:auto; margin-top:100px;" contenteditable="true">
+  <div id="editContainer" style="background-color: black; border: 1px solid black; width: 80%; height: 60%; overflow: auto; margin:auto; margin-top:100px;">
     {!! $editableContent !!}
   </div>
   <p style="margin: auto;">Maximum Image Size is 2MB</p>

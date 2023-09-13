@@ -6,7 +6,7 @@ use App\Models\tbl_admin_info;
 use App\Models\tbl_correction;
 use App\Models\tbl_submission;
 use App\Models\tbl_payment;
-
+use App\Models\tbl_participants_info;
 use App\Mail\cameraReady;
 
 use Illuminate\Support\Facades\DB;
@@ -137,26 +137,33 @@ class JKReviewerController extends Controller
             $submission = tbl_submission::where('submissionCode',$submissionCode)->first();
             $submission->correctionPhase = "readyForPresent";
             $submission->save();
-
+            $participants1Name = tbl_participants_info::where('email',$submission->participants1)->first();
             $mailToUser = new cameraReady;
-            $mailToUser->setSubmissionCode($submissionCode);
+            $mailToUser->setSubmissionInfo($submission,$participants1Name);
             $validator = Validator::make(['email' => $submission->participants1], [
                 'email' => 'email',
-            ]);
+            ]); 
 
             if ($validator->passes()) {
+
                 Mail::to($submission->participants1)->send($mailToUser);
             // Validate and send the email to participants2 or participants3
+            } 
+                
             if ($submission->participants2 != null) {
+                
                 $validator = Validator::make(['email' => $submission->participants2], [
                     'email' => 'email',
                 ]);
-            }
 
                 if ($validator->passes()) {
                     Mail::to($submission->participants2)->send($mailToUser);
                 }
-            } elseif ($submission->participants3 != null) {
+            }
+
+                
+                if ($submission->participants3 != null) {
+
                 $validator = Validator::make(['email' => $submission->participants3], [
                     'email' => 'email',
                 ]);

@@ -15,7 +15,7 @@
                             <div class="row-register">
                                 <div class="col-lg-7">	
                                     <div class="contact">
-                                        <form class="form" name="form" enctype="multipart/form-data" method="POST" onsubmit="return validation();">
+                                        <form class="form" id="fullpaper-form" name="form" enctype="multipart/form-data" method="POST" onsubmit="return validateAdditionalAuthor(event)">
                                         @csrf
                                             <div class="row">
                                                 <!--Dropdown-->
@@ -68,13 +68,22 @@
                                                 <!--End Dropdown-->
                                                 
                                                 <div class="form-group col-md-12">
-                                                    <input type="text" name="participants2" class="form-control" placeholder="Second Author's Name (CAPITAL LETTER)" oninput="this.value = this.value.toUpperCase()">
-
+                                                    <input type="email" name="participants2_email" class="form-control" placeholder="Second Author's Email">
+                                                    <div id="participants2-email-error" class="text-danger"></div>
                                                 </div>
                                                 <div class="form-group col-md-12">
-                                                    <input type="text" name="participants3" class="form-control" placeholder="Third Author's Name (CAPITAL LETTER)" oninput="this.value = this.value.toUpperCase()">
-
+                                                    <input type="text" name="participants2_name" class="form-control" placeholder="Second Author's Name">
+                                                    <div id="participants2-name-error" class="text-danger"></div>
                                                 </div>
+                                                <div class="form-group col-md-12">
+                                                    <input type="email" name="participants3_email" class="form-control" placeholder="Third Author's Email">
+                                                    <div id="participants3-email-error" class="text-danger"></div>
+                                                </div>
+                                                <div class="form-group col-md-12">
+                                                    <input type="text" name="participants3_name" class="form-control" placeholder="Third Author's Name">
+                                                    <div id="participants3-name-error" class="text-danger"></div>
+                                                </div>
+
                                                 <div class="form-group col-md-12">
                                                     <input type="text" name="paper-title" class="form-control" placeholder="Title" required>
                                                 </div>
@@ -101,7 +110,7 @@
                                                 <p><em>Format : ".docx(word)"</em></p>
                                                 <p><em>For more information, please <a href="/conferencesDownload">click here.</a></em></p>
                                                 <div class="upload-sect">
-                                                    <input type="file" id="file-upload" name="file_upload">
+                                                    <input type="file" id="file-upload" name="file_upload" required>
                                                 </div>
 
                                                 <!-- HTML modal popup element -->
@@ -177,6 +186,77 @@
                                                     }
                                                 }
                                                 });
+                                                    
+                                                function validateAdditionalAuthor(event) {
+
+                                                    const form = document.getElementById('fullpaper-form');
+                                                    const participants2Email = form.elements['participants2_email'].value;
+                                                    const participants2Name = form.elements['participants2_name'].value;
+                                                    const participants3Email = form.elements['participants3_email'].value;
+                                                    const participants3Name = form.elements['participants3_name'].value;
+
+                                                    const participants2EmailError = document.getElementById('participants2-email-error');
+                                                    const participants2NameError = document.getElementById('participants2-name-error');
+                                                    const participants3EmailError = document.getElementById('participants3-email-error');
+                                                    const participants3NameError = document.getElementById('participants3-name-error');
+
+                                                    participants2EmailError.textContent = '';
+                                                    participants2NameError.textContent = '';
+                                                    participants3EmailError.textContent = '';
+                                                    participants3NameError.textContent = '';
+
+                                                    let isError = false;
+
+                                                    if (participants2Name && !participants2Email) {
+                                                        participants2EmailError.textContent = 'Please enter a valid email address for 2nd author';
+                                                        
+                                                        isError = true;
+                                                    }else if (participants2Email && !isValidEmail(participants2Email)) {
+                                                        participants2EmailError.textContent = 'Please enter a valid email address for 2nd author';
+                                                        isError = true;
+                                                    }else if(participants2Email && isValidEmail(participants2Email)){
+                                                        participants2EmailError.textContent = '';
+                                                    }
+
+                                                    if (participants2Email && !participants2Name) {
+                                                        participants2NameError.textContent = 'Please enter the name for 2nd author';
+                                                        isError = true;
+                                                    }else if (participants2Name && !isValidEmail(participants2Email)) {
+                                                        participants2EmailError.textContent = 'Please enter a valid email address for 2nd author';
+                                                        isError = true;
+                                                    }else if(participants2Name && isValidEmail(participants2Email)){
+                                                        participants2NameError.textContent = '';
+                                                    }
+
+                                                    if (participants3Name && !participants3Email) {
+                                                        participants3EmailError.textContent = 'Please enter a valid email address for 3rd author';
+                                                        isError = true;
+                                                    }else if (participants3Email && !isValidEmail(participants3Email)) {
+                                                        participants3EmailError.textContent = 'Please enter a valid email address for 3nd author';
+                                                        isError = true;
+                                                    }else if(participants3Email && isValidEmail(participants3Email)){
+                                                        participants3EmailError.textContent = '';
+                                                    }
+
+                                                    if (participants3Email && !participants3Name) {
+                                                        participants3NameError.textContent = 'Please enter the name for 3rd author';
+                                                        isError = true;
+                                                    }else if (participants3Email && !isValidEmail(participants3Email)) {
+                                                        participants3EmailError.textContent = 'Please enter a valid email address for 3nd author';
+                                                        isError = true;
+                                                    }else if(participants3Name && isValidEmail(participants3Email)){
+                                                        participants3NameError.textContent = '';
+                                                    }
+
+                                                    if (isError == true) {
+                                                        event.preventDefault();
+                                                    }
+                                                }
+
+                                                function isValidEmail(email) {
+                                                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                                                    return emailRegex.test(email);
+                                                }
                                             </script>
                                             @if($message = Session::get('error'))
                                             <div class="error">

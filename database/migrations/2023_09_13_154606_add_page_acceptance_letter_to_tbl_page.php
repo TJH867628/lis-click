@@ -18,13 +18,23 @@ return new class extends Migration
 
         DB::table('tbl_page')->insert([
             [
-                'pageName' => 'Gallery',
-                'pagePath' => 'page.visitor.gallery.galleryContent',
-                'pageType' => 'visitor',
+                'pageName' => 'Acceptance Letter',
+                'pagePath' => 'emails.acceptanceLetter.acceptanceLetterContent',
+                'pageType' => 'email',
                 'editable' => true,
                 'createdAt' => now(),
                 'updatedAt' => now(),
             ],
         ]);
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::table('tbl_page', function (Blueprint $table) {
+            //
+        });
     }
 };

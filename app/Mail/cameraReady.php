@@ -12,12 +12,13 @@ use Illuminate\Queue\SerializesModels;
 class cameraReady extends Mailable
 {
     use Queueable, SerializesModels;
-    public $submissionCode;
+    public $submissionInfo,$participants1Name;
 
     /**
      * Create a new message instance.
      *
-     * @param string $submissionCode
+     * @param string $submissionInfo
+     * @param string $participants1Name
      * @return void
      */
     public function __construct()
@@ -26,10 +27,10 @@ class cameraReady extends Mailable
 
     }
 
-    public function setSubmissionCode($submissionCode)
+    public function setSubmissionInfo($submissionInfo,$participants1Name)
     {
-        $this->submissionCode = $submissionCode;
-
+        $this->submissionInfo = $submissionInfo;
+        $this->participants1Name = $participants1Name;
         return $this;
     }
 
@@ -39,15 +40,16 @@ class cameraReady extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Camera Ready',
+            subject: 'Acceptance of Manuscript for International Conference Liga Ilmu Serantau (LIS)',
         );
     }
 
     public function build(){
-        return $this->view('emails.camera_ready.camera_ready')
+        return $this->view('emails.acceptanceLetter.acceptanceLetter')
             ->subject('LIS-CLICK Submission Status Notification')
             ->with([
-                'submission' => $this->submissionCode,
+                'submissionInfo' => $this->submissionInfo,
+                'participants1Name' => $this->participants1Name,
             ]);
             // ->attach(public_path('images/Logo1 (1).jpg'), [
             //     'as' => 'Logo.jpg',
@@ -61,7 +63,7 @@ class cameraReady extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.camera_ready.camera_ready',
+            view: 'emails.acceptanceLetter.acceptanceLetter',
         );
     }
 

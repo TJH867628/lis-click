@@ -378,12 +378,12 @@
                             @php
                                 $i = 0;
                                 $allComplete = false;
+                                $isEmpty = true;
                             @endphp
                             <table class="paymentStatus">
                                 <th>Receipt</th>
                                 <th>Status</th>
                                 @foreach($submissionInfo->paymentStatus as $submissionInfo->paymentStatus)
-
                                 <tr>
                                     @php
                                         $i++;
@@ -396,21 +396,32 @@
                                         <label style="color:lime;">Verified payment</label>
                                         @php
                                             $allComplete = true;
+                                            $isEmpty = false;
                                         @endphp
                                     @elseif($submissionInfo->paymentStatus->paymentStatus === "Pending For Verification")
                                         <label style="color:orange;">{{ $submissionInfo->paymentStatus->paymentStatus }}</label>
                                         @php
                                             $allComplete = false;
+                                            $isEmpty = false;
                                         @endphp
                                     @else
                                         <label style="color:red;">{{ $submissionInfo->paymentStatus->paymentStatus }}</label>
                                         @php
                                             $allComplete = false;
+                                            $isEmpty = false;
                                         @endphp
                                     @endif
+
                                     </td>
                                 </tr>
                                 @endforeach
+                                @if($isEmpty == true)
+                                <tr>
+                                    <td colspan="2">
+                                        <p>Empty</p>
+                                    </td>
+                                    @endif
+                                </tr>
                             </table>
                             @if(( $allComplete === false))
                                 <button onclick="showPopup()" style="margin: auto;">Show Payment Method</button>
