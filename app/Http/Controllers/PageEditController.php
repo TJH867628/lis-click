@@ -7,6 +7,7 @@ use App\Models\tbl_gallery;
 use Illuminate\Http\Exceptions\PostTooLargeException;
 use App\Models\Page;
 use Illuminate\Http\Request;
+use App\Models\tbl_masterdata;
 use Illuminate\Support\Str;
 
 class PageEditController extends Controller
@@ -18,6 +19,8 @@ class PageEditController extends Controller
         if($pageName == 'Gallery'){
             $gallery = tbl_gallery::all();
             return view('page.superadmin.editGallery.editGallery',['gallery' => $gallery]);
+        }elseif($pageName == 'Publication Info'){
+            $publication = tbl_masterdata::where('master_');
         }else{
             $page = tbl_page::where('pageName', $pageName)->first(); 
             $pagePath = $page->pagePath;

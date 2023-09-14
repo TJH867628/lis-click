@@ -25,6 +25,14 @@ return new class extends Migration
                 'createdAt' => now(),
                 'updatedAt' => now(),
             ],
+            [
+                'pageName' => 'Publication Info',
+                'pagePath' => 'page.participants.publicationInfo.publicationInfoContent',
+                'pageType' => 'participants',
+                'editable' => true,
+                'createdAt' => now(),
+                'updatedAt' => now(),
+            ],
         ]);
     }
 
