@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Camera Ready</title>
+    <title>Acceptance Letter</title>
     <style>
         /* Add your custom CSS styles here */
         body {
             font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
+            background-color: #ffffff;
             margin: 0;
             padding: 0;
         }
@@ -20,11 +20,7 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 5px;
         }
-        .header img {
-            max-height: 50%;
-            max-width: 50%;
-            height: auto;
-        }
+
         .content {
             margin-top: 20px;
         }
@@ -42,6 +38,6 @@
         @include('emails.acceptanceLetter.acceptanceLetterContent')
     </div>
 
-    @include('emails.footer')
+    @include('page.footer')
 </body>
 </html>

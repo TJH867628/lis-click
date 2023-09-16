@@ -27,14 +27,4 @@ return new class extends Migration
             ],
         ]);
     }
-
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::table('tbl_page', function (Blueprint $table) {
-            //
-        });
-    }
 };

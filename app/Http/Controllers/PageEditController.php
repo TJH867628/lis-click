@@ -7,6 +7,7 @@ use App\Models\tbl_gallery;
 use Illuminate\Http\Exceptions\PostTooLargeException;
 use App\Models\Page;
 use Illuminate\Http\Request;
+use App\Models\tbl_masterdata;
 use Illuminate\Support\Str;
 
 class PageEditController extends Controller
@@ -18,6 +19,8 @@ class PageEditController extends Controller
         if($pageName == 'Gallery'){
             $gallery = tbl_gallery::all();
             return view('page.superadmin.editGallery.editGallery',['gallery' => $gallery]);
+        }elseif($pageName == 'Publication Info'){
+            $publication = tbl_masterdata::where('master_');
         }else{
             $page = tbl_page::where('pageName', $pageName)->first(); 
             $pagePath = $page->pagePath;
@@ -25,6 +28,7 @@ class PageEditController extends Controller
             $fileContents = $view->render();
             $editableContent = $this->generateEditableHTML($fileContents);
             $wrappedContent = $editableContent;
+
             return view('page.editPage', ['editableContent' => $wrappedContent,'pageName' => $pageName]);
         }
 
@@ -43,6 +47,28 @@ class PageEditController extends Controller
 
         // Remove the "fixed-top" class from the generated HTML
         $editableContent = str_replace('fixed-top', '', $editableContent);
+
+        $search = '/(<table[^>]*id="acceptancLetterDetailsTable"[^>]*)([^>]*contenteditable="true"[^>]*)(>.*?<\/table>)/s';
+
+        $editableContent = preg_replace_callback($search, function($matches) {
+            $tableHtml = $matches[1] . str_replace(' contenteditable="true"', '', $matches[2]) . $matches[3];
+            $tableHtml = str_replace(' contenteditable="true"', '', $tableHtml);
+            return $tableHtml;
+        }, $editableContent);
+
+        $search = '/(<div[^>]*class="acceptanceLetter"[^>]*)([^>]*)contenteditable="true"([^>]*>.*?<\/div>)/s';
+
+        $editableContent = preg_replace_callback($search, function($matches) {
+            $divHtml = $matches[1] . $matches[2] . $matches[3];
+            return $divHtml;
+        }, $editableContent);
+
+        $search = '/(<div[^>]*id="editContainer"[^>]*)([^>]*)contenteditable="true"([^>]*>.*?<\/div>)/s';
+
+        $editableContent = preg_replace_callback($search, function($matches) {
+            $divHtml = $matches[1] . $matches[2] . $matches[3];
+            return $divHtml;
+        }, $editableContent);
     
         return $editableContent;
     }
@@ -53,7 +79,7 @@ class PageEditController extends Controller
         $page = tbl_page::where('pageName', $pageName)->first();
         // Get the path of the original file
         $originalFilePath = resource_path('views/' . str_replace('.', '/', $page->pagePath) . '.blade.php');
-    
+        
         // Create a backup file by appending a timestamp to the original file name
         $backupFilePath = resource_path('views/' . str_replace('.', '/', $page->pagePath) . '_backup' . '.blade.php');
     
@@ -86,9 +112,11 @@ class PageEditController extends Controller
 
     }
         $updatedContent = $this->removeContentEditable($updatedContent);
+        if($pageName == 'Acceptance Letter'){
+            $updatedContent = $this->replaceAcceptanceLetterTemplate($updatedContent);
+        }
         // Save the updated content to the original file
         File::put($originalFilePath, $updatedContent);
-        // dd($updatedContent);
 
     
         // Redirect to the appropriate page or display a success message
@@ -120,5 +148,56 @@ class PageEditController extends Controller
         unlink($backupFilePath);
         
         return redirect()->back()->with('success', 'Page successfully reversed to the backup.');
+    }
+
+    public function replaceAcceptanceLetterTemplate($updatedContent){
+        $tableHtml = 
+        '                            @if(isset($submissionInfo))
+        <table id="acceptancLetterDetailsTable" style="border: 1px solid black; border-collapse: collapse;">
+        <tr>
+            <td style="border: 1px solid black; padding:1%;" >ID</td>
+            <td style="border: 1px solid black; padding:1%; width:fit-content;" >{{ $submissionInfo->submissionCode }}</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black; padding:1%; width:fit-content;" >Research Paper Title</td>
+            <td style="border: 1px solid black; padding:1%; width:fit-content;" >{{ $submissionInfo->submissionTitle }}</td>    
+        </tr>
+        <tr>
+            <td style="border: 1px solid black; padding:1%; width:fit-content;" >Authors</td>
+            <td style="border: 1px solid black; padding:1%; width:fit-content;" >
+                {{ $participants1Name->name }}
+                @if($submissionInfo->participants2 != null)
+                    ,{{ $submissionInfo->participants2_name }}
+                @endif
+                @if($submissionInfo->participants3 != null)
+                    ,{{ $submissionInfo->participants3_name }}
+                @endif
+            </td>
+        </tr>
+    </table>
+    @else
+    <table id="acceptancLetterDetailsTable" style="border: 1px solid black">
+        <tr>
+            <td style="border: 1px solid black; padding:1%;" >ID</td>
+            <td style="border: 1px solid black; padding:1%;" >XXX</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black; padding:1%;" >Research Paper Title</td>
+            <td style="border: 1px solid black; padding:1%;" >Submission Title</td>    
+        </tr>
+        <tr>
+            <td style="border: 1px solid black; padding:1%;" >Authors</td>
+            <td style="border: 1px solid black; padding:1%;" >
+                Authors name 1,2,3
+            </td>
+        </tr>
+    </table>
+            @endif';
+
+        $search = '/<table[^>]*id="acceptancLetterDetailsTable"[^>]*>.*?<\/table>/s';
+
+        $updatedContent = preg_replace($search , $tableHtml, $updatedContent);
+
+        return $updatedContent;
     }
 }

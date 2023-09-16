@@ -60,7 +60,7 @@ class AccountController extends Controller
             $name = $request -> input('name');//get name from user
             $IC_No = $request -> input('IC_No');//get IC_No from user
             $phoneNumber = $request -> input('phoneNumber');//get Phone Number from user
-            $title = $request -> input('title');//get title from user
+            $salutation = $request -> input('salutation');//get title from user
             $organizationName = $request -> input("organizationName");//get organizationName from user
             $address = $request -> input('address');//get address from user
             $postcode = $request -> input('postcode');//get postcode from user
@@ -75,7 +75,7 @@ class AccountController extends Controller
             }
 
             //create a set of data that will be update to database
-            $updateData = array('IC_No'=>$IC_No,'name'=>$name,'title'=>$title,'phoneNumber'=>$phoneNumber,'organizationName'=>$organizationName,'organizationAddress'=>$address,'postcode'=>$postcode,'country'=>$country,'updated_at'=>$date);
+            $updateData = array('IC_No'=>$IC_No,'name'=>$name,'salutation'=>$salutation,'phoneNumber'=>$phoneNumber,'organizationName'=>$organizationName,'organizationAddress'=>$address,'postcode'=>$postcode,'country'=>$country,'updated_at'=>$date);
             //insert the data to database with specified table and the dataset that have been create
             DB::table('tbl_participants_info')->where('email',$userSession)->update($updateData);
             
