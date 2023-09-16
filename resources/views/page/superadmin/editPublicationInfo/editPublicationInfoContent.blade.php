@@ -438,16 +438,16 @@
                                     <textarea class="form-control"  type="text" id="existingTitle" name="title">{{ trim($thisPublication->field_details) }}</textarea>
                                 </td>
                                 <td>
-                                <a href="{{ route('downloadJurnal', ['filename' => $thisPublication->field_value ]) }}" target="_blank">
-                                    <div id="downloadButton" class="d-flex justify-content-center align-items-center">
-                                        <i class="material-icons">open_in_new</i> View Current File
-                                    </div>
-                                </a>
+                                    <a href="{{ route('downloadJurnal', ['filename' => $thisPublication->field_value ]) }}" target="_blank">
+                                        <div id="downloadButton" class="d-flex justify-content-center align-items-center">
+                                            <i class="material-icons">open_in_new</i> View Current File
+                                        </div>
+                                    </a>
                                 <div id="chooseFile">
                                     <input type="file" id="existingFile" name="document" accept=".doc,.docx,.pdf">
                                 </div>
                                 </td>
-                                <td>
+                                <td style="text-align: center;">
                                     <label class="switch">
                                         <input type="checkbox" name="visibility" style="display: none;" {{ $thisPublication->field_visibility == 1 ? 'checked' : null }} > <!-- Hide the checkbox -->
                                         <span class="slider round"></span>
