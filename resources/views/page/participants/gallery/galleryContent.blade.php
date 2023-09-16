@@ -17,7 +17,6 @@
         <style>
             body{
                 background-color: #eaeaea;
-                overflow: hidden;
             }
             #container{
                 position: absolute;
@@ -34,13 +33,14 @@
                 width:max-content;
                 margin-top:50px;
             }
+            
             #item{
                 width:200px;
-                height:300px;
+                height:150px;
                 background-position: 50% 50%;
                 display: inline-block;
                 transition: 0.5s;
-                background-size: contain;
+                background-size: cover;
                 background-size: 100% 100%;
                 background-repeat: no-repeat;
                 position: absolute;
@@ -49,7 +49,6 @@
                 transform: translate(0,-50%);
                 border-radius: 20px;
                 box-shadow:  0 30px 50px #505050;
-                
             }
 
             #item:nth-child(1),
@@ -145,12 +144,13 @@
         <div id="slide">
             @foreach($gallery as $galleryItem)
                 @if($galleryItem->visible == true)
+                    <div id="item" style="background-image: url({{ $galleryItem->imageSrc }});"><?php // phpcs:ignore ?>
                         <div id="content">
                             <div id="name">{{ $galleryItem->title }}</div>
                             <div id="des">{{ $galleryItem->description }}</div>
                         </div>
                     </div>
-                @endif
+                @endifz
             @endforeach
         </div>
         <div id="buttons">

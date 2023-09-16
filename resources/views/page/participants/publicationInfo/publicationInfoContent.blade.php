@@ -415,9 +415,9 @@
                         $i++;
                     @endphp
                     <th scope="row">{{ $i }}</th>
-                <td>{{ $thisPublication->masterdata_details }}</td>
+                <td>{{ $thisPublication->field_details }}</td>
                 <td>
-                <a href="{{ route('downloadJurnal', ['filename' => $thisPublication->masterdata_value ]) }}"><button id="button"><i class="fa-solid fa-download"></i>Download
+                <a href="{{ route('downloadJurnal', ['filename' => $thisPublication->field_value ]) }}" target="_blank"><button id="button"><i class="fa-solid fa-download"></i>Download
                         <div class="progress-wrapper">
                             <div class="inner"></div>
                                 <div class="checkmark">

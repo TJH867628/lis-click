@@ -144,7 +144,7 @@
         <div id="slide">
             @foreach($gallery as $galleryItem)
                 @if($galleryItem->visible == true)
-                    <div id="item" style="background-image: url({{ $galleryItem->imageSrc }});">
+                    <div id="item" style="background-image: url({{ $galleryItem->imageSrc }});"><?php // phpcs:ignore ?>
                         <div id="content">
                             <div id="name">{{ $galleryItem->title }}</div>
                             <div id="des">{{ $galleryItem->description }}</div>
