@@ -109,6 +109,7 @@ Route::post('/pageEdit/Gallery/uploadNewPost',  [GalleryController::class,'uploa
 Route::post('/pageEdit/Gallery/editExistingPost/{id}',  [GalleryController::class,'editExistingPost'])->name('editExistingPost');
 Route::get('/pageEdit/Gallery/changeVisible/{id}',  [GalleryController::class,'changeVisible'])->name('changeVisible');
 Route::post('/uploadCertificate/{submissionCode}',  [JKReviewerController::class,'uploadCertificate'])->name('uploadCertificate');
+Route::get('/downloadCertificate/{filename}',  [JKReviewerController::class,'downloadCertificate'])->name('downloadCertificate');
 Route::get('/JKBendahariHomePage',[HomePageController::class,'index']);
 Route::get('/paymentStatus',[JKBendahariController::class,'paymentStatus']);
 Route::get('/feesPaymentQR',[JKBendahariController::class,'paymentQR']);
@@ -124,4 +125,6 @@ Route::get('/floorManager/presentationSchedule/deleteSchedule/{group}', [FloorMa
 Route::get('/floorManager/presentationGroup', [FloorManagerController::class, 'presentationGroup'])->name('presentationGroup');
 Route::post('/floorManager/presentationGroup/editSubmissionPresentationGroup/{submissionCode}', [FloorManagerController::class, 'editSubmissionPresentationGroup'])->name('editSubmissionPresentationGroup');
 Route::get('/participants/presentationSchedule', [FloorManagerController::class, 'presentationSchedule']);
+Route::post('/superadmin/pageList/publicationList/editExistingPublication/{id}', [PublicationController::class, 'editExistingPublication'])->name('editExistingPublication');
+Route::post('/superadmin/pageList/publicationList/uploadNewPublication', [PublicationController::class, 'uploadNewPublication'])->name('uploadNewPublication');
 

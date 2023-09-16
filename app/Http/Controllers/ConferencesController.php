@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 
 class ConferencesController extends Controller
 {
@@ -33,9 +34,17 @@ class ConferencesController extends Controller
        
     }
 
-    public function download($filename)
+    function download($filename)
     {
-        $path = public_path('conferences_info/' . $filename);
-        return response()->download($path, $filename);
+        $file = public_path('conferences_info/' . $filename);
+        $extension = pathinfo($file, PATHINFO_EXTENSION);
+    
+        if ($extension == 'pdf') {
+            return Response::make(file_get_contents($file), 200, [
+                'content-type' => 'application/pdf',
+            ]);
+        } elseif ($extension == 'doc' || $extension == 'docx') {
+            return response()->file($file);
+        }
     }
 }

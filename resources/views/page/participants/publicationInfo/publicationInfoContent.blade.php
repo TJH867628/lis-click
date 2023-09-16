@@ -127,6 +127,7 @@
         background-color: #d5d1defe;
         cursor: pointer;
         text-transform: capitalize;
+        z-index: 1;
     }
 
     tbody tr:nth-child(even) {

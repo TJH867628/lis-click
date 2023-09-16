@@ -49,6 +49,7 @@
                 transform: translate(0,-50%);
                 border-radius: 20px;
                 box-shadow:  0 30px 50px #505050;
+                
             }
 
             #item:nth-child(1),
@@ -144,7 +145,6 @@
         <div id="slide">
             @foreach($gallery as $galleryItem)
                 @if($galleryItem->visible == true)
-                    <div id="item" style="background-image: url({{ $galleryItem->imageSrc }});">
                         <div id="content">
                             <div id="name">{{ $galleryItem->title }}</div>
                             <div id="des">{{ $galleryItem->description }}</div>

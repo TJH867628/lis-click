@@ -117,13 +117,46 @@ class ReviewerController extends Controller
     }
 
     public function downloadEvaluationForm($filename){
-        $path = 'storage/EvaluationForm/' . $filename;
-        return response()->download($path, $filename);
+        $file = 'storage/EvaluationForm/' . $filename;
+        $extension = pathinfo($file, PATHINFO_EXTENSION);
+    
+        if ($extension == 'pdf') {
+            return response()->file($file, [
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'inline',
+            ]);
+        } elseif ($extension == 'doc' || $extension == 'docx') {
+            return response()->file($file);
+        }
     }
 
     public function downloadReviewSubmission($filename){
-        $path = 'storage/uploads/' . $filename;
-        return response()->download($path, $filename);
+        $file = 'storage/uploads/' . $filename;
+        $extension = pathinfo($file, PATHINFO_EXTENSION);
+        if ($extension == 'pdf') {
+            return response()->file($file, [
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'inline',
+            ]);
+        } elseif ($extension == 'doc' || $extension == 'docx') {
+            return response()->file($file);
+        }
+    }
+    
+    function download($filename)
+    {
+        $file = public_path('conferences_info/' . $filename);
+        $extension = pathinfo($file, PATHINFO_EXTENSION);
+        dd($extension);
+    
+        if ($extension == 'pdf') {
+            return response()->file($file, [
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'inline',
+            ]);
+        } elseif ($extension == 'doc' || $extension == 'docx') {
+            return response()->file($file);
+        }
     }
 
     public function evaluationForm($submissionCode){

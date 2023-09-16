@@ -46,9 +46,9 @@
             @csrf
             <table>
                 <tr>
-                    <td>Please Upload Image(only accept jpeg or png)</td>
+                    <td>Please Upload Image(only accept jpg)</td>
                     <td>
-                        <input type="file" name="image" accept="image/jpeg, image/png">
+                        <input type="file" name="image" accept="image/jpeg, image/jpg">
                     </td>
                 </tr>
                 <tr>
@@ -95,7 +95,7 @@
                         <img src="{{ $gallery->imageSrc }}">
                         <form method="post" action="{{ route('editExistingPost',['id' => $gallery->id]) }}" enctype="multipart/form-data">
                             @csrf
-                            <input type="file" name="image" accept="image/jpeg, image/png">
+                            <input type="file" name="image" accept="image/jpeg, image/jpg">
                             <button>Submit New Image</button>
                         </form>
                     </td>
