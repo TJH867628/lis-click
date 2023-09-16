@@ -17,6 +17,7 @@
         <style>
             body{
                 background-color: #eaeaea;
+                overflow: hidden;
             }
             #container{
                 position: absolute;
@@ -33,14 +34,13 @@
                 width:max-content;
                 margin-top:50px;
             }
-            
             #item{
-                width:200px;
-                height:150px;
+                width:100px;
+                height:100px;
                 background-position: 50% 50%;
                 display: inline-block;
                 transition: 0.5s;
-                background-size: cover;
+                background-size: contain;
                 background-size: 100% 100%;
                 background-repeat: no-repeat;
                 position: absolute;
@@ -62,16 +62,16 @@
                 box-shadow: none;
             }
             #item:nth-child(3){
-                left:50%;
+                left:82%;
             }
             #item:nth-child(4){
-                left:calc(50% + 220px);
+                left:calc(60% + 280px);
             }
             #item:nth-child(5){
-                left:calc(50% + 440px);
+                left:calc(60% + 340px);
             }
             #item:nth-child(n+6){
-                left:calc(50% + 660px);
+                left:calc(60% + 560px);
                 opacity: 0;
             }
             #item #content{
@@ -150,7 +150,7 @@
                             <div id="des">{{ $galleryItem->description }}</div>
                         </div>
                     </div>
-                @endifz
+                @endif
             @endforeach
         </div>
         <div id="buttons">
