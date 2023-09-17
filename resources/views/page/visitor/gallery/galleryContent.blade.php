@@ -143,42 +143,39 @@
                 background-color: #bac383;
             }
             @media screen and (max-width: 1080px) {
-                .mobile-show{
-                    display: block;
-                }
-
-                .mobile-hide{
-                    display: none;
-                }
-
-                #MobileButtons{
-                    position: absolute;
-                    bottom:30px;
-                    z-index: 222222;
-                    text-align: center;
-                    width:100%;
-                }
-
-                #content{
-                    width:300px;
-                    background: transparent;
-                    border: 2px solid rgba(255, 255, 255, 0.5);
-                    border-radius: 20px;
-                    backdrop-filter: blur(20px);
-                    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
-                    overflow: hidden;
-                    padding: 10px;;
-                    color:black;
-                    transform: translate(0,-50%);
-                    display: none;
-                    font-family: system-ui;
-                }
-
-                #item{
-                    width: 80%;
-                    height: 30%;
-                }
+            .mobile-show {
+                display: block;
             }
+
+            .mobile-hide {
+                display: none;
+            }
+
+            #container {
+                width: 100%;
+                height: auto;
+                padding: 20px; /* Adjusted for mobile */
+            }
+
+            .item-container {
+                width: 100%;
+                height: auto;
+                margin-top: 10px; /* Adjusted for mobile */
+            }
+
+            .item-container .content {
+                background: rgba(0, 0, 0, 0.5);
+                border: 2px solid rgba(255, 255, 255, 0.5);
+                border-radius: 20px;
+                backdrop-filter: blur(20px);
+                box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+                overflow: hidden;
+                padding: 10px;
+                color: black;
+                font-family: system-ui;
+                display: none;
+            }
+        }
     </style>
     </head>
     <body>
