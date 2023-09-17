@@ -167,6 +167,14 @@
             #buttons button {
                 margin: 0 10px; /* Add spacing between buttons on mobile */
             }
+
+            .mobile-hide{
+                display: none;
+            }
+
+            .mobile-show{
+                display: block;
+            }
         }
     </style>
     </head>
@@ -178,9 +186,13 @@
                 @if($galleryItem->visible == true)
                     <div id="item" style="background-image: url({{ $galleryItem->imageSrc }});"><?php // phpcs:ignore ?>
                         <div id="content">
-                            <div id="name">{{ $galleryItem->title }}</div>
-                            <div id="des">{{ $galleryItem->description }}</div>
+                            <div id="name" class="mobile-hide">{{ $galleryItem->title }}</div>
+                            <div id="des" class="mobile-hide">{{ $galleryItem->description }}</div>
                         </div>
+                    </div>
+                    <div id="content">
+                        <div id="name" class="mobile-show">{{ $galleryItem->title }}</div>
+                        <div id="des" class="mobile-show">{{ $galleryItem->description }}</div>
                     </div>
                 @endif
             @endforeach
