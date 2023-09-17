@@ -144,7 +144,7 @@
             }
             #imgcontainer {
                 width: 80%; /* Adjust width to fit the screen */
-                height: 60%; /* Adjust height to fit content */
+                height: 30%; /* Adjust height to fit content */
                 padding: 20px; /* Reduce padding for smaller screens */
             }
             #slide {
