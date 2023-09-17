@@ -138,7 +138,7 @@
                 background-color: #bac383;
             }
 
-            @media screen and (max-width: 768px) {
+            @media screen and (max-width: 1080px) {
             body {
                 overflow: auto; /* Allow scrolling on smaller screens */
             }
