@@ -143,8 +143,8 @@
                 overflow: auto; /* Allow scrolling on smaller screens */
             }
             #imgcontainer {
-                width: 100%; /* Adjust width to fit the screen */
-                height: auto; /* Adjust height to fit content */
+                width: 80%; /* Adjust width to fit the screen */
+                height: 100%; /* Adjust height to fit content */
                 padding: 20px; /* Reduce padding for smaller screens */
             }
             #slide {
