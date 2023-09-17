@@ -150,7 +150,6 @@
             #slide {
                 width: 100%; /* Adjust width to fit the screen */
                 margin-top: 20px; /* Adjust margin for smaller screens */
-                display: flex;
                 flex-direction: column; /* Display images vertically on mobile */
             }
             #item {
@@ -161,7 +160,6 @@
                 box-shadow: 0 10px 20px #505050;
             }
             #buttons {
-                position: static; /* Remove absolute positioning */
                 text-align: center;
                 width: 100%;
                 margin-top: 20px; /* Adjust margin for smaller screens */
