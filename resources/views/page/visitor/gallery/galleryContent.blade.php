@@ -91,6 +91,7 @@
                 display: none;
                 font-family: system-ui;
             }
+
             #item:nth-child(2) #content{
                 display: block;
                 z-index: 11111;
@@ -142,6 +143,35 @@
                 background-color: #bac383;
             }
             @media screen and (max-width: 1080px) {
+                .mobile-show{
+                    display: block;
+                }
+
+                .mobile-hide{
+                    display: none;
+                }
+
+                #MobileButtons{
+                    bottom:30px;
+                    z-index: 222222;
+                    text-align: center;
+                    width:100%;
+                }
+
+                #mobileContent{
+                    width:300px;
+                    background: transparent;
+                    border: 2px solid rgba(255, 255, 255, 0.5);
+                    border-radius: 20px;
+                    backdrop-filter: blur(20px);
+                    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+                    overflow: hidden;
+                    padding: 10px;;
+                    color:black;
+                    transform: translate(0,-50%);
+                    display: none;
+                    font-family: system-ui;
+                }
             }
     </style>
     </head>
@@ -152,19 +182,23 @@
             @foreach($gallery as $galleryItem)
                 @if($galleryItem->visible == true)
                     <div id="item" style="background-image: url({{ $galleryItem->imageSrc }});"><?php // phpcs:ignore ?>
-                        <div id="content">
+                        <div id="content" class="mobile-hide">
                             <div id="name">{{ $galleryItem->title }}</div>
                             <div id="des">{{ $galleryItem->description }}</div>
                         </div>
                     </div>
                 @endif
-                    <div id="content">
+                    <div id="mobileContent" class="mobile-show" style="display: none;">
                         <div id="name">{{ $galleryItem->title }}</div>
                         <div id="des">{{ $galleryItem->description }}</div>
                     </div>
             @endforeach
         </div>
-        <div id="buttons">
+        <div id="buttons" class="mobile-hide">
+            <button id="prev"><i class="fa-solid fa-angle-left"></i></button>
+            <button id="next"><i class="fa-solid fa-angle-right"></i></button>
+        </div>
+        <div id="mobileButtons" class="mobile-show" style="display: none;">
             <button id="prev"><i class="fa-solid fa-angle-left"></i></button>
             <button id="next"><i class="fa-solid fa-angle-right"></i></button>
         </div>
