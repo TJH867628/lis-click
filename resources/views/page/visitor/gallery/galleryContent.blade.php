@@ -23,7 +23,7 @@
             #imgcontainer{
                 position: absolute;
                 left:50%;
-                top:52%;
+                top:53%;
                 transform: translate(-50%,-50%);
                 width:60%;
                 height:70%;
@@ -31,7 +31,7 @@
                 background-color: #f5f5f5;
                 box-shadow: 0 30px 50px #dbdbdb;
             }
-            
+
             #slide{
                 width:max-content;
                 margin-top:50px;
