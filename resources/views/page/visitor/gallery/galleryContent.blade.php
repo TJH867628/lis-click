@@ -195,22 +195,8 @@
                     </div>
                 @endif
             @endforeach
-            @foreach($gallery as $galleryItem)
-                @if($galleryItem->visible == true)
-                    <div id="item" style="background-image: url({{ $galleryItem->imageSrc }}); display:none;" class="mobile-hide"><?php // phpcs:ignore ?>
-                        <div id="content">
-                            <div id="name">{{ $galleryItem->title }}</div>
-                            <div id="des">{{ $galleryItem->description }}</div>
-                        </div>
-                    </div>
-                @endif
-            @endforeach
         </div>
         <div id="buttons" class="mobile-hide">
-            <button id="prev"><i class="fa-solid fa-angle-left"></i></button>
-            <button id="next"><i class="fa-solid fa-angle-right"></i></button>
-        </div>
-        <div id="mobileButtons" class="mobile-show" style="display: none;">
             <button id="prev"><i class="fa-solid fa-angle-left"></i></button>
             <button id="next"><i class="fa-solid fa-angle-right"></i></button>
         </div>
