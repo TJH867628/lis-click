@@ -96,14 +96,14 @@
                 z-index: 11111;
             }
             #item #name{
-                color: black;
+                color: white;
                 font-size: 40px;
                 font-weight: bold;
                 opacity: 0;
                 animation:showcontent 1s ease-in-out 1 forwards
             }
             #item #des{
-                color: black;
+                color: white;
                 margin:20px 0;
                 opacity: 0;
                 animation:showcontent 1s ease-in-out 0.3s 1 forwards
