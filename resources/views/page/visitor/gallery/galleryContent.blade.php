@@ -14,12 +14,12 @@
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <style>
             body{
                 background-color: #eaeaea;
                 overflow: hidden;
             }
-
             #imgcontainer{
                 position: absolute;
                 left:50%;
@@ -31,7 +31,6 @@
                 background-color: #f5f5f5;
                 box-shadow: 0 30px 50px #dbdbdb;
             }
-
             #slide{
                 width:max-content;
                 margin-top:50px;
@@ -81,13 +80,8 @@
                 top:50%;
                 left:100px;
                 width:300px;
-                background: transparent;
-                border: 2px solid rgba(255, 255, 255, 0.5);
-                border-radius: 20px;
-                backdrop-filter: blur(20px);
-                box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
-                overflow: hidden;
-                padding: 10px;;
+                text-align: left;
+                padding:0;
                 color:#eee;
                 transform: translate(0,-50%);
                 display: none;
@@ -143,6 +137,39 @@
             }#buttons button:hover{
                 background-color: #bac383;
             }
+
+            @media screen and (max-width: 768px) {
+            body {
+                overflow: auto; /* Allow scrolling on smaller screens */
+            }
+            #imgcontainer {
+                width: 100%; /* Adjust width to fit the screen */
+                height: auto; /* Adjust height to fit content */
+                padding: 20px; /* Reduce padding for smaller screens */
+            }
+            #slide {
+                width: 100%; /* Adjust width to fit the screen */
+                margin-top: 20px; /* Adjust margin for smaller screens */
+                display: flex;
+                flex-direction: column; /* Display images vertically on mobile */
+            }
+            #item {
+                width: 100%;
+                height: auto;
+                margin: 0 auto 20px; /* Add margin between items on mobile */
+                border-radius: 20px;
+                box-shadow: 0 10px 20px #505050;
+            }
+            #buttons {
+                position: static; /* Remove absolute positioning */
+                text-align: center;
+                width: 100%;
+                margin-top: 20px; /* Adjust margin for smaller screens */
+            }
+            #buttons button {
+                margin: 0 10px; /* Add spacing between buttons on mobile */
+            }
+        }
     </style>
     </head>
     <body>
