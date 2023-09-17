@@ -162,7 +162,7 @@
             #buttons {
                 text-align: center;
                 width: 100%;
-                margin-top: 20px; /* Adjust margin for smaller screens */
+                margin-top: 50px; /* Adjust margin for smaller screens */
             }
             #buttons button {
                 margin: 0 10px; /* Add spacing between buttons on mobile */
