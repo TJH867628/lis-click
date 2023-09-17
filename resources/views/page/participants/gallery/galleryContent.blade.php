@@ -139,9 +139,6 @@
             }
 
             @media screen and (max-width: 1080px) {
-            body {
-                overflow: auto; /* Allow scrolling on smaller screens */
-            }
             #imgcontainer {
                 width: 100%; /* Adjust width to fit the screen */
                 height: auto; /* Adjust height to fit content */
