@@ -152,13 +152,14 @@
                 }
 
                 #MobileButtons{
+                    position: absolute;
                     bottom:30px;
                     z-index: 222222;
                     text-align: center;
                     width:100%;
                 }
 
-                #mobileContent{
+                #content{
                     width:300px;
                     background: transparent;
                     border: 2px solid rgba(255, 255, 255, 0.5);
@@ -171,6 +172,11 @@
                     transform: translate(0,-50%);
                     display: none;
                     font-family: system-ui;
+                }
+
+                #item{
+                    width: 80%;
+                    height: 30%;
                 }
             }
     </style>
@@ -191,10 +197,10 @@
             @endforeach
             @foreach($gallery as $galleryItem)
                 @if($galleryItem->visible == true)
-                    <div id="mobileitem" style="background-image: url({{ $galleryItem->imageSrc }}); display:none;" class="mobile-hide"><?php // phpcs:ignore ?>
-                        <div id="mobilecontent">
-                            <div id="mobilename">{{ $galleryItem->title }}</div>
-                            <div id="mobiledes">{{ $galleryItem->description }}</div>
+                    <div id="item" style="background-image: url({{ $galleryItem->imageSrc }}); display:none;" class="mobile-hide"><?php // phpcs:ignore ?>
+                        <div id="content">
+                            <div id="name">{{ $galleryItem->title }}</div>
+                            <div id="des">{{ $galleryItem->description }}</div>
                         </div>
                     </div>
                 @endif
