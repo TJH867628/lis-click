@@ -20,13 +20,13 @@
                 background-color: #eaeaea;
                 overflow: hidden;
             }
-            #container{
+            #imgcontainer{
                 position: absolute;
                 left:50%;
-                top:50%;
+                top:52%;
                 transform: translate(-50%,-50%);
-                width:1000px;
-                height:600px;
+                width:60%;
+                height:70%;
                 padding:50px;
                 background-color: #f5f5f5;
                 box-shadow: 0 30px 50px #dbdbdb;
@@ -141,7 +141,7 @@
     </head>
     <body>
     @if($gallery->isNotEmpty())
-    <div id="container">
+    <div id="imgcontainer">
         <div id="slide">
             @foreach($gallery as $galleryItem)
                 @if($galleryItem->visible == true)
