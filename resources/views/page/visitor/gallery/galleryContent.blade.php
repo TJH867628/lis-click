@@ -22,10 +22,10 @@
             #container{
                 position: absolute;
                 left:50%;
-                top:50%;
+                top:52%;
                 transform: translate(-50%,-50%);
-                width:1000px;
-                height:600px;
+                width:60%;
+                height:70%;
                 padding:50px;
                 background-color: #f5f5f5;
                 box-shadow: 0 30px 50px #dbdbdb;
@@ -181,17 +181,23 @@
         <div id="slide">
             @foreach($gallery as $galleryItem)
                 @if($galleryItem->visible == true)
-                    <div id="item" style="background-image: url({{ $galleryItem->imageSrc }});"><?php // phpcs:ignore ?>
+                    <div id="item" style="background-image: url({{ $galleryItem->imageSrc }});" class="mobile-hide"><?php // phpcs:ignore ?>
                         <div id="content" class="mobile-hide">
                             <div id="name">{{ $galleryItem->title }}</div>
                             <div id="des">{{ $galleryItem->description }}</div>
                         </div>
                     </div>
                 @endif
-                    <div id="mobileContent" class="mobile-show" style="display: none;">
-                        <div id="name">{{ $galleryItem->title }}</div>
-                        <div id="des">{{ $galleryItem->description }}</div>
+            @endforeach
+            @foreach($gallery as $galleryItem)
+                @if($galleryItem->visible == true)
+                    <div id="mobileitem" style="background-image: url({{ $galleryItem->imageSrc }}); display:none;" class="mobile-hide"><?php // phpcs:ignore ?>
+                        <div id="mobilecontent">
+                            <div id="mobilename">{{ $galleryItem->title }}</div>
+                            <div id="mobiledes">{{ $galleryItem->description }}</div>
+                        </div>
                     </div>
+                @endif
             @endforeach
         </div>
         <div id="buttons" class="mobile-hide">
