@@ -141,6 +141,7 @@
             cursor: pointer;
             text-transform: capitalize;
             z-index: 1;
+            text-align: center;
         }
 
         tbody tr:nth-child(even) {
@@ -395,11 +396,35 @@
         }
 
         #downloadButton{
-            border-radius: 5%;
-            width:60%;
+            border-radius: 5px;
+            width:80%;
             height: 40px;
             background-color: #007bff;
             color: white;
+        }
+        #tdSubmitButton{
+            width: 20%;
+            text-align: center;
+        }
+
+        #submitButton{
+            padding: 3%;
+            border-radius: 50%;
+            height: fit-content;
+            background-color: #007bff;
+            color: white;
+            display: flex;
+            align-items: center;
+            margin: auto;
+            transition: .2s ease-in-out;
+        }
+
+        #submitButton:hover{
+            background-color: #0069d9;
+        }
+
+        #submitButton i{
+            font-size: 300%;
         }
 
     </style>
@@ -418,7 +443,7 @@
                             <th>File</th>
                             <th>Visibility To User</th>
                             <th>Update At</th>
-                            <th>Submit</th>
+                            <th>Save Change</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -443,9 +468,15 @@
                                             <i class="material-icons">open_in_new</i> View Current File
                                         </div>
                                     </a>
-                                <div id="chooseFile">
-                                    <input type="file" id="existingFile" name="document" accept=".doc,.docx,.pdf">
-                                </div>
+                                    <div class="choose-file">
+                                        <div style="display: flex; align-items: center; margin-top:3%;">
+                                            <label class="btn btn-primary" style="font-size:medium; padding:2%; width:60%;">
+                                                Choose New File
+                                                <input type="file" name="document" accept=".pdf" style="display: none;">
+                                            </label>
+                                            <span class="file-name" style="font-style: italic; color: #999; font-size:small; padding:0; margin-top:2%;">No File Selected</span>
+                                        </div>
+                                    </div>
                                 </td>
                                 <td style="text-align: center;">
                                     <label class="switch">
@@ -456,8 +487,10 @@
                                 <td>
                                     {{ $thisPublication->updated_at }}
                                 </td>
-                                <td>
-                                    <button>Submit Edit</button>
+                                <td id="tdSubmitButton">
+                                    <button type="submit" id="submitButton">
+                                        <i class="material-icons">save</i>
+                                    </button>
                                 </td>
                             </tr>
                             </form>
@@ -490,7 +523,15 @@
                                 <tr>
                                     <td>Please Upload New File<br><p>(only accept word or pdf)</p></td>
                                     <td>
-                                        <input type="file" name="document" accept=".doc,.docx,.pdf" required>
+                                        <div class="choose-file">
+                                            <div style="display: flex; align-items: center; margin-top:3%;">
+                                                <label class="btn btn-primary" style="font-size:medium; padding:2%; width:50%;">
+                                                    Choose File
+                                                    <input type="file" name="document" accept=".pdf" style="display: none;">
+                                                </label>
+                                                <span class="file-name" style="font-style: italic; color: #999; font-size:small; padding:0; margin-top:2%;">No File Selected</span>
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -501,7 +542,7 @@
                                 </tr>
                                 <tr>
                                     <td colspan="2">
-                                        <button>Submit Change</button>
+                                        <button>Submit</button>
                                     </td>
                                 </tr>
                             </table>
@@ -531,6 +572,34 @@
                         // Call the autoResizeTextarea function when the content changes
                         textarea.addEventListener('input', function() {
                             autoResizeTextarea(textarea);
+                        });
+                    });
+                    const chooseFiles = document.querySelectorAll('.choose-file');
+
+                    chooseFiles.forEach(function(chooseFile) {
+                        const imageUpload = chooseFile.querySelector('input[type="file"]');
+                        const fileName = chooseFile.querySelector('.file-name');
+
+                        imageUpload.addEventListener('change', function() {
+                            const files = this.files;
+                            let fileNames = '';
+
+                            for (let i = 0; i < files.length; i++) {
+                                const file = files[i];
+                                const reader = new FileReader();
+
+                                reader.addEventListener('load', function() {
+                                    const previewImage = document.createElement('img');
+                                    previewImage.src = reader.result;
+                                });
+
+                                reader.readAsDataURL(file);
+
+                                fileNames += file.name + ', ';
+                            }
+
+                            fileNames = fileNames.slice(0, -2);
+                            fileName.textContent = fileNames;
                         });
                     });
                 </script>
