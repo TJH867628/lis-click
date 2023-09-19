@@ -109,18 +109,16 @@
                                 <h1>REGISTER</h1>
                                 
                             </div>
-                            <form method="post">
-                             @csrf
                              <div class="row-register">
                                 <div class="col-lg-7">	
                                     <div class="contact">
-                                        <form class="form" name="enq" method="post" action="/registration" onsubmit="return validation();">
-                                            <div class="row">
-                                                
+                                        <form class="form" name="enq" id="registrationForm" method="post" action="/registration">
+                                                @csrf
+                                                <div class="row">
                                                 <!--Dropdown-->
                                                 <div class="form-group col-md-3">
-                                                    <label class="category">Salutation :</label>
-                                                    <select class="dropdown-option" id="salutation" name="salutation">
+                                                    <label for="salutation">Salutation :</label>
+                                                    <select class="dropdown-option" id="salutation" name="salutation" required>
                                                         <option selected disabled>Choose</option>
                                                         <option value="Dr">Dr</option>
                                                         <option value="Mr">Mr</option>
@@ -132,51 +130,59 @@
                                                         <option value="Dr prof">Dr Prof</option>
                                                         <option value="Others">Others</option>
                                                     </select>
-                                                <input type="text" name="salutationInput" id="salutationInput" style='display:none;'/><br>
+                                                    <input type="text" name="salutationInput" id="salutationInput" style='display:none;'/><br>
                                                 </div>
-                                                <!--End Dropdown-->
-                                                <!--Dropdown-->
+
                                                 <div class="form-group col-md-7">
-                                                    <label class="category">Participant Category :</label>
-                                                    <select class="dropdown-option category" name="category" id="">
-                                                        <option selected disabled>Choose</option>
+                                                    <label for="category">Participant Category :</label>
+                                                    <select class="dropdown-option category" name="category" id="" required>
                                                         <option value="presenter">Presenter</option>
                                                         <option value="Audience">Audience</option>
                                                     </select><br>
                                                 </div>
-                                                <!--End Dropdown-->
+
                                                 <div class="form-group col-md-12">
+                                                    <label for="name">Full Name:</label>
                                                     <input type="text" name="name" id="name" class="form-control name" placeholder="Full Name" required="required">
                                                 </div>
 
-                                                 <div class="form-group col-md-7">
+                                                <div class="form-group col-md-7">
+                                                    <label for="organizationName">Organization Name:</label>
                                                     <input type="text" name="organizationName" id="organizationName"  class="form-control organizationName" placeholder="Organization Name" required="required">
                                                 </div>
+
                                                 <div class="form-group col-md-5">
+                                                    <label for="email">Email Address:</label>
                                                     <input type="text" name="email" id="email" class="form-control email" placeholder="Email Address" required="required">
                                                     @if($message = Session::get('error'))
                                                     <div class="error">
                                                         <span class="error">{{ $message }}</span><br> 
                                                     </div>
                                                     @endif
-                                                </div> 
+                                                </div>
 
                                                 <div class="form-group col-md-6">
-                                                    <input type="text" name="IC_No" id="IC_No" class="form-control IC_No" placeholder="IC Number " required="required">
+                                                    <label for="IC_No">IC Number:</label>
+                                                    <input type="text" name="IC_No" id="IC_No" class="form-control IC_No" placeholder="IC Number" required="required">
                                                 </div>
+
                                                 <div class="form-group col-md-6">
+                                                    <label for="phoneNumber">Phone Number:</label>
                                                     <input type="text" name="phoneNumber" id="phoneNumber" class="form-control phoneNumber" placeholder="Phone Number" required="required">
                                                 </div>
+
                                                 <div class="form-group col-md-12">
+                                                    <label for="address">Address:</label>
                                                     <textarea rows="6" name="address" id="address" class="form-control address" placeholder="Address" required="required"></textarea>
                                                 </div>
+
                                                 <div class="form-group col-md-4 pe-5">
+                                                    <label for="postcode">Postcode:</label>
                                                     <input type="text" name="postcode" id="postcode" class="form-control postcode" placeholder="Postcode" required="required">
                                                 </div>
-                                                
-                                                <!--Dropdown-->
+
                                                 <div class="form-group col-md-3">
-                                                    <label class="category">Country :</label>
+                                                    <label for="country">Country:</label>
                                                     <select id="country" class="dropdown-option country" name="country" >
                                                         <option selected disabled>Choose</option>
                                                         <option value="malaysia">Malaysia</option>
@@ -186,27 +192,35 @@
                                                         <option value="singapore">Singapore</option>
                                                     </select><br>
                                                 </div>
-                                                <!--End Dropdown-->
-                                                <!--Dropdown-->
+
                                                 <div class="form-group col-md-4">
-                                                    <label for="state">State :</label>
+                                                    <label for="state">State:</label>
                                                     <select id="state" class="dropdown-option state" name="state" >
                                                         <option selected disabled>Choose</option>
                                                         <option value="">-- Select State --</option>
                                                     </select><br>
                                                 </div>
-                                                <!--End Dropdown-->
+
                                                 <div class="form-group col-md-4 pe-5" >
-                                                    <input type="password" name="password1" id="password1" class="form-control password" placeholder="Password" minlength="6" required="required">
+                                                    <label for="password1">Password:</label>
+                                                    <input type="password" name="password1" id="password1" class="form-control password" placeholder="Password" minlength="6" maxlength="30" required="required">
                                                     <i class="bi-eye password-toggle" id="togglePassword1" style="color: black;"></i>
                                                 </div>
 
-                                                <!--End Dropdown-->
                                                 <div class="form-group col-md-4 pe-5" >
-                                                    <input type="password" name="password2" id="password2" class="form-control password" placeholder="Please Confirm Your Password" minlength="6" required="required">
+                                                    <label for="password2">Confirm Password:</label>
+                                                    <input type="password" name="password2" id="password2" class="form-control password" placeholder="Please Confirm Your Password" minlength="6" maxlength="30" required="required">
                                                     <i class="bi-eye password-toggle" id="togglePassword2" style="color: black;"></i>
+                                                    <span id="password2Error" class="text-danger" style="display: none;"></span>
                                                 </div>
                                                 
+                                                
+                                                <div class="col-md-12 text-center">
+                                                    <button type="submit" name="submit" id="submitButton" class="button-submit" title="Submit your form!">Submit</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
                                         <script>
                                         $(document).ready(function() {
                                         // Define an object that maps countries to states
@@ -246,16 +260,8 @@
                                         $('')
                                     });
                                         </script>                                          
-                                                
-                                                <div class="col-md-12 text-center">
-                                                    <a href="FeLISregister_2.html"><button type="submit" value="Send form" name="submit" id="submitButton" class="button-submit" title="Submit your form!">Submit</button></a>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
                             </div><!--- END ROW -->
                         </div><!--- END CONTAINER -->	
-                            </form>		
                             
                     </div>
                 </div>
@@ -283,6 +289,8 @@
             $(document).ready(function () {
                 var passwordVisible1 = false; // Track password1 visibility state
                 var passwordVisible2 = false; // Track password2 visibility state
+                var form = $('#registrationForm'); // Get the form
+                var error = false; //
 
                 // Toggle password visibility for password1
                 $("#togglePassword1").on("click", function () {
@@ -344,17 +352,39 @@
                         }
                     },
                 );
-            });
 
-            var registrationForm = document.getElementById('registrationForm');
-            registrationForm.addEventListener('submit', function(event) {
-            var passwordInput = document.getElementById('password1');
-            if (passwordInput.value.length > 50) {
-                event.preventDefault(); // Prevent form submission
-                passwordInput.value = passwordInput.value.slice(0, 50);
-                alert('Password must be no more than 50 characters long.');
-            }
+                // Attach an event listener to the form's submit event
+                form.on("submit", function (event) {
+                event.preventDefault(); // Prevent the form from submitting
+                console.log(error);
+
+                // Validate passwords here
+                var password1 = $("#password1").val();
+                var password2 = $("#password2").val();
+                var password2Error = $("#password2Error");
+                
+                password2Error.hide().text("");
+                if (password1 !== password2) {
+                    password2Error.text("Passwords do not match.").show();
+                    error = true;
+                }else{
+                    error = false;
+                }
+
+                if (password1.length > 30 || password2.length > 30) {
+                    alert("Passwords should not be more than 30 characters.");
+                    error = true;
+                }else{
+                    error = false;
+                }
+
+                if(error == false){
+                    form.unbind("submit").submit();
+                }
             });
+        });
+
+            
         </script>
         <!--<script src="js/scripts.js"></script>-->
     </body>

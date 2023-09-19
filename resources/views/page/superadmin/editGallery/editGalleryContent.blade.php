@@ -494,9 +494,9 @@
                                 </td>
                                 <td id="titleTableData">
                                     <label for="title">Title</label>
-                                    <textarea class="form-control" style="margin-top: 3%;"  type="text" id="existingTitle" name="title">{{ trim($gallery->title) }}</textarea>
+                                    <textarea class="form-control" style="margin-top: 3%;"  type="text" id="existingTitle" name="title" required>{{ trim($gallery->title) }}</textarea>
                                     <label for="title" style="margin-top: 8%;">Description</label>
-                                    <textarea class="form-control" style="margin-top: 3%;" type="text" id="existingDescription" name="description">{{ trim($gallery->description) }}</textarea>
+                                    <textarea class="form-control" style="margin-top: 3%;" type="text" id="existingDescription" name="description" required>{{ trim($gallery->description) }}</textarea>
                                 </td>
                                 <td style="text-align: center;">
                                     <label class="switch">
@@ -548,7 +548,7 @@
                                         <div style="display: flex; align-items: center; margin-top:3%;">
                                             <label class="btn btn-primary" style="font-size:medium; padding:2%; width:70%;">
                                                 Choose Image
-                                                <input type="file" id="imageUpload" name="image" accept="image/jpeg, image/jpg" style="display: none;">
+                                                <input type="file" id="imageUpload" name="image" accept="image/jpeg, image/jpg" style="display: none;" required>
                                             </label>
                                             <span class="file-name" style="font-style: italic; color: #999; font-size:small; padding:0; margin-top:2%;">No File Selected</span>
                                         </div>
@@ -558,13 +558,13 @@
                                 <tr>
                                     <td>Title</td>
                                     <td>
-                                        <input type="text" name="title">
+                                        <input type="text" name="title" required>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Description</td>
                                     <td>
-                                        <input type="text" name="description">
+                                        <textarea type="text" name="description" required></textarea>
                                     </td>
                                 </tr>
                                 <tr>
