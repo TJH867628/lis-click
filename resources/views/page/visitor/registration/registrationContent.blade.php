@@ -311,9 +311,9 @@
                     if (inputField.attr("type") === "password") {
                         passwordVisible1 = true;
                         inputField.attr("type", "text");
+                        inputField[0].style.color = "#232434";
                         icon.addClass("bi-eye-slash").removeClass("bi-eye");
                     }else if (passwordVisible1 == false){
-                        console.log(1);
                         inputField.attr("type", "password");
                         icon.addClass("bi-eye").removeClass("bi-eye-slash");
                     }
@@ -323,9 +323,9 @@
                     if (inputField.attr("type") === "password") {
                         passwordVisible2 = true;
                         inputField.attr("type", "text");
+                        inputField[0].style.color = "#232434";
                         icon.addClass("bi-eye-slash").removeClass("bi-eye");
                     }else if (passwordVisible2 == false){
-                        console.log(1);
                         inputField.attr("type", "password");
                         icon.addClass("bi-eye").removeClass("bi-eye-slash");
                     }
