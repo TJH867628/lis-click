@@ -19,76 +19,77 @@
 	    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <style>
-          .error{
-            border: 1px solid red;
-            border-radius: 20px;
-            background-color: red;
-            text-align: center;
-            margin-bottom: 10px;
-            color: white;
-          }
 
-          .success{
-            border: 1px solid lightblue;
-            border-radius: 20px;
-            background-color: lightblue;
-            text-align: center;
-            margin-bottom: 10px;
-          }
+            .error{
+                border: 1px solid red;
+                border-radius: 20px;
+                background-color: red;
+                text-align: center;
+                margin-bottom: 10px;
+                color: white;
+            }
 
-          .txt_field {
-            position: relative;
-        }
+            .success{
+                border: 1px solid lightblue;
+                border-radius: 20px;
+                background-color: lightblue;
+                text-align: center;
+                margin-bottom: 10px;
+            }
 
-        .password-toggle {
-            padding: 5px;
-            position: absolute;
-            width: 2.1em;
-            align-items: center;
-            border-radius: 50%;
-            text-align: center;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            transition: color 0.5s, background-color 0.5s; /* Faster transition */
-        }
+            .txt_field {
+                position: relative;
+            }
 
-        /* Adjust padding for input fields with the icon */
-        .txt_field input[type="password"] {
-            padding-right: 15%; /* Initial padding */
-        }
+            .password-toggle {
+                padding: 5px;
+                position: absolute;
+                width: 2.1em;
+                align-items: center;
+                border-radius: 50%;
+                text-align: center;
+                right: 10px;
+                top: 50%;
+                transform: translateY(-50%);
+                cursor: pointer;
+                transition: color 0.5s, background-color 0.5s; /* Faster transition */
+            }
 
-        /* Adjust padding when the icon is visible */
-        .txt_field.password-visible input[type="password"] {
-            padding-right: 20%; /* Increased padding */
-        }
+            /* Adjust padding for input fields with the icon */
+            .txt_field input[type="password"] {
+                padding-right: 15%; /* Initial padding */
+            }
 
-          /* Adjust padding for input fields with the icon */
-          .txt_field input[type="text"] {
-            padding-right: 15%; /* Initial padding */
-        }
+            /* Adjust padding when the icon is visible */
+            .txt_field.password-visible input[type="password"] {
+                padding-right: 20%; /* Increased padding */
+            }
 
-        /* Adjust padding when the icon is visible */
-        .txt_field.password-visible input[type="text"] {
-            padding-right: 20%; /* Increased padding */
-        }
+            /* Adjust padding for input fields with the icon */
+            .txt_field input[type="text"] {
+                padding-right: 15%; /* Initial padding */
+            }
 
-        /* Add a circle around the icon on hover */
-        .password-toggle:hover {
-            padding: 5px;
-            color: grey;
-            align-items: center;
-            text-align: center;
-            border-radius: 50%;
-            width: 2.1em;
-            background-color: rgba(128, 128, 128, 0.2); /* Grey with opacity */
-            transition: color 0.5s, background-color 0.5s; /* Faster transition */
-        }
+            /* Adjust padding when the icon is visible */
+            .txt_field.password-visible input[type="text"] {
+                padding-right: 20%; /* Increased padding */
+            }
 
-        .form-group{
-            position: relative;
-        }
+            /* Add a circle around the icon on hover */
+            .password-toggle:hover {
+                padding: 5px;
+                color: grey;
+                align-items: center;
+                text-align: center;
+                border-radius: 50%;
+                width: 2.1em;
+                background-color: rgba(128, 128, 128, 0.2); /* Grey with opacity */
+                transition: color 0.5s, background-color 0.5s; /* Faster transition */
+            }
+
+            .form-group{
+                position: relative;
+            }
     </style>
     </head>
     <body>
@@ -130,7 +131,7 @@
                                                         <option value="Dr prof">Dr Prof</option>
                                                         <option value="Others">Others</option>
                                                     </select>
-                                                    <input type="text" name="salutationInput" id="salutationInput" style='display:none;'/><br>
+                                                    <input type="text" name="salutationInput" id="salutationInput" style='display:none;' placeholder="Other Salutations"/><br>
                                                 </div>
 
                                                 <div class="form-group col-md-7">
@@ -181,7 +182,7 @@
                                                     <input type="text" name="postcode" id="postcode" class="form-control postcode" placeholder="Postcode" required="required">
                                                 </div>
 
-                                                <div class="form-group col-md-3">
+                                                <div style="margin-top:2%;" class="form-group col-md-3">
                                                     <label for="country">Country:</label>
                                                     <select id="country" class="dropdown-option country" name="country" >
                                                         <option selected disabled>Choose</option>
@@ -193,7 +194,7 @@
                                                     </select><br>
                                                 </div>
 
-                                                <div class="form-group col-md-4">
+                                                <div style="margin-top:2%;" class="form-group col-md-4">
                                                     <label for="state">State:</label>
                                                     <select id="state" class="dropdown-option state" name="state" >
                                                         <option selected disabled>Choose</option>
@@ -204,13 +205,13 @@
                                                 <div class="form-group col-md-4 pe-5" >
                                                     <label for="password1">Password:</label>
                                                     <input type="password" name="password1" id="password1" class="form-control password" placeholder="Password" minlength="6" maxlength="30" required="required">
-                                                    <i class="bi-eye password-toggle" id="togglePassword1" style="color: black;"></i>
+                                                    <i style="margin-top:2%;" class="bi-eye password-toggle" id="togglePassword1" style="color: black;"></i>
                                                 </div>
 
                                                 <div class="form-group col-md-4 pe-5" >
                                                     <label for="password2">Confirm Password:</label>
                                                     <input type="password" name="password2" id="password2" class="form-control password" placeholder="Please Confirm Your Password" minlength="6" maxlength="30" required="required">
-                                                    <i class="bi-eye password-toggle" id="togglePassword2" style="color: black;"></i>
+                                                    <i style="margin-top:2%;" class="bi-eye password-toggle" id="togglePassword2" style="color: black;"></i>
                                                     <span id="password2Error" class="text-danger" style="display: none;"></span>
                                                 </div>
                                                 
@@ -314,7 +315,7 @@
                     }else if (passwordVisible1 == false){
                         console.log(1);
                         inputField.attr("type", "password");
-                        icon.addClass("bi-eye-slash").removeClass("bi-eye");
+                        icon.addClass("bi-eye").removeClass("bi-eye-slash");
                     }
                 }
 
@@ -326,7 +327,7 @@
                     }else if (passwordVisible2 == false){
                         console.log(1);
                         inputField.attr("type", "password");
-                        icon.addClass("bi-eye-slash").removeClass("bi-eye");
+                        icon.addClass("bi-eye").removeClass("bi-eye-slash");
                     }
                 }
 
