@@ -14,7 +14,7 @@ class PublicationController extends Controller
             $userSession = session()->get('LoggedUser');
             $publication = tbl_conference::where('field_name','Publication E-Jurnal')->get();
 
-            return view('page.participants.publicationInfo.publicationinfo',['userSession' => $userSession,'publication' => $publication]);
+            return view('page.participants.publicationInfo.publicationInfo',['userSession' => $userSession,'publication' => $publication]);
         }else
         {
             return redirect('login')->with('fail','Login expired,Please Login Again');

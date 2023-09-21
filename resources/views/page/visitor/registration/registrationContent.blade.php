@@ -205,13 +205,12 @@
                                                 <div class="form-group col-md-4 pe-5" >
                                                     <label for="password1">Password:</label>
                                                     <input type="password" name="password1" id="password1" class="form-control password" placeholder="Password" minlength="6" maxlength="30" required="required">
-                                                    <i style="margin-top:2%;" class="bi-eye password-toggle" id="togglePassword1" style="color: black;"></i>
                                                 </div>
 
                                                 <div class="form-group col-md-4 pe-5" >
                                                     <label for="password2">Confirm Password:</label>
                                                     <input type="password" name="password2" id="password2" class="form-control password" placeholder="Please Confirm Your Password" minlength="6" maxlength="30" required="required">
-                                                    <i style="margin-top:2%;" class="bi-eye password-toggle" id="togglePassword2" style="color: black;"></i>
+                                                    <i style="margin-top:3%;" class="bi-eye password-toggle" id="togglePassword1" style="color: black;"></i>
                                                     <span id="password2Error" class="text-danger" style="display: none;"></span>
                                                 </div>
                                                 
@@ -288,71 +287,52 @@
         <!-- Core theme JS-->
         <script>
             $(document).ready(function () {
-                var passwordVisible1 = false; // Track password1 visibility state
-                var passwordVisible2 = false; // Track password2 visibility state
+                var passwordVisible = false; // Track password1 visibility state
                 var form = $('#registrationForm'); // Get the form
                 var error = false; //
 
                 // Toggle password visibility for password1
                 $("#togglePassword1").on("click", function () {
-                    var inputField = $("#password1");
+                    var inputField1 = $("#password1");
                     var icon = $("#togglePassword1");
-                    togglePasswordVisibility1(inputField,icon,passwordVisible1);
+                    var inputField2 = $("#password2");
+                    togglePasswordVisibility(inputField1,inputField2,icon);
                 });
 
                 // Toggle password visibility for password2
                 $("#togglePassword2").on("click", function () {
                     var inputField = $("#password2");
                     var icon = $("#togglePassword2");
-                    togglePasswordVisibility2(inputField,icon,passwordVisible2);
+                    togglePasswordVisibility(inputField1,inputField2,icon);
                 });
 
-                function togglePasswordVisibility1(inputField,icon) {
-                    if (inputField.attr("type") === "password") {
-                        passwordVisible1 = true;
-                        inputField.attr("type", "text");
-                        inputField[0].style.color = "#232434";
+                function togglePasswordVisibility(inputField1,inputField2,icon) {
+                    if (inputField1.attr("type") === "password") {
+                        passwordVisible = true;
+                        inputField1.attr("type", "text");
+                        inputField1[0].style.color = "#232434";
+                        inputField2.attr("type", "text");
+                        inputField2[0].style.color = "#232434";
                         icon.addClass("bi-eye-slash").removeClass("bi-eye");
-                    }else if (passwordVisible1 == false){
-                        inputField.attr("type", "password");
-                        icon.addClass("bi-eye").removeClass("bi-eye-slash");
-                    }
-                }
-
-                function togglePasswordVisibility2(inputField,icon) {
-                    if (inputField.attr("type") === "password") {
-                        passwordVisible2 = true;
-                        inputField.attr("type", "text");
-                        inputField[0].style.color = "#232434";
-                        icon.addClass("bi-eye-slash").removeClass("bi-eye");
-                    }else if (passwordVisible2 == false){
-                        inputField.attr("type", "password");
+                    }else if (passwordVisible == false){
+                        inputField1.attr("type", "password");
+                        inputField2.attr("type", "password");
                         icon.addClass("bi-eye").removeClass("bi-eye-slash");
                     }
                 }
 
                 
-            $("#togglePassword1").hover(
-                    function () {
-                        var inputField = $("#password1");
-                        var icon = $("#togglePassword1");
-                        if (passwordVisible1 == true) {
-                            passwordVisible1 = false; // Toggle visibility state
-                            togglePasswordVisibility1(inputField, icon,passwordVisible1,passwordVisible1); 
-                        }
-                    },
-                );
-
-                $("#togglePassword2").hover(
-                    function () {
-                        var inputField = $("#password2");
-                        var icon = $("#togglePassword2");
-                        if (passwordVisible2 == true) {
-                            passwordVisible2 = false; // Toggle visibility state
-                            togglePasswordVisibility2(inputField, icon,passwordVisible2); 
-                        }
-                    },
-                );
+                $("#togglePassword1").hover(
+                        function () {
+                            var inputField1 = $("#password1");
+                            var icon = $("#togglePassword1");
+                            var inputField2 = $("#password2");
+                            if (passwordVisible == true) {
+                                passwordVisible = false; // Toggle visibility state
+                                togglePasswordVisibility(inputField1,inputField2, icon); 
+                            }
+                        },
+                    );
 
                 // Attach an event listener to the form's submit event
                 form.on("submit", function (event) {

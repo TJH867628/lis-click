@@ -16,41 +16,6 @@
     </head>
     <body class="d-flex flex-column h-100">
         <main class="flex-shrink-0">
-            @csrf
-            <!-- Navigation-->
-            <nav class="shadow-sm navbar navbar-expand-lg navbar-light bg-light fixed-top">
-                <div class="container px-5">
-                    <a class="navbar-brand" href="index.html">
-                        <img src="assets/Logo1 (1).png" width="200px" alt="logoLIS2023" />
-                    </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                            <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Conference</a>
-                                <ul class="dropdown-menu dropdown-menu-end bg-light" aria-labelledby="navbarDropdownBlog">
-                                    <li><a class="dropdown-item" href="FeConference.html">Conference Info</a></li>
-                                    <li><a class="dropdown-item" href="Fedownload.html">Downloads</a></li>
-                                </ul>
-                                <li class="nav-item"><a class="nav-link" href="FePublication.html">Publication</a></li>
-                                <li class="nav-item"><a class="nav-link" href="FeFaq.html">Contact Us</a></li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Registration</a>
-                                        <ul class="dropdown-menu dropdown-menu-end bg-light" aria-labelledby="navbarDropdownBlog">
-                                            <li><a class="dropdown-item" href="FeLISregister.html">LIS Registration</a></li>
-                                            <li><a class="dropdown-item" href="FePoster.html">Poster Submission</a></li>
-                                            <li><a class="dropdown-item" href="FeFullPaper.html">Full Paper Submission</a></li>
-                                            <li><a class="dropdown-item" href="FeSubmissionList.html">Submission Status</a></li>
-                                            </ul>
-                                <li class="nav-item"><a class="nav-link" href="FeAccount.html">My Profile</a></li>
-                            
-                            </div>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-
             <!-- Header-->
             <header class="bg-light text text-dark py-5" id="sectionBlur">
                 <div class="container px-5 py-5">
@@ -192,43 +157,6 @@
                     </div>
                 </div>
             </header>
-
-        <!-- Footer-->
-        <footer class="bg-dark py-4 mt-auto">
-            <div class="container px-5">
-                <div class="row align-items-center justify-content-between flex-column flex-sm-row">
-                    <div class="col-auto"><div class="small m-0 text-white">© 2023 LIGA ILMU SERANTAU 2023. All Rights Reserved. Design by Politeknik Mersing</div></div>
-                    <div class="col-auto">
-                        <a class="link-light small" href="index.html">Home</a>
-                        <span class="text-white mx-1">&middot;</span>
-                        <a class="link-light small" href="FeConference.html">Conference</a>
-                        <span class="text-white mx-1">&middot;</span>
-                        <a class="link-light small" href="FeDownload.html">Download</a>
-                        <span class="text-white mx-1">&middot;</span>
-                        <a class="link-light small" href="FePublication.html">Publication</a>
-                        <span class="text-white mx-1">&middot;</span>
-                        <a class="link-light small" href="FeRegistration.html">Register</a>
-                        <span class="text-white mx-1">&middot;</span>
-                        <a class="link-light small" href="FeFaq.html">Contact</a>
-                        <span class="text-white mx-1">&middot;</span>
-                        <a class="link-light small" href="FePrivacy.html">Privacy</a>
-                    </div>
-                </div>
-            </div>
-        </footer>
-
-        <!--Popup Window
-        <div id="popup1">
-            <h1>SUCCESS</h1>
-            <p>Your profile has been updated</p>
-            <button class="button-submit" onclick="toggle()">Done</button>
-        </div>
-        <div id="popup2">
-            <h1>CANCEL</h1>
-            <p>Changes will not be saved. Do you want to proceed?</p>
-            <button class="button-submit" onclick="toggle()">Discard</button>
-            <button class="button-submit" onclick="toggle()">Back</button>
-        </div> -->
 
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
