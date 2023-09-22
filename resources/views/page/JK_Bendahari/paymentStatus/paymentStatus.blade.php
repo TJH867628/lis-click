@@ -13,47 +13,6 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
         <style>
-            tr td{
-                padding: 10px;
-                margin: 10px;
-                border: 1px solid black;
-                color: black;
-                background-color: aliceblue;
-            }
-
-            .table-container{
-                border: 2px solid black;
-                padding: 20px;
-                width: 90%;
-                margin: auto;
-                overflow-x: auto;
-                overflow-wrap: break-word;
-                align-items: center;
-                justify-content: center;
-                text-align: center;
-            }
-            
-            table{
-                margin-top: 50px;
-                margin: auto;
-                overflow-x: auto;
-                align-items: center;
-                justify-content: center;
-                text-align: center;
-            }
-
-            table th{
-                text-align: center;
-                font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-                color: black;
-                background-color:aquamarine;
-                border: 1px solid black;
-            }
-
-            body{
-                background-color: white;
-            }
-
             #searchInput{
                 margin: 10px;
                 width: 250px;

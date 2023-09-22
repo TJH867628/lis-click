@@ -13,57 +13,6 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-
-        <style>
-            tr td{
-                padding: 10px;
-                margin: 10px;
-                border: 1px solid black;
-                color: black;
-                overflow-x: auto;
-                background-color: aliceblue;
-            }
-            
-            .table-container{
-                margin-top: 200px !important;
-                border: 2px solid black;
-                padding: 20px;
-                width: 90%;
-                margin: auto;
-                overflow-x: auto;
-                overflow-wrap: break-word;
-                align-items: center;
-                justify-content: center;
-                text-align: center;
-            }
-            
-            table{
-                margin-top: 50px;
-                overflow-x: auto;
-                overflow-wrap: break-word;
-                align-items: center;
-                justify-content: center;
-                text-align: center;
-            }
-
-            table th{
-                text-align: center;
-                font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-                color: black;
-                background-color:aquamarine;
-                border: 1px solid black;
-            }
-
-            body{
-                background-color: white;
-            }
-
-            form{
-                border: 1px solid black;
-                margin: 10px;
-                padding: 10px;
-            }
-        </style>
     </head>
     <body class="d-flex flex-column h-100" style="background-color: white;">
         <main class="flex-shrink-0">   

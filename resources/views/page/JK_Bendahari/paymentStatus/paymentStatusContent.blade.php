@@ -4,23 +4,175 @@
         <link href="css/styles.css" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
         <style>
-            /* Set the font family and size */
-            body {
-            font-family: Arial, sans-serif;
-            font-size: 16px;
-            }
+            * {
+        margin: 0;
+        padding: 0;
 
-            /* Set the background color */
-            body {
-            background-color: #f2f2f2;
-            }
+        box-sizing: border-box;
+        font-family: sans-serif;
+    }
 
+    body {
+        min-height: 100vh;
+        background: url("../images/tblBackground.jpg") center / cover;
+        display: flex;
+        justify-content: center;
+    }
+
+    main.table {
+        margin-top: 3%;
+        width: 87vw !important;
+        height: 70vh;
+        background-color: #fff5;
+        backdrop-filter: blur(7px);
+        box-shadow: 0 .4rem .8rem #0005;
+        border-radius: .8rem;
+        overflow: hidden;
+    }
+
+    .table__header {
+        z-index:0;
+        width: 100%;
+        height: 15%;
+        background-color: #fff4;
+        padding: 1rem 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .table__header .input-group {
+        width: 35%;
+        height: 100%;
+        background-color: #fff5;
+        padding: 0 .8rem;
+        border-radius: 2rem;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        transition: .2s;
+    }
+
+    .table__header .input-group:hover {
+        width: 45%;
+        background-color: #fff8;
+        box-shadow: 0 .1rem .4rem #0002;
+    }
+
+    .table__header .input-group img {
+        width: 1.2rem;
+        height: 1.2rem;
+    }
+
+    .table__header .input-group input {
+        width: 100%;
+        padding: 0 .5rem 0 .3rem;
+        background-color: transparent;
+        border: none;
+        outline: none;
+    }
+
+    .table__body {
+        position: relative;
+        width: 95%;
+        background-color: #fffb;
+        height: 48vh;
+        margin: .3rem auto;
+        border-radius: .6rem;
+
+        overflow: auto;
+        overflow: overlay;
+    }
+
+    .table__body::-webkit-scrollbar{
+        width: 0.5rem;
+        height: 0.5rem;
+    }
+
+    .table__body::-webkit-scrollbar-thumb{
+        border-radius: .5rem;
+        background-color: #0004;
+        visibility: hidden;
+    }
+
+    .table__body:hover::-webkit-scrollbar-thumb{ 
+        visibility: visible;
+    }
+
+    table {
+        width: 100%;
+    }
+
+    td img {
+        width: 36px;
+        height: 36px;
+        margin-right: .5rem;
+        border-radius: 50%;
+
+        vertical-align: middle;
+    }
+
+    table, th, td {
+        border-collapse: collapse;
+        padding: 1rem;
+        text-align: left;
+    }
+
+    th {
+        background-color: #d5d1defe !important;
+    }
+
+    thead th {
+        position: sticky;
+        top: 0;
+        left: 0;
+        cursor: pointer;
+        text-transform: capitalize;
+    }
+
+    tbody tr:nth-child(even) {
+        background-color: #0000000b;
+    }
+
+    tbody tr {
+        --delay: .1s;
+        transition: .5s ease-in-out var(--delay), background-color 0s;
+    }
+
+    tbody tr.hide {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+
+    tbody tr:hover {
+        background-color: #fff6 !important;
+    }
+
+    tbody tr td,
+    tbody tr td p,
+    tbody tr td img {
+        transition: .2s ease-in-out;
+    }
+
+    tbody tr.hide td,
+    tbody tr.hide td p {
+        padding: 0;
+        font: 0 / 0 sans-serif;
+        transition: .2s ease-in-out .5s;
+    }
+
+    tbody tr.hide td img {
+        width: 0;
+        height: 0;
+        transition: .2s ease-in-out .5s;
+    }
             /* Style the search container */
             .search-container {
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 20px 0;
             }
 
             /* Style the search input */
@@ -48,35 +200,6 @@
             background-color: #4CAF50;
             color: white;
             cursor: pointer;
-            }
-
-            /* Style the table */
-            table {
-            border-collapse: collapse;
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            background-color: white;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            margin-bottom: 10%;
-            }
-
-            /* Style the table headings */
-            th {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px;
-            text-align: left;
-            }
-
-            /* Style the table rows */
-            .payment-row {
-            border-bottom: 1px solid #ddd;
-            }
-
-            /* Style the table cells */
-            td {
-            padding: 10px;
             }
 
             /* Style the select dropdown */
@@ -116,6 +239,11 @@
         </style>
     </head>
     <body>
+        
+        <main class="table">
+        <section class="table__header">
+            <h1>Payment Status</h1>
+        </section>
         <div class="search-container">
             <input type="text" id="searchInput" placeholder="Search...">
             <select id="searchField">
@@ -126,16 +254,22 @@
             </select>
             <button id="searchButton">Search</button>
         </div>
+        <section class="table__body">
         <table>
-            <th>
-                Submission Details
-            </th>
-            <th>
-                Payment Details
-            </th>
-            <th>
-                Proof Of Payment
-            </th>
+            <thead>
+            <tr>
+                <th>
+                    Submission Details
+                </th>
+                <th>
+                    Payment Details
+                </th>
+                <th>
+                    Proof Of Payment
+                </th>
+            </tr>
+            </thead>
+            <tbody>
             @foreach($paymentDetails as $thisPaymentDetails)
                 @if(!(empty($thisPaymentDetails->paymentReceipt)))
                 <tr class="payment-row">
@@ -143,6 +277,7 @@
                         <p> Submission Code : </p>{{$thisPaymentDetails->submissionCode}}<br>
                         <p> Participant Email : </p>{{$thisPaymentDetails->submissionInfo->participants1}}<br>
                         <p> Participant HP : </p>{{$thisPaymentDetails->participantsInfo->phoneNumber}}<br>
+
                     </td>
                     <td>
                         <p> Payment ID : </p>
@@ -181,7 +316,10 @@
                 </tr>
                 @endif
             @endforeach
+            </tbody>
         </table>
+        </section>
+    </main>
     </body>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     
