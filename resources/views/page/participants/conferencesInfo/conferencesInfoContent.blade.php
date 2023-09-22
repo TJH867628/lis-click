@@ -389,93 +389,93 @@
     }
     </style>
     <div class="table-container">
-            <div style="width:50%">
-                <main class="table" style="margin-top: 20%; width:fit-content;">
-                <section class="table__header">
-                    <h1>Conference Fees</h1>
-                </section>
-                <section class="table__body">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th> No</th>
-                                <th> List of Jurnal</th>
-                                <th> Fees</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+        <div style="width:50%">
+            <main class="table" style="margin-top: 20%; width:fit-content;">
+            <section class="table__header">
+                <h1>Conference Fees</h1>
+            </section>
+            <section class="table__body">
+                <table>
+                    <thead>
                         <tr>
-                            <td scope="row">1</td>
-                            <td>Presentation &amp; Publication</td>
-                            <td>RM 300 / USD 70</td>
+                            <th> No</th>
+                            <th> List of Jurnal</th>
+                            <th> Fees</th>
                         </tr>
-                        <tr>
-                            <td scope="row">2</td>
-                            <td>Poster / Paper Presentation</td>
-                            <td>RM 250 / USD 60</td>
-                        </tr>
-                        <tr>
-                            <td scope="row">3</td>
-                            <td>Publication Only</td>
-                            <td>RM 250 / USD 60</td>
-                        </tr>
-                        <tr>
-                            <td scope="row">4</td>
-                            <td>Participant / Audience</td>
-                            <td>RM 250 / USD 60</td>
-                        </tr>
-                        <tr>
-                            <td scope="row">5</td>
-                            <td>Student Presenter</td>
-                            <td>RM 250 / USD 60</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </section>
-            </main>
-        </div>
-    <div style="width:50%">
-    <main class="table" style="margin-top: 20%; width:fit-content;">
-        <section class="table__header">
-            <h1>Important Dates</h1>
-        </section>
-        <section class="table__body">
-            <table>
-                <thead>
-                    <tr>
-                        <th> No</th>
-                        <th> Title</th>
-                        <th> Date</th>
-                    </tr>
-                </thead>
-                <tbody>
+                    </thead>
+                    <tbody>
                     <tr>
                         <td scope="row">1</td>
-                        <td>Registration &amp; Abstract Submission</td>
-                        <td>12 Mac - 30 April 2023</td>
+                        <td>Presentation &amp; Publication</td>
+                        <td>RM 300 / USD 70</td>
                     </tr>
                     <tr>
                         <td scope="row">2</td>
-                        <td>Full Paper Submission Deadline</td>
-                        <td>15 June 2023</td>
+                        <td>Poster / Paper Presentation</td>
+                        <td>RM 250 / USD 60</td>
                     </tr>
                     <tr>
                         <td scope="row">3</td>
-                        <td>Acceptance of Payment Deadline</td>
-                        <td>6 July 2023</td>
+                        <td>Publication Only</td>
+                        <td>RM 250 / USD 60</td>
                     </tr>
                     <tr>
                         <td scope="row">4</td>
-                        <td>Conference Date</td>
-                        <td>8 August 2023</td>
+                        <td>Participant / Audience</td>
+                        <td>RM 250 / USD 60</td>
                     </tr>
-                </tbody>
-            </table>
-        </section>
-    </main>
+                    <tr>
+                        <td scope="row">5</td>
+                        <td>Student Presenter</td>
+                        <td>RM 250 / USD 60</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
     </div>
+    <div style="width:50%">
+        <main class="table" style="margin-top: 20%; width:fit-content;">
+            <section class="table__header">
+                <h1>Important Dates</h1>
+            </section>
+            <section class="table__body">
+                <table>
+                    <thead>
+                        <tr>
+                            <th> No</th>
+                            <th> Title</th>
+                            <th> Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td scope="row">1</td>
+                            <td>Registration &amp; Abstract Submission</td>
+                            <td>12 Mac - 30 April 2023</td>
+                        </tr>
+                        <tr>
+                            <td scope="row">2</td>
+                            <td>Full Paper Submission Deadline</td>
+                            <td>15 June 2023</td>
+                        </tr>
+                        <tr>
+                            <td scope="row">3</td>
+                            <td>Acceptance of Payment Deadline</td>
+                            <td>6 July 2023</td>
+                        </tr>
+                        <tr>
+                            <td scope="row">4</td>
+                            <td>Conference Date</td>
+                            <td>8 August 2023</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
     </div>
-
-    <main style="margin-top:2%;" class="table">
+</div>
+<main style="margin-top:2%;" class="table">
         <div class="fs-4 fw-bold mb-4 fst-italic" style="text-align:center;"><span>Don't Miss These Amazing Opportunities &amp; The Conference!</span></div>
     </main>
+
