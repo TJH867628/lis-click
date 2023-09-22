@@ -5,7 +5,7 @@
 <link href="/css/styles.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Navigation-->
-<nav class="shadow-sm navbar navbar-expand-lg navbar-light bg-light">
+<nav class="shadow-sm navbar navbar-expand-lg navbar-light bg-light fixed-top">
     <div class="container px-5">
         <a class="navbar-brand" href="/homePage">
             <img src="/images/Logo1 (1).png" width="200px" alt="logoLIS2023" />

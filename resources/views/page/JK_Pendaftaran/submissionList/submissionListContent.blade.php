@@ -1,13 +1,19 @@
-<div class="table-container">
+<main class="table">
+<section class="table__header">
+    <h1>Submission List</h1>
+</section>
+<section class="table__body">
 <table>
-    <h2 style="color: black ;">Submission List</h2>
-    <th>Details</th>
-    <th>Type</th>
-    <th>Theme</th>
-    <th>Present Mode</th>
-    <th>Participants</th>
-    <th>Review Status</th>
-    <th>Upload At</th>
+    <thead>
+        <th>Details</th>
+        <th>Type</th>
+        <th>Theme</th>
+        <th>Present Mode</th>
+        <th>Participants</th>
+        <th>Review Status</th>
+        <th>Upload At</th>
+    </thead>
+    <tbody>
     @foreach($submissionInfo as $submission)
     <tr>
         <td>
@@ -35,5 +41,7 @@
         <td>{{ $submission->created_at }}</td>
     </tr>
     @endforeach
+    </tbody>
 </table>
-</div>
+</section>
+</main>
