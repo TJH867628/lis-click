@@ -14,7 +14,7 @@
                     <p class="lead fw-normal text-black-50 mb-4">Welcome to the 9th annual Liga Ilmu Serantau 2023, a milestone event that celebrates almost a decade of research, and collaboration. Since its inception, this conference has brought together experts, researchers, practitioners, and enthusiasts from across industries to explore the latest developments and trends in many fields. </p>
                 </div>
             </div>
-            <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img src="/resources/Img/backdrop1.jpg" class="img-fluid rounded-3 my-5"></div>
+            <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img src="/resources/Img/backdrop1.jpg" src="/resources/Img/bgbox.png" class="img-fluid rounded-3 my-5"></div>
         </div>
     </div>
 </header>
@@ -56,8 +56,6 @@
         </div>
     </div>
 </div>
-
-<li class="nav-item"><a class="nav-link" href="/account">My Profile</a></li>
 
 <!-- Blog preview section-->
 <section class="py-5">

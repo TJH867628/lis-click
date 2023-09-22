@@ -31,7 +31,6 @@ class PageEditController extends Controller
             $fileContents = $view->render();
             $editableContent = $this->generateEditableHTML($fileContents);
             $wrappedContent = $editableContent;
-
             return view('page.editPage', ['editableContent' => $wrappedContent,'pageName' => $pageName]);
         }
 
@@ -40,7 +39,7 @@ class PageEditController extends Controller
     public function generateEditableHTML($content)
     {
         // Match all HTML opening tags
-        $pattern = '/<([a-zA-Z]+)([^>]*)>/';
+        $pattern = '/<(h[1-5]|p|label|a|span|td|[a-zA-Z]+[^>]*\bword\b[^>]*)([^>]*)>/';
     
         // Replace each opening tag with the same tag and the contenteditable attribute added
         $editableContent = preg_replace($pattern, '<$1$2 contenteditable="true">', $content);
@@ -72,6 +71,27 @@ class PageEditController extends Controller
             $divHtml = $matches[1] . $matches[2] . $matches[3];
             return $divHtml;
         }, $editableContent);
+
+        $search = '/(<div[^>]*)([^>]*)contenteditable="true"([^>]*>.*?<\/div>)/s';
+
+        $editableContent = preg_replace_callback($search, function($matches) {
+            $divHtml = $matches[1] . $matches[2] . $matches[3];
+            return $divHtml;
+        }, $editableContent);
+
+        $search = '/(<div[^>]*)([^>]*)style="[^"]*"[^>]*contenteditable="true"([^>]*>.*?<\/div>)/s';
+
+        $editableContent = preg_replace_callback($search, function($matches) {
+            $divHtml = $matches[1] . $matches[2] . $matches[3];
+            return $divHtml;
+        }, $editableContent);
+
+        $search = '/(<main[^>]*)([^>]*)contenteditable="true"([^>]*>.*?<\/main>)/s';
+
+        $editableContent = preg_replace_callback($search, function($matches) {
+            $divHtml = $matches[1] . $matches[2] . $matches[3];
+            return $divHtml;
+        }, $editableContent);
     
         return $editableContent;
     }
@@ -94,13 +114,7 @@ class PageEditController extends Controller
 
         // Handle the uploaded image file
         $image = $request->file('images');
-
     if ($image) {
-        // Check if the file size exceeds the limit (2MB)
-        if ($image->getSize() > 2 * 1024 * 1024) {
-            // Handle the file size limit exceeded error
-            return redirect()->back()->with('error', 'The uploaded image file exceeds the maximum allowed size of 2MB.');
-        }
 
         // Move the uploaded image file to the desired directory using a unique filename
         $imageName = $image->getClientOriginalName();
@@ -112,7 +126,7 @@ class PageEditController extends Controller
         // Update the src attribute in the updated content with the new file path
         $pattern = '/<img([^>]*)>/';
         $updatedContent = preg_replace($pattern, '<img src="'.$savedImagePath.'"$1>', $updatedContent);
-
+        
     }
         $updatedContent = $this->removeContentEditable($updatedContent);
         if($pageName == 'Acceptance Letter'){
