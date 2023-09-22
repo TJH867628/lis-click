@@ -12,7 +12,6 @@
 </head>
 <body>
     @include('page.participants.navigationBar')
-    <br><br><br><br><br>
     @include('page.participants.conferencesInfo.conferencesInfoContent')
     @include('page.footer')
 </body>

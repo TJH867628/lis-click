@@ -11408,7 +11408,7 @@ html {
       border-radius: 3px;
       -webkit-box-shadow: none;
       box-shadow: none;
-      color: #232434;
+      color: grey;
       font-size: 16px;
       height: 60px;
       padding: 10px;
@@ -11419,6 +11419,10 @@ html {
       -o-transition: all 0.3s ease 0s;
       transition: all 0.3s ease 0s;
   }
+
+  .contact input::placeholder{
+    color: grey;
+  }
   
   .contact textarea {
       background: #fff;
@@ -11426,7 +11430,7 @@ html {
       border-radius: 3px;
       -webkit-box-shadow: none;
       box-shadow: none;
-      color: #232434;
+      color: grey;
       font-size: 16px;
       padding: 10px;
       width: 100%;
@@ -11435,6 +11439,10 @@ html {
       -webkit-transition: all 0.3s ease 0s;
       -o-transition: all 0.3s ease 0s;
       transition: all 0.3s ease 0s;
+  }
+
+  .contact textarea::placeholder{
+    color: grey;
   }
   
   .contact input:focus {

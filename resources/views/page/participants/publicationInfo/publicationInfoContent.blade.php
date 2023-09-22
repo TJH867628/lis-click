@@ -127,6 +127,7 @@
         background-color: #d5d1defe;
         cursor: pointer;
         text-transform: capitalize;
+        z-index: 1;
     }
 
     tbody tr:nth-child(even) {
@@ -321,6 +322,7 @@
     }
 
     .circle .right {
+        right: -2%;
         transform: rotate(180deg);
     }
 
@@ -375,6 +377,10 @@
     #button.active .checkmark span:last-child {
         transform: rotate(-45deg) scaleX(1);
     }
+
+    #button.active .inner{
+        background-color: #0d6efd;
+    }
     </style>
     </head>
     <body>
@@ -401,8 +407,38 @@
                     </tr>
                 </thead>
                 <tbody>
-                <tr>
-                <th scope="row">1</th>
+                @php
+                    $i = 0;
+                @endphp
+                @foreach($publication->reverse() as $thisPublication)
+                    @php
+                        $i++;
+                    @endphp
+                    <th scope="row">{{ $i }}</th>
+                <td>{{ $thisPublication->field_details }}</td>
+                <td>
+                <a href="{{ route('downloadJurnal', ['filename' => $thisPublication->field_value ]) }}" target="_blank"><button id="button"><i class="fa-solid fa-download"></i>Download
+                        <div class="progress-wrapper">
+                            <div class="inner"></div>
+                                <div class="checkmark">
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                                <div class="circle">
+                                    <div class="bar left">
+                                        <div class="progress"></div>
+                                    </div>
+                                    <div class="bar right">
+                                        <div class="progress"></div>
+                                    </div>                  
+                                </div>            
+                        </div>
+                    </button></a>
+                </td>
+                </tr>
+                @endforeach
+                <!--<tr>
+                 <th scope="row">1</th>
                 <td>EDISI KHAS LIGA ILMU SERANTAU 2022</td>
                 <td>
                 <a href="{{ route('downloadJurnal', ['filename' => 'Edisi Khas LIS22.pdf']) }}"><button id="button"><i class="fa-solid fa-download"></i>Download
@@ -555,7 +591,7 @@
                                 </div>            
                         </div></button></a>
                     </td>                                    
-                </tr>
+                </tr> -->
                 </tbody>
             </table>
         </section>

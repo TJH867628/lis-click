@@ -48,9 +48,10 @@ class GalleryController extends Controller
         $img = $request->file('image');
         $title = $request->input('title');
         $description = $request->input('description');
+        $visibility = $request->input('visibility') == 'on' ? 1 : 0;
         $date = now();
         $formatted_date = $date->format('YmdHis');
-        $gallery = tbl_gallery::find($id);
+        $gallery = tbl_gallery::where('id',$id)->first();
 
         if($img != NULL && $img != ""){
             $imgName = $formatted_date . "_" . $title  . "_" . "." . $img->getClientOriginalExtension();
@@ -70,20 +71,9 @@ class GalleryController extends Controller
             $gallery->updated_at = $date;
         }
 
+        $gallery->visible = $visibility;
         $gallery->save();
         
-        return redirect()->back();
-    }
-
-    public function changeVisible($id){
-        $gallery = tbl_gallery::find($id);
-        if($gallery->visible == 1){
-            $gallery->visible = 0;
-        }else{
-            $gallery->visible = 1;
-        }
-        $gallery->save();
-
         return redirect()->back();
     }
 }

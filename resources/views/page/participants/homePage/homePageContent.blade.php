@@ -14,7 +14,7 @@
                     <p class="lead fw-normal text-black-50 mb-4">Welcome to the 9th annual Liga Ilmu Serantau 2023, a milestone event that celebrates almost a decade of research, and collaboration. Since its inception, this conference has brought together experts, researchers, practitioners, and enthusiasts from across industries to explore the latest developments and trends in many fields. </p>
                 </div>
             </div>
-            <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img src="/resources/Img/backdrop1.jpg" class="img-fluid rounded-3 my-5"></div>
+            <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img src="/resources/Img/backdrop1.jpg" src="/resources/Img/bgbox.png" class="img-fluid rounded-3 my-5"></div>
         </div>
     </div>
 </header>
@@ -56,8 +56,6 @@
         </div>
     </div>
 </div>
-
-<li class="nav-item"><a class="nav-link" href="/account">My Profile</a></li>
 
 <!-- Blog preview section-->
 <section class="py-5">
@@ -153,22 +151,5 @@
             </div>
             </div>
         </div>
-
-        <!-- Call to action-->
-        <aside class="bg-primary bg-gradient rounded-3 p-4 p-sm-5 mt-5">
-            <div class="d-flex align-items-center justify-content-between flex-column flex-xl-row text-center text-xl-start">
-                <div class="mb-4 mb-xl-0">
-                    <div class="fs-3 fw-bold text-white">New Item, delivered to you.</div>
-                    <div class="text-white-50">Sign up for our newsletter for the latest updates.</div>
-                </div>
-                <div class="ms-xl-4">
-                    <div class="input-group mb-2">
-                        <input class="form-control" type="text" placeholder="Email address..." aria-label="Email address..." aria-describedby="button-newsletter">
-                        <button class="btn btn-outline-light" id="button-newsletter" type="button">Sign up</button>
-                    </div>
-                    <div class="small text-white-50">We care about privacy, and will never share your data.</div>
-                </div>
-            </div>
-        </aside>
     </div>
 </div></div></div></section>

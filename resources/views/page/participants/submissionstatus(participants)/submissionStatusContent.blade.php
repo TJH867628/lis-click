@@ -274,7 +274,7 @@
                                 @if($submissionInfo->returnPaperLink == NULL)
                                     <p>Return Paper Unavailable</p>
                                 @else
-                                    <a href="{{ route('downloadReviewedFile', ['filename' => $submissionInfo->returnPaperLink]) }}" class="btn btn-primary mb-4 btn-download">Return File</a>
+                                    <a href="{{ route('downloadReviewedFile', ['filename' => $submissionInfo->returnPaperLink]) }}" class="btn btn-primary mb-4 btn-download" target="_blank">Return File</a>
                                 @endif
                                 </td>
                             </tr>
@@ -282,7 +282,7 @@
                                 <td style="width: max-content; color:black;">
                                     Orginal Paper
                                 </td>
-                                <td><a href="{{ route('downloadSubmission', ['filename' => $submissionInfo->file_name]) }}" class="btn btn-primary mb-4 btn-download">Original File</a></td>
+                                <td><a href="{{ route('downloadSubmission', ['filename' => $submissionInfo->file_name]) }}" class="btn btn-primary mb-4 btn-download" target="_blank">Original File</a></td>
                             </tr>
                             <tr>
                                 <td style="width: max-content; color:black;">
@@ -290,7 +290,7 @@
                                 </td>
                                 <td>
                                     @if($submissionInfo->turnInReport)
-                                        <a href="{{ route('downloadTurnInReport', ['filename' => $submissionInfo->turnInReport]) }}" class="btn btn-primary mb-4 btn-download">Turn In Report</a>
+                                        <a href="{{ route('downloadTurnInReport', ['filename' => $submissionInfo->turnInReport]) }}" class="btn btn-primary mb-4 btn-download" target="_blank">Turn In Report</a>
                                     @else
                                         <p> Pending </p>
                                     @endif
@@ -306,7 +306,7 @@
                                         @if($submissionInfo->certificate == 'pending')
                                             <p>Pending</p>
                                         @else
-                                            <br><a style="text-align: center; align-items:center; justify-content:center;" href="{{ asset('storage/certificate/' . $submissionInfo->certificate) }}" class="btn btn-primary mb-4 btn-download" download="{{ $submissionInfo->certificate }}">Certificate</a>
+                                            <br><a href="{{ route('downloadCertificate', ['filename' => $submissionInfo->certificate]) }}" class="btn btn-primary mb-4 btn-download" target="_blank">Turn In Report</a>
                                         @endif
                                     @else
                                         <p>Not Ready</p>
@@ -389,7 +389,7 @@
                                         $i++;
                                     @endphp
                                     <td>
-                                        <a href="{{route('downloadPaymentReceipt', $submissionInfo->paymentStatus->proofOfPayment)}}">Receipt {{ $i }}</a>
+                                        <a href="{{route('downloadPaymentReceipt', $submissionInfo->paymentStatus->proofOfPayment)}}" target="_blank">Receipt {{ $i }}</a>
                                     </td>
                                     <td>
                                     @if($submissionInfo->paymentStatus->paymentStatus === 'Complete')

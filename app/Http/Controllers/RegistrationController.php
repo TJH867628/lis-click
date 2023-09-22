@@ -19,10 +19,11 @@ class RegistrationController extends Controller
     public function store(request $request)
     {
         $email = $request -> input('email');//get email from user
-        if(tbl_account::where('email', $email)->first() != null){
+        $isExist = tbl_account::where('email', $email)->first();
+        if($isExist != null){
             return redirect()->back()->with('error','Email Already Exist!');
         }else{
-            $password = $request -> input('password');
+            $password = $request -> input('password1');
             $name = $request -> input('name');//get name from user
             $IC_No = $request -> input('IC_No');//get IC_No from user
             $phoneNumber = $request -> input('phoneNumber');//get Phone Number from user

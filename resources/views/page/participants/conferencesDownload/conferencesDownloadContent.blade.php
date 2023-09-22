@@ -124,6 +124,7 @@
         background-color: #d5d1defe;
         cursor: pointer;
         text-transform: capitalize;
+        z-index: 1;
     }
 
     tbody tr:nth-child(even) {
@@ -401,7 +402,7 @@
                 <th scope="row">1</th>
                 <td>LIS 2023 Author Guideline</td>
                 <td>
-                <a href="{{ route('conferencesDownload', ['filename' => 'LIS 2023 AUTHORs GUIDELINE.docx']) }}"><button id="button"><i class="fa-solid fa-download"></i>Download
+                <a href="{{ route('conferencesDownload', ['filename' => 'LIS 2023 AUTHORs GUIDELINE.docx']) }}" target="_blank"><button id="button"><i class="fa-solid fa-download"></i>Download
                         <div class="progress-wrapper">
                             <div class="inner"></div>
                                 <div class="checkmark">
@@ -424,7 +425,7 @@
                     <th scope="row">2</th>
                     <td>LIS 2023 Full Paper Template</td>
                     <td>
-                    <a href="{{ route('conferencesDownload', ['filename' => 'LIS2023_FULL-PAPER-TEMPLATE.docx']) }}"><button id="button"><i class="fa-solid fa-download"></i>Download
+                    <a href="{{ route('conferencesDownload', ['filename' => 'LIS2023_FULL-PAPER-TEMPLATE.docx']) }}"  target="_blank"><button id="button"><i class="fa-solid fa-download"></i>Download
                     <div class="progress-wrapper">
                             <div class="inner"></div>
                                 <div class="checkmark">
@@ -446,7 +447,7 @@
                     <th scope="row">3</th>
                     <td>LIS 2023 Abstract Template</td>
                     <td>
-                    <a href="{{ route('conferencesDownload', ['filename' => 'LIS2023_ABSTRACT-TEMPLATE.docx']) }}"><button id="button"><i class="fa-solid fa-download"></i>Download
+                    <a href="{{ route('conferencesDownload', ['filename' => 'LIS2023_ABSTRACT-TEMPLATE.docx']) }}"  target="_blank"><button id="button"><i class="fa-solid fa-download"></i>Download
                     <div class="progress-wrapper">
                             <div class="inner"></div>
                                 <div class="checkmark">
@@ -468,7 +469,7 @@
                     <th scope="row">4</th>
                     <td>LIS 2023 Poster Guideline</td>
                     <td>
-                    <a href="{{ route('conferencesDownload', ['filename' => 'LIS 2023 POSTER PRESENTATION GUIDELINE.docx']) }}"><button id="button"><i class="fa-solid fa-download"></i>Download
+                    <a href="{{ route('conferencesDownload', ['filename' => 'LIS 2023 POSTER PRESENTATION GUIDELINE.docx']) }}"  target="_blank"><button id="button"><i class="fa-solid fa-download"></i>Download
                     <div class="progress-wrapper">
                             <div class="inner"></div>
                                 <div class="checkmark">
@@ -490,7 +491,7 @@
                     <th scope="row">5</th>
                     <td>LIS 2023 Poster Template</td>
                     <td>
-                    <a href="{{ route('conferencesDownload', ['filename' => 'LIS 2023 poster presentation template.pptx']) }}"><button id="button"><i class="fa-solid fa-download"></i>Download
+                    <a href="{{ route('conferencesDownload', ['filename' => 'LIS 2023 poster presentation template.pptx']) }}"  target="_blank"><button id="button"><i class="fa-solid fa-download"></i>Download
                     <div class="progress-wrapper">
                             <div class="inner"></div>
                                 <div class="checkmark">

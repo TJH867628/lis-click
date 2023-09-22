@@ -462,7 +462,6 @@
                                     </form>
                                     @else
                                         <p>Click To Download Certificate:</p>
-                                        <button onclick="window.location.href='{{ asset('storage/certificate/' . $submissionInfo->certificate) }}'" download="{{ $submissionInfo->certificate }}">Download Certificate</button>
                                     @endif
                                 @else
                                     <p>Not Ready</p>

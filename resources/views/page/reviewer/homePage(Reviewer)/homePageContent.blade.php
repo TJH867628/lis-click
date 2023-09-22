@@ -13,7 +13,7 @@
                                 <p class="lead fw-normal text-black-50 mb-4">Welcome to the 9th annual Liga Ilmu Serantau 2023, a milestone event that celebrates almost a decade of research, and collaboration. Since its inception, this conference has brought together experts, researchers, practitioners, and enthusiasts from across industries to explore the latest developments and trends in many fields. </p>
                             </div>
                         </div>
-                        <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-5" src="images/backdrop1.jpg" alt="..." /></div>
+                        <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img src="/resources/Img/backdrop1.jpg" class="img-fluid rounded-3 my-5"></div>
                     </div>
                 </div>
             </header>
@@ -25,12 +25,12 @@
                         <div class="col-lg-4 mb-5 mb-lg-0"><h2 class="fw-bolder mb-0">LIS 2023 International Conference Welcomes Quality Research in The Area of :</h2></div>
                         <div class="col-lg-8">
                             <div class="row gx-5 row-cols-1 row-cols-md-2">
-                                <div class="col mb-5 h-100" > 
-                                    <h2 class="h5">- Engineering & Technology</h2>
+                                <div class="col mb-5 h-100"> 
+                                    <h2 class="h5">- Engineering &amp; Technology</h2>
                                     <h2 class="h5">- Technical Vocational Education and Training (TVET)</h2>
                                     <h2 class="h5">- Social Science</h2>
-                                    <h2 class="h5">- Information Technology (IT) & Communication</h2>
-                                    <h2 class="h5">- Environment & Health</h2>
+                                    <h2 class="h5">- Information Technology (IT) &amp; Communication</h2>
+                                    <h2 class="h5">- Environment &amp; Health</h2>
                                     <h2 class="h5">- Renewable energy</h2>
                                     <h2 class="h5">- Commerce</h2>
                                     <h2 class="h5">- Multi-Discipline</h2>
@@ -47,7 +47,7 @@
                     <div class="row gx-5 justify-content-center">
                         <div class="col-lg-10 col-xl-7">
                             <div class="text-center">
-                                <div class="fs-4 mb-4 fst-italic fw-bold text-black">Don't Miss These Amazing Opportunities & The Conference!</div>
+                                <div class="fs-4 mb-4 fst-italic fw-bold text-black">Don't Miss These Amazing Opportunities &amp; The Conference!</div>
                                 <div class="d-flex align-items-center justify-content-center">
                                 </div>
                             </div>
@@ -160,7 +160,7 @@
                             </div>
                             <div class="ms-xl-4">
                                 <div class="input-group mb-2">
-                                    <input class="form-control" type="text" placeholder="Email address..." aria-label="Email address..." aria-describedby="button-newsletter" />
+                                    <input class="form-control" type="text" placeholder="Email address..." aria-label="Email address..." aria-describedby="button-newsletter">
                                     <button class="btn btn-outline-light" id="button-newsletter" type="button">Sign up</button>
                                 </div>
                                 <div class="small text-white-50">We care about privacy, and will never share your data.</div>
@@ -168,4 +168,4 @@
                         </div>
                     </aside>
                 </div>
-            </section>
+            </div></div></div></section>

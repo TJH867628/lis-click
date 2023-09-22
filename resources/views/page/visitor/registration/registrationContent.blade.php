@@ -19,76 +19,77 @@
 	    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <style>
-          .error{
-            border: 1px solid red;
-            border-radius: 20px;
-            background-color: red;
-            text-align: center;
-            margin-bottom: 10px;
-            color: white;
-          }
 
-          .success{
-            border: 1px solid lightblue;
-            border-radius: 20px;
-            background-color: lightblue;
-            text-align: center;
-            margin-bottom: 10px;
-          }
+            .error{
+                border: 1px solid red;
+                border-radius: 20px;
+                background-color: red;
+                text-align: center;
+                margin-bottom: 10px;
+                color: white;
+            }
 
-          .txt_field {
-            position: relative;
-        }
+            .success{
+                border: 1px solid lightblue;
+                border-radius: 20px;
+                background-color: lightblue;
+                text-align: center;
+                margin-bottom: 10px;
+            }
 
-        .password-toggle {
-            padding: 5px;
-            position: absolute;
-            width: 2.1em;
-            align-items: center;
-            border-radius: 50%;
-            text-align: center;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            transition: color 0.5s, background-color 0.5s; /* Faster transition */
-        }
+            .txt_field {
+                position: relative;
+            }
 
-        /* Adjust padding for input fields with the icon */
-        .txt_field input[type="password"] {
-            padding-right: 15%; /* Initial padding */
-        }
+            .password-toggle {
+                padding: 5px;
+                position: absolute;
+                width: 2.1em;
+                align-items: center;
+                border-radius: 50%;
+                text-align: center;
+                right: 10px;
+                top: 50%;
+                transform: translateY(-50%);
+                cursor: pointer;
+                transition: color 0.5s, background-color 0.5s; /* Faster transition */
+            }
 
-        /* Adjust padding when the icon is visible */
-        .txt_field.password-visible input[type="password"] {
-            padding-right: 20%; /* Increased padding */
-        }
+            /* Adjust padding for input fields with the icon */
+            .txt_field input[type="password"] {
+                padding-right: 15%; /* Initial padding */
+            }
 
-          /* Adjust padding for input fields with the icon */
-          .txt_field input[type="text"] {
-            padding-right: 15%; /* Initial padding */
-        }
+            /* Adjust padding when the icon is visible */
+            .txt_field.password-visible input[type="password"] {
+                padding-right: 20%; /* Increased padding */
+            }
 
-        /* Adjust padding when the icon is visible */
-        .txt_field.password-visible input[type="text"] {
-            padding-right: 20%; /* Increased padding */
-        }
+            /* Adjust padding for input fields with the icon */
+            .txt_field input[type="text"] {
+                padding-right: 15%; /* Initial padding */
+            }
 
-        /* Add a circle around the icon on hover */
-        .password-toggle:hover {
-            padding: 5px;
-            color: grey;
-            align-items: center;
-            text-align: center;
-            border-radius: 50%;
-            width: 2.1em;
-            background-color: rgba(128, 128, 128, 0.2); /* Grey with opacity */
-            transition: color 0.5s, background-color 0.5s; /* Faster transition */
-        }
+            /* Adjust padding when the icon is visible */
+            .txt_field.password-visible input[type="text"] {
+                padding-right: 20%; /* Increased padding */
+            }
 
-        .form-group{
-            position: relative;
-        }
+            /* Add a circle around the icon on hover */
+            .password-toggle:hover {
+                padding: 5px;
+                color: grey;
+                align-items: center;
+                text-align: center;
+                border-radius: 50%;
+                width: 2.1em;
+                background-color: rgba(128, 128, 128, 0.2); /* Grey with opacity */
+                transition: color 0.5s, background-color 0.5s; /* Faster transition */
+            }
+
+            .form-group{
+                position: relative;
+            }
     </style>
     </head>
     <body>
@@ -109,18 +110,16 @@
                                 <h1>REGISTER</h1>
                                 
                             </div>
-                            <form method="post">
-                             @csrf
                              <div class="row-register">
                                 <div class="col-lg-7">	
                                     <div class="contact">
-                                        <form class="form" name="enq" method="post" action="/registration" onsubmit="return validation();">
-                                            <div class="row">
-                                                
+                                        <form class="form" name="enq" id="registrationForm" method="post" action="/registration">
+                                                @csrf
+                                                <div class="row">
                                                 <!--Dropdown-->
                                                 <div class="form-group col-md-3">
-                                                    <label class="category">Salutation :</label>
-                                                    <select class="dropdown-option" id="salutation" name="salutation">
+                                                    <label for="salutation">Salutation :</label>
+                                                    <select class="dropdown-option" id="salutation" name="salutation" required>
                                                         <option selected disabled>Choose</option>
                                                         <option value="Dr">Dr</option>
                                                         <option value="Mr">Mr</option>
@@ -132,51 +131,59 @@
                                                         <option value="Dr prof">Dr Prof</option>
                                                         <option value="Others">Others</option>
                                                     </select>
-                                                <input type="text" name="salutationInput" id="salutationInput" style='display:none;'/><br>
+                                                    <input type="text" name="salutationInput" id="salutationInput" style='display:none;' placeholder="Other Salutations"/><br>
                                                 </div>
-                                                <!--End Dropdown-->
-                                                <!--Dropdown-->
+
                                                 <div class="form-group col-md-7">
-                                                    <label class="category">Participant Category :</label>
-                                                    <select class="dropdown-option category" name="category" id="">
-                                                        <option selected disabled>Choose</option>
+                                                    <label for="category">Participant Category :</label>
+                                                    <select class="dropdown-option category" name="category" id="" required>
                                                         <option value="presenter">Presenter</option>
                                                         <option value="Audience">Audience</option>
                                                     </select><br>
                                                 </div>
-                                                <!--End Dropdown-->
+
                                                 <div class="form-group col-md-12">
+                                                    <label for="name">Full Name:</label>
                                                     <input type="text" name="name" id="name" class="form-control name" placeholder="Full Name" required="required">
                                                 </div>
 
-                                                 <div class="form-group col-md-7">
+                                                <div class="form-group col-md-7">
+                                                    <label for="organizationName">Organization Name:</label>
                                                     <input type="text" name="organizationName" id="organizationName"  class="form-control organizationName" placeholder="Organization Name" required="required">
                                                 </div>
+
                                                 <div class="form-group col-md-5">
+                                                    <label for="email">Email Address:</label>
                                                     <input type="text" name="email" id="email" class="form-control email" placeholder="Email Address" required="required">
                                                     @if($message = Session::get('error'))
                                                     <div class="error">
                                                         <span class="error">{{ $message }}</span><br> 
                                                     </div>
                                                     @endif
-                                                </div> 
+                                                </div>
 
                                                 <div class="form-group col-md-6">
-                                                    <input type="text" name="IC_No" id="IC_No" class="form-control IC_No" placeholder="IC Number " required="required">
+                                                    <label for="IC_No">IC Number:</label>
+                                                    <input type="text" name="IC_No" id="IC_No" class="form-control IC_No" placeholder="IC Number" required="required">
                                                 </div>
+
                                                 <div class="form-group col-md-6">
+                                                    <label for="phoneNumber">Phone Number:</label>
                                                     <input type="text" name="phoneNumber" id="phoneNumber" class="form-control phoneNumber" placeholder="Phone Number" required="required">
                                                 </div>
+
                                                 <div class="form-group col-md-12">
+                                                    <label for="address">Address:</label>
                                                     <textarea rows="6" name="address" id="address" class="form-control address" placeholder="Address" required="required"></textarea>
                                                 </div>
+
                                                 <div class="form-group col-md-4 pe-5">
+                                                    <label for="postcode">Postcode:</label>
                                                     <input type="text" name="postcode" id="postcode" class="form-control postcode" placeholder="Postcode" required="required">
                                                 </div>
-                                                
-                                                <!--Dropdown-->
-                                                <div class="form-group col-md-3">
-                                                    <label class="category">Country :</label>
+
+                                                <div style="margin-top:2%;" class="form-group col-md-3">
+                                                    <label for="country">Country:</label>
                                                     <select id="country" class="dropdown-option country" name="country" >
                                                         <option selected disabled>Choose</option>
                                                         <option value="malaysia">Malaysia</option>
@@ -186,27 +193,34 @@
                                                         <option value="singapore">Singapore</option>
                                                     </select><br>
                                                 </div>
-                                                <!--End Dropdown-->
-                                                <!--Dropdown-->
-                                                <div class="form-group col-md-4">
-                                                    <label for="state">State :</label>
+
+                                                <div style="margin-top:2%;" class="form-group col-md-4">
+                                                    <label for="state">State:</label>
                                                     <select id="state" class="dropdown-option state" name="state" >
                                                         <option selected disabled>Choose</option>
                                                         <option value="">-- Select State --</option>
                                                     </select><br>
                                                 </div>
-                                                <!--End Dropdown-->
+
                                                 <div class="form-group col-md-4 pe-5" >
-                                                    <input type="password" name="password1" id="password1" class="form-control password" placeholder="Password" minlength="6" required="required">
-                                                    <i class="bi-eye password-toggle" id="togglePassword1" style="color: black;"></i>
+                                                    <label for="password1">Password:</label>
+                                                    <input type="password" name="password1" id="password1" class="form-control password" placeholder="Password" minlength="6" maxlength="30" required="required">
                                                 </div>
 
-                                                <!--End Dropdown-->
                                                 <div class="form-group col-md-4 pe-5" >
-                                                    <input type="password" name="password2" id="password2" class="form-control password" placeholder="Please Confirm Your Password" minlength="6" required="required">
-                                                    <i class="bi-eye password-toggle" id="togglePassword2" style="color: black;"></i>
+                                                    <label for="password2">Confirm Password:</label>
+                                                    <input type="password" name="password2" id="password2" class="form-control password" placeholder="Please Confirm Your Password" minlength="6" maxlength="30" required="required">
+                                                    <i style="margin-top:3%;" class="bi-eye password-toggle" id="togglePassword1" style="color: black;"></i>
+                                                    <span id="password2Error" class="text-danger" style="display: none;"></span>
                                                 </div>
                                                 
+                                                
+                                                <div class="col-md-12 text-center">
+                                                    <button type="submit" name="submit" id="submitButton" class="button-submit" title="Submit your form!">Submit</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
                                         <script>
                                         $(document).ready(function() {
                                         // Define an object that maps countries to states
@@ -246,16 +260,8 @@
                                         $('')
                                     });
                                         </script>                                          
-                                                
-                                                <div class="col-md-12 text-center">
-                                                    <a href="FeLISregister_2.html"><button type="submit" value="Send form" name="submit" id="submitButton" class="button-submit" title="Submit your form!">Submit</button></a>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
                             </div><!--- END ROW -->
                         </div><!--- END CONTAINER -->	
-                            </form>		
                             
                     </div>
                 </div>
@@ -281,80 +287,85 @@
         <!-- Core theme JS-->
         <script>
             $(document).ready(function () {
-                var passwordVisible1 = false; // Track password1 visibility state
-                var passwordVisible2 = false; // Track password2 visibility state
+                var passwordVisible = false; // Track password1 visibility state
+                var form = $('#registrationForm'); // Get the form
+                var error = false; //
 
                 // Toggle password visibility for password1
                 $("#togglePassword1").on("click", function () {
-                    var inputField = $("#password1");
+                    var inputField1 = $("#password1");
                     var icon = $("#togglePassword1");
-                    togglePasswordVisibility1(inputField,icon,passwordVisible1);
+                    var inputField2 = $("#password2");
+                    togglePasswordVisibility(inputField1,inputField2,icon);
                 });
 
                 // Toggle password visibility for password2
                 $("#togglePassword2").on("click", function () {
                     var inputField = $("#password2");
                     var icon = $("#togglePassword2");
-                    togglePasswordVisibility2(inputField,icon,passwordVisible2);
+                    togglePasswordVisibility(inputField1,inputField2,icon);
                 });
 
-                function togglePasswordVisibility1(inputField,icon) {
-                    if (inputField.attr("type") === "password") {
-                        passwordVisible1 = true;
-                        inputField.attr("type", "text");
+                function togglePasswordVisibility(inputField1,inputField2,icon) {
+                    if (inputField1.attr("type") === "password") {
+                        passwordVisible = true;
+                        inputField1.attr("type", "text");
+                        inputField1[0].style.color = "#232434";
+                        inputField2.attr("type", "text");
+                        inputField2[0].style.color = "#232434";
                         icon.addClass("bi-eye-slash").removeClass("bi-eye");
-                    }else if (passwordVisible1 == false){
-                        console.log(1);
-                        inputField.attr("type", "password");
-                        icon.addClass("bi-eye-slash").removeClass("bi-eye");
-                    }
-                }
-
-                function togglePasswordVisibility2(inputField,icon) {
-                    if (inputField.attr("type") === "password") {
-                        passwordVisible2 = true;
-                        inputField.attr("type", "text");
-                        icon.addClass("bi-eye-slash").removeClass("bi-eye");
-                    }else if (passwordVisible2 == false){
-                        console.log(1);
-                        inputField.attr("type", "password");
-                        icon.addClass("bi-eye-slash").removeClass("bi-eye");
+                    }else if (passwordVisible == false){
+                        inputField1.attr("type", "password");
+                        inputField2.attr("type", "password");
+                        icon.addClass("bi-eye").removeClass("bi-eye-slash");
                     }
                 }
 
                 
-            $("#togglePassword1").hover(
-                    function () {
-                        var inputField = $("#password1");
-                        var icon = $("#togglePassword1");
-                        if (passwordVisible1 == true) {
-                            passwordVisible1 = false; // Toggle visibility state
-                            togglePasswordVisibility1(inputField, icon,passwordVisible1,passwordVisible1); 
-                        }
-                    },
-                );
+                $("#togglePassword1").hover(
+                        function () {
+                            var inputField1 = $("#password1");
+                            var icon = $("#togglePassword1");
+                            var inputField2 = $("#password2");
+                            if (passwordVisible == true) {
+                                passwordVisible = false; // Toggle visibility state
+                                togglePasswordVisibility(inputField1,inputField2, icon); 
+                            }
+                        },
+                    );
 
-                $("#togglePassword2").hover(
-                    function () {
-                        var inputField = $("#password2");
-                        var icon = $("#togglePassword2");
-                        if (passwordVisible2 == true) {
-                            passwordVisible2 = false; // Toggle visibility state
-                            togglePasswordVisibility2(inputField, icon,passwordVisible2); 
-                        }
-                    },
-                );
-            });
+                // Attach an event listener to the form's submit event
+                form.on("submit", function (event) {
+                event.preventDefault(); // Prevent the form from submitting
+                console.log(error);
 
-            var registrationForm = document.getElementById('registrationForm');
-            registrationForm.addEventListener('submit', function(event) {
-            var passwordInput = document.getElementById('password1');
-            if (passwordInput.value.length > 50) {
-                event.preventDefault(); // Prevent form submission
-                passwordInput.value = passwordInput.value.slice(0, 50);
-                alert('Password must be no more than 50 characters long.');
-            }
+                // Validate passwords here
+                var password1 = $("#password1").val();
+                var password2 = $("#password2").val();
+                var password2Error = $("#password2Error");
+                
+                password2Error.hide().text("");
+                if (password1 !== password2) {
+                    password2Error.text("Passwords do not match.").show();
+                    error = true;
+                }else{
+                    error = false;
+                }
+
+                if (password1.length > 30 || password2.length > 30) {
+                    alert("Passwords should not be more than 30 characters.");
+                    error = true;
+                }else{
+                    error = false;
+                }
+
+                if(error == false){
+                    form.unbind("submit").submit();
+                }
             });
+        });
+
+            
         </script>
         <!--<script src="js/scripts.js"></script>-->
     </body>

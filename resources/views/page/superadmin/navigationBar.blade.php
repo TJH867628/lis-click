@@ -28,8 +28,8 @@
                                     </ul>
                                 </li>
                             <li class="nav-item"><a class="nav-link" href="/account">My Profile</a></li>
-                            <a href="/logout" class="btn btn-primary">Logout</a>
                             </div>
+                            <a href="/logout" class="btn btn-primary">Logout</a>
                         </ul>
                     </div>
                 </div>

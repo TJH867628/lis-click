@@ -129,8 +129,17 @@ class JKReviewerController extends Controller
     
         public function downloadReturnCorrection($filename)
         {
-            $path = 'storage/returnCorrection/' . $filename;
-            return response()->download($path, $filename);
+            $file = 'storage/returnCorrection/' . $filename;
+            $extension = pathinfo($file, PATHINFO_EXTENSION);
+    
+            if ($extension == 'pdf') {
+                return response()->file($file, [
+                    'Content-Type' => 'application/pdf',
+                    'Content-Disposition' => 'inline',
+                ]);
+            } elseif ($extension == 'doc' || $extension == 'docx') {
+                return response()->file($file);
+            }
         }
 
         public function doneCorrection($submissionCode){
@@ -211,4 +220,18 @@ class JKReviewerController extends Controller
             }
         }
         
+        public function downloadCertificate($filename)
+        {
+            $file = 'storage/certificate/' . $filename;
+            $extension = pathinfo($file, PATHINFO_EXTENSION);
+    
+            if ($extension == 'pdf') {
+                return response()->file($file, [
+                    'Content-Type' => 'application/pdf',
+                    'Content-Disposition' => 'inline',
+                ]);
+            } elseif ($extension == 'doc' || $extension == 'docx') {
+                return response()->file($file);
+            }
+        }
 }

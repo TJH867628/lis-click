@@ -21,7 +21,7 @@ class AccountController extends Controller
         if(session()->has('LoggedUser')){
             $userSession = session()->get('LoggedUser');
             $user = tbl_participants_info::where('email',$userSession)->first();
-            return view('page.account',['userSession'=>$userSession,'user' => $user]);
+            return view('page.participants.profile.profile',['userSession'=>$userSession,'user' => $user]);
         }elseif(session()->has("LoggedSuperAdmin")){
             $adminSession = session()->get('LoggedSuperAdmin');
             $admin = tbl_admin_info::where('email',$adminSession)->first();
@@ -30,7 +30,6 @@ class AccountController extends Controller
         }elseif(session()->has('LoggedJKParticipants')){
             $adminSession = session()->get('LoggedJKParticipants');
             $admin = tbl_admin_info::where('email',$adminSession)->first();
-            dd($adminSession);
             
             return view('page.account(Admin)',['adminSession'=>$adminSession,'admin' => $admin]);
         }elseif(session()->has('LoggedJKReviewer')){
