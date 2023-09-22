@@ -14,6 +14,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item"><a class="nav-link" href="/homePage">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/gallery">Gallery</a></li>
                 <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Conference</a>
                     <ul class="dropdown-menu dropdown-menu-end bg-light" aria-labelledby="navbarDropdownBlog">
@@ -22,8 +23,6 @@
                         <li><a class="dropdown-item" href="/participants/presentationSchedule">Presentation Schedule</a></li>
                     </ul>
                     <li class="nav-item"><a class="nav-link" href="/publicationInfo">Publication</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/gallery">Gallery</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/faq">Contact Us</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Paper Submission</a>
                             <ul class="dropdown-menu dropdown-menu-end bg-light" aria-labelledby="navbarDropdownBlog">
@@ -31,6 +30,7 @@
                                 <li><a class="dropdown-item" href="/submissionStatus">Submission Status</a></li>
                             </ul>
                     <li class="nav-item"><a class="nav-link" href="/account">My Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/faq">Contact Us</a></li>
                     <a href="/logout" class="btn btn-primary">Logout</a>
                 </div>
             </ul>

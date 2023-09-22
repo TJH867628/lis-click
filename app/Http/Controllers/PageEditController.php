@@ -24,6 +24,10 @@ class PageEditController extends Controller
             $publication = tbl_conference::where('field_name','Publication E-Jurnal')->get();
 
             return view('page.superadmin.editPublicationInfo.editPublicationInfo',['publication' => $publication]);
+        }elseif($pageName == 'Conference Download'){
+            $conferencesDownload = tbl_conference::where('field_name','Conferences Download')->get();
+
+            return view('page.superadmin.editConferencesDownload.editConferencesDownload',['conferencesDownload' => $conferencesDownload]);
         }else{
             $page = tbl_page::where('pageName', $pageName)->first(); 
             $pagePath = $page->pagePath;

@@ -126,4 +126,5 @@ Route::post('/floorManager/presentationGroup/editSubmissionPresentationGroup/{su
 Route::get('/participants/presentationSchedule', [FloorManagerController::class, 'presentationSchedule']);
 Route::post('/superadmin/pageList/publicationList/editExistingPublication/{id}', [PublicationController::class, 'editExistingPublication'])->name('editExistingPublication');
 Route::post('/superadmin/pageList/publicationList/uploadNewPublication', [PublicationController::class, 'uploadNewPublication'])->name('uploadNewPublication');
-
+Route::post('/superadmin/pageList/publicationList/editExistingPublication/{id}', [ConferencesController::class, 'editExistingConferencesDownload'])->name('editExistingConferencesDownload');
+Route::post('/superadmin/pageList/publicationList/uploadNewPublication', [ConferencesController::class, 'uploadNewConferencesDownload'])->name('uploadNewConferencesDownload');

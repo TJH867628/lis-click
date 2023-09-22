@@ -19,7 +19,7 @@
     main.table {
         margin-top: 11.5%;
         width: 82vw;
-        height: 65vh;
+        height: fit-content;
         background-color: #fff5;
         backdrop-filter: blur(7px);
         box-shadow: 0 .4rem .8rem #0005;
@@ -386,129 +386,51 @@
 
         <main class="table">
         <section class="table__header">
-            <h1>E-Jurnal</h1>
+            <h1>Conferences Download</h1>
         </section>
+        @php
+            $count = 0;
+        @endphp
         <section class="table__body">
             <table>
                 <thead>
                     <tr>
                         <th> No</th>
-                        <th> List of Jurnal</th>
+                        <th> Details </th>
                         <th> </th>
                     </tr>
                 </thead>
                 <tbody>
-                <tr>
-                <th scope="row">1</th>
-                <td>LIS 2023 Author Guideline</td>
-                <td>
-                <a href="{{ route('conferencesDownload', ['filename' => 'LIS 2023 AUTHORs GUIDELINE.docx']) }}" target="_blank"><button id="button"><i class="fa-solid fa-download"></i>Download
-                        <div class="progress-wrapper">
-                            <div class="inner"></div>
-                                <div class="checkmark">
-                                    <span></span>
-                                    <span></span>
-                                </div>
-                                <div class="circle">
-                                    <div class="bar left">
-                                        <div class="progress"></div>
+                @if(isset($conferencesDownload))
+                    @foreach($conferencesDownload as $thisConferencesDownload)
+                        @php
+                            $count++;
+                        @endphp
+                        <tr>
+                            <th scope="row">{{ $count }}</th>
+                            <td>{{ $thisConferencesDownload->field_details }}</td>
+                            <td>
+                            <a href="{{ route('conferencesDownload', ['filename' => '$thisConferencesDownload->field_value']) }}" target="_blank"><button id="button"><i class="fa-solid fa-download"></i>Download
+                                <div class="progress-wrapper">
+                                    <div class="inner"></div>
+                                        <div class="checkmark">
+                                            <span></span>
+                                            <span></span>
+                                        </div>
+                                        <div class="circle">
+                                            <div class="bar left">
+                                                <div class="progress"></div>
+                                            </div>
+                                            <div class="bar right">
+                                                <div class="progress"></div>
+                                            </div>                  
+                                        </div>            
                                     </div>
-                                    <div class="bar right">
-                                        <div class="progress"></div>
-                                    </div>                  
-                                </div>            
-                        </div>
-                    </button></a>
-                </td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>LIS 2023 Full Paper Template</td>
-                    <td>
-                    <a href="{{ route('conferencesDownload', ['filename' => 'LIS2023_FULL-PAPER-TEMPLATE.docx']) }}"  target="_blank"><button id="button"><i class="fa-solid fa-download"></i>Download
-                    <div class="progress-wrapper">
-                            <div class="inner"></div>
-                                <div class="checkmark">
-                                    <span></span>
-                                    <span></span>
-                                </div>
-                                <div class="circle">
-                                    <div class="bar left">
-                                        <div class="progress"></div>
-                                    </div>
-                                    <div class="bar right">
-                                        <div class="progress"></div>
-                                    </div>                  
-                                </div>            
-                        </div></button></a>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>LIS 2023 Abstract Template</td>
-                    <td>
-                    <a href="{{ route('conferencesDownload', ['filename' => 'LIS2023_ABSTRACT-TEMPLATE.docx']) }}"  target="_blank"><button id="button"><i class="fa-solid fa-download"></i>Download
-                    <div class="progress-wrapper">
-                            <div class="inner"></div>
-                                <div class="checkmark">
-                                    <span></span>
-                                    <span></span>
-                                </div>
-                                <div class="circle">
-                                    <div class="bar left">
-                                        <div class="progress"></div>
-                                    </div>
-                                    <div class="bar right">
-                                        <div class="progress"></div>
-                                    </div>                  
-                                </div>            
-                        </div></button></a>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">4</th>
-                    <td>LIS 2023 Poster Guideline</td>
-                    <td>
-                    <a href="{{ route('conferencesDownload', ['filename' => 'LIS 2023 POSTER PRESENTATION GUIDELINE.docx']) }}"  target="_blank"><button id="button"><i class="fa-solid fa-download"></i>Download
-                    <div class="progress-wrapper">
-                            <div class="inner"></div>
-                                <div class="checkmark">
-                                    <span></span>
-                                    <span></span>
-                                </div>
-                                <div class="circle">
-                                    <div class="bar left">
-                                        <div class="progress"></div>
-                                    </div>
-                                    <div class="bar right">
-                                        <div class="progress"></div>
-                                    </div>                  
-                                </div>            
-                        </div></button></a>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">5</th>
-                    <td>LIS 2023 Poster Template</td>
-                    <td>
-                    <a href="{{ route('conferencesDownload', ['filename' => 'LIS 2023 poster presentation template.pptx']) }}"  target="_blank"><button id="button"><i class="fa-solid fa-download"></i>Download
-                    <div class="progress-wrapper">
-                            <div class="inner"></div>
-                                <div class="checkmark">
-                                    <span></span>
-                                    <span></span>
-                                </div>
-                                <div class="circle">
-                                    <div class="bar left">
-                                        <div class="progress"></div>
-                                    </div>
-                                    <div class="bar right">
-                                        <div class="progress"></div>
-                                    </div>                  
-                                </div>            
-                        </div></button></a>
-                    </td>
-                </tr>
+                                </button></a>
+                            </td>
+                        </tr>
+                    @endforeach
+                @endif
                 </tbody>
             </table>
         </section>
