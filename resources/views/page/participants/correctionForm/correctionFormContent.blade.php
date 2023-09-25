@@ -51,44 +51,62 @@
 <body>
     <br><br><br>
 @if($submissionInfo->correctionPhase == 'pending')
-@if($correction->isNotEmpty())
-    @if($latestCorrection->returnCorrectionLink == NULL)
+    @if($correction->isNotEmpty())
+        @if($latestCorrection->returnCorrectionLink == NULL)
 
-    Latest Correction:
-            <table border>
-        <th>
-            Details
-        </th>
-        <th>
-            Comment:
-        </th>
-        <th>
-            Created Time
-        </th>
-        <th>
-            Submit File With Correction
-        </th>
-        <tr>
-            <td>
-                <p>Submission Code</p>
-                {{ $latestCorrection->submissionCode }}
-            </td> 
-            <td>{{ $latestCorrection->commentForCorrection }}</td>        
-            <td>{{ $latestCorrection->created_at }}</td>   
-            <td>
-                <form action="{{ route('uploadFileWithCorrection',['submissionCode' => $submissionInfo->submissionCode]) }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <input type="file" name="file" />
-                    <button type="submit">Upload File With Correction</button>
-                </form>
-            </td>
-        </tr>
-        </table>
+        Latest Correction:
+                <table border>
+            <th>
+                Details
+            </th>
+            <th>
+                Comment:
+            </th>
+            <th>
+                Created Time
+            </th>
+            <th>
+                Submit File With Correction
+            </th>
+            <tr>
+                <td>
+                    <p>Submission Code</p>
+                    {{ $latestCorrection->submissionCode }}
+                </td> 
+                <td>{{ $latestCorrection->commentForCorrection }}</td>        
+                <td>{{ $latestCorrection->created_at }}</td>   
+                <td>
+                    <form action="{{ route('uploadFileWithCorrection',['submissionCode' => $submissionInfo->submissionCode]) }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <input type="file" name="file" />
+                        <button type="submit">Upload File With Correction</button>
+                    </form>
+                </td>
+            </tr>
+            </table>
+        @endif
+    @elseif($submissionInfo->correctionPhase == 'readyForPresent')
+        <h5>Correction Phase Has Done</h5>
+    @else
+        <h5>No Correction History</h5>
     @endif
-@elseif($submissionInfo->correctionPhase == 'done')
-<h5>Correction Phase Has Done</h5>
+
+    
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+@elseif($submissionInfo->correctionPhase == 'readyForPresent')
+    @if(isset($correction))
+    @else
+    <h5>Congratulations, you've sailed through the correction phase flawlessly</h5>
+    @endif
+@else
+    <h5>No Correction History</h5>
 @endif
 
+@if(isset($correction))
     Correction History:
     @foreach($correction as $correction)
             @if($correction->numberOfTimes != $latestCorrection->numberOfTimes)
@@ -155,14 +173,6 @@
                 @endif
             @endif
     @endforeach
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-@else
-    <h5>No Correction History</h5>
 @endif
-
 </body>
 </html>

@@ -493,10 +493,11 @@
                                     </div>
                                 </td>
                                 <td id="titleTableData">
+                                    <p>Max Length : 200 Characters</p>
                                     <label for="title">Title</label>
-                                    <textarea class="form-control" style="margin-top: 3%;"  type="text" id="existingTitle" name="title" required>{{ trim($gallery->title) }}</textarea>
+                                    <textarea class="form-control" style="margin-top: 3%;"  type="text" id="existingTitle" name="title" maxlength="200" required>{{ trim($gallery->title) }}</textarea>
                                     <label for="title" style="margin-top: 8%;">Description</label>
-                                    <textarea class="form-control" style="margin-top: 3%;" type="text" id="existingDescription" name="description" required>{{ trim($gallery->description) }}</textarea>
+                                    <textarea class="form-control" style="margin-top: 3%;" type="text" id="existingDescription" name="description" maxlength="200" required>{{ trim($gallery->description) }}</textarea>
                                 </td>
                                 <td style="text-align: center;">
                                     <label class="switch">

@@ -29,7 +29,7 @@ class GalleryController extends Controller
         $date = now();
         $formatted_date = $date->format('YmdHis');
 
-        $imgName = $formatted_date . "_" . $title  . "_" . "." . $img->getClientOriginalExtension();
+        $imgName = $formatted_date . "_" . $title  . "." . $img->getClientOriginalExtension();
         $img->move(public_path('recources/gallery'),$imgName);
         $imgSrc = '/recources/gallery/' . $imgName;
         $gallery = new tbl_gallery;
@@ -54,7 +54,7 @@ class GalleryController extends Controller
         $gallery = tbl_gallery::where('id',$id)->first();
 
         if($img != NULL && $img != ""){
-            $imgName = $formatted_date . "_" . $title  . "_" . "." . $img->getClientOriginalExtension();
+            $imgName = $formatted_date . "_" . $title  . "." . $img->getClientOriginalExtension();
             $img->move(public_path('recources/gallery'),$imgName);
             $imgSrc = '/recources/gallery/' . $imgName;
             $gallery->imageSrc = $imgSrc;

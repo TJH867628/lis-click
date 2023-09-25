@@ -45,7 +45,7 @@ class ConferencesController extends Controller
             return Response::make(file_get_contents($file), 200, [
                 'content-type' => 'application/pdf',
             ]);
-        } elseif ($extension == 'doc' || $extension == 'docx') {
+        } else{
             return response()->file($file);
         }
     }

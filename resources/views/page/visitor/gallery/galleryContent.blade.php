@@ -22,10 +22,10 @@
             #container{
                 position: absolute;
                 left:50%;
-                top:52%;
+                top:50%;
                 transform: translate(-50%,-50%);
-                width:60%;
-                height:70%;
+                width:1000px;
+                height:600px;
                 padding:50px;
                 background-color: #f5f5f5;
                 box-shadow: 0 30px 50px #dbdbdb;
@@ -82,7 +82,7 @@
                 background: transparent;
                 border: 2px solid rgba(255, 255, 255, 0.5);
                 border-radius: 20px;
-                backdrop-filter: blur(20px);
+                backdrop-filter: blur(50px);
                 box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
                 overflow: hidden;
                 padding: 10px;;
@@ -91,7 +91,6 @@
                 display: none;
                 font-family: system-ui;
             }
-
             #item:nth-child(2) #content{
                 display: block;
                 z-index: 11111;
@@ -142,40 +141,23 @@
             }#buttons button:hover{
                 background-color: #bac383;
             }
-            @media screen and (max-width: 1080px) {
-            .mobile-show {
-                display: block;
+            #content {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                padding: 20px;
+                background-color: rgba(0, 0, 0, 0.5);
+                color: #fff; /* default color */
             }
 
-            .mobile-hide {
-                display: none;
+            #item.light #content div{
+                color: #000; /* reverse color for light images */
             }
 
-            #container {
-                width: 100%;
-                height: auto;
-                padding: 20px; /* Adjusted for mobile */
+            #item.dark #content div{
+                color: #f5f5f5; /* reverse color for dark images */
             }
-
-            .item-container {
-                width: 100%;
-                height: auto;
-                margin-top: 10px; /* Adjusted for mobile */
-            }
-
-            .item-container .content {
-                background: rgba(0, 0, 0, 0.5);
-                border: 2px solid rgba(255, 255, 255, 0.5);
-                border-radius: 20px;
-                backdrop-filter: blur(20px);
-                box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
-                overflow: hidden;
-                padding: 10px;
-                color: black;
-                font-family: system-ui;
-                display: none;
-            }
-        }
     </style>
     </head>
     <body>
@@ -184,8 +166,9 @@
         <div id="slide">
             @foreach($gallery as $galleryItem)
                 @if($galleryItem->visible == true)
-                    <div id="item" style="background-image: url({{ $galleryItem->imageSrc }});" class="mobile-hide"><?php // phpcs:ignore ?>
-                        <div id="content" class="mobile-hide">
+                    <div id="item" style="background-image: url('{{ $galleryItem->imageSrc }}');"><?php // phpcs:ignore ?>
+                        <img src="{{ $galleryItem->imageSrc }}" id="item-img" alt="" style="display: none;">
+                        <div id="content">
                             <div id="name">{{ $galleryItem->title }}</div>
                             <div id="des">{{ $galleryItem->description }}</div>
                         </div>
@@ -193,12 +176,14 @@
                 @endif
             @endforeach
         </div>
-        <div id="buttons" class="mobile-hide">
+        <div id="buttons">
             <button id="prev"><i class="fa-solid fa-angle-left"></i></button>
             <button id="next"><i class="fa-solid fa-angle-right"></i></button>
         </div>
     </div>
     @endif
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.4.0/color-thief.min.js" integrity="sha512-r2yd2GP87iHAsf2K+ARvu01VtR7Bs04la0geDLbFlB/38AruUbA5qfmtXwXx6FZBQGJRogiPtEqtfk/fnQfaYA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         document.getElementById('next').onclick = function(){
             let lists = document.querySelectorAll('#item');
@@ -209,6 +194,23 @@
             let lists = document.querySelectorAll('#item');
             document.getElementById('slide').prepend(lists[lists.length - 1]);
         }
+        
+        $(document).ready(function() {
+            var items = document.querySelectorAll('#item');
+            var colorThief = new ColorThief();
+            items.forEach(function(item) {
+                var img = item.querySelector('#item-img');
+                img.addEventListener('load', function() {
+                    var dominantColor = colorThief.getColor(img);
+                    console.log(item,dominantColor);
+                    if (dominantColor[0] + dominantColor[1] + dominantColor[2] > 382.5) {
+                        item.classList.add('light');
+                    } else {
+                        item.classList.add('dark');
+                    }
+                });
+            });
+        });
     </script>
 </body>
 </html>

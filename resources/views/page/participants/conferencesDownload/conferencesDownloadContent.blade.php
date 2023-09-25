@@ -410,7 +410,7 @@
                             <th scope="row">{{ $count }}</th>
                             <td>{{ $thisConferencesDownload->field_details }}</td>
                             <td>
-                            <a href="{{ route('conferencesDownload', ['filename' => '$thisConferencesDownload->field_value']) }}" target="_blank"><button id="button"><i class="fa-solid fa-download"></i>Download
+                            <a href="{{ route('conferencesDownload', ['filename' => $thisConferencesDownload->field_value]) }}" target="_blank"><button id="button"><i class="fa-solid fa-download"></i>Download
                                 <div class="progress-wrapper">
                                     <div class="inner"></div>
                                         <div class="checkmark">

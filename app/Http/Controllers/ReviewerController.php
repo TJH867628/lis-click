@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\tbl_admin_info;
@@ -8,6 +7,7 @@ use App\Models\tbl_evaluation_form;
 use App\Models\tbl_correction;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ReviewerController extends Controller
 {
@@ -50,6 +50,7 @@ class ReviewerController extends Controller
             }elseif(tbl_submission::where('reviewer2ID', $reviewername)->first()){
                 $submissionInfo = tbl_submission::where('reviewer2ID', $reviewername)->get();
             }
+
             return view('page.reviewer.donereview.donereview',['reviewername'=>$reviewername,'submissionInfo' => $submissionInfo]);
         }else{
             return redirect('login')->with('fail','Login Session Expire,Please Login again');
@@ -160,6 +161,7 @@ class ReviewerController extends Controller
     }
 
     public function evaluationForm($submissionCode){
+        $year = date('Y');
         if(session()->has("LoggedReviewer")){
             session()->start();
             $reviewerSession = session()->get('LoggedReviewer');
@@ -249,7 +251,8 @@ class ReviewerController extends Controller
 
         }elseif(session()->has("LoggedUser")){
             $dataEvaluationForm = tbl_evaluation_form::where('paper_id_number', $submissionCode)->get();
-            return view('page.participants.evaluationForm.evaluationForm',['dataEvaluationForm' => $dataEvaluationForm]);
+            $pdf = PDF::loadView('page.participants.evaluationForm.evaluationFormContent',['dataEvaluationForm' => $dataEvaluationForm,'year' => $year]);
+            return response($pdf->stream('evaluationForm.pdf'))->header('Content-Type', 'application/pdf');
 
         }else{
             return redirect('login')->with('fail','Login Session Expire,Please Login again');
