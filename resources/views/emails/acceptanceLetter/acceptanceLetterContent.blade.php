@@ -82,5 +82,5 @@
     <br>
     <span name="content">Kindly make sure to complete the payment before the deadline and thank you for considering the 9th International Conference Liga Ilmu Serantau(LIS) 2023 as your preffered conference.We look forward to seeing you at the conference</span>
     <br><br>
-    <span name="contentRegards">Regards,LIS 2023 Committe</span>
+    <span name="contentRegards">Regards,<br>LIS 2023 Committe</span>
 </div>

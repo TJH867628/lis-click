@@ -30,6 +30,10 @@
         overflow: hidden;
     }
 
+    table th{
+        text-align: center;
+    }
+
     .table__header {
         z-index:0;
         width: 100%;
@@ -39,6 +43,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        text-align: center;
     }
 
     .table__header .input-group {
@@ -281,7 +286,29 @@
                                     </tr>
                                     @endif
                                 @endif
-                               
+                            @else
+                               @if($submissionInfo->reviewerID === $reviewername)
+                                    @if($submissionInfo->evaluationFormLink)
+                                        <tr>
+                                            <td>{{ $submissionInfo->submissionCode }}</td>
+                                            <td>{{ $submissionInfo->submissionTitle }}</td>
+                                            <td>{{ $submissionInfo->submissionType }}</td>
+                                            <td>{{ $submissionInfo->subTheme }}</td>
+                                            <td>{{ $submissionInfo->presentMode }}</td>
+                                            <td>
+                                            @if($submissionInfo->returnPaperLink)
+                                                <a href="{{ route('downloadReviewedFile', ['filename' => $submissionInfo->returnPaperLink]) }}" class="btn btn-primary mb-4">Download Reviewed Paper</a>
+                                            @else
+                                                <form action="{{ route('uploadReviewSubmission',['submissionCode' => $submissionInfo->submissionCode]) }}" method="POST" enctype="multipart/form-data">
+                                                    @csrf
+                                                    <input type="file" name="file" />
+                                                    <button type="submit">Upload Reviewed Paper</button>
+                                                </form>
+                                            @endif
+                                            <a href="{{ route('downloadEvaluationForm', ['filename' => $submissionInfo->evaluationFormLink]) }}" class="btn btn-primary mb-4">Download Evaluation Form</a></td>
+                                        </tr>
+                                    @endif
+                                @endif
                             </tr>
                             @endif
                         @endforeach

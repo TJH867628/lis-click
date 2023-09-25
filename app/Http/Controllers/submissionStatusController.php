@@ -55,6 +55,7 @@ class submissionStatusController extends Controller
             }
 
 
+
             return view('page.submissionStatusPage(Super Admin)',['userSession'=>$userSession,'userSubmissionInfo' => $allSubmissionInfo,'allReviewerInfo' => $allReviewerInfo]);
         }elseif(session()->has('LoggedJKReviewer')){
             $userSession = session()->get('LoggedJKReviewer');
@@ -133,9 +134,9 @@ class submissionStatusController extends Controller
                 'Content-Type' => 'application/pdf',
                 'Content-Disposition' => 'inline',
             ]);
-        } elseif ($extension == 'doc' || $extension == 'docx') {
-            return response()->file($file);
-        }
+        } else{
+            return response()->download($file);
+        }  
 
     }
 

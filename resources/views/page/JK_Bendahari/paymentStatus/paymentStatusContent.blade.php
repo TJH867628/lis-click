@@ -334,6 +334,7 @@
             statusInput.value = statusOption.value;
 
             statusOption.addEventListener('change', () => {
+            console.log(paymentRow);
                 if (statusOption.value === 'Complete' || statusOption.value === 'Pending For Verification') {
                     statusInput.value = statusOption.value;
                     statusInput.style.display = 'none';

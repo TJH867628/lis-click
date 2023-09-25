@@ -306,7 +306,7 @@
                                         @if($submissionInfo->certificate == 'pending')
                                             <p>Pending</p>
                                         @else
-                                            <br><a href="{{ route('downloadCertificate', ['filename' => $submissionInfo->certificate]) }}" class="btn btn-primary mb-4 btn-download" target="_blank">Turn In Report</a>
+                                            <br><a href="{{ route('downloadCertificate', ['filename' => $submissionInfo->certificate]) }}" class="btn btn-primary mb-4 btn-download" target="_blank">Certificate</a>
                                         @endif
                                     @else
                                         <p>Not Ready</p>
@@ -326,7 +326,7 @@
                     @if($submissionInfo->reviewer2ID != NULL)
                         @if($submissionInfo->evaluationFormLink != NULL || $submissionInfo->evaluationFormLink2 != NULL)
                             @if($submissionInfo->dataEvaluationForm && $submissionInfo->dataEvaluationForm->paper_id_number == $submissionInfo->submissionCode)
-                                <td><a href="{{ route('evaluationForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4">Evaluate Form</a> </td>
+                                <td><a href="{{ route('evaluationForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" target="_blank" class="btn btn-primary mb-4">Evaluate Form</a> </td>
                             @else
                                 <td><p>Pending</p></td>
                             @endif
@@ -336,7 +336,7 @@
                     @elseif($submissionInfo->reviewer2ID == NULL)
                         @if($submissionInfo->evaluationFormLink != NULL)
                             @if($submissionInfo->dataEvaluationForm && $submissionInfo->dataEvaluationForm->paper_id_number == $submissionInfo->submissionCode)
-                                <td><a href="{{ route('evaluationForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4">Evaluate Form</a> </td>
+                                <td><a href="{{ route('evaluationForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" target="_blank" class="btn btn-primary mb-4">Evaluate Form</a> </td>
                             @else
                                 <td><p>Pending</p></td>
                             @endif
@@ -349,24 +349,24 @@
                     
                     <td>
                         @if($submissionInfo->correctionPhase == 'pending')
-                            @if(empty($submissionInfo->latestCorrection->submissionCode))
-                                <h5>Pending For Comment</h5>
-                            @else
-                                @if($submissionInfo->latestCorrection->submissionCode == $submissionInfo->submissionCode)
-                                    @if($submissionInfo->latestCorrection->numberOfTimes == $submissionInfo->correction->count())
-                                        @if($submissionInfo->latestCorrection->returnCorrectionLink != NULL)
+                            @if(isset($submissionInfo->latestReturnCorrection->submissionCode))
+                                @if($submissionInfo->latestReturnCorrection->submissionCode == $submissionInfo->submissionCode)
+                                    @if($submissionInfo->latestReturnCorrection->numberOfTimes == $submissionInfo->correction->count())
+                                        @if($submissionInfo->latestReturnCorrection->returnCorrectionLink != NULL)
                                             <h5>Pending For Comment</h5>
-                                        @elseif($submissionInfo->latestCorrection->returnCorrectionLink == NULL)
+                                        @elseif($submissionInfo->latestReturnCorrection->returnCorrectionLink == NULL)
                                             <h5>Pending For Correction</h5>
                                         @endif
                                     @endif
+                                    <a href="{{ route('correctionForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4">Correction</a>
                                 @endif
+                            @else
+                                <h5 style="color:black;">Pending For Comment</h5>
                             @endif
-                            <p>Click To View Correction: </p>
-                            <a href="{{ route('correctionForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4">Correction</a>
                         @elseif($submissionInfo->correctionPhase == 'readyForPresent')
-                            <p>Click To View Correction: </p>
-                            <a href="{{ route('correctionForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4">Correction</a>
+                            @if(isset($submissionInfo->correction))
+                                <a href="{{ route('correctionForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4">Correction</a>
+                            @endif
                             <p>Camera Ready</p>
                         @else
                             <p>Pending</p>
@@ -389,11 +389,11 @@
                                         $i++;
                                     @endphp
                                     <td>
-                                        <a href="{{route('downloadPaymentReceipt', $submissionInfo->paymentStatus->proofOfPayment)}}" target="_blank">Receipt {{ $i }}</a>
+                                        <a href="{{route('downloadPaymentReceipt', $submissionInfo->paymentStatus->proofOfPayment)}}">Receipt {{ $i }}</a>
                                     </td>
                                     <td>
                                     @if($submissionInfo->paymentStatus->paymentStatus === 'Complete')
-                                        <label style="color:lime;">Verified payment</label>
+                                        <label style="color:lime;">Verified</label>
                                         @php
                                             $allComplete = true;
                                             $isEmpty = false;
@@ -434,10 +434,8 @@
                                 <i class="fas fa-upload"></i>
                             </label>
                             <input id="file-upload" type="file" name="file" accept=".jpeg,.jpg,.png,application/pdf" onchange="enableUploadButton()"/>
-                            <button type="submit" class="file-upload-button" disabled>Upload</button>
+                            <button type="submit" class="file-upload-button">Upload</button>
                         </form>
-                            @else
-                                <br><br><h3> All Payment Done</h3>
                             @endif
                         @else
                             <p>Waiting To Done The Correction Phase</p>
@@ -454,10 +452,21 @@
         <script>
             function showPopup() {
             // Create a new window
-            var popup = window.open("Payment QR", "Payment QR", "width=400,height=400");
-            // Add an image and some text to the window
-            popup.document.write("@if(empty($paymentQR))<h1>Payment QR is not available,please contact with the customer service</h1>@else @if($paymentQR->masterdata_value != NULL) <img style='max-height:100px; max-width:100px; margin:auto;' src='{{ asset('paymentQR/'.$paymentQR->masterdata_value) }}'><br> @endif @if($paymentQR->masterdata_details != NULL)<label>{{ $paymentQR->masterdata_details }}</label><br>@endif @if($paymentQR->masterdata_value == NULL && $paymentQR->masterdata_details == NULL) Payment QR is not available,please contact with the customer service @endif @endif");
+            var popup = window.open("", "Payment QR", "width=400,height=400");
+            popup.document.write("<head><title>Payment</title></head>");
+            // Add styles
+            popup.document.write("<style>");
+            popup.document.write("body { font-family: Arial, sans-serif; text-align: center; }");
+            popup.document.write("h1 { color: #333; }");
+            popup.document.write("img { max-height: 100px; max-width: 100px; margin: auto; display: block; }");
+            popup.document.write("label { color: #555; }");
+            popup.document.write("</style>");
+
+            // Add content
+            popup.document.write("<body>");
+            popup.document.write("@if(empty($paymentQR))<h1>Payment QR is not available, please contact customer service</h1>@else @if($paymentQR->masterdata_value != NULL) <img src='{{ asset('paymentQR/'.$paymentQR->masterdata_value) }}'><br> @endif @if($paymentQR->masterdata_details != NULL)<label>{{ $paymentQR->masterdata_details }}</label><br>@endif @if($paymentQR->masterdata_value == NULL && $paymentQR->masterdata_details == NULL) Payment QR is not available, please contact customer service @endif @endif");
             popup.document.write("@if(empty($paymentQR->masterdata_value))@else Please save your receipt for upload @endif");
+            popup.document.write("</body>");
 
             // Center the window on the screen
             popup.moveTo((screen.width - popup.outerWidth) / 2, (screen.height - popup.outerHeight) / 2);

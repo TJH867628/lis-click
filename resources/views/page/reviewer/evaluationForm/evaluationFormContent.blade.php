@@ -5,34 +5,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Evaluation Form</title>
     <style>
-        body{
+        body {
+            font-family: Arial, sans-serif;
             text-align: center;
+            background-color: #f2f2f2;
+        }
+
+        h2 {
+            margin-top: 30px;
+            font-size: 24px;
+            font-weight: bold;
         }
 
         table {
             margin: auto;
-            text-align: center;
+            text-align: left;
             border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
         }
 
-        table tr td{
+        form{
+            margin-top: 10%;
+            margin-bottom: 10%;
+        }
+
+        table tr td {
             padding: 10px;
+            border: 1px solid #ddd;
         }
 
         textarea {
             width: 500px;
             height: 100px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            resize: none;
+        }
+
+        label {
+            margin-right: 10px;
+        }
+
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #3e8e41;
         }
     </style>
 </head>
 <body>
-
     <form action="{{ route('evaluationForm', ['submissionCode' => $dataEvaluationForm->paper_id_number]) }}" method="post">
         @csrf
         <h2>8th INTERNATIONAL CONFERENCE</h2>
         <h2>LIGA ILMU SERANTAU 2022 (LIS 2022)</h2>
 
-        <table border>
+        <table>
             <tr>
                 <td><strong>Reviewer’s Name:</strong></td>
                 <td><input type="text" name="reviewer_name" value="{{ $dataEvaluationForm->reviewer_name }}" readonly></td>
@@ -56,42 +99,42 @@
         </table>
 
         <h3>Comments per Section of Manuscript</h3>
-
-        <table border>
+        <p style="font-size:25px;">Max Length : 1000 Characters only</p>
+        <table>
             <tr>
                 <td><strong>Abstract:</strong></td>
-                <td><textarea name="comments_abstract">{{ $dataEvaluationForm->comments_abstract }}</textarea></td>
+                <td><textarea maxlength="1500" name="comments_abstract">{{ $dataEvaluationForm->comments_abstract }}</textarea></td>
             </tr>
             <tr>
                 <td><strong>Introduction:</strong></td>
-                <td><textarea name="comments_introduction">{{ $dataEvaluationForm->comments_introduction }}</textarea></td>
+                <td><textarea maxlength="1500" name="comments_introduction">{{ $dataEvaluationForm->comments_introduction }}</textarea></td>
             </tr>
             <tr>
                 <td><strong>Literature Review:</strong></td>
-                <td><textarea name="comments_literature_review">{{ $dataEvaluationForm->comments_literature_review }}</textarea></td>
+                <td><textarea maxlength="1500" name="comments_literature_review">{{ $dataEvaluationForm->comments_literature_review }}</textarea></td>
             </tr>
             <tr>
                 <td><strong>Methodology:</strong></td>
-                <td><textarea name="comments_methodology">{{ $dataEvaluationForm->comments_methodology }}</textarea></td>
+                <td><textarea maxlength="1500" name="comments_methodology">{{ $dataEvaluationForm->comments_methodology }}</textarea></td>
             </tr>
             <tr>
                 <td><strong>Results:</strong></td>
-                <td><textarea name="comments_results">{{ $dataEvaluationForm->comments_results }}</textarea></td>
+                <td><textarea maxlength="1500" name="comments_results">{{ $dataEvaluationForm->comments_results }}</textarea></td>
             </tr>
             <tr>
                 <td><strong>Discussion:</strong></td>
-                <td><textarea name="comments_discussion">{{ $dataEvaluationForm->comments_discussion }}</textarea></td>
+                <td><textarea maxlength="1500" name="comments_discussion">{{ $dataEvaluationForm->comments_discussion }}</textarea></td>
             </tr>
             <tr>
                 <td><strong>References:</strong></td>
-                <td><textarea name="comments_references">{{ $dataEvaluationForm->comments_references }}</textarea></td>
+                <td><textarea maxlength="1500" name="comments_references">{{ $dataEvaluationForm->comments_references }}</textarea></td>
             </tr>
 
         </table>
 
         <h3>Please rate the following: (1=Excellent) (2=Good) (3=Fair) (4=Poor)</h3>
 
-        <table border>
+        <table>
             <tr>
                 <td><strong>Originality:</strong></td>
                 <td>
@@ -138,13 +181,10 @@
                 </td>
             </tr>
         </table>
-        <br>
-        <br>
-        <br>
-        <table border>
-            <tr>
-                <td><h3>Recommendation: (mark with X)</h3></td>
-            </tr>
+
+        <h3>Recommendation: (mark with X)</h3>
+
+        <table>
             <tr>
                 <td><label for="accept">Accept As Is</label></td>
                 <td><input type="radio" id="accept" name="recommendation" value="accept" <?php echo ($dataEvaluationForm->recommendation == "accept") ? 'checked' : ''; ?>></td>
@@ -165,13 +205,41 @@
                 <td><label for="reject">Reject On Ground of (Please Be Specific)</label></td>
                 <td><input type="radio" id="reject" name="recommendation" value="reject" <?php echo ($dataEvaluationForm->recommendation == "reject") ? 'checked' : ''; ?>></td>
             </tr>
+            <tr id="reason" style="display: none;">
+                <td>Reject Reason</td>
+                <td colspan="2"><input type="text"  name="specific_reject_reason" placeholder="Reason for rejection" value="<?php echo $dataEvaluationForm->specific_reject_reason ?? ''; ?>" ></td>
+            </tr>
         </table>
 
-        <button type="submit" style="margin: 10px; font-size:larger;">Save</button>
+        <button type="submit">Save</button>
     </form>
-    <br>
-    <br>
-    <br>
-    
+        
+    <script>
+        const acceptRadio = document.getElementById('accept');
+        const minorRadio = document.getElementById('minor');
+        const moderateRadio = document.getElementById('moderate');
+        const majorRadio = document.getElementById('major');
+        const rejectRadio = document.getElementById('reject');
+        const reasonInput = document.getElementById('reason');
+
+        function toggleReasonInput() {
+            if (rejectRadio.checked) {
+                reasonInput.style.display = 'block';
+            } else {
+                reasonInput.style.display = 'none';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            toggleReasonInput();
+            });
+
+        acceptRadio.addEventListener('change', toggleReasonInput);
+        minorRadio.addEventListener('change', toggleReasonInput);
+        moderateRadio.addEventListener('change', toggleReasonInput);
+        majorRadio.addEventListener('change', toggleReasonInput);
+        rejectRadio.addEventListener('change', toggleReasonInput);
+
+    </script>
 </body>
 </html>
