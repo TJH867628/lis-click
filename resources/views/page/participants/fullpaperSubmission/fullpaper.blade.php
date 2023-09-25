@@ -14,23 +14,6 @@
         <link href="css/styles.css" rel="stylesheet"/>
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     </head>
-    <style>
-          .error{
-            border: 1px solid red;
-            border-radius: 20px;
-            background-color: red;
-            text-align: center;
-            margin-bottom: 10px;
-          }
-
-          .success{
-            border: 1px solid lightblue;
-            border-radius: 20px;
-            background-color: lightblue;
-            text-align: center;
-            margin-bottom: 10px;
-          }
-    </style>
     <body class="d-flex flex-column h-100">
         <main class="flex-shrink-0">
         @include('page.participants.navigationBar')
