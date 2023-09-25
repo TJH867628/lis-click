@@ -3,6 +3,26 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" wfd-invisible="true">
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="/css/styles.css" rel="stylesheet" wfd-invisible="true">
+<head>
+    <style>
+        .error{
+            border: 1px solid red;
+            border-radius: 20px;
+            background-color: red;
+            text-align: center;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .success{
+            border: 1px solid lightblue;
+            border-radius: 20px;
+            background-color: lightblue;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
 <!-- Header-->
 <header class="bg-light text text-dark py-5">
                 <div class="container px-5 py-5">
@@ -34,57 +54,71 @@
                                                 <!--End Dropdown-->
                                                 
                                                 <div class="form-group col-md-12">
+                                                    <label>Full Name:</label>
                                                     <input type="text" name="name" class="form-control" placeholder="Presenter's Full Name (CAPITAL LETTER)" required="required" value="{{ $user -> name }}" readonly >
                                                 </div>
                                                 <div class="form-group col-md-12">
+                                                    <label>IC Number:</label>
                                                     <input type="text" name="IC" class="form-control" placeholder="Presenter's Identification Number (MyKad) *without -" required="required" value="{{ $user -> IC_No }}" readonly>
                                                 </div>
                                                 <div class="form-group col-md-12">
+                                                    <label>Phone Number:</label>
                                                     <input type="text" name="number" class="form-control" placeholder="Presenter's Contact number" required="required" value="{{ $user -> phoneNumber }}" readonly>
                                                 </div>
                                                 <div class="form-group col-md-12">
+                                                    <label>Email:</label>
                                                     <input type="text" name="email" class="form-control" placeholder="Presenter's Email Address" required="required" value="{{ $user -> email }}" readonly>
                                                 </div>
                                                 <div class="form-group col-md-12">
+                                                    <label>Organization Name:</label>
                                                     <input type="text" name="address" class="form-control" placeholder="Presenter's Organization Name" value="{{ $user -> organizationName }}" required="required" readonly>
                                                 </div>
                                                 <div class="form-group col-md-12">
+                                                    <label>Address:</label>
                                                     <textarea rows="6" name="message" class="form-control" placeholder="Address" required="required" readonly>{{ $user -> organizationAddress }}</textarea>
                                                 </div>
                                                 <div class="form-group col-md-3">
+                                                    <label>Postcode:</label>
                                                     <input type="text" name="poscode" class="form-control" placeholder="Poscode" required="required" value="{{ $user -> postcode }}" readonly>
                                                 </div>
 
                                                 <!--Dropdown-->
                                                 <div class="form-group col-md-3">
+                                                    <label>Country:</label>
                                                     <input type="text" name="poscode" class="form-control" placeholder="Poscode" required="required" value="{{ $user -> country }}" readonly>
                                                 </div>
                                                 <!--End Dropdown-->
                                                 
                                                 <!--Dropdown-->
                                                 <div class="form-group col-md-4">
+                                                    <label>State:</label>
                                                     <input type="text" name="poscode" class="form-control" placeholder="Poscode" required="required" value="{{ $user -> state }}" readonly>
                                                 </div>
                                                 <!--End Dropdown-->
                                                 
                                                 <div class="form-group col-md-12">
+                                                    <label>Second Author's Email:</label>
                                                     <input type="email" name="participants2_email" class="form-control" placeholder="Second Author's Email">
                                                     <div id="participants2-email-error" class="text-danger"></div>
                                                 </div>
                                                 <div class="form-group col-md-12">
+                                                    <label>Second Author's Name:</label>
                                                     <input type="text" name="participants2_name" class="form-control" placeholder="Second Author's Name">
                                                     <div id="participants2-name-error" class="text-danger"></div>
                                                 </div>
                                                 <div class="form-group col-md-12">
+                                                    <label>Third Author's Email:</label>
                                                     <input type="email" name="participants3_email" class="form-control" placeholder="Third Author's Email">
                                                     <div id="participants3-email-error" class="text-danger"></div>
                                                 </div>
                                                 <div class="form-group col-md-12">
+                                                    <label>Third Author's Name:</label>
                                                     <input type="text" name="participants3_name" class="form-control" placeholder="Third Author's Name">
                                                     <div id="participants3-name-error" class="text-danger"></div>
                                                 </div>
 
                                                 <div class="form-group col-md-12">
+                                                    <label>Title:</label>
                                                     <input type="text" name="paper-title" class="form-control" placeholder="Title" required>
                                                 </div>
 
