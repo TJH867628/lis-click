@@ -548,7 +548,7 @@
                                 @if($submissionInfo->reviewer2ID != NULL)
                                 @if($submissionInfo->evaluationFormLink != NULL || $submissionInfo->evaluationFormLink2 != NULL)
                                     @if($submissionInfo->dataEvaluationForm && $submissionInfo->dataEvaluationForm->paper_id_number == $submissionInfo->submissionCode)
-                                        <td><a href="{{ route('evaluationForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" target="_blank" class="btn btn-primary mb-4 btn-download" id="btn">Download Evaluate Form</a> </td>
+                                        <td><a href="{{ route('evaluationForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" style="float:none; width:95%;" target="_blank" class="btn btn-primary mb-4 btn-download" id="btn">Download Evaluate Form</a> </td>
                                     @else
                                         <td><p>Pending</p></td>
                                     @endif
@@ -559,7 +559,7 @@
                                     @if($submissionInfo->evaluationFormLink != NULL)
                                         @if($submissionInfo->dataEvaluationForm && $submissionInfo->dataEvaluationForm->paper_id_number == $submissionInfo->submissionCode)
                                             <td>
-                                                <a href="{{ route('evaluationForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" target="_blank" class="btn btn-primary mb-4 btn-download" id="btn">
+                                                <a href="{{ route('evaluationForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" style="float:none; width:95%;" target="_blank" class="btn btn-primary mb-4 btn-download" id="btn">
                                                     <i class="fas fa-download"></i>Download Evaluate Form
                                                 </a> 
                                             </td>
