@@ -4,10 +4,6 @@
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="/css/styles.css" rel="stylesheet" wfd-invisible="true">
     <style>
-        body {
-            background-color: #f8f9fa;
-            font-family: Arial, sans-serif;
-        }
 
         h1 {
             text-align: center;
@@ -147,51 +143,271 @@
             background-color: grey;
         }
 
-        .paymentStatus td{
-            width: 10%;
-        }
-
-        .paymentStatus{
-            margin-bottom: 5%;
-        }
-
         .btn-download{
             width: 95%;
         }
+
+        * {
+            margin: 0;
+            padding: 0;
+
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: url("../images/tblBackground.jpg") center / cover;
+            display: flex;
+            justify-content: center;
+        }
+
+        main.table {
+            margin-top: -4%;
+            width: 82vw;
+            height: 75vh;
+            background-color: #fff5;
+            backdrop-filter: blur(7px);
+            box-shadow: 0 .4rem .8rem #0005;
+            border-radius: .8rem;
+            overflow: hidden;
+        }
+
+        .table__header {
+            width: 100%;
+            height: 15%;
+            background-color: #fff4;
+            padding: 1rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .table__header .search-container {
+            width: 35%;
+            height: 100%;
+            background-color: #fff5;
+            padding: 0 .8rem;
+            border-radius: 2rem;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            transition: .2s;
+        }
+
+        .table__header .search-container:hover {
+            width: 45%;
+            background-color: #fff8;
+            box-shadow: 0 .1rem .4rem #0002;
+        }
+
+        .table__header .search-container img {
+            width: 1.2rem;
+            height: 1.2rem;
+        }
+
+        .table__header .search-container input {
+            width: 100%;
+            padding: 0 .5rem 0 .3rem;
+            background-color: transparent;
+            border: none;
+            outline: none;
+        }
+
+        .table__body {
+            width: 95%;
+            max-height: calc(84% - 1.6rem);
+            background-color: #fffb;
+
+            margin: .8rem auto;
+            border-radius: .6rem;
+
+            overflow: auto;
+            overflow: overlay;
+        }
+
+        .table__body::-webkit-scrollbar{
+            width: 0.5rem;
+            height: 0.5rem;
+        }
+
+        .table__body::-webkit-scrollbar-thumb{
+            border-radius: .5rem;
+            background-color: #0004;
+            visibility: hidden;
+        }
+
+        .table__body:hover::-webkit-scrollbar-thumb{ 
+            visibility: visible;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        td img {
+            width: 36px;
+            height: 36px;
+            margin-right: .5rem;
+            border-radius: 50%;
+
+            vertical-align: middle;
+        }
+
+        table, th, td {
+            border-collapse: collapse;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        thead th {
+            position: sticky;
+            top: 0;
+            left: 0;
+            background-color: #d5d1defe;
+            cursor: pointer;
+            text-transform: capitalize;
+            z-index: 1;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #0000000b;
+        }
+
+        tbody tr {
+            --delay: .1s;
+            transition: .5s ease-in-out var(--delay), background-color 0s;
+        }
+
+        tbody tr.hide {
+            opacity: 0;
+            transform: translateX(100%);
+        }
+
+        tbody tr:hover {
+            background-color: #fff6 !important;
+        }
+
+        tbody tr td,
+        tbody tr td p,
+        tbody tr td img {
+            transition: .2s ease-in-out;
+        }
+
+        tbody tr.hide td,
+        tbody tr.hide td p {
+            padding: 0;
+            font: 0 / 0 sans-serif;
+            transition: .2s ease-in-out .5s;
+        }
+
+        tbody tr.hide td img {
+            width: 0;
+            height: 0;
+            transition: .2s ease-in-out .5s;
+        }
+
+        .status {
+            padding: .4rem 0;
+            border-radius: 2rem;
+            text-align: center;
+        }
+
+        .status.delivered {
+            background-color: #86e49d;
+            color: #006b21;
+        }
+
+        .status.cancelled {
+            background-color: #d893a3;
+            color: #b30021;
+        }
+
+        .status.pending {
+            background-color: #ebc474;
+        }
+
+        .status.shipped {
+            background-color: #6fcaea;
+        }
+
+
+        @media (max-width: 1000px) {
+            td:not(:first-of-type) {
+                min-width: 12.1rem;
+            }
+        }
+
+        thead th span.icon-arrow {
+            display: inline-block;
+            width: 1.3rem;
+            height: 1.3rem;
+            border-radius: 50%;
+            border: 1.4px solid transparent;
+            
+            text-align: center;
+            font-size: 1rem;
+            
+            margin-left: .5rem;
+            transition: .2s ease-in-out;
+        }
+
+        thead th:hover span.icon-arrow{
+            border: 1.4px solid #6c00bd;
+        }
+
+        thead th:hover {
+            color: #6c00bd;
+        }
+
+        thead th.active span.icon-arrow{
+            background-color: #6c00bd;
+            color: #fff;
+        }
+
+        thead th.asc span.icon-arrow{
+            transform: rotate(180deg);
+        }
+
+        thead th.active,tbody td.active {
+            color: #6c00bd;
+        }
+
+        #btn, .download {
+            margin-right: 10px;
+            margin-top: 5px;
+            width: max-content;
+        }
 </style>
-<div class="table-container">
-    @if($userSubmissionInfo)
-    <div class="search-container">
-        <input type="text" id="searchInput" placeholder="Search by Submission Code" style="width:20%; margin-top:3%; text-align:center; margin-left:5%;">
-        <button type="button" onclick="filterTable()">Search</button>
-    </div>
-        <table id="submissionTable" border>
-            <tr>
-                <th>
-                    Submission<br>
-                </th>
-                <th>
-                    Document<br>
-                </th>
-                <!-- <th>
-                    Review Paper<br>
-                </th> -->
-                <th>
-                    Evaluation Form<br>
-                </th>
-                <th>
-                    Correction
-                </th>
-                <th>
-                    Payment Status
-                </th>
-            </tr>
-            @foreach($userSubmissionInfo as $submissionInfo)
+<main class="table">
+@if($userSubmissionInfo)
+        <section class="table__header">
+            <h1>Presentation Schedule</h1>
+            <div class="search-container">
+                <input type="search" id="searchInput" placeholder="Search by Submission Code">
+                <button type="button" onclick="filterTable()"><i class="fas fa-search"></i></button>
+            </div>
+        </section>
+        <section class="table__body" id="submissionTable">
+            <table>
+                <thead>
+                    <tr>
+                        <th> Submission</th>
+                        <th> Document</th>
+                        <!-- <th> Evaluation Form</th> -->
+                        <!-- <th> Correction</th> -->
+                        <th> Payment Status </th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach($userSubmissionInfo as $submissionInfo)
                 <tr>
                     <td>
-                        <p>Click The Code To Access Details</p>
                         <a style="font-size:20px; font-weight:bold; color:black;  text-decoration:none;" href="#" class="submission-code" data-submission-code="{{$submissionInfo->submissionCode}}" data-submission-type="{{$submissionInfo->submissionType}}" data-submission-title="{{$submissionInfo->submissionTitle}}" data-submission-type="{{$submissionInfo->submissionTitle}}" data-sub-theme="{{$submissionInfo->subTheme}}" data-present-mode="{{$submissionInfo->presentMode}}">
                             <div class="submissionCode">
+                                <i class="fa-solid fa-circle-info"></i>
                                 {{$submissionInfo->submissionCode}}
                             </div>
                         </a>
@@ -224,11 +440,11 @@
                                     </td>
                                     <td>
                                         @if($submissionInfo->reviewStatus == 'pending')
-                                            <h5 style="color:#007bff;">Waiting For Review</h5>
+                                            <p class="status shipped">Waiting For Review</p>
                                         @elseif($submissionInfo->reviewStatus == 'done')
-                                            <h5 style="color:lime;">Review Completed</h5>
+                                            <p class="status delivered">Review Completed</p>
                                         @elseif($submissionInfo->reviewStatus == 'None')
-                                            <h5 style="color:#007bff;">Pending For Reviewer</h5>
+                                            <p class="status cancelled">Pending For Reviewer</p>
                                         @else
                                         @endif
                                     </td>
@@ -272,9 +488,11 @@
                                 </td>
                                 <td>
                                 @if($submissionInfo->returnPaperLink == NULL)
-                                    <p>Return Paper Unavailable</p>
+                                    <p class="status cancelled">Return Paper Unavailable</p>
                                 @else
-                                    <a href="{{ route('downloadReviewedFile', ['filename' => $submissionInfo->returnPaperLink]) }}" class="btn btn-primary mb-4 btn-download" target="_blank">Return File</a>
+                                <a href="{{ route('downloadReviewedFile', ['filename' => $submissionInfo->returnPaperLink]) }}" class="btn btn-primary mb-4 btn-download" target="_blank">
+                                    <i class="fas fa-download"></i> Download Return File
+                                </a>
                                 @endif
                                 </td>
                             </tr>
@@ -282,7 +500,11 @@
                                 <td style="width: max-content; color:black;">
                                     Orginal Paper
                                 </td>
-                                <td><a href="{{ route('downloadSubmission', ['filename' => $submissionInfo->file_name]) }}" class="btn btn-primary mb-4 btn-download" target="_blank">Original File</a></td>
+                                <td>
+                                    <a href="{{ route('downloadSubmission', ['filename' => $submissionInfo->file_name]) }}" class="btn btn-primary mb-4 btn-download" target="_blank">
+                                        <i class="fas fa-download"></i> Download Original File
+                                    </a>
+                                </td>
                             </tr>
                             <tr>
                                 <td style="width: max-content; color:black;">
@@ -290,9 +512,11 @@
                                 </td>
                                 <td>
                                     @if($submissionInfo->turnInReport)
-                                        <a href="{{ route('downloadTurnInReport', ['filename' => $submissionInfo->turnInReport]) }}" class="btn btn-primary mb-4 btn-download" target="_blank">Turn In Report</a>
+                                        <a href="{{ route('downloadTurnInReport', ['filename' => $submissionInfo->turnInReport]) }}" class="btn btn-primary mb-4 btn-download" target="_blank">
+                                            <i class="fas fa-download"></i>Turn In Report
+                                        </a>
                                     @else
-                                        <p> Pending </p>
+                                        <p class="status shipped"> Pending </p>
                                     @endif
                                 </td>
                             </tr>
@@ -300,77 +524,95 @@
                                 <td style="width: max-content; color:black;">
                                     Certificate
                                 </td>
+                                
                                 <td>
                                     <!-- download certificate -->
                                     @if($submissionInfo->correctionPhase == 'readyForPresent')
                                         @if($submissionInfo->certificate == 'pending')
-                                            <p>Pending</p>
+                                            <p class="status shipped">Pending</p>
                                         @else
-                                            <br><a href="{{ route('downloadCertificate', ['filename' => $submissionInfo->certificate]) }}" class="btn btn-primary mb-4 btn-download" target="_blank">Certificate</a>
+                                            <a href="{{ route('downloadCertificate', ['filename' => $submissionInfo->certificate]) }}" class="btn btn-primary mb-4 btn-download" target="_blank">
+                                                <i class="fas fa-download"></i>Certificate
+                                            </a>
                                         @endif
                                     @else
-                                        <p>Not Ready</p>
+                                        <p class="status cancelled">Not Ready</p>
                                     @endif
                                 </td>
                             </tr>
-                        </table>
-                    </td>
-                    <!-- <td>
-                        <p>Reviewer</p>
-                        <h5>{{ $submissionInfo->reviewerID }} </h5>
-                        @if($submissionInfo->reviewer2ID != NULL)
-                            <p>Reviewer 2</p>
-                            <h5>{{ $submissionInfo->reviewer2ID }} </h5>
-                        @endif
-                    </td> -->
-                    @if($submissionInfo->reviewer2ID != NULL)
-                        @if($submissionInfo->evaluationFormLink != NULL || $submissionInfo->evaluationFormLink2 != NULL)
-                            @if($submissionInfo->dataEvaluationForm && $submissionInfo->dataEvaluationForm->paper_id_number == $submissionInfo->submissionCode)
-                                <td><a href="{{ route('evaluationForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" target="_blank" class="btn btn-primary mb-4">Evaluate Form</a> </td>
-                            @else
-                                <td><p>Pending</p></td>
-                            @endif
-                        @else
-                            <td><p>Pending</p></td>
-                        @endif
-                    @elseif($submissionInfo->reviewer2ID == NULL)
-                        @if($submissionInfo->evaluationFormLink != NULL)
-                            @if($submissionInfo->dataEvaluationForm && $submissionInfo->dataEvaluationForm->paper_id_number == $submissionInfo->submissionCode)
-                                <td><a href="{{ route('evaluationForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" target="_blank" class="btn btn-primary mb-4">Evaluate Form</a> </td>
-                            @else
-                                <td><p>Pending</p></td>
-                            @endif
-                        @else
-                            <td><p>Pending</p></td>
-                        @endif
-                    @else
-                        <td><p>Pending</p></td>
-                    @endif
-                    
-                    <td>
-                        @if($submissionInfo->correctionPhase == 'pending')
-                            @if(isset($submissionInfo->latestReturnCorrection->submissionCode))
-                                @if($submissionInfo->latestReturnCorrection->submissionCode == $submissionInfo->submissionCode)
-                                    @if($submissionInfo->latestReturnCorrection->numberOfTimes == $submissionInfo->correction->count())
-                                        @if($submissionInfo->latestReturnCorrection->returnCorrectionLink != NULL)
-                                            <h5>Pending For Comment</h5>
-                                        @elseif($submissionInfo->latestReturnCorrection->returnCorrectionLink == NULL)
-                                            <h5>Pending For Correction</h5>
-                                        @endif
+                            <tr>
+                                <td style="width: max-content; color:black;">
+                                    Evaluation Form
+                                </td>
+
+                                @if($submissionInfo->reviewer2ID != NULL)
+                                @if($submissionInfo->evaluationFormLink != NULL || $submissionInfo->evaluationFormLink2 != NULL)
+                                    @if($submissionInfo->dataEvaluationForm && $submissionInfo->dataEvaluationForm->paper_id_number == $submissionInfo->submissionCode)
+                                        <td><a href="{{ route('evaluationForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" target="_blank" class="btn btn-primary mb-4 btn-download" id="btn">Download Evaluate Form</a> </td>
+                                    @else
+                                        <td><p>Pending</p></td>
                                     @endif
-                                    <a href="{{ route('correctionForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4">Correction</a>
+                                @else
+                                    <td><p>Pending</p></td>
                                 @endif
-                            @else
-                                <h5 style="color:black;">Pending For Comment</h5>
-                            @endif
-                        @elseif($submissionInfo->correctionPhase == 'readyForPresent')
-                            @if(isset($submissionInfo->correction))
-                                <a href="{{ route('correctionForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4">Correction</a>
-                            @endif
-                            <p>Camera Ready</p>
-                        @else
-                            <p>Pending</p>
-                        @endif
+                                @elseif($submissionInfo->reviewer2ID == NULL)
+                                    @if($submissionInfo->evaluationFormLink != NULL)
+                                        @if($submissionInfo->dataEvaluationForm && $submissionInfo->dataEvaluationForm->paper_id_number == $submissionInfo->submissionCode)
+                                            <td>
+                                                <a href="{{ route('evaluationForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" target="_blank" class="btn btn-primary mb-4 btn-download" id="btn">
+                                                    <i class="fas fa-download"></i>Download Evaluate Form
+                                                </a> 
+                                            </td>
+                                        @else
+                                            <td><p class="status shipped">Pending</p></td>
+                                        @endif
+                                    @else
+                                        <td><p class="status shipped">Pending</p></td>
+                                    @endif
+                                @else
+                                    <td><p class="status shipped">Pending</p></td>
+                                @endif
+                            </tr>
+
+                            <tr>
+                                <td style="width: max-content; color:black;">
+                                    Correction
+                                </td>
+
+                                <td>
+                                @if($submissionInfo->correctionPhase == 'pending')
+                                    @if(isset($submissionInfo->latestReturnCorrection->submissionCode))
+                                        @if($submissionInfo->latestReturnCorrection->submissionCode == $submissionInfo->submissionCode)
+                                            @if($submissionInfo->latestReturnCorrection->numberOfTimes == $submissionInfo->correction->count())
+                                                @if($submissionInfo->latestReturnCorrection->returnCorrectionLink != NULL)
+                                                    <p class="status shipped">Pending For Comment</p>
+                                                @elseif($submissionInfo->latestReturnCorrection->returnCorrectionLink == NULL)
+                                                    <p class="status shipped">Pending For Correction</p>
+                                                @endif
+                                            @endif
+                                            <a href="{{ route('correctionForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4 btn-download">
+                                                <i class="fas fa-file-alt"></i>Correction
+                                            </a>
+                                        @endif
+                                    @else
+                                        <p class="status shipped">Pending For Comment</p>
+                                    @endif
+                                @elseif($submissionInfo->correctionPhase == 'readyForPresent')
+                                    @if(isset($submissionInfo->correction) && $submissionInfo->correction->count() > 0)
+                                        <p class="status delivered">
+                                            <a href="{{ route('correctionForm', ['submissionCode' => $submissionInfo->submissionCode]) }}">
+                                                <i class="fas fa-file-alt"></i>Correction
+                                            </a>Camera Ready
+                                        </p>
+                                    @else
+                                        <p class="status delivered">Camera Ready</p>
+                                    @endif
+                                @else
+                                    <p class="status shipped">Pending</p>
+                                @endif
+                                </td>
+                            </tr>
+                        </table>
                     </td>
                     
                     <td>
@@ -380,32 +622,36 @@
                                 $allComplete = false;
                                 $isEmpty = true;
                             @endphp
-                            <table class="paymentStatus">
-                                <th>Receipt</th>
-                                <th>Status</th>
+                            <table class="table__body">
+                            <thead>
+                                <tr>
+                                    <th style="color: black;"> Receipt</th>
+                                    <th style="color: black;"> Status</th>
+                                </tr>
+                            </thead>
                                 @foreach($submissionInfo->paymentStatus as $submissionInfo->paymentStatus)
                                 <tr>
                                     @php
                                         $i++;
                                     @endphp
                                     <td>
-                                        <a href="{{route('downloadPaymentReceipt', $submissionInfo->paymentStatus->proofOfPayment)}}">Receipt {{ $i }}</a>
+                                    <a href="{{route('downloadPaymentReceipt', $submissionInfo->paymentStatus->proofOfPayment)}}"><i class="fas fa-receipt"></i> Receipt {{ $i }}</a>
                                     </td>
                                     <td>
                                     @if($submissionInfo->paymentStatus->paymentStatus === 'Complete')
-                                        <label style="color:lime;">Verified</label>
+                                        <p class="status delivered">Verified</p>
                                         @php
                                             $allComplete = true;
                                             $isEmpty = false;
                                         @endphp
                                     @elseif($submissionInfo->paymentStatus->paymentStatus === "Pending For Verification")
-                                        <label style="color:orange;">{{ $submissionInfo->paymentStatus->paymentStatus }}</label>
+                                        <p class="status shipped">{{ $submissionInfo->paymentStatus->paymentStatus }}</p>
                                         @php
                                             $allComplete = false;
                                             $isEmpty = false;
                                         @endphp
                                     @else
-                                        <label style="color:red;">{{ $submissionInfo->paymentStatus->paymentStatus }}</label>
+                                        <p class="status cancelled">{{ $submissionInfo->paymentStatus->paymentStatus }}</p>
                                         @php
                                             $allComplete = false;
                                             $isEmpty = false;
@@ -438,7 +684,7 @@
                         </form>
                             @endif
                         @else
-                            <p>Waiting To Done The Correction Phase</p>
+                            <p class="status shipped">Waiting To Done The Correction Phase</p>
                         @endif
                     </td> 
                 </tr>
@@ -446,9 +692,10 @@
         @else       
             <p style="color: black;">No submission found.</p>
         @endif
-    </table>
-    <br><br><br><br><br><br>
-</div>
+                </tbody>
+            </table>
+        </section>
+    </main>
         <script>
             function showPopup() {
             // Create a new window
@@ -506,9 +753,7 @@
                     <span style="font-weight:bold;">${presentMode}</span>
                     </div>
                     <div class="submission-details-header" style=" text-align:center; margin:20px;">
-                    <span class="submission-details-close" style="color:white; font-size:20px; padding:3%; background-color: #007bff; cursor: pointer; border-radius:5px;">Close</span>
-                    </div>
-                `;
+                    <span class="submission-details-close" style="position: absolute;top: 0px;right: 0px;width: 45px;height: 45px;background: #0d6efd;font-size: 2em;color: #fff;display: flex;justify-content: center;align-items: center;border-bottom-left-radius: 20px;border-top-right-radius: 20px;cursor: pointer;z-index: 1;"><i class="fas fa-times"></i></span></div>`;
                 document.body.appendChild(popUpWindow);
                 submissionDetails = popUpWindow;
 
@@ -521,6 +766,7 @@
                 submissionDetails.style.backgroundColor = 'white';
                 submissionDetails.style.padding = '20px';
                 submissionDetails.style.border = '1px solid #ccc';
+                submissionDetails.style.borderRadius = '20px';
                 submissionDetails.style.boxShadow = '0 0 20px rgba(0, 0, 0, 0.5)';
                 submissionDetails.style.color = 'black';
                 submissionDetails.style.transition = '0.5s';
