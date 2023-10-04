@@ -449,7 +449,7 @@
                             // Store CSRF token in a hidden input field
                             $('#csrfToken').val(response.csrf_token);
                            // Show success message and disable the button for 1 minutes
-                            var remainingTime =1; // 1 minutes in seconds
+                            var remainingTime =60; // 1 minutes in seconds
                             button.prop('title','Please wait before resend');
                                 var countdown = setInterval(function() {
                                     var minutes = Math.floor(remainingTime / 60);
