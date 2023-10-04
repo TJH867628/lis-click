@@ -13,19 +13,19 @@
         <link href="../css/styles.css" rel="stylesheet"/>
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <style>
             body{
                 background-color: #eaeaea;
                 overflow: hidden;
             }
             #container{
+                margin-top: 25px;
                 position: absolute;
                 left:50%;
                 top:50%;
                 transform: translate(-50%,-50%);
-                width:1000px;
-                height:600px;
+                width:800px;
+                height:500px;
                 padding:50px;
                 background-color: #f5f5f5;
                 box-shadow: 0 30px 50px #dbdbdb;
@@ -158,6 +158,13 @@
             #item.dark #content div{
                 color: #f5f5f5; /* reverse color for dark images */
             }
+            #prev{
+                margin-right: 1000px;
+                margin-bottom: 100px;
+            }
+            #next{
+                margin-left: 100px;
+            }
     </style>
     </head>
     <body>
@@ -167,7 +174,7 @@
             @foreach($gallery as $galleryItem)
                 @if($galleryItem->visible == true)
                     <div id="item" style="background-image: url('{{ $galleryItem->imageSrc }}');"><?php // phpcs:ignore ?>
-                        <img src="{{ $galleryItem->imageSrc }}" id="item-img" alt="" style="display: none;">
+                        <img src="{{ $galleryItem->imageSrc }}" id="item-img" alt="" style="display: none;  margin-right: 1000px; ">
                         <div id="content">
                             <div id="name">{{ $galleryItem->title }}</div>
                             <div id="des">{{ $galleryItem->description }}</div>
@@ -176,11 +183,12 @@
                 @endif
             @endforeach
         </div>
-        <div id="buttons">
+        
+    </div>
+    <div id="buttons">
             <button id="prev"><i class="fa-solid fa-angle-left"></i></button>
             <button id="next"><i class="fa-solid fa-angle-right"></i></button>
-        </div>
-    </div>
+        </div>  
     @endif
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.4.0/color-thief.min.js" integrity="sha512-r2yd2GP87iHAsf2K+ARvu01VtR7Bs04la0geDLbFlB/38AruUbA5qfmtXwXx6FZBQGJRogiPtEqtfk/fnQfaYA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
