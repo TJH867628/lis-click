@@ -275,7 +275,7 @@
                 </thead>
                 <tbody>
                     @foreach($submission as $submission)
-                        @if($submission->submissionType != 'Publication ONLY')
+                        @if($submission->submissionType != 'Publication ONLY' && $submission->correctionPhase == 'readyForPresent')
                         <tr>
                             <td>
                                 <a style="font-size:20px; font-weight:bold; color:black;  text-decoration:none;" href="#" class="submission-code" data-submission-code="{{$submission->submissionCode}}" data-submission-type="{{$submission->submissionType}}" data-submission-title="{{$submission->submissionTitle}}" data-submission-type="{{$submission->submissionTitle}}" data-sub-theme="{{$submission->subTheme}}" data-present-mode="{{$submission->presentMode}}">

@@ -15,11 +15,8 @@
         
     </head>
     <body class="d-flex flex-column h-100" style="background-color: white; color:black;">
-        <main class="flex-shrink-0">
         @include('page.participants.navigationBar')
-        <br><br><br><br><br>
         @include('page.participants.correctionForm.correctionFormContent')
-        </main>
         @include('page.footer')
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>

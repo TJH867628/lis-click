@@ -13,6 +13,28 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet"/>
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+        <style>
+            .password-toggle {
+                padding: 5px;
+                width: 2.1em;
+                align-items: center;
+                border-radius: 50%;
+                text-align: center;
+                transform: translateY(-50%);
+                cursor: pointer;
+                transition: color 0.5s, background-color 0.5s; /* Faster transition */
+            }
+            /* Add a circle around the icon on hover */
+            .password-toggle:hover {
+                padding: 5px;
+                color: grey;
+                text-align: center;
+                border-radius: 50%;
+                width: 2.1em;
+                background-color: rgba(128, 128, 128, 0.2); /* Grey with opacity */
+                transition: color 0.5s, background-color 0.5s; /* Faster transition */
+            }
+        </style>
     </head>
     <body class="d-flex flex-column h-100">
         <main class="flex-shrink-0">
@@ -120,30 +142,33 @@
                                             <button class="btn btn-primary">Cancel</button>
                                         </div>
                                     </div>
-                                         
+                                </form>
                                     <!--- PASSWORD -->
                                     <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
+                                <form action="/updatePassword" method="post" id="changePasswordForm">
                                         <h3 class="mb-4">Password Settings</h3>
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-6" style="display: flex; position:relative;">
                                                 <div class="form-group">
                                                       <label>Current Password :</label>
-                                                      <input type="password" class="form-control">
+                                                      <input type="password" class="form-control" id="currentPassword" minlength="3" maxlength="50">
                                                 </div>
-                                            </div>
+                                                <i style="height:fit-content; position:absolute; top:50%; left:45%;" class="bi-eye password-toggle" id="toggleCurrentPassword" style="color: black;"></i>
+                                            </div>  
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                       <label>New Password :</label>
-                                                      <input type="password" class="form-control">
+                                                      <input type="password" class="form-control" id="newPassword1" minlength="3" maxlength="50">
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-6" style="position: relative;">
                                                 <div class="form-group">
                                                       <label>Confirm New Password :</label>
-                                                      <input type="password" class="form-control">
+                                                      <input type="password" class="form-control" id="newPassword2" minlength="3" maxlength="50">
                                                 </div>
+                                                <i style="height:fit-content; position:absolute; top:50%; left:100%;" class="bi-eye password-toggle" id="toggleNewPassword" style="color: black;"></i>
                                             </div>
                                         </div>
                                         <div>
@@ -151,6 +176,7 @@
                                             <button class="btn btn-primary">Cancel</button>
                                         </div>
                                     </div>
+                                </form>
                                 </div>
                             </div><!--- END ROW -->
                         </div><!--- END CONTAINER -->	
@@ -187,6 +213,98 @@
                 $('#state').html(stateOptionsHtml);
             });
             });
+
+            $(document).ready(function () {
+                var passwordVisible = false; // Track password1 visibility state
+                var form = $('#changePasswordForm'); // Get the form
+                var error = false; //
+
+                // Toggle password visibility for password1
+                $("#toggleCurrentPassword").on("click", function () {
+                    var inputField1 = $("#currentPassword");
+                    var icon = $("#toggleCurrentPassword");
+                    togglePasswordVisibility(inputField1,null,icon);
+                });
+
+                // Toggle password visibility for password2
+                $("#toggleNewPassword").on("click", function () {
+                    var inputField1 = $("#newPassword1");
+                    var inputField2 = $("#newPassword2");
+                    var icon = $("#toggleNewPassword");
+                    togglePasswordVisibility(inputField1,inputField2,icon);
+                });
+
+                function togglePasswordVisibility(inputField1,inputField2,icon) {
+                    if (inputField1.attr("type") === "password") {
+                        passwordVisible = true;
+                        inputField1.attr("type", "text");
+                        inputField1[0].style.color = "#232434";
+                        inputField2.attr("type", "text");
+                        inputField2[0].style.color = "#232434";
+                        icon.addClass("bi-eye-slash").removeClass("bi-eye");
+                    }else if (passwordVisible == false){
+                        inputField1.attr("type", "password");
+                        inputField2.attr("type", "password");
+                        icon.addClass("bi-eye").removeClass("bi-eye-slash");
+                    }
+                }
+
+                
+                $("#toggleCurrentPassword").hover(
+                        function () {
+                            var inputField1 = $("#currentPassword");
+                            var icon = $("#toggleCurrentPassword");
+                            if (passwordVisible == true) {
+                                passwordVisible = false; // Toggle visibility state
+                                togglePasswordVisibility(inputField1,null, icon); 
+                            }
+                        },
+                    );
+
+                $("#toggleNewPassword").hover(
+                    function () {
+                        var inputField1 = $("#newPassword1");
+                        var inputField2 = $("#newPassword2");
+                        var icon = $("#toggleNewPassword");
+                        if (passwordVisible == true) {
+                            passwordVisible = false; // Toggle visibility state
+                            togglePasswordVisibility(inputField1,inputField2, icon); 
+                        }
+                    },
+                );
+
+                // Attach an event listener to the form's submit event
+                form.on("submit", function (event) {
+                event.preventDefault(); // Prevent the form from submitting
+                console.log(error);
+
+                // Validate passwords here
+                var password1 = $("#password1").val();
+                var password2 = $("#password2").val();
+                var password2Error = $("#password2Error");
+                
+                password2Error.hide().text("");
+                if (password1 !== password2) {
+                    password2Error.text("Passwords do not match.").show();
+                    error = true;
+                }else{
+                    error = false;
+                }
+
+                if (password1.length > 30 || password2.length > 30) {
+                    alert("Passwords should not be more than 30 characters.");
+                    error = true;
+                }else{
+                    error = false;
+                }
+
+                if(error == false){
+                    form.unbind("submit").submit();
+                }
+            });
+        });
+
+            
             </script>   
         <!-- Core theme JS-->
         <!--<script src="js/scripts.js"></script>-->

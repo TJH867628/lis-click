@@ -15,6 +15,7 @@
             max-width: 100%;
             margin: 0 auto;
             padding: 20px;
+            margin-top: 10%;
         }
         #form-container {
             padding: 20px;
@@ -91,6 +92,17 @@
         .page-break {
             page-break-after: always;
         }
+
+        #logo_lis{
+            position: absolute;
+            top: 10%;
+        }
+
+        #logo_pmj{
+            position: absolute;
+            top: 8%;
+            left:50%;
+        }
     </style>
 </head>
 <body>
@@ -99,7 +111,8 @@
         $count = 0;
     @endphp
         @foreach($dataEvaluationForm as $thisdataEvaluationForm)
-
+            <img src="{{ $logo_lis }}" id="logo_lis" alt="logo_lis" style="width: 300px; height: 150px;">
+            <img src="{{ $logo_pmj }}" id="logo_pmj" alt="logo_pmj" style="width: 300px; height: 150px;">
         <div id="form-container">
             <div class="header">
                 <h2>INTERNATIONAL CONFERENCE </h2><br>

@@ -460,7 +460,7 @@
                             <tr>
                                 <td>{{ $count }}</td>
                                 <td id="titleTableData">
-                                    <textarea class="form-control"  type="text" id="existingTitle" name="title">{{ trim($thisPublication->field_details) }}</textarea>
+                                    <textarea class="form-control" style="height: auto;"  type="text" id="existingTitle" name="title">{{ trim($thisPublication->field_details) }}</textarea>
                                 </td>
                                 <td>
                                     <a href="{{ route('downloadJurnal', ['filename' => $thisPublication->field_value ]) }}" target="_blank">

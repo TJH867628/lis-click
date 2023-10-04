@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>LIS Registration</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
@@ -90,6 +91,44 @@
             .form-group{
                 position: relative;
             }
+
+            /* CSS spinner animation */
+            .spinner {
+                display: inline-block;
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                border: 2px solid #ccc;
+                border-top-color: #333;
+                animation: spin 0.8s ease-in-out infinite;
+            }
+
+            @keyframes spin {
+                to { transform: rotate(360deg); }
+            }
+
+            .success-icon {
+                display: inline-block;
+                width: 20px;
+                height: 20px;
+                line-height: 20px;
+                text-align: center;
+                border-radius: 50%;
+                background-color: #0f0;
+                color: #fff;
+            }
+
+            /* CSS shake animation */
+            @keyframes shake {
+                0% { transform: translateX(0); }
+                10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+                20%, 40%, 60%, 80% { transform: translateX(10px); }
+                100% { transform: translateX(0); }
+            }
+
+            .shake {
+                animation: shake 0.5s ease-in-out;
+            }
     </style>
     </head>
     <body>
@@ -105,7 +144,7 @@
             <header class="bg-light text text-dark py-5">
                 <div class="container px-5 py-5 mt-xl-5">
                     <div id="contact" class="contact-area section-padding">
-                        <div class="container py-5">										
+                        <div class="container py-5">		    								
                             <div class="section-title text-center fw-bold">
                                 <h1>REGISTER</h1>
                                 
@@ -148,19 +187,35 @@
                                                 </div>
 
                                                 <div class="form-group col-md-7">
-                                                    <label for="organizationName">Organization Name:</label>
-                                                    <input type="text" name="organizationName" id="organizationName"  class="form-control organizationName" placeholder="Organization Name" required="required">
-                                                </div>
-
-                                                <div class="form-group col-md-5">
-                                                    <label for="email">Email Address:</label>
-                                                    <input type="text" name="email" id="email" class="form-control email" placeholder="Email Address" required="required">
+                                                        <label for="email">Email Address:</label>
+                                                    <div style="display: flex;">
+                                                        <input type="text" name="email" id="email" class="form-control email" placeholder="Email Address" required="required">
+                                                    </div>
                                                     @if($message = Session::get('error'))
                                                     <div class="error">
                                                         <span class="error">{{ $message }}</span><br> 
                                                     </div>
                                                     @endif
                                                 </div>
+
+                                                <div class="form-group col-md-5" id="emailVerification">
+                                                    <label for="name">Verify Your Email</label>
+                                                    <div class="input-group">
+                                                        <input type="text" name="otp" id="otp" class="form-control otp" placeholder="OTP(One-Time Password)" minlength="6" maxlength="6" required="required" style='text-transform:uppercase'>
+                                                        <div class="input-group-append" style="margin-top:2%; margin-left:5%;">
+                                                            <button href="#emailVerification" class="btn btn-primary" id="sendOtp">Send OTP</button>
+                                                        </div>
+                                                    </div>
+                                                    <div id="errorOtpMessage"></div>
+                                                </div>
+
+                                                <div class="form-group col-md-12">
+                                                    <label for="organizationName">Organization Name:</label>
+                                                    <input type="text" name="organizationName" id="organizationName"  class="form-control organizationName" placeholder="Organization Name" required="required">
+                                                </div>
+
+                                                
+
 
                                                 <div class="form-group col-md-6">
                                                     <label for="IC_No">IC Number:</label>
@@ -259,37 +314,28 @@
 
                                         $('')
                                     });
-                                        </script>                                          
+
+                                    function toUpperCase() {
+                                        var input = document.getElementById('myInput');
+                                        input.value = input.value.toUpperCase();
+                                    }
+                                </script>                                          
                             </div><!--- END ROW -->
                         </div><!--- END CONTAINER -->	
                             
                     </div>
                 </div>
             </header>
-
-        <!-- Footer-->
-        <footer class="bg-dark py-4 mt-auto">
-            <div class="container px-5">
-                <div class="row align-items-center justify-content-between flex-column flex-sm-row">
-                    <div class="col-auto"><div class="small m-0 text-white">© 2023 LIGA ILMU SERANTAU 2023. All Rights Reserved. Design by Politeknik Mersing</div></div>
-                    <div class="col-auto">
-                        <a class="link-light small" href="#!">Privacy</a>
-                        <span class="text-white mx-1">&middot;</span>
-                        <a class="link-light small" href="#!">Terms</a>
-                        <span class="text-white mx-1">&middot;</span>
-                        <a class="link-light small" href="#!">Contact</a>
-                    </div>
-                </div>
-            </div>
-        </footer>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <!-- Core theme JS-->
         <script>
             $(document).ready(function () {
                 var passwordVisible = false; // Track password1 visibility state
                 var form = $('#registrationForm'); // Get the form
                 var error = false; //
+                let emailVerified = false;
 
                 // Toggle password visibility for password1
                 $("#togglePassword1").on("click", function () {
@@ -337,7 +383,6 @@
                 // Attach an event listener to the form's submit event
                 form.on("submit", function (event) {
                 event.preventDefault(); // Prevent the form from submitting
-                console.log(error);
 
                 // Validate passwords here
                 var password1 = $("#password1").val();
@@ -359,13 +404,123 @@
                     error = false;
                 }
 
-                if(error == false){
+                if(error == false && emailVerified == true){
                     form.unbind("submit").submit();
+                }else if(emailVerified == false){
+                    return  
                 }
             });
-        });
 
-            
+            $.ajaxSetup({
+
+                headers: {
+
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+
+                }
+
+            });
+            // Send OTP link click event
+            $('#sendOtp').click(function(e) {
+                e.preventDefault();
+                var button = $(this);
+                
+                var email = $('#email').val();
+                if (email === '') {
+                    alert('Please Enter A Valid Email Address')
+                    return;
+                }
+
+                // Disable the button and show the spinner animation
+                button.prop('disabled', true);
+                button.prop('title','Sending OTP to your email...');
+                button.html('<span class="spinner"></span>Sending OTP...');
+
+                // Send AJAX request to sendOTP function
+                $.ajax({
+                    url: '{{ route("emailVerification")}}',
+                    type: 'POST',
+                    data: {
+                        email: email,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            // Store CSRF token in a hidden input field
+                            $('#csrfToken').val(response.csrf_token);
+                           // Show success message and disable the button for 1 minutes
+                            var remainingTime =1; // 1 minutes in seconds
+                            button.prop('title','Please wait before resend');
+                                var countdown = setInterval(function() {
+                                    var minutes = Math.floor(remainingTime / 60);
+                                    var seconds = remainingTime % 60;
+                                    var timeString = minutes.toString().padStart(1, '0') + ':' + seconds.toString().padStart(2, '0');
+                                    button.html(timeString);
+                                    remainingTime--;
+                                    
+                                    if (emailVerified) {
+                                        clearInterval(countdown);
+                                        button.css('background-color','transparent');
+                                        button.css('border','none');
+                                        button.html('<span class="success-icon">&#10003;</span>');
+                                        button.prop('title','Email verified');
+                                        return;
+                                    } 
+                                    if (remainingTime < 0) {
+                                        clearInterval(countdown);
+                                        button.prop('disabled', false);
+                                        button.html('Resend OTP');
+                                    }
+                                }, 1000); // 1 second interval
+                        } else {
+                            alert('In , Failed to send OTP.');
+                            button.prop('disabled', false);
+                            button.html('Resend OTP');
+                        }
+                    }
+                });
+
+            });
+
+            // Validate OTP when input has 6 characters
+            $('#otp').on('input', function() {
+                var button = $('#sendOtp');
+                var otp = $(this).val();
+                otp = otp.toUpperCase();
+                if (otp.length === 6) {
+                    // Send AJAX request to validateOTP function
+                    $.ajax({
+                        url: '{{ route("emailVerification-confirmOTP")}}',
+                        type: 'POST',
+                        data: {
+                            otp: otp,
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function(response) {
+                            if (response.success) {
+                                $('#otp').prop('disabled', true);
+                                emailVerified = true;
+                            } else {
+                                $('#otp').css('color','red');
+                                setTimeout(function() {
+                                    $('#otp').val('').addClass('shake');
+                                }, 1000);
+                                setTimeout(function() {
+                                    $('#otp').css('color','black');
+                                    $('#otp').val('').removeClass('shake');
+                                }, 1500);
+                                
+                            }
+                        },
+                        error: function(response) {
+                            alert('Failed to validate OTP.');
+                        }
+                    });
+                }
+            });
+
+            $('#submit')
+        });
         </script>
         <!--<script src="js/scripts.js"></script>-->
     </body>

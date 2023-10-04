@@ -251,7 +251,9 @@ class ReviewerController extends Controller
 
         }elseif(session()->has("LoggedUser")){
             $dataEvaluationForm = tbl_evaluation_form::where('paper_id_number', $submissionCode)->get();
-            $pdf = PDF::loadView('page.participants.evaluationForm.evaluationFormContent',['dataEvaluationForm' => $dataEvaluationForm,'year' => $year]);
+            $logo_lis = public_path('images/Logo1 (1).png');
+            $logo_pmj = public_path('images/logo_PMJ.png');
+            $pdf = PDF::loadView('page.participants.evaluationForm.evaluationFormContent',['dataEvaluationForm' => $dataEvaluationForm,'year' => $year,'logo_lis' => $logo_lis,'logo_pmj' => $logo_pmj]);
             return response($pdf->stream('evaluationForm.pdf'))->header('Content-Type', 'application/pdf');
 
         }else{

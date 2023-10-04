@@ -63,7 +63,8 @@ Route::post('/updateProfile',[AccountController::class,'updateProfile'])->name('
 Route::post('/updatePassword',[AccountController::class,'updatePassword'])->name('account.updatePassword');
 Route::get('/participantsList',[SuperAdminController::class,'participantsList']);
 Route::get('/forgotPassword',[ForgotPasswordController::class,'index']);
-Route::post('/forgotPassword',[ForgotPasswordController::class,'sendOTP']);
+Route::post('/forgotPassword',[ForgotPasswordController::class,'sendOTP'])->name('forgotPasswordOTP');
+Route::post('/forgotPasswordResendOTP',[ForgotPasswordController::class,'OTPSender'])->name('forgotPasswordResendOTP');
 Route::get('/confirmOTP', [ForgotPasswordController::class,'indexConfirmOTP'])->name("confirmOTP");
 Route::post('/confirmOTP', [ForgotPasswordController::class,'confirmOTP']);
 Route::get('/changePassword', [ForgotPasswordController::class,'indexChangePassword']);
@@ -128,3 +129,5 @@ Route::post('/superadmin/pageList/publicationList/editExistingPublication/{id}',
 Route::post('/superadmin/pageList/publicationList/uploadNewPublication', [PublicationController::class, 'uploadNewPublication'])->name('uploadNewPublication');
 Route::post('/superadmin/pageList/conferencesDownload/editExistingConferencesDownload/{id}', [ConferencesController::class, 'editExistingConferencesDownload'])->name('editExistingConferencesDownload');
 Route::post('/superadmin/pageList/conferencesDownload/uploadNewConferencesDownload', [ConferencesController::class, 'uploadNewConferencesDownload'])->name('uploadNewConferencesDownload');
+Route::post('/registration/emailVerification',[RegistrationController::class,'OTPSender'])->name('emailVerification');
+Route::post('/registration/validateOTP',[RegistrationController::class,'confirmOTP'])->name('emailVerification-confirmOTP');

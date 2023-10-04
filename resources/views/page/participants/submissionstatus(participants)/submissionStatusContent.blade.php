@@ -451,19 +451,8 @@
                                 </tr>
                             </table>
                         </div>
-                        <div style="margin-top:10%;">
-                            <table>
-                                <tr>
-                                    <td>
-                                        <p style="color: #343a40; font-size:medium;">Presentation</p>
-                                    </td>
-                                    <td>
-                                        <h5 style="color:#007bff;">Function is being develop</h5>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                        @if($submissionInfo->submissionType != 'Publication ONLY')
+
+                        @if($submissionInfo->submissionType != 'Publication ONLY' && $submissionInfo->correctionPhase == 'readyForPresent')
                             @if($submissionInfo->presentationGroup != null)
                             <div style="margin-top: 10%;">
                                 <table>
@@ -472,6 +461,19 @@
                                             <p>Presentation Group:</p>
                                         </td>
                                         <td style="color: blue;">{{ $submissionInfo->presentationGroup }}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            @else
+                            <div style="margin-top:10%;">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <p style="color: #343a40; font-size:medium;">Presentation Group</p>
+                                        </td>
+                                        <td>
+                                            <h5 style="color:#007bff;">Pending For Assign</h5>
+                                        </td>
                                     </tr>
                                 </table>
                             </div>
@@ -600,9 +602,9 @@
                                 @elseif($submissionInfo->correctionPhase == 'readyForPresent')
                                     @if(isset($submissionInfo->correction) && $submissionInfo->correction->count() > 0)
                                         <p class="status delivered">
-                                            <a href="{{ route('correctionForm', ['submissionCode' => $submissionInfo->submissionCode]) }}">
-                                                <i class="fas fa-file-alt"></i>Correction
-                                            </a>Camera Ready
+                                            <a href="{{ route('correctionForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" style="text-decoration:none; color:#006b21;">
+                                                <i class="fas fa-file-alt"></i>Camera Ready
+                                            </a>
                                         </p>
                                     @else
                                         <p class="status delivered">Camera Ready</p>

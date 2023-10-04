@@ -101,5 +101,32 @@ class ForgotPasswordController extends Controller
         }
     }
 
+    public function resendOTP($email,$otp)
+    {
+        $mail = new SendOtp($otp);
+        Mail::to($email)->send($mail);
+    }
+
+    public function OTPSender(Request $request)
+    {
+
+    // Generate and send OTP
+    $otpData = $this->generateMixedCode(6, 5);
+    $otp = strtoupper($otpData['otp']);
+    $expiresAt = $otpData['expires_at'];
+    $sent = $this->resendOTP($request->input('email'), $otp);
+
+    // Store OTP in session
+    $request->session()->put('otp', $otp);
+    $request->session()->put('otp_expires_at', $expiresAt);
+    $otp = $request->session()->get('otp');
+    return response()->json([
+        'success' => true,
+        'csrf_token' => csrf_token(),
+        'otp' => $otp,
+        'email' => $request->input('email'),
+        ]);
+    }
+
 
 }
