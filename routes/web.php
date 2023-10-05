@@ -131,3 +131,4 @@ Route::post('/superadmin/pageList/conferencesDownload/editExistingConferencesDow
 Route::post('/superadmin/pageList/conferencesDownload/uploadNewConferencesDownload', [ConferencesController::class, 'uploadNewConferencesDownload'])->name('uploadNewConferencesDownload');
 Route::post('/registration/emailVerification',[RegistrationController::class,'OTPSender'])->name('emailVerification');
 Route::post('/registration/validateOTP',[RegistrationController::class,'confirmOTP'])->name('emailVerification-confirmOTP');
+Route::post('faq/submit',[FaqController::class, 'sendFaq'])->name('sendEmailContactUs');

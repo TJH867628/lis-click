@@ -384,7 +384,7 @@
 <main class="table">
 @if($userSubmissionInfo)
         <section class="table__header">
-            <h1>Presentation Schedule</h1>
+            <h1>Submission Status</h1>
             <div class="search-container">
                 <input type="search" id="searchInput" placeholder="Search by Submission Code">
                 <button type="button" onclick="filterTable()"><i class="fas fa-search"></i></button>
@@ -394,11 +394,11 @@
             <table>
                 <thead>
                     <tr>
-                        <th> Submission</th>
-                        <th> Document</th>
+                        <th style="color: black;"> Submission</th>
+                        <th style="color: black;"> Document</th>
                         <!-- <th> Evaluation Form</th> -->
                         <!-- <th> Correction</th> -->
-                        <th> Payment Status </th>
+                        <th style="color: black;"> Payment Status </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -486,20 +486,6 @@
                         <table>
                             <tr>
                                 <td style="width: max-content; color:black;">
-                                    Return Paper
-                                </td>
-                                <td>
-                                @if($submissionInfo->returnPaperLink == NULL)
-                                    <p class="status cancelled">Return Paper Unavailable</p>
-                                @else
-                                <a href="{{ route('downloadReviewedFile', ['filename' => $submissionInfo->returnPaperLink]) }}" class="btn btn-primary mb-4 btn-download" target="_blank">
-                                    <i class="fas fa-download"></i> Download Return File
-                                </a>
-                                @endif
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="width: max-content; color:black;">
                                     Orginal Paper
                                 </td>
                                 <td>
@@ -510,36 +496,16 @@
                             </tr>
                             <tr>
                                 <td style="width: max-content; color:black;">
-                                    Turn In Report
+                                    Return Paper
                                 </td>
                                 <td>
-                                    @if($submissionInfo->turnInReport)
-                                        <a href="{{ route('downloadTurnInReport', ['filename' => $submissionInfo->turnInReport]) }}" class="btn btn-primary mb-4 btn-download" target="_blank">
-                                            <i class="fas fa-download"></i>Turn In Report
-                                        </a>
-                                    @else
-                                        <p class="status shipped"> Pending </p>
-                                    @endif
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="width: max-content; color:black;">
-                                    Certificate
-                                </td>
-                                
-                                <td>
-                                    <!-- download certificate -->
-                                    @if($submissionInfo->correctionPhase == 'readyForPresent')
-                                        @if($submissionInfo->certificate == 'pending')
-                                            <p class="status shipped">Pending</p>
-                                        @else
-                                            <a href="{{ route('downloadCertificate', ['filename' => $submissionInfo->certificate]) }}" class="btn btn-primary mb-4 btn-download" target="_blank">
-                                                <i class="fas fa-download"></i>Certificate
-                                            </a>
-                                        @endif
-                                    @else
-                                        <p class="status cancelled">Not Ready</p>
-                                    @endif
+                                @if($submissionInfo->returnPaperLink == NULL)
+                                    <p class="status cancelled">Return Paper Unavailable</p>
+                                @else
+                                <a href="{{ route('downloadReviewedFile', ['filename' => $submissionInfo->returnPaperLink]) }}" class="btn btn-primary mb-4 btn-download" target="_blank">
+                                    <i class="fas fa-download"></i> Download Return File
+                                </a>
+                                @endif
                                 </td>
                             </tr>
                             <tr>
@@ -575,7 +541,21 @@
                                     <td><p class="status shipped">Pending</p></td>
                                 @endif
                             </tr>
-
+                           
+                            <tr>
+                                <td style="width: max-content; color:black;">
+                                    Turn In Report
+                                </td>
+                                <td>
+                                    @if($submissionInfo->turnInReport)
+                                        <a href="{{ route('downloadTurnInReport', ['filename' => $submissionInfo->turnInReport]) }}" class="btn btn-primary mb-4 btn-download" target="_blank">
+                                            <i class="fas fa-download"></i>Turn In Report
+                                        </a>
+                                    @else
+                                        <p class="status shipped"> Pending </p>
+                                    @endif
+                                </td>
+                            </tr>
                             <tr>
                                 <td style="width: max-content; color:black;">
                                     Correction
@@ -614,6 +594,29 @@
                                 @endif
                                 </td>
                             </tr>
+                            <tr>
+                                <td style="width: max-content; color:black;">
+                                    Certificate
+                                </td>
+                                
+                                <td>
+                                    <!-- download certificate -->
+                                    @if($submissionInfo->correctionPhase == 'readyForPresent')
+                                        @if($submissionInfo->certificate == 'pending')
+                                            <p class="status shipped">Pending</p>
+                                        @else
+                                            <a href="{{ route('downloadCertificate', ['filename' => $submissionInfo->certificate]) }}" class="btn btn-primary mb-4 btn-download" target="_blank">
+                                                <i class="fas fa-download"></i>Certificate
+                                            </a>
+                                        @endif
+                                    @else
+                                        <p class="status cancelled">Not Ready</p>
+                                    @endif
+                                </td>
+                            </tr>
+
+
+                            
                         </table>
                     </td>
                     

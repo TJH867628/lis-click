@@ -252,7 +252,7 @@
                     <tr>
                         <th> Group</th>
                         <th> Time</th>
-                        <th> Link</th>
+                        <th> Link/Location</th>
                     </tr>
                 </thead>
                 <tbody>

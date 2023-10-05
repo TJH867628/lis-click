@@ -151,7 +151,7 @@
                                                 <div id="myModal" class="modal">
                                                 <div class="modal-content">
                                                     <span class="close">&times;</span>
-                                                    <p>Please upload .docx(worksheet) file only.</p>
+                                                    <p>Please upload .docx(word) file only.</p>
                                                 </div>
                                                 </div>
 

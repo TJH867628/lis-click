@@ -139,7 +139,6 @@
                                         </div>
                                         <div>
                                             <button class="btn btn-primary">Update</button>
-                                            <button class="btn btn-primary">Cancel</button>
                                         </div>
                                     </div>
                                 </form>
@@ -173,7 +172,6 @@
                                         </div>
                                         <div>
                                             <button class="btn btn-primary">Update</button>
-                                            <button class="btn btn-primary">Cancel</button>
                                         </div>
                                     </div>
                                 </form>

@@ -108,9 +108,10 @@
 <body>
 <div id="evaluation-form">
     @php
-        $count = 0;
+        $count = 1;
     @endphp
         @foreach($dataEvaluationForm as $thisdataEvaluationForm)
+        @if($count == 1)
             <img src="{{ $logo_lis }}" id="logo_lis" alt="logo_lis" style="width: 300px; height: 150px;">
             <img src="{{ $logo_pmj }}" id="logo_pmj" alt="logo_pmj" style="width: 300px; height: 150px;">
         <div id="form-container">
@@ -137,6 +138,10 @@
                     </tr>
                 </table>
             </div>
+            @endif
+            @php
+                $count++;
+            @endphp
             <div class="page-break"></div>
             <div id="comment">
                 <table class="comment">
@@ -236,7 +241,7 @@
 
             <table id="recommendation">
                 <tr>
-                    <td><strong>Recommendation: (mark with X)</strong></td>
+                    <td><strong>Recommendation:</strong></td>
                 </tr>
                 <tr>
                     <td>

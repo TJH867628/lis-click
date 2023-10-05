@@ -206,7 +206,6 @@
                                             </div>
                                             <div>
                                                 <button class="btn btn-primary">Update</button>
-                                                <button class="btn btn-primary">Cancel</button>
                                             </div>
                                         </form>
                                     </div>
@@ -254,7 +253,6 @@
                                             </div>
                                             <div>
                                                 <button class="btn btn-primary">Change Password</button>
-                                                <button class="btn btn-primary">Cancel</button>
                                             </div>
                                         </form>
                                     </div>

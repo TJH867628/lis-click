@@ -13,6 +13,10 @@ class FloorManagerController extends Controller
         if(session()->has('LoggedFloorManager')){
             session()->start();
             $schedule = tbl_presentation_schedule::all();
+            $submission = tbl_submission::all();
+            foreach ($schedule as $eachSchedule) {
+                $eachSchedule->submission = $submission;
+            }
             return view('page.Floor_Manager.presentationSchedule.presentationSchedule',["schedule"=>$schedule]);
         }else if(session()->has('LoggedUser')){
             session()->start();
@@ -72,6 +76,12 @@ class FloorManagerController extends Controller
 
             $schedule = tbl_presentation_schedule::where('presentationGroup',$group)->first();
             $schedule->delete();
+
+            $assignedPaper = tbl_submission::where('presentationGroup',$group)->get();
+            foreach($assignedPaper as $thisAssignedPaper){
+                $thisAssignedPaper->presentationGroup = null;
+                $thisAssignedPaper->save();
+            }
 
             return redirect()->back()->with('success','Schedule Deleted');
         }else{

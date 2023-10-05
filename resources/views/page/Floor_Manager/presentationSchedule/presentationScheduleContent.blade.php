@@ -108,7 +108,7 @@
         <label for="time">Time:</label>
         <input type="datetime-local" name="time" id="time" required>
 
-        <label for="link">Link:</label>
+        <label for="link">Link/Location:</label>
         <textarea name="link" id="link" rows="5" required></textarea>
 
         <button type="submit">Add Schedule</button>
@@ -125,7 +125,7 @@
             <tr>
                 <th>Group</th>
                 <th>Time</th>
-                <th>Link</th>
+                <th>Link/Location</th>
                 <th>Edit</th>
             </tr>
         </thead>
@@ -135,8 +135,16 @@
             @endphp
             @foreach($schedule as $eachSchedule)
                 @php
-                    $scheduleCount++
+                    $scheduleCount++;
+                    $hasGroup = 0;
                 @endphp
+                @foreach($eachSchedule->submission as $submission)
+                    @if($submission->presentationGroup == $eachSchedule->presentationGroup)
+                        @php
+                            $hasGroup++;
+                        @endphp
+                    @endif
+                @endforeach
             <tr>
                 <form method="post" action="{{ route('editSchedule',['currentGroup'=>$eachSchedule->presentationGroup]) }}" enctype="multipart/form-data">
                     @csrf
@@ -145,8 +153,21 @@
                     <td><input type="text" name="link" value="{{ $eachSchedule->presentationLink }}"></td>
                     <td>
                         <button type="submit">Save</button>
+                        
+                        @if ($hasGroup != 0)
+                        <a href="{{ route('deleteSchedule',['group'=>$eachSchedule->presentationGroup]) }}" onclick="return showSecondConfirm(<?php echo $hasGroup ?>)" class="deleteButton">Delete</a>
+                        @else
                         <a href="{{ route('deleteSchedule',['group'=>$eachSchedule->presentationGroup]) }}" onclick="return confirm('Are you sure you want to delete this schedule?')" class="deleteButton">Delete</a>
+                        @endif
                     </td>
+                    <script>
+                        function showSecondConfirm($hasGroup) {
+                            if (confirm('There are ' +  $hasGroup + ' Submission assigned in this group. Are you sure you want to delete?')) {
+                                return alert('The group has been deleted,please assigned back for those submissions');
+                            }
+                            return false; // User canceled the first confirmation
+                        }
+                    </script>
                 </form>
             </tr>
             @endforeach
