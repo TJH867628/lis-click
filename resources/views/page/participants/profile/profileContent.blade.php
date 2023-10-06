@@ -139,7 +139,7 @@
                                         </div>
                                         <div>
                                             <button class="btn btn-primary">Update</button>
-                                        </div>
+.;                                        </div>
                                     </div>
                                 </form>
                                     <!--- PASSWORD -->
