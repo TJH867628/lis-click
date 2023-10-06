@@ -109,7 +109,7 @@ class JKReviewerController extends Controller
                 if ($request->hasFile('file')) {
                     $file = $request->file('file');
                     $submissionInfo = tbl_submission::where('submissionCode',$submissionCode)->first();
-                    $correction = tbl_correction::where('submissionCode',$submissionCode)->first();
+                    $correction = tbl_correction::where('submissionCode',$submissionCode)->get();
                     $count = $correction->count();
                     $latestCorrection = tbl_correction::where('numberOfTimes',$count)->first();
         
