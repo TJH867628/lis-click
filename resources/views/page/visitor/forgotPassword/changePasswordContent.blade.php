@@ -63,6 +63,7 @@
 <div class="center">
         <h1>Reset Password</h1>
         <form method="post">
+            @csrf
             <!-- Your form elements here -->
 
             <div class="txt_field">

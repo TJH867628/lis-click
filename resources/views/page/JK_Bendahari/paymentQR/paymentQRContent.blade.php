@@ -8,6 +8,7 @@
         </style>
     </head>
     <body>
+        <br><br><br><br><br>
         <div class="uploadQR">
             @if($qrCode == NULL)
                 <h1>QR Code is not available</h1>
