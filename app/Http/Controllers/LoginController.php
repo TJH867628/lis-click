@@ -43,7 +43,7 @@ class LoginController extends Controller
             $attempts = $request->session()->get('login_attempts',0);
             if ($attempts >= $maxAttempts - 1) {
                 if($maxAttempts - $attempts == 1 && !$request->session()->has('suspend_login')){
-                    $suspendTime = time() + 30; // Add 5 minute to the current time
+                    $suspendTime = time() + 60; // Add 5 minute to the current time
                     $request->session()->put('suspend_login', $suspendTime);
                 }
                 if(time() < $request->session()->get('suspend_login')){
