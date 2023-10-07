@@ -118,7 +118,7 @@
     table, th, td {
         border-collapse: collapse;
         padding: 1rem;
-        text-align: left;
+        text-align: center;
     }
 
     th {
@@ -177,7 +177,6 @@
             padding: 20px;
             border: 1px solid #dee2e6;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            background-color: white;
         }
 
         button {
@@ -287,22 +286,22 @@
                                         <td>{{ $submissionInfo->submissionType }}</td>
                                         <td>{{ $submissionInfo->subTheme }}</td>
                                         <td>{{ $submissionInfo->presentMode }}</td>
-                                        <td><a href="{{ route('downloadSubmission', ['filename' => $submissionInfo->file_name]) }}" class="btn btn-primary mb-4">Download</a></td>
+                                        <td><a href="{{ route('downloadSubmission', ['filename' => $submissionInfo->file_name]) }}" class="btn btn-primary mb-4"><i class="fa-solid fa-download" style="padding: 5px;"></i>Download</a></td>
                                         <td>{{ $submissionInfo->updated_at }}</td>
                                         <td>
                                             <form action="{{ route('uploadReviewSubmission',['submissionCode' => $submissionInfo->submissionCode]) }}" method="POST" enctype="multipart/form-data" class="file-upload-form">
                                                 @csrf
                                                 <input type="file" name="file" />
-                                                <button type="submit" class="file-upload-button">Upload Reviewed Paper</button>
+                                                <button type="submit" class="file-upload-button"><i class="fas fa-cloud-upload-alt" style="padding: 5px;"></i>Upload Reviewed Paper</button>
                                             </form>
                                             <form action="{{ route('uploadEvaluationForm',['submissionCode' => $submissionInfo->submissionCode]) }}" method="POST" enctype="multipart/form-data" class="file-upload-form">
                                                 @csrf
                                                 <input type="file" name="file" />
-                                                <button type="submit" class="file-upload-button">Upload Evaluation Form</button>
+                                                <button type="submit" class="file-upload-button"><i class="fas fa-cloud-upload-alt" style="padding: 5px;"></i>Upload Evaluation Form</button>
                                             </form>
                                         </td>
                                         <td>
-                                            <a href="{{ route('evaluationForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4">Evaluate Form</a>
+                                            <a href="{{ route('evaluationForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4"><i class="fas fa-calculator" style="padding: 5px;"></i>Evaluate Form</a>
                                         </td>
                                     </tr>
                                     @endif
@@ -314,22 +313,22 @@
                                         <td>{{ $submissionInfo->submissionType }}</td>
                                         <td>{{ $submissionInfo->subTheme }}</td>
                                         <td>{{ $submissionInfo->presentMode }}</td>
-                                        <td><a href="{{ route('downloadSubmission', ['filename' => $submissionInfo->file_name]) }}" class="btn btn-primary mb-4">Download</a></td>
+                                        <td><a href="{{ route('downloadSubmission', ['filename' => $submissionInfo->file_name]) }}" class="btn btn-primary mb-4"><i class="fa-solid fa-download" style="padding: 5px;"></i>Download</a></td>
                                         <td>{{ $submissionInfo->updated_at }}</td>
                                         <td>
                                             <form action="{{ route('uploadReviewSubmission',['submissionCode' => $submissionInfo->submissionCode]) }}" method="POST" enctype="multipart/form-data">
                                                 @csrf
                                                 <input type="file" name="file" />
-                                                <button type="submit">Upload Reviewed Paper</button>
+                                                <button type="submit"><i class="fas fa-cloud-upload-alt" style="padding: 5px;"></i>Upload Reviewed Paper</button>
                                             </form>
                                             <form action="{{ route('uploadEvaluationForm',['submissionCode' => $submissionInfo->submissionCode]) }}" method="POST" enctype="multipart/form-data">
                                                 @csrf
                                                 <input type="file" name="file" />
-                                                <button type="submit">Upload Evaluation Form</button>
+                                                <button type="submit"><i class="fas fa-cloud-upload-alt" style="padding: 5px;"></i>Upload Evaluation Form</button>
                                             </form>
                                         </td>
                                         <td>
-                                            <a href="{{ route('evaluationForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4">Evaluate Form</a>
+                                            <a href="{{ route('evaluationForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4"><i class="fas fa-calculator" style="padding: 5px;"></i>Evaluate Form</a>
                                         </td>
                                     </tr>
                                     @endif
@@ -342,22 +341,22 @@
                             <td>{{ $submissionInfo->submissionType }}</td>
                             <td>{{ $submissionInfo->subTheme }}</td>
                             <td>{{ $submissionInfo->presentMode }}</td>
-                            <td><a href="{{ route('downloadSubmission', ['filename' => $submissionInfo->file_name]) }}" class="btn btn-primary mb-4">Download</a></td>
+                            <td><a href="{{ route('downloadSubmission', ['filename' => $submissionInfo->file_name]) }}" class="btn btn-primary mb-4"><i class="fa-solid fa-download" style="padding: 5px;"></i>Download</a></td>
                             <td>{{ $submissionInfo->updated_at }}</td>
                             <td>
                                 <form action="{{ route('uploadReviewSubmission',['submissionCode' => $submissionInfo->submissionCode]) }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <input type="file" name="file" />
-                                    <button type="submit">Upload Reviewed Paper</button>
+                                    <button type="submit"><i class="fas fa-cloud-upload-alt" style="padding: 5px;"></i>Upload Reviewed Paper</button>
                                 </form>
                                 <form action="{{ route('uploadEvaluationForm',['submissionCode' => $submissionInfo->submissionCode]) }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <input type="file" name="file" />
-                                    <button type="submit">Upload Evaluation Form</button>
+                                    <button type="submit"><i class="fas fa-cloud-upload-alt" style="padding: 5px;"></i>Upload Evaluation Form</button>
                                 </form>
                             </td>
                             <td>
-                                <a href="{{ route('evaluationForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4">Evaluate Form</a>
+                                <a href="{{ route('evaluationForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4"><i class="fas fa-calculator" style="padding: 5px;"></i>Evaluate Form</a>
                             </td>
                         </tr>
                             @endif
