@@ -355,7 +355,7 @@
 </style>
 <main class="table">
         <section class="table__header">
-            <h1>Done Rewiew List</h1>
+            <h1>Done Review List</h1>
         </section>
         <section class="table__body">
             <div class="table-container">

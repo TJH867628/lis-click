@@ -82,7 +82,7 @@
             </nav>
 
             <div class="table-container">
-                <h2 style="color: black ;">Done Rewiew List</h2>
+                <h2 style="color: black ;">Done Review List</h2>
                 @if($submissionInfo)
                 <table>
                     <th>
