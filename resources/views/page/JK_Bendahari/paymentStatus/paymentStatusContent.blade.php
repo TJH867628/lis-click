@@ -78,10 +78,10 @@
         position: relative;
         width: 95%;
         background-color: #fffb;
-        height: 48vh;
+        height: 55vh;
         margin: .3rem auto;
         border-radius: .6rem;
-
+        margin-top: 1%;
         overflow: auto;
         overflow: overlay;
     }
@@ -178,8 +178,7 @@
             /* Style the search input */
             #searchInput {
             padding: 10px;
-            border-radius: 5px;
-            border: 1px solid black;
+            border-radius: 5px; 
             margin-right: 10px;
             flex-grow: 1;
             }
@@ -190,16 +189,6 @@
                 background-color: lightgrey;
                 margin-right: 10px;
                 flex-grow: 1;
-            }
-
-            /* Style the search button */
-            #searchButton {
-            padding: 10px;
-            border-radius: 5px;
-            border: none;
-            background-color: #4CAF50;
-            color: white;
-            cursor: pointer;
             }
 
             /* Style the select dropdown */
@@ -236,6 +225,39 @@
             p[style="color: orange;"] {
             font-weight: bold;
             }
+
+        .table__header .search-container {
+            width: 35%;
+            height: 100%;
+            background-color: #fff5;
+            padding: 0 .8rem;
+            border-radius: 2rem;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            transition: .2s;
+        }
+
+        .table__header .search-container:hover {
+            width: 45%;
+            background-color: #fff8;
+            box-shadow: 0 .1rem .4rem #0002;
+        }
+
+        .table__header .search-container img {
+            width: 1.2rem;
+            height: 1.2rem;
+        }
+
+        .table__header .search-container input {
+            width: 100%;
+            padding: 0 .5rem 0 .3rem;
+            background-color: transparent;
+            border: none;
+            outline: none;
+        }
         </style>
     </head>
     <body>
@@ -243,19 +265,19 @@
         <main class="table">
         <section class="table__header">
             <h1>Payment Status</h1>
-        </section>
+        
         <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Search...">
-            <select id="searchField">
-                <option value="submissionCode">Submission Code</option>
-                <option value="participantsName">Participants Name</option>
-                <option value="hp">HP</option>
-                <option value="paymentStatus">Payment Status</option>
+            <select class="statusFilter" id="filter" onchange="filterTable()">
+                <option value="all" selected>All</option>
+                <option value="complete">Complete</option>
+                <option value="pending">Pending</option>
+                <option value="incomplete">Incomplete</option>
             </select>
-            <button id="searchButton">Search</button>
+            <!-- <button type="button" onclick="filterTable()"><i class="fas fa-search"></i></button> -->
         </div>
+        </section>
         <section class="table__body">
-        <table>
+        <table id="paymenttable">
             <thead>
             <tr>
                 <th>
@@ -284,14 +306,14 @@
                         {{ $thisPaymentDetails->paymentID }}<br>
                         <p> Payment Status : </p>
                         @if($thisPaymentDetails->paymentStatus == 'Complete')<br>
-                            <p style="color: green;">Complete</p><br>
+                            <p style="color: green;" name="Complete" id="complete" class="paymentStatus">Complete</p><br>
                             <p> Payment Date : </p>{{$thisPaymentDetails->paymentDate}}<br>
                             <p> Confirm Payment Date : </p>{{$thisPaymentDetails->confirmPaymentDate}}<br>
-                        @elseif($thisPaymentDetails->paymentStatus == 'incomplete')
-                            <p style="color: red;">Incomplete</p><br>
+                        @elseif($thisPaymentDetails->paymentStatus == 'Pending For Verification')
+                            <p style="color: orange;" name="Pending" id="pending" class="paymentStatus">{{$thisPaymentDetails->paymentStatus}}</p><br>
                         @else
-                            <p style="color: orange;">{{$thisPaymentDetails->paymentStatus}}</p><br>
                             <p> Payment Date : </p>{{ $thisPaymentDetails->paymentDate }}<br>
+                            <p style="color: red;" name="Incomplete" id="incomplete" class="paymentStatus">{{$thisPaymentDetails->paymentStatus}}</p><br>
                         @endif
                         <form action="{{ route('paymentStatusControl', ['paymentID' => $thisPaymentDetails->paymentID]) }}" method="POST">
                             @csrf
@@ -299,10 +321,10 @@
                             <select class="statusOption" name="statusOption">
                                 <option value="Complete">Complete</option>
                                 <option value="Pending For Verification" selected>Pending For Verification</option>
-                                <option value="incomplete">Incomplete</option>
+                                <option value="Incomplete">Incomplete</option>
                             </select>
                             <input type="text" class="statusInput" id="statusInput" name="statusInput" style="display: none;">
-                            <br><button>Submit</button>
+                            <br><button style="margin-top: 1%;">Submit</button>
                         </form>
                     </td>
                     <td>
@@ -322,6 +344,7 @@
     </main>
     </body>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    sc
     
     <script>
        document.addEventListener('DOMContentLoaded', function () {
@@ -338,9 +361,11 @@
                 if (statusOption.value === 'Complete' || statusOption.value === 'Pending For Verification') {
                     statusInput.value = statusOption.value;
                     statusInput.style.display = 'none';
-                } else if (statusOption.value === 'incomplete') {
+                    statusInput.required = false;
+                } else if (statusOption.value === 'Incomplete') {
                     statusInput.value = '';
                     statusInput.style.display = 'block';
+                    statusInput.required = true;
                     }
                 console.log(statusInput.value);
 
@@ -348,35 +373,23 @@
             });
         });
 
-        const paymentRows = document.querySelectorAll('.payment-row');
-        const searchButton = document.getElementById('searchButton');
 
-        searchButton.addEventListener('click', () => {
-            const filterValue = searchInput.value.toUpperCase();
-            const filterField = searchField.value;
-            paymentRows.forEach(row => {
-                const fieldValue = row.querySelector(`p:nth-child(${getFieldIndex(filterField)})`).textContent.toUpperCase();
-                if (fieldValue.includes(filterValue)) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
-            });
-        });
-
-        function getFieldIndex(field) {
-            switch (field) {
-                case 'submissionCode':
-                    return 1;
-                case 'participantsName':
-                    return 2;
-                case 'hp':
-                    return 3;
-                case 'paymentStatus':
-                    return 5;
-                default:
-                    return 1;
+        function filterTable() {
+        var dropdown = document.getElementById("filter");
+        var selectedvalue = dropdown.value;
+        var table = document.getElementById("paymenttable");
+        var rows = table.querySelectorAll(".payment-row");
+        
+        rows.forEach(function(row) {
+            var payment = row.cells[1].getElementsByClassName("paymentStatus")[0];
+            var paymentid= payment.id
+            if(selectedvalue == "all" || paymentid == selectedvalue){
+            row.style.display = "";
             }
+            else {
+            row.style.display = "none";
+            }
+        });
         }
     </script>
 </html>
