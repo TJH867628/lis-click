@@ -360,7 +360,7 @@
         <section class="table__body">
             <div class="table-container">
                 @php
-                    $caount = 0;
+                    $count = 0;
                 @endphp
                 @if($submissionInfo)
                 <table>
