@@ -273,11 +273,17 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @php
+                     $count = 0;
+                    @endphp
                     @foreach($submissionInfo as $submissionInfo)
                         @if($submissionInfo->reviewStatus === 'pending')
                             @if($submissionInfo->reviewer2ID != NULL)
                                 @if($submissionInfo->reviewerID === $reviewername)
                                     @if($submissionInfo->evaluationFormLink == null)
+                                        @php
+                                            $count++;
+                                        @endphp
                                     <tr>
                                         <div style="font-size:20px; font-weight:bold; color:black;  text-decoration:none;"!important;>
                                             <td>{{ $submissionInfo->submissionCode }}</td>
@@ -363,13 +369,14 @@
                         
                         @endif
                     @endforeach
+                    @if($count == 0)
+                    <tr>
+                        <td colspan="9" style="text-align: center;">
+                            <p style="color: black;">No record found.</p>
+                        </td>
+                    </tr>
+                    @endif
                 </tbody>
                 </table>
                 </section>
             </main>
-                <br>
-                <br>
-                <br>
-                    @else
-                        <p style="color: black;">No record found.</p>
-                    @endif

@@ -359,6 +359,9 @@
         </section>
         <section class="table__body">
             <div class="table-container">
+                @php
+                    $caount = 0;
+                @endphp
                 @if($submissionInfo)
                 <table>
                 <thead>
@@ -388,6 +391,9 @@
                             @if($submissionInfo->reviewer2ID)
                                 @if($submissionInfo->reviewerID === $reviewername)
                                     @if($submissionInfo->evaluationFormLink)
+                                        @php
+                                            $count++;
+                                        @endphp
                                         <tr>
                                             <td>{{ $submissionInfo->submissionCode }}</td>
                                             <td>{{ $submissionInfo->submissionTitle }}</td>
@@ -455,6 +461,11 @@
                             </tr>
                             @endif
                         @endforeach
+                        @if($count==0)
+                            <tr>
+                                <td colspan="9">No record found.</td>
+                            </tr>
+                        @endif
                     </tbody>
                 </table>
                 @endif
