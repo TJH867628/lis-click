@@ -367,7 +367,6 @@
                         </tr>
                             @endif
                         
-                        @endif
                     @endforeach
                     @if($count == 0)
                     <tr>
