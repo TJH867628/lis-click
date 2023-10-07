@@ -144,7 +144,7 @@ class AccountController extends Controller
             }
             $date = now();//get timestamp now
             $user = DB::table('tbl_account')->where('email', $userSession)->first();
-            $currentPassword = $request->input('password');
+            $currentPassword = $request->input('currentPassword');
             $newPassword = $request->input('newPassword1');
             $confirmPassword = $request->input('newPassword2');
             $password = hash('sha512',$currentPassword);

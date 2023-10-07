@@ -48,7 +48,6 @@
                                                         <option value="Poster Presentation ONLY">Poster Presentation ONLY</option>
                                                         <option value="Publication ONLY">Publication ONLY</option>
                                                         <option value="Student Presenter">Student Presenter</option>
-                                                        <option value="Audience Presenter">Audience Presenter</option>
                                                     </select><br>
                                                 </div>
                                                 <!--End Dropdown-->

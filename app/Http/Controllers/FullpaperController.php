@@ -135,7 +135,11 @@ class FullpaperController extends Controller
                     $mail->setSubmissionCode($submissionCode);
                     Mail::to($user->email)->send($mail);
                     return redirect()->back()->with('success','Submitted Succesfully');
+                }else{
+                    return redirect()->back()->with('error','Submit Failed');
                 }
+            }else{
+                return redirect('/login')->with('Session Expired');
             }
         
     }

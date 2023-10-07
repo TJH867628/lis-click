@@ -137,20 +137,34 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div>
-                                            <button class="btn btn-primary">Update</button>
-.;                                        </div>
+                                        @if($message = Session::get('account-success'))
+                                            <div class="alert alert-success">
+                                                <strong>{{ $message }}</strong>
+                                            </div>
+                                        @elseif($message = Session::get('password-success'))
+                                            <div class="alert alert-success">
+                                                <strong>{{ $message }}</strong>
+                                            </div>
+                                        @elseif($message = Session::get('password-fail'))
+                                            <div class="alert alert-danger">
+                                                <strong>{{ $message }}</strong>
+                                            </div>
+                                        @endif
+                                            <div>
+                                                <button class="btn btn-primary">Update</button>
+                                            </div>
                                     </div>
                                 </form>
                                     <!--- PASSWORD -->
                                     <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
                                 <form action="/updatePassword" method="post" id="changePasswordForm">
+                                    @csrf
                                         <h3 class="mb-4">Password Settings</h3>
                                         <div class="row">
                                             <div class="col-md-6" style="display: flex; position:relative;">
                                                 <div class="form-group">
                                                       <label>Current Password :</label>
-                                                      <input type="password" class="form-control" id="currentPassword" minlength="3" maxlength="50">
+                                                      <input type="password" name="currentPassword" class="form-control" id="currentPassword" minlength="3" maxlength="50">
                                                 </div>
                                                 <i style="height:fit-content; position:absolute; top:50%; left:45%;" class="bi-eye password-toggle" id="toggleCurrentPassword" style="color: black;"></i>
                                             </div>  
@@ -159,16 +173,17 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                       <label>New Password :</label>
-                                                      <input type="password" class="form-control" id="newPassword1" minlength="3" maxlength="50">
+                                                      <input type="password" name="newPassword1" class="form-control" id="newPassword1" minlength="3" maxlength="50">
                                                 </div>
                                             </div>
                                             <div class="col-md-6" style="position: relative;">
                                                 <div class="form-group">
                                                       <label>Confirm New Password :</label>
-                                                      <input type="password" class="form-control" id="newPassword2" minlength="3" maxlength="50">
+                                                      <input type="password" name="newPassword2" class="form-control" id="newPassword2" minlength="3" maxlength="50">
                                                 </div>
                                                 <i style="height:fit-content; position:absolute; top:50%; left:100%;" class="bi-eye password-toggle" id="toggleNewPassword" style="color: black;"></i>
                                             </div>
+                                            <span id="password2Error" class="text-danger" style="display: none;"></span>
                                         </div>
                                         <div>
                                             <button class="btn btn-primary">Update</button>
@@ -200,7 +215,7 @@
 
             // When a country is selected, update the options in the state dropdown
             $('#country').change(function() {
-                var selectedCountry = $(this).val();
+                var selectedCountry = $(this);
                 var stateOptionsHtml = '<option value="">-- Select State --</option>';
                 if (selectedCountry && stateOptions[selectedCountry]) {
                 var states = stateOptions[selectedCountry];
@@ -228,6 +243,7 @@
                 $("#toggleNewPassword").on("click", function () {
                     var inputField1 = $("#newPassword1");
                     var inputField2 = $("#newPassword2");
+                    console.log(inputField1,inputField2);
                     var icon = $("#toggleNewPassword");
                     togglePasswordVisibility(inputField1,inputField2,icon);
                 });
@@ -236,9 +252,9 @@
                     if (inputField1.attr("type") === "password") {
                         passwordVisible = true;
                         inputField1.attr("type", "text");
-                        inputField1[0].style.color = "#232434";
+                        inputField1[0].style.color = "black";
                         inputField2.attr("type", "text");
-                        inputField2[0].style.color = "#232434";
+                        inputField2[0].style.color = "black";
                         icon.addClass("bi-eye-slash").removeClass("bi-eye");
                     }else if (passwordVisible == false){
                         inputField1.attr("type", "password");
@@ -272,32 +288,24 @@
                 );
 
                 // Attach an event listener to the form's submit event
-                form.on("submit", function (event) {
+                $("#changePasswordForm").on("submit", function (event) {
                 event.preventDefault(); // Prevent the form from submitting
                 console.log(error);
 
                 // Validate passwords here
-                var password1 = $("#password1").val();
-                var password2 = $("#password2").val();
+                var password1 = $("#newPassword1").val();
+                var password2 = $("#newPassword2").val();
                 var password2Error = $("#password2Error");
-                
                 password2Error.hide().text("");
-                if (password1 !== password2) {
+                if (password1 != password2) {
                     password2Error.text("Passwords do not match.").show();
                     error = true;
                 }else{
                     error = false;
                 }
 
-                if (password1.length > 30 || password2.length > 30) {
-                    alert("Passwords should not be more than 30 characters.");
-                    error = true;
-                }else{
-                    error = false;
-                }
-
                 if(error == false){
-                    form.unbind("submit").submit();
+                    form.unbind("submit").submit(); // Re-submit the form
                 }
             });
         });
