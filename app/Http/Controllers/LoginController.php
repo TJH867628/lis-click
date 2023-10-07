@@ -26,10 +26,10 @@ class LoginController extends Controller
 
     function check(Request $request)
     {
-        try{
             $request->session()->start();
             $email = $request->input('email');
             $password = hash('sha512',$request->input('password'));
+            $maxAttempts = 5;
             // print password
             $userInfo = DB::table('tbl_account')->where('email', $email)->first();
             $request->session()->remove('LoggedUser');
@@ -38,8 +38,25 @@ class LoginController extends Controller
             $request->session()->remove('LoggedJKReviewer');
             $request->session()->remove('LoggedJKParticipants');
             $request->session()->remove('LoggedReviewer');
-            
+
+            // Check if the user has exceeded the maximum number of login attempts
+            $attempts = $request->session()->get('login_attempts',0);
+            if ($attempts >= $maxAttempts - 1) {
+                if($maxAttempts - $attempts == 1 && !$request->session()->has('suspend_login')){
+                    $suspendTime = time() + 30; // Add 5 minute to the current time
+                    $request->session()->put('suspend_login', $suspendTime);
+                }
+                if(time() < $request->session()->get('suspend_login')){
+                    return redirect()->back()->with('fail', "Too many attemtps <br> Please try again at " . date("H:i:s" , ($request->session()->get('suspend_login'))));
+                }else{
+                    $request->session()->put('login_attempts',0);
+                    $request->session()->remove('suspend_login');
+                    $attempts = $request->session()->get('login_attempts',0);
+                }
+            }
+
             if ($userInfo && $userInfo->password == $password) {
+                $request->session()->remove('login_attempts');
                 if($userInfo->isAdmin === 0)
                 {
                 $request->session()->put('LoggedUser', $userInfo->email);
@@ -72,15 +89,13 @@ class LoginController extends Controller
                         return redirect()->back()->with('fail','Your Admin Status is not Active,Please contact with managment department');
                     }
                 }
-            }   else {
+            }else {
+                if ($attempts <= $maxAttempts+1) {
+                    $attempts++;
+                }
+                $request->session()->put('login_attempts', $attempts);
 
-                return redirect()->back()->with('fail','Email or Password is Invalid');
+                return redirect()->back()->with('fail','Email or Password is Invalid<br>Remaining Chances: '.($maxAttempts-$attempts));
             }
-        }
-        catch(Exception $exception){
-            return redirect()->back()->with('fail','Login Error please try again');
-        }
     } 
-
-    
 }

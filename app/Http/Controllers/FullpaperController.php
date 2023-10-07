@@ -136,7 +136,7 @@ class FullpaperController extends Controller
                     Mail::to($user->email)->send($mail);
                     return redirect()->back()->with('success','Submitted Succesfully');
                 }else{
-                    return redirect()->back()->with('error','Submit Failed');
+                    return redirect()->back()->with('error','Submit Failed,Invalid File');
                 }
             }else{
                 return redirect('/login')->with('Session Expired');

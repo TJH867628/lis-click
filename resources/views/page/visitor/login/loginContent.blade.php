@@ -105,7 +105,7 @@
                 </div>
                 @if($message = Session::get('fail'))
                 <div class="error">
-                  <span class="errorText">{{ $message }}</span><br> 
+                  <span class="errorText">{!! $message !!}</span><br> 
                 </div>
                 @elseif ($message = Session::get('resetSuccess'))
                 <div class="success">
