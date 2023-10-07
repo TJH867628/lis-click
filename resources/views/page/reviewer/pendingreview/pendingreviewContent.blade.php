@@ -366,7 +366,7 @@
                             </td>
                         </tr>
                             @endif
-                        
+                        @endif
                     @endforeach
                     @if($count == 0)
                     <tr>
@@ -375,6 +375,7 @@
                         </td>
                     </tr>
                     @endif
+                @endif
                 </tbody>
                 </table>
                 </section>
