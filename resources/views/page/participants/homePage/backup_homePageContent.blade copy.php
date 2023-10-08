@@ -1,4 +1,4 @@
-<link rel="icon" type="image/x-icon" href="assets/favicon.ico" wfd-invisible="true" contenteditable="true">
+<link rel="icon" type="image/x-icon" href="/images/Logo_Title.png" wfd-invisible="true" contenteditable="true"/>
 <!-- Bootstrap icons-->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" wfd-invisible="true" contenteditable="true">
 <!-- Core theme CSS (includes Bootstrap)-->
