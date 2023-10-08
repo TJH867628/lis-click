@@ -36,7 +36,7 @@ class AccountController extends Controller
             $adminSession = session()->get('LoggedJKReviewer');
             $admin = tbl_admin_info::where('email',$adminSession)->first();
             
-            return view('page.account(Admin)',['adminSession'=>$adminSession,'admin' => $admin]);
+            return view('page.Jk_Reviewer.profile.profile',['adminSession'=>$adminSession,'admin' => $admin]);
         }elseif(session()->has('LoggedReviewer')){
             $adminSession = session()->get('LoggedReviewer');
             $admin = tbl_admin_info::where('email',$adminSession)->first();
@@ -46,7 +46,7 @@ class AccountController extends Controller
             $adminSession = session()->get('LoggedFloorManager');
             $admin = tbl_admin_info::where('email',$adminSession)->first();
             
-            return view('page.account(Admin)',['adminSession'=>$adminSession,'admin' => $admin]);
+            return view('page.Floor_Manager.profile.profile',['adminSession'=>$adminSession,'admin' => $admin]);
         }elseif(session()->has('LoggedJKBendahari')){
             $adminSession = session()->get('LoggedJKBendahari');
             $admin = tbl_admin_info::where('email',$adminSession)->first();
@@ -98,7 +98,7 @@ class AccountController extends Controller
                 
             }return redirect('account')->with('account-success','Profile Updated Successfully');
             
-        }elseif(session()->has("LoggedSuperAdmin") || session()->has('LoggedJKParticipants') || session()->has('LoggedJKReviewer') || session()->has('LoggedReviewer') || session()->has('LoggedJKBendahari')){
+        }elseif(session()->has("LoggedSuperAdmin") || session()->has('LoggedJKParticipants') || session()->has('LoggedJKReviewer') || session()->has('LoggedReviewer') || session()->has('LoggedJKBendahari') || session()->has('LoggedFloorManager')){
             if(session()->has("LoggedSuperAdmin")){
                 $adminSession = session()->get('LoggedSuperAdmin');
             }elseif(session()->has('LoggedJKParticipants')){
@@ -112,6 +112,9 @@ class AccountController extends Controller
             }
             elseif(session()->has('LoggedJKBendahari')){
                 $adminSession = session()->get('LoggedJKBendahari');
+            }
+            elseif(session()->has('LoggedFloorManager')){
+                $adminSession = session()->get('LoggedFloorManager');
             }
             $name = $request -> input('name');//get name from user
             $IC_No = $request -> input('IC_No');//get IC_No from user
@@ -135,7 +138,7 @@ class AccountController extends Controller
 
     public function updatePassword(Request $request){
         $request->session()->start();
-        if(session()->has('LoggedUser') || session()->has('LoggedUser') || session()->has("LoggedSuperAdmin") || session()->has('LoggedJKParticipants') || session()->has('LoggedJKReviewer') || session()->has('LoggedReviewer') || session()->has('LoggedJKBendahari')){
+        if(session()->has('LoggedUser') || session()->has('LoggedUser') || session()->has("LoggedSuperAdmin") || session()->has('LoggedJKParticipants') || session()->has('LoggedJKReviewer') || session()->has('LoggedReviewer') || session()->has('LoggedJKBendahari') || session()->has('LoggedFloorManager')){
             if(session()->has('LoggedUser')){
                 $userSession = session()->get('LoggedUser');
             }
@@ -152,6 +155,9 @@ class AccountController extends Controller
             }
             elseif(session()->has('LoggedJKBendahari')){
                 $userSession = session()->get('LoggedJKBendahari');
+            }
+            elseif(session()->has('LoggedFloorManager')){
+                $userSession = session()->get('LoggedFloorManager');
             }
             $date = now();//get timestamp now
             $user = DB::table('tbl_account')->where('email', $userSession)->first();
