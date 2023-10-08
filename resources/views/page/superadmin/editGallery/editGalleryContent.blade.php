@@ -450,6 +450,9 @@
             font-size: 300%;
         }
 
+        textarea{
+            height: auto;
+        }
         </style>
     </head>
     <body class="d-flex flex-column h-100" style="background-color: white; text-align:center;">      
