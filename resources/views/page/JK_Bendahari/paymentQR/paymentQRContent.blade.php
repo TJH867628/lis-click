@@ -13,7 +13,8 @@
         border-radius: 5px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         max-width: 800px;
-        margin-top: 9%;
+        margin-top: 12%;
+        margin-bottom: 9%;
       }
       .uploadQR h1 {
         font-size: 24px;
@@ -74,15 +75,16 @@
       button:hover {
         background-color: red;
       }
-      a {
-        color: #333;
-        text-decoration: none;
-      }
-      a:hover {
-        text-decoration: underline;
-      }
+
       .fa-trash {
         margin-right: 5px;
+      }
+
+      #qrCode{
+        width: 30%;
+        height: 30%;
+        max-width: 30%;
+        max-height: 30%;
       }
     </style>
   </head>
@@ -103,7 +105,7 @@
       @else
       @if($qrCode->masterdata_value != NULL)
       <h1>Current QR Code</h1>
-      <img src="{{ asset('paymentQR/'.$qrCode->masterdata_value) }}" alt="QR Code">
+      <img id="qrCode" src="{{ asset('paymentQR/'.$qrCode->masterdata_value) }}" alt="QR Code">
       <br>
       <button style="margin-top: 1%;"><a href="/removePaymentQR"><i class="fas fa-trash"></i>Remove Current QR</a></button>
       @else

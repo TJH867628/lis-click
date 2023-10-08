@@ -17,12 +17,13 @@
                             <li class="nav-item"><a class="nav-link" href="/homePage">Home</a></li>
                             <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Reviewer</a>
-                                <ul class="dropdown-menu dropdown-menu-end bg-light" aria-labelledby="navbarDropdownBlog">
+                                <ul class="dropdown-menu dropdown-menu-end bg-light" aria-labellesdby="navbarDropdownBlog">
                                     <li><a class="dropdown-item" href="/pendingreview">Pending Review</a></li>
                                     <li><a class="dropdown-item" href="/donereview">Done Review</a></li>
                                 </ul>
                             </li>
-                                <a href="/logout" class="btn btn-primary">Logout</a>
+                            <li class="nav-item"><a class="nav-link" href="/account">My Profile</a></li>
+                            <a href="/logout" class="btn btn-primary">Logout</a>
                             </div>
                         </ul>
                     </div>

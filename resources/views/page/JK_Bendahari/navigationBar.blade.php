@@ -20,6 +20,7 @@
                     <li><a class="dropdown-item" href="/paymentStatus">Payment Status</a></li>
                     <li><a class="dropdown-item" href="/feesPaymentQR ">Change Payment QR</a></li>
                 </ul>
+            <li class="nav-item"><a class="nav-link" href="/account">My Profile</a></li>
             </ul>
             <a href="/logout" class="btn btn-primary">Logout</a>
         </div>
