@@ -33,4 +33,19 @@
                         </ul>
                     </div>
                 </div>
+                <div class="preloader">
+            <div class="spinner"></div>
+            <div class="preloader-text">Loading...</div>
+        </div>
+        <script>
+            const preloader = document.querySelector(".preloader");
+            const preloaderDuration = 400;
+
+            const hidePreloader = () => {
+            setTimeout(() => {
+            preloader.classList.add("hide");
+            }, preloaderDuration);
+            }
+            window.addEventListener("load", hidePreloader);
+        </script>
             </nav>
