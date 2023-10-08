@@ -128,11 +128,12 @@
 </head>
 <body>
     @csrf
-    <div class="heading">
-        <h1 id="head">8th INTERNATIONAL CONFERENCE</h1>
-        <h2 id="subheadinng"><i>LIGA ILMU SERANTAU 2022 (LIS 2022)</i></h2>
-    </div>
+
     <form action="{{ route('evaluationForm', ['submissionCode' => $dataEvaluationForm->paper_id_number]) }}" method="post">
+        <div class="heading">
+            <h1 id="head">8th INTERNATIONAL CONFERENCE</h1>
+            <h2 id="subheadinng"><i>LIGA ILMU SERANTAU 2022 (LIS 2022)</i></h2>
+        </div>
         <div class="content1">
             <label for="">Reviewer’s Name:</label> <br><br>
             <input type="text" name="reviewer_name" value="{{ $dataEvaluationForm->reviewer_name }}" readonly class="box"> <br><br> 

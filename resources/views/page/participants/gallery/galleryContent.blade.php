@@ -62,7 +62,7 @@
                 box-shadow: none;
             }
             #item:nth-child(3){
-                left:82%;
+                left:88%;
             }
             #item:nth-child(4){
                 left:calc(60% + 280px);

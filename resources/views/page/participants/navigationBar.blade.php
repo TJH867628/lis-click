@@ -35,6 +35,21 @@
                 </div>
             </ul>
         </div>
+        <div class="preloader">
+            <div class="spinner"></div>
+            <div class="preloader-text">Loading...</div>
+        </div>
+        <script>
+            const preloader = document.querySelector(".preloader");
+            const preloaderDuration = 400;
+
+            const hidePreloader = () => {
+            setTimeout(() => {
+            preloader.classList.add("hide");
+            }, preloaderDuration);
+            }
+            window.addEventListener("load", hidePreloader);
+        </script>
     </div>
 </nav>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
