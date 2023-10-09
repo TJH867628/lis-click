@@ -465,7 +465,7 @@
                         Submission Code
                         </th>
                         <th>
-                            Comment:
+                            Comment
                         </th>
                         <th>
                             Correction Time
