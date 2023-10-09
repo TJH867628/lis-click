@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="assets/vendors/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="assets/vendors/css/vendor.bundle.base.css">
     <link rel="stylesheet" href="assets/css/style.css">
-
     <link rel="shortcut icon" href="assets/images/Logo1 (1).png" />
     <style>
       .logo-image {
@@ -151,47 +150,82 @@
         <!-- partial -->
         <div class="main-panel" id="mainPanel" style="margin-left: 260px;">
           <div class="content-wrapper">
-            <div style="text-align: center; background-color: #EBF5FB; height: 100%; display: flex; overflow: auto; flex-wrap: wrap;">
-                <div style="margin: auto; max-width: 800px; padding: 20px; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); background-color: #f5f5f5;">
-                    <style>
-                        .button-container {
-                            display: flex;
-                            flex-wrap: wrap;
-                            justify-content: center;
-                            gap: 10px;
-                        }
+            <div class="table-container">
+                <h2 style="color: black ;">Admin List</h2>
+                @if($message = Session::get('updateSuccess'))
+                    <span class="success">{{ $message }}</span>
+                @endif
+                @if($admin)
+                <table>
+                <tr>
+                    <th>
+                        Email<br>
+                        <input type="text" onchange="filterTable(0, this.value)" placeholder="Search Email">
+                    </th>
+                    <th>
+                        Name<br>
+                        <input type="text" onchange="filterTable(1, this.value)" placeholder="Search Name">
+                    </th>
+                    <th>
+                        Phone Number<br>
+                        <input type="text" onchange="filterTable(2, this.value)" placeholder="Search Phone Number">
+                    </th>
+                    <th>
+                        Status<br>
+                        <input type="text" onchange="filterTable(3, this.value)" placeholder="Search Status">
+                    </th>
+                    <th>
+                        Role<br>
+                        <input type="text" onchange="filterTable(4, this.value)" placeholder="Search Role">
+                    </th>
+                    <th>
+                        Ic No<br>
+                        <input type="text" onchange="filterTable(5, this.value)" placeholder="Search IC No">
+                    </th>
+                    <th>
+                        Created At<br>
+                        <input type="text" onchange="filterTable(6, this.value)" placeholder="Search Created At">
+                    </th>
+                    <th>
+                        Updated At<br>
+                        <input type="text" onchange="filterTable(7, this.value)" placeholder="Search Updated At">
+                    </th>
+                </tr>
+                @foreach($admin as $admin)
+                <tr>
+                    <td>{{ $admin->email }}</td>
+                    <td>{{ $admin->name }}</td>
+                    <td>{{ $admin->phoneNumber }}</td>
+                    @if($admin->status === 0)
+                        <td>Deactived</td>
 
-                        #button {
-                            margin: 5px;
-                            width: 300px;
-                            height: 50px;
-                            background: #0d6efd;
-                            border-radius: 40px;
-                            color: #fff;
-                            font-size: 16px;
-                            border: none;
-                            outline: none;
-                            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-                            cursor: pointer;
-                            transition: .3s ease-in-out;
+                    @elseif($admin->status === 1)
+                        <td>Active</td>
+                    @endif
+                    <td>{{ $admin->adminRole }}</td>
+                    <td>{{ $admin->IC_No }}</td>
+                    <td>{{ $admin->created_at }}</td>
+                    <td>{{ $admin->updated_at }}</td>
+                    @if($admin->status === 0)
+                    <td><a href="{{ route('activeAdmin', ['adminEmail' => $admin->email]) }}" class="btn btn-primary mb-4">Active Admin</a></td>
+                    @elseif($admin->status === 1)
+                        @if($admin->adminRole === "Super")
+                            <td><a href="#" class="btn btn-primary mb-4" style="background-color:gray; pointer-events: none;" >Deactive Admin</a></td>
+                        @else{
+                            <td><a href="{{ route('deactiveAdmin', ['adminEmail' => $admin->email]) }}" class="btn btn-primary mb-4">Deactive Admin</a></td>
+                            
                         }
+                        @endif
+                    @endif
+                </tr>
+                @endforeach
 
-                        #button:hover {
-                            background: #0056b3;
-                        }
-                    </style>
-
-                    <div class="button-container">
-                      @foreach($pages as $page)
-                          @if($page->editable == true)
-                              <a href="{{ route('editPage', ['page' => $page->pageName]) }}" id="page">
-                                  <button id="button">{{ $page->pageName }}</button>
-                              </a>
-                          @endif
-                      @endforeach
-                    </div>
-                </div>
-            </div>
+            </table>
+                    @else
+                        <p style="color: black;">No record found.</p>
+                    @endif
+        </div>
+        <br><br><br><br><br><br>
           </div>
           <!-- content-wrapper ends -->
           <!-- partial:partials/_footer.html -->

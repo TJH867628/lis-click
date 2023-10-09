@@ -14,7 +14,7 @@ class SuperAdminController extends Controller
             session()->start();
             $adminSession = session()->get('LoggedSuperAdmin');
             $adminInfo  = tbl_admin_info::all();
-            return view('page.adminList(Super Admin)',['adminSession'=>$adminSession,'admin' => $adminInfo]);
+            return view('page.superadmin.adminList.adminList(Super Admin)',['adminSession'=>$adminSession,'admin' => $adminInfo]);
         }else{
             return redirect('login')->with('fail','Login Session Expire,Please Login again');
         }
