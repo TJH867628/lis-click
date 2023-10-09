@@ -199,7 +199,7 @@ class JKReviewerController extends Controller
             return redirect()->back();
         }
 
-        public function uploadCertificate(Request $request,$submissionCode){
+        public function uploadParticipantsCertificate(Request $request,$submissionCode){
             if(session()->has('LoggedJKReviewer') || session()->has('LoggedSuperAdmin')){
                 session()->start();
                 $submission = tbl_submission::where('submissionCode',$submissionCode)->first();
@@ -207,8 +207,30 @@ class JKReviewerController extends Controller
                     $file = $request->file('file');
                     $timestamp = time();
                     $dateString = date('YmdHis', $timestamp);
-                    $filename = 'Certificate_'. $submission->submissionCode . "_" . $dateString . ".". $file->getClientOriginalExtension();
-                    $submission->certificate = $filename;
+                    $filename = 'Participants_Certificate_'. $submission->submissionCode . "_" . $dateString . ".". $file->getClientOriginalExtension();
+                    $submission->participants_certificate = $filename;
+                    $file->storeAs('certificate', $filename, 'public');
+                    $submission->save();
+                    return redirect()->back()->with('success', 'File uploaded successfully.');
+                }else{
+                    return redirect()->back();
+                }
+            }else{
+                return redirect('login')->with('fail','Login Session Expire,Please Login again');
+            }
+        }
+
+        
+        public function uploadPresentationCertificate(Request $request,$submissionCode){
+            if(session()->has('LoggedJKReviewer') || session()->has('LoggedSuperAdmin')){
+                session()->start();
+                $submission = tbl_submission::where('submissionCode',$submissionCode)->first();
+                if ($request->hasFile('file')) {
+                    $file = $request->file('file');
+                    $timestamp = time();
+                    $dateString = date('YmdHis', $timestamp);
+                    $filename = 'Presentation_Certificate_'. $submission->submissionCode . "_" . $dateString . ".". $file->getClientOriginalExtension();
+                    $submission->presentation_certificate = $filename;
                     $file->storeAs('certificate', $filename, 'public');
                     $submission->save();
                     return redirect()->back()->with('success', 'File uploaded successfully.');
@@ -220,7 +242,22 @@ class JKReviewerController extends Controller
             }
         }
         
-        public function downloadCertificate($filename)
+        public function downloadParticipantsCertificate($filename)
+        {
+            $file = 'storage/certificate/' . $filename;
+            $extension = pathinfo($file, PATHINFO_EXTENSION);
+    
+            if ($extension == 'pdf') {
+                return response()->file($file, [
+                    'Content-Type' => 'application/pdf',
+                    'Content-Disposition' => 'inline',
+                ]);
+            } elseif ($extension == 'doc' || $extension == 'docx') {
+                return response()->file($file);
+            }
+        }
+
+        public function downloadPresentationCertificate($filename)
         {
             $file = 'storage/certificate/' . $filename;
             $extension = pathinfo($file, PATHINFO_EXTENSION);

@@ -209,9 +209,7 @@
     <input type="radio" class="larger" id="minor" name="recommendation" value="minor" <?php echo ($thisdataEvaluationForm->recommendation == "minor") ? 'checked' : ''; ?> disabled>&nbsp&nbsp&nbspRequires Minor Corrections<br><br>
     <input type="radio" class="larger" id="moderate" name="recommendation" value="moderate" <?php echo ($thisdataEvaluationForm->recommendation == "moderate") ? 'checked' : ''; ?> disabled>&nbsp&nbsp&nbspRequires Moderate Revision<br><br>
     <input type="radio" class="larger" id="major" name="recommendation" value="major" <?php echo ($thisdataEvaluationForm->recommendation == "major") ? 'checked' : ''; ?> disabled>&nbsp&nbsp&nbspRequires Major Revision<br><br>
-    <input type="radio" class="larger" id="reject" name="recommendation" value="reject" <?php echo ($thisdataEvaluationForm->recommendation == "reject") ? 'checked' : ''; ?> disabled>&nbsp&nbsp&nbspReject On Ground of (Please Be Specific)<br><br>
-    
-    <button><h3><i class="fa-solid fa-save" style="padding: 5px;"></i>This is the button to generated pdf</h3></button>
+    <input type="radio" class="larger" id="reject" name="recommendation" value="reject" <?php echo ($thisdataEvaluationForm->recommendation == "reject") ? 'checked' : ''; ?> disabled>&nbsp&nbsp&nbspReject On Ground of (Please Be Specific)<br><br>   
 </form>
 @endforeach
 

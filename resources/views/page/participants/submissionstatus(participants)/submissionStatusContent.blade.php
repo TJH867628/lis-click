@@ -609,11 +609,18 @@ $count = 0;
                                 <td>
                                     <!-- download certificate -->
                                     @if($submissionInfo->correctionPhase == 'readyForPresent')
-                                        @if($submissionInfo->certificate == 'pending')
+                                        @if($submissionInfo->participants_certificate == 'pending')
                                             <p class="status shipped">Pending</p>
                                         @else
-                                            <a href="{{ route('downloadCertificate', ['filename' => $submissionInfo->certificate]) }}" class="btn btn-primary mb-4 btn-download" target="_blank">
-                                                <i class="fas fa-download"></i>Certificate
+                                            <a href="{{ route('downloadParticipantsCertificate', ['filename' => $submissionInfo->certificate]) }}" class="btn btn-primary mb-4 btn-download" target="_blank">
+                                                <i class="fas fa-download"></i>Participants Certificate
+                                            </a>
+                                        @endif
+                                        @if($submissionInfo->presentation_certificate == 'pending')
+                                            <p class="status shipped">Pending</p>
+                                        @else
+                                            <a href="{{ route('downloadPresentationCertificate', ['filename' => $submissionInfo->certificate]) }}" class="btn btn-primary mb-4 btn-download" target="_blank">
+                                                <i class="fas fa-download"></i>Presentation Certificate
                                             </a>
                                         @endif
                                     @else

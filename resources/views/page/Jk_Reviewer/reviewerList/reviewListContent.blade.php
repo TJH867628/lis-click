@@ -1,10 +1,13 @@
-    <link rel="icon" type="image/x-icon" href="/images/Logo_Title.png" />
-
+<html>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
 <!-- Bootstrap icons-->
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" wfd-invisible="true">
 <!-- Core theme CSS (includes Bootstrap)-->
-<link href="/css/styles.css" rel="stylesheet" wfd-invisible="true">
 <style>
     * {
         margin: 0;
@@ -127,7 +130,7 @@
         background-color: #d5d1defe !important;
     }
 
-    thead th {
+    thead tr th {
         position: sticky;
         top: 0;
         left: 0;
@@ -336,43 +339,47 @@
         .status.shipped {
             background-color: #6fcaea;
         }
-        </style>
-        <main class="table">
+
+        
+    </style>
+</head>
+<body>
+    <main class="table">
         <section class="table__header">
-            <h1>Reviewer List</h1>
+            <h1>Review List</h1>
         </section>
         <section class="table__body">
+            <table id="submissionTable" class="display">
+            <thead>
+                    <tr>
+                        <th>
+                            Submission Details<br>
+                        </th>
+                        <th>
+                            Reviewer Info <br>
+                        </th>
+                        <th>
+                            Change Reviewer<br>
+                        </th>
+                        <th>    
+                            Document<br>
+                        </th>
+                        <th>    
+                            View Evaluation Form<br>
+                        </th>
+                        <th>    
+                            Turn In Report<br>
+                        </th>
+                        <th>
+                            Correction
+                        </th>
+                        <th>
+                            Certificate
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
                 @if($userSubmissionInfo)
-                <table id="submissionTable">
-                <thead>
-                <tr>
-                    <th>
-                        Submission Details<br>
-                    </th>
-                    <th>
-                        Reviewer Info <br>
-                    </th>
-                    <th>
-                        Change Reviewer<br>
-                    </th>
-                    <th>    
-                        Document<br>
-                    </th>
-                    <th>    
-                        View Evaluation Form<br>
-                    </th>
-                    <th>    
-                        Turn In Report<br>
-                    </th>
-                    <th>
-                        Correction
-                    </th>
-                    <th>
-                        Certificate
-                    </th>
-                </tr>
-                <thead>
-                    <tbody>
                     @foreach($userSubmissionInfo as $submissionInfo)
                         <tr>
                             <td>
@@ -398,7 +405,7 @@
                                     <p>Reviewer 2</p>
                                     <h5>{{ $submissionInfo->reviewer2ID }} </h5>
                                 @endif
-                                <br><p>Reviewer Status</p>
+                                <br><p>Review Status</p>
                                 {{ $submissionInfo->reviewStatus }}
                             </td>             
                             <td>
@@ -439,7 +446,19 @@
                                 <p class="status shipped">Pending</p>
                             @else
                                 @if($submissionInfo->dataEvaluationForm->paper_id_number == $submissionInfo->submissionCode)
-                                    <a href="{{ route('evaluationForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4"><i class="fas fa-calculator" style="padding: 5px;"></i>Evaluate Form</a>
+                                    <a href="{{ route('evaluationForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4" style="float:left;"><i class="fas fa-calculator" style="padding: 5px; "></i>Evaluate Form</a><br>
+                                @endif
+                                @if($submissionInfo->evaluationFormLink != NULL)
+                                    <a href="{{ route('downloadEvaluationForm', ['filename' => $submissionInfo->evaluationFormLink]) }}" class="btn btn-primary mb-4" style="float:left;"><i class="fa-solid fa-download" style="padding: 5px;"></i>Evaluate Form(Reviewer 1)</a><br>
+                                @else
+                                    <label style="padding:1%;" class="status cancelled"><strong>Reviewer 1</strong>'s Evaluation Form haven't submitted </label><br>
+                                @endif
+                                @if($submissionInfo->reviewer2ID != null)
+                                    @if($submissionInfo->evaluationFormLink2 != NULL)
+                                        <a href="{{ route('downloadEvaluationForm', ['filename' => $submissionInfo->evaluationFormLink2]) }}" class="btn btn-primary mb-4" style="float:left;"><i class="fa-solid fa-download" style="padding: 5px;"></i>Evaluate Form(Reviewer 2)</a><br>
+                                    @else
+                                        <label style="padding:1%;" class="status cancelled"><strong>Reviewer 2</strong>'s Evaluation Form haven't submitted</label><br>
+                                    @endif
                                 @endif
                             @endif
                             </td>
@@ -451,7 +470,16 @@
                                 @endif
                                 <form action="{{ route('uploadTurnInReport',['submissionCode' => $submissionInfo->submissionCode]) }}" method="POST" enctype="multipart/form-data" class="formturnin">
                                     @csrf
-                                    <br><input type="file" name="file" />
+                                    <br>            
+                                    <div class="choose-file">                            
+                                        <div style="display: flex; align-items: center; margin-top:3%;">
+                                            <label class="btn btn-primary" style="font-size:medium; padding:2%; width:20%; margin-left:5%;">
+                                                <i class="fa-solid fa-file-import"></i>
+                                                <input type="file" id="turnInReport" name="file" style="display: none;">
+                                            </label>
+                                            <span class="file-name" id="turnInReport-file-name" style="font-style: italic; color: #999; font-size:small; padding:0; margin-top:2%;">No File Selected</span>
+                                        </div>
+                                    </div>
                                     <br><button type="submit" class="uploadturnin"><i class="fas fa-cloud-upload-alt" style="padding: 5px;"></i>Upload Turn In Report</button>
                                 </form>
                             </td>
@@ -477,11 +505,38 @@
                             </td>
                             <td>
                                 @if($submissionInfo->correctionPhase == 'readyForPresent')
-                                    @if($submissionInfo->certificate == 'pending')
-                                    <form method="post" action="{{ route('uploadCertificate', ['submissionCode' => $submissionInfo->submissionCode]) }}" enctype="multipart/form-data" style="margin:auto;">
+                                    @if($submissionInfo->participants_certificate == 'pending')
+                                    <form method="post" action="{{ route('uploadParticipantsCertificate', ['submissionCode' => $submissionInfo->submissionCode]) }}" enctype="multipart/form-data" style="margin:auto; padding-bottom:10%; width:auto; text-align:center;">
+                                    <h5>Participants Certificate</h5><br>
                                         @csrf
-                                        <input type="file" name="file" accept="application/pdf">
-                                        <button type="submit"><i class="fas fa-cloud-upload-alt" style="padding: 5px;"></i>Upload Certificate</button>
+                                        <div class="choose-file">                            
+                                            <div style="display: flex; align-items: center; margin-top:3%;">
+                                                <label class="btn btn-primary" style="font-size:medium; padding:2%; width:20%; margin-left:5%;">
+                                                    <i class="fa-solid fa-file-import"></i>
+                                                    <input type="file" id="participantsCertificate" name="file" accept="application/pdf" style="display: none;">
+                                                </label>
+                                                <span class="file-name" style="font-style: italic; color: #999; font-size:small; padding:0; margin-top:2%;">No File Selected</span>
+                                            </div>
+                                        </div>
+                                        <br><button type="submit"><i class="fas fa-cloud-upload-alt" style="padding: 5px;"></i>Upload</button>
+                                    </form>
+                                    @else
+                                        <p class="status delivered">Click To Download Certificate:</p>
+                                    @endif
+                                    @if($submissionInfo->presentation_certificate == 'pending')
+                                    <form method="post" action="{{ route('uploadPresentationCertificate', ['submissionCode' => $submissionInfo->submissionCode]) }}" enctype="multipart/form-data" style="margin:auto; padding-bottom:10%; width:auto; text-align:center;">
+                                    <h5>Presentation Certificate</h5><br>
+                                        @csrf
+                                        <div class="choose-file">                            
+                                            <div style="display: flex; align-items: center; margin-top:3%;">
+                                                <label class="btn btn-primary" style="font-size:medium; padding:2%; width:20%; margin-left:5%;">
+                                                    <i class="fa-solid fa-file-import"></i>
+                                                    <input type="file" id="presentationCertificate" name="file" accept="application/pdf" style="display: none;">
+                                                </label>
+                                                <span class="file-name" style="font-style: italic; color: #999; font-size:small; padding:0; margin-top:2%;">No File Selected</span>
+                                            </div>
+                                        </div>
+                                        <br><button type="submit"><i class="fas fa-cloud-upload-alt" style="padding: 5px;"></i>Upload</button>
                                     </form>
                                     @else
                                         <p class="status delivered">Click To Download Certificate:</p>
@@ -492,11 +547,50 @@
                             </td>
                         </tr>
                     @endforeach
-                    </tbody>
                 @else
                     <p style="color: black;">No record found</p>
                 @endif
-                
+                </tbody>
             </table>
         </section>
     </main>
+    </body>
+    <script>
+         const chooseFiles = document.querySelectorAll('.choose-file');
+
+    chooseFiles.forEach(function(chooseFile) {
+        const imageUpload = chooseFile.querySelector('input[type="file"]');
+        const fileName = chooseFile.querySelector('.file-name');
+        const previewImage = chooseFile.querySelector('.preview-image');
+
+        imageUpload.addEventListener('change', function() {
+            const files = this.files;
+            let fileNames = '';
+
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const reader = new FileReader();
+
+                reader.addEventListener('load', function() {
+                    previewImage.src = reader.result;
+                    previewImage.style.display = "block";
+                });
+
+                reader.readAsDataURL(file);
+
+                fileNames += file.name + ', ';
+            }
+
+            fileNames = fileNames.slice(0, -2);
+            fileName.textContent = fileNames;
+        });
+    });
+
+    $(document).ready(function() {
+        $('#submissionTable').DataTable();
+    });
+
+
+    </script>
+
+</html>

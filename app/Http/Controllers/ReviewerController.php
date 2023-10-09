@@ -247,7 +247,9 @@ class ReviewerController extends Controller
             }
         }elseif(session()->has("LoggedJKReviewer")){
             $dataEvaluationForm = tbl_evaluation_form::where('paper_id_number', $submissionCode)->get();
-            return view('page.Jk_Reviewer.evaluationForm.evaluationForm',['dataEvaluationForm' => $dataEvaluationForm]);
+            $logo_lis = public_path('images/Logo1 (1).png');
+            $logo_pmj = public_path('images/logo_PMJ.png');
+            return view('page.Jk_Reviewer.evaluationForm.evaluationForm',['dataEvaluationForm' => $dataEvaluationForm,'year' => $year,'logo_lis' => $logo_lis,'logo_pmj' => $logo_pmj]);
 
         }elseif(session()->has("LoggedUser")){
             $dataEvaluationForm = tbl_evaluation_form::where('paper_id_number', $submissionCode)->get();
@@ -264,10 +266,22 @@ class ReviewerController extends Controller
 
     public function generatePDFEvaluationForm($id){
         $year = date('Y');
-        $dataEvaluationForm = tbl_evaluation_form::where('id', $id)->get();
-        $logo_lis = public_path('images/Logo1 (1).png');
-        $logo_pmj = public_path('images/logo_PMJ.png');
-        $pdf = PDF::loadView('page.reviewer.evaluationFormPdfTemplate.evaluationFormPdfTemplateContent',['dataEvaluationForm' => $dataEvaluationForm,'year' => $year,'logo_lis' => $logo_lis,'logo_pmj' => $logo_pmj]);
+        if(session()->has("LoggedJKReviewer")){
+            session()->start();
+            $reviewerSession = session()->get('LoggedJKReviewer');
+            $dataEvaluationForm = tbl_evaluation_form::where('paper_id_number', $id)->get();
+            $logo_lis = public_path('images/Logo1 (1).png');
+            $logo_pmj = public_path('images/logo_PMJ.png');
+            $pdf = PDF::loadView('page.Jk_Reviewer.evaluationFormPdfTemplate.evaluationFormPdfTemplateContent',['dataEvaluationForm' => $dataEvaluationForm,'year' => $year,'logo_lis' => $logo_lis,'logo_pmj' => $logo_pmj]);
+        }else if(session()->has("LoggedReviewer")){
+            session()->start();
+            $reviewerSession = session()->get('LoggedReviewer');
+            $dataEvaluationForm = tbl_evaluation_form::where('id', $id)->get();
+            $logo_lis = public_path('images/Logo1 (1).png');
+            $logo_pmj = public_path('images/logo_PMJ.png');
+            $pdf = PDF::loadView('page.reviewer.evaluationFormPdfTemplate.evaluationFormPdfTemplateContent',['dataEvaluationForm' => $dataEvaluationForm,'year' => $year,'logo_lis' => $logo_lis,'logo_pmj' => $logo_pmj]);
+        }
+       
         return response($pdf->stream('evaluationForm.pdf'))->header('Content-Type', 'application/pdf');
     }
 

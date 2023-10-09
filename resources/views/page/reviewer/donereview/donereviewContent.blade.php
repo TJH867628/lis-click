@@ -364,7 +364,7 @@
                     $count = 0;
                 @endphp
                 @if($submissionInfo)
-                <table>
+                <table id="reviewTable" class="display">
                 <thead>
                     <tr>
                         <th>
@@ -472,4 +472,5 @@
                 @endif
             </div>
         </section>
+        
 </main>

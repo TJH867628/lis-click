@@ -241,7 +241,7 @@
             </section>
             <section class="table__body">
                 @if($submissionInfo)
-                <table>
+                <table id="reviewTable" class="display">
                 <thead>
                     <tr>
                         <th>
@@ -278,13 +278,14 @@
                      $count = 0;
                     @endphp
                     @foreach($submissionInfo as $submissionInfo)
+                        @php
+                            $count++;
+                        @endphp
                         @if($submissionInfo->reviewStatus === 'pending')
                             @if($submissionInfo->reviewer2ID != NULL)
                                 @if($submissionInfo->reviewerID === $reviewername)
                                     @if($submissionInfo->evaluationFormLink == null)
-                                        @php
-                                            $count++;
-                                        @endphp
+
                                     <tr>
                                         <div style="font-size:20px; font-weight:bold; color:black;  text-decoration:none;"!important;>
                                             <td>{{ $submissionInfo->submissionCode }}</td>

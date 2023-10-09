@@ -46,7 +46,7 @@
         }
         
         th, td {
-            padding: 10px;
+            padding: 8px;
             border: 1px solid #ccc;
             text-align: left;
         }
@@ -111,6 +111,10 @@
         $count = 1;
     @endphp
         @foreach($dataEvaluationForm as $thisdataEvaluationForm)
+        @if($count > 1)
+        <div class="page-break"></div>
+        @endif
+
             <img src="{{ $logo_lis }}" id="logo_lis" alt="logo_lis" style="width: 300px; height: 150px;">
             <img src="{{ $logo_pmj }}" id="logo_pmj" alt="logo_pmj" style="width: 300px; height: 150px;">
         <div id="form-container">
@@ -124,16 +128,24 @@
             <div id="paper-details">
                 <table>
                     <tr>
-                        <th><h2>Paper Id Number:</h2></th>
-                        <td style=" text-align:center;"><label type="text" name="paper_id_number" style="font-size:30px;" readonly>{{ $thisdataEvaluationForm->paper_id_number }}</label></td>
+                        <th><h3>Reviewer Name:</h3>
+                        <td style=" text-align:center;"><label type="text" name="paper_id_number" style="font-size:20px;" readonly>{{ $thisdataEvaluationForm->reviewer_name }}</label></td>
                     </tr>
                     <tr>
-                        <th><h2>Title of Paper Reviewed:</h2></th>
-                        <td style=" text-align:center;"><label type="text" name="paper_id_number" style="font-size:30px;" readonly>{{ $thisdataEvaluationForm->title_of_paper_reviewed }}</label></td>
+                        <th><h3>Reviewer Email:</h3></th>
+                        <td style=" text-align:center;"><label type="text" name="paper_id_number" style="font-size:20px;" readonly>{{ $thisdataEvaluationForm->email }}</label></td>
                     </tr>
                     <tr>
-                        <th><h2>Date of Reviewed:</h2></th>
-                        <td style=" text-align:center;"><label type="text" name="paper_id_number" style="font-size:30px;" readonly>{{ date('d/m/Y', strtotime($thisdataEvaluationForm->date_of_reviewed)) }}</label></td>
+                        <th><h3>Paper Id Number:</h3></th>
+                        <td style=" text-align:center;"><label type="text" name="paper_id_number" style="font-size:20px;" readonly>{{ $thisdataEvaluationForm->paper_id_number }}</label></td>
+                    </tr>
+                    <tr>
+                        <th><h3>Title of Paper Reviewed:</h3></th>
+                        <td style=" text-align:center;"><label type="text" name="paper_id_number" style="font-size:20px;" readonly>{{ $thisdataEvaluationForm->title_of_paper_reviewed }}</label></td>
+                    </tr>
+                    <tr>
+                        <th><h3>Date of Reviewed:</h3></th>
+                        <td style=" text-align:center;"><label type="text" name="paper_id_number" style="font-size:20px;" readonly>{{ date('d/m/Y', strtotime($thisdataEvaluationForm->date_of_reviewed)) }}</label></td>
                     </tr>
                 </table>
             </div>
@@ -275,8 +287,23 @@
                 @endif
             </table>
 
-            <label for="" id="head2">Additional Comment</label> <br><br>
-            <textarea name="additional_comments" placeholder="Enter......" maxlength="1500">{{ $dataEvaluationForm->additional_comments }}</textarea><br><br>
+            <div class="page-break"></div>
+
+            <h2 for="" id="head2" style="text-align: left;">Additional Comment:</h2> <br><br>
+            <textarea name="additional_comments" placeholder="Enter......" maxlength="1500" style="">{{ $thisdataEvaluationForm->additional_comments }}</textarea><br><br>
+
+            <div class="signature">
+                <label for="signature" style="font-size: 20px; margin-top:10%;">Signature of Evaluator: …………………………………………… </label>
+            </div>
+            <div class="date">
+                <label for="date" style="font-size: 20px; margin-top:10%;">Date: …………………………………………… </label>
+            </div>
+            <div class="full-name">
+                <label for="full-name" style="font-size: 20px; margin-top:10%;">Full Name: …………………………………………… </label>
+            </div>
+            <div class="official-stamp">
+                <label for="official-stamp" style="font-size: 20px; margin-top:10%;">Official Stamp:</label>
+            </div>
         </div>
 
         @endforeach

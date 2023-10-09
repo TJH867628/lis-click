@@ -8,25 +8,23 @@
         <title>Liga Ilmu Serantau</title>
         <!-- Favicon-->
             <link rel="icon" type="image/x-icon" href="/images/Logo_Title.png" />
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
         <!-- Bootstrap icons-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
-        <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.js"></script>
-        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
-
+        
     </head>
-    <body class="d-flex flex-column h-100">
+    <body class="d-flex flex-column h-100" style="background-color: white; color:black;">
         @include('page.Jk_Reviewer.navigationBar')
         <br><br><br><br><br>
-        @include('page.Jk_Reviewer.reviewerList.reviewListContent')
-        <br><br><br><br><br><br>
+        @include('page.Jk_Reviewer.evaluationFormPdfTemplate.evaluationFormPdfTemplateContent')
+        <br><br><br><br><br>
+        </main>
         @include('page.footer')
         <!-- Bootstrap core JS-->
         <!-- Core theme JS-->
         <!--<script src="js/scripts.js"></script>-->
-    </body>
 
+    </body>
 </html>

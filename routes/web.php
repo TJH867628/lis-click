@@ -108,8 +108,10 @@ Route::get('unDoneCorrection/{submissionCode}',  [JKReviewerController::class,'u
 Route::get('/gallery',[GalleryController::class,'index']);
 Route::post('/pageEdit/Gallery/uploadNewPost',  [GalleryController::class,'uploadNewPost'])->name('uploadNewPost');
 Route::post('/pageEdit/Gallery/editExistingPost/{id}',  [GalleryController::class,'editExistingPost'])->name('editExistingPost');
-Route::post('/uploadCertificate/{submissionCode}',  [JKReviewerController::class,'uploadCertificate'])->name('uploadCertificate');
-Route::get('/downloadCertificate/{filename}',  [JKReviewerController::class,'downloadCertificate'])->name('downloadCertificate');
+Route::post('/uploadParticipantsCertificate/{submissionCode}',  [JKReviewerController::class,'uploadParticipantsCertificate'])->name('uploadParticipantsCertificate');
+Route::post('/uploadPresentationCertificate/{submissionCode}',  [JKReviewerController::class,'uploadPresentationCertificate'])->name('uploadPresentationCertificate');
+Route::get('/downloadParticipantsCertificate/{filename}',  [JKReviewerController::class,'downloadParticipantsCertificate'])->name('downloadParticipantsCertificate');
+Route::get('/downloadPresentationCertificate/{filename}',  [JKReviewerController::class,'downloadPresentationCertificate'])->name('downloadPresentationCertificate');
 Route::get('/JKBendahariHomePage',[HomePageController::class,'index']);
 Route::get('/paymentStatus',[JKBendahariController::class,'paymentStatus']);
 Route::get('/feesPaymentQR',[JKBendahariController::class,'paymentQR']);

@@ -42,5 +42,5 @@
             }
             window.addEventListener("load", hidePreloader);
         </script>
-            </div>
+
 </nav>
