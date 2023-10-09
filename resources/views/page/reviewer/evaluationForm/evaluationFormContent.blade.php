@@ -84,12 +84,29 @@
         }
 
         button {
-            margin-left: 5px;
-            width: 98.5%;
+            align-items: center;
+            margin-right: 10%;
+            width: 30%;
             height: 3em;
             position: relative;
             background-color: #0062cc;
             border: none;
+            color: rgb(255, 255, 2555);
+            cursor: pointer;
+            border-radius: 50px;
+        }
+
+        #btnGeneratePdf {
+            align-items: center;
+            text-align: center;
+            margin-left: 10%;
+            padding-top: 0.5%;
+            width: 30%;
+            height: 3em;
+            position: relative;
+            background-color: #0062cc;
+            border: none;
+            text-decoration: none;
             color: rgb(255, 255, 2555);
             cursor: pointer;
             border-radius: 50px;
@@ -123,6 +140,11 @@
         #reason {
             margin-left: 2%;
         }
+
+        #btnAction{
+            display: flex;
+            justify-content: center;
+        }
     
     </style>
 </head>
@@ -130,9 +152,11 @@
     @csrf
 
     <form action="{{ route('evaluationForm', ['submissionCode' => $dataEvaluationForm->paper_id_number]) }}" method="post">
+        @csrf
         <div class="heading">
-            <h1 id="head">8th INTERNATIONAL CONFERENCE</h1>
-            <h2 id="subheadinng"><i>LIGA ILMU SERANTAU 2022 (LIS 2022)</i></h2>
+            <h1 id="head">INTERNATIONAL CONFERENCE</h1>
+            <h2 id="subheadinng"><i>LIGA ILMU SERANTAU {{ $year }} (LIS {{ $year }})</i></h2>
+            <p style="color:white;">Reminder : The Form need to be generate as pdf and submit with sign and etc..</p>
         </div>
         <div class="content1">
             <label for="">Reviewer’s Name:</label> <br><br>
@@ -202,7 +226,14 @@
         <input type="radio" class="larger" id="major" name="recommendation" value="major" <?php echo ($dataEvaluationForm->recommendation == "major") ? 'checked' : ''; ?>>&nbsp&nbsp&nbspRequires Major Revision<br><br>
         <input type="radio" class="larger" id="reject" name="recommendation" value="reject" <?php echo ($dataEvaluationForm->recommendation == "reject") ? 'checked' : ''; ?>>&nbsp&nbsp&nbspReject On Ground of (Please Be Specific)<br><br>
         <input type="text"  name="specific_reject_reason" id="reason" placeholder="Reason for rejection" value="<?php echo $dataEvaluationForm->specific_reject_reason ?? ''; ?>" ><br>
-        <button type="submit"><h3><i class="fa-solid fa-save" style="padding: 5px;"></i>Submit</h3></button>
+
+        <label for="" id="head2">Additional Comment</label> <br><br>
+        <textarea name="additional_comments" placeholder="Enter......" maxlength="1500">{{ $dataEvaluationForm->additional_comments }}</textarea><br><br>
+        <div id="btnAction">
+            <button type="submit"><h3><i class="fa-solid fa-save" style="padding: 5px;"></i>Submit</h3></button>
+            <a href="{{ route('generatePDFEvaluationForm' , ['id' => $dataEvaluationForm->id ]) }}" id="btnGeneratePdf"><h3><i class="fa-solid fa-save" style="padding: 5px;"></i>Generate PDF</h3></a>
+        </div>
+        
     </form>
         
     <script>
