@@ -704,7 +704,7 @@ $count = 0;
             @if($count == 0)
             <tr>
                 <td colspan="3">
-                    <h1 style="color: black;">No submission found.</h1>
+                    <h1 style="color: grey;">No submission found.</h1>
                 </td>
             </tr>
             @endif
