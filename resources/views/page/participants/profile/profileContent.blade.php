@@ -119,7 +119,7 @@
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                       <label>Country :</label>
-                                                      <select id="country" class="form-control" name="category" onclick="removeChooseoption()">
+                                                      <select id="country" class="form-control" name="category">
                                                         <option selected disabled>Choose</option>
                                                         <option value="malaysia">Malaysia</option>
                                                         <option value="indonesia">Indonesia</option>
@@ -133,7 +133,7 @@
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                       <label>State :</label>
-                                                      <select id="state" class="form-control" name="category" onclick="removeChooseoption()">
+                                                      <select id="state" class="form-control" name="category">
                                                         <option selected disabled>Choose</option>
                                                     </select><br>
                                                 </div>
@@ -217,8 +217,9 @@
 
             // When a country is selected, update the options in the state dropdown
             $('#country').change(function() {
-                var selectedCountry = $(this);
+                var selectedCountry = $(this).val();
                 var stateOptionsHtml = '<option value="">-- Select State --</option>';
+                console.log(selectedCountry);
                 if (selectedCountry && stateOptions[selectedCountry]) {
                 var states = stateOptions[selectedCountry];
                 for (var i = 0; i < states.length; i++) {
