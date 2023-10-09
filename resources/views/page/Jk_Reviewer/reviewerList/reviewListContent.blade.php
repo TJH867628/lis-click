@@ -182,7 +182,6 @@
             padding-top: 10px;
             border: 1px solid #dee2e6;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            background-color: white;
         }
 
         .formturnin{
@@ -313,6 +312,30 @@
         .uploadturnin{
             padding: 10px;
         }
+
+        .status {
+            padding: .4rem 0;
+            border-radius: 2rem;
+            text-align: center;
+        }
+
+        .status.delivered {
+            background-color: #86e49d;
+            color: #006b21;
+        }
+
+        .status.cancelled {
+            background-color: #d893a3;
+            color: #b30021;
+        }
+
+        .status.pending {
+            background-color: #ebc474;
+        }
+
+        .status.shipped {
+            background-color: #6fcaea;
+        }
         </style>
         <main class="table">
         <section class="table__header">
@@ -376,7 +399,7 @@
                                     <h5>{{ $submissionInfo->reviewer2ID }} </h5>
                                 @endif
                                 <br><p>Reviewer Status</p>
-                                {{ $submissionInfo->reviewStatus}}
+                                {{ $submissionInfo->reviewStatus }}
                             </td>             
                             <td>
                             <form action="{{ route('updateReviewer', ['submissionCode' => $submissionInfo->submissionCode]) }}" method="POST">
@@ -393,44 +416,43 @@
                                         @endforeach
                                 </select>
                                 <div class=btnreview>
-                                    <button type="submit" class="btn btn-primary mb-4">Update Reviewer</button>
+                                    <button type="submit" class="btn btn-primary mb-4" style="margin-right: -1%;"><i class="fas fa-sync-alt" style="padding: 5px;"></i>Update Reviewer</button>
 
-                                    <a href="{{ route('cancelReviewer', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4">Cancel Reviewer</a>
+                                    <a href="{{ route('cancelReviewer', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4" style="margin-right: 1%;"><i class="fas fa-times" style="padding: 5px;"></i>Cancel Reviewer</a>
                                 </div>
                             </form>
-
                                 
                             </td>
                             <td>
                                 <p>Download Submission File</p>
-                                <a href="{{ route('downloadSubmission', ['filename' => $submissionInfo->file_name]) }}" class="btn btn-primary mb-4">Download Orginal File</a>
+                                <a href="{{ route('downloadSubmission', ['filename' => $submissionInfo->file_name]) }}" class="btn btn-primary mb-4"><i class="fa-solid fa-download" style="padding: 5px;"></i>Download Orginal File</a>
                                 <p>Reviewed File</p>
                                 @if($submissionInfo->returnPaperLink == NULL)
-                                    Return Paper Unavailable
+                                    <p class="status cancelled">Return Paper Unavailable</p>
                                 @else
-                                    <a href="{{ route('downloadReviewedFile', ['filename' => $submissionInfo->returnPaperLink]) }}" class="btn btn-primary mb-4">Download Return File</a>
+                                    <a href="{{ route('downloadReviewedFile', ['filename' => $submissionInfo->returnPaperLink]) }}" class="btn btn-primary mb-4"><i class="fa-solid fa-download" style="padding: 5px;"></i>Download Return File</a>
                                 @endif
                             </td>
 
                             <td>
                             @if(empty($submissionInfo->dataEvaluationForm->paper_id_number))
-                                <p>Pending</p>
+                                <p class="status shipped">Pending</p>
                             @else
                                 @if($submissionInfo->dataEvaluationForm->paper_id_number == $submissionInfo->submissionCode)
-                                    <a href="{{ route('evaluationForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4">Evaluate Form</a>
+                                    <a href="{{ route('evaluationForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4"><i class="fas fa-calculator" style="padding: 5px;"></i>Evaluate Form</a>
                                 @endif
                             @endif
                             </td>
                             <td>
                                 @if($submissionInfo->turnInReport)
                                 <div class="downloadturnin">
-                                    <a href="{{ route('downloadTurnInReport', ['filename' => $submissionInfo->turnInReport]) }}" class="btn btn-primary mb-4">Download Turn In Report</a>
+                                    <a href="{{ route('downloadTurnInReport', ['filename' => $submissionInfo->turnInReport]) }}" class="btn btn-primary mb-4"><i class="fa-solid fa-download" style="padding: 5px;"></i>Download Turn In Report</a>
                                 </div>
                                 @endif
                                 <form action="{{ route('uploadTurnInReport',['submissionCode' => $submissionInfo->submissionCode]) }}" method="POST" enctype="multipart/form-data" class="formturnin">
                                     @csrf
                                     <br><input type="file" name="file" />
-                                    <br><button type="submit" class="uploadturnin">Upload Turn In Report</button>
+                                    <br><button type="submit" class="uploadturnin"><i class="fas fa-cloud-upload-alt" style="padding: 5px;"></i>Upload Turn In Report</button>
                                 </form>
                             </td>
                             <td>
@@ -438,34 +460,34 @@
                                     <p>Correction Phase :</p>
                                     @if( $submissionInfo->correctionPhase == 'pending' )
                                         @if($submissionInfo->latestReturnCorrection && $submissionInfo->latestReturnCorrection->returnCorrectionLink !== NULL)
-                                            <h5>Pending For Comment</h5>
+                                            <p class="status shipped">Pending For Comment</p>
                                         @elseif(!$submissionInfo->latestReturnCorrection)
-                                            <h5>Pending For Comment</h5>
+                                            <p class="status shipped">Pending For Comment</p>
                                         @else
-                                            <h5>Pending For Correction</h5>
+                                            <p class="status shipped">Pending For Correction</p>
                                         @endif
                                     @elseif( $submissionInfo->correctionPhase == 'readyForPresent' )
-                                        <h5>Ready For Present</h5>
+                                        <p class="status delivered">Ready For Present</p>
                                     @endif
-                                    <a href="{{ route('correctionForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4">Correction</a>
+                                    <a href="{{ route('correctionForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4"><i class="fas fa-calculator" style="padding: 5px;"></i>Correction</a>
                                 @else
-                                    <p>Waiting for review</p>
+                                    <p class="status cancelled">Waiting for review</p>
                                  
                                 @endif
                             </td>
                             <td>
                                 @if($submissionInfo->correctionPhase == 'readyForPresent')
                                     @if($submissionInfo->certificate == 'pending')
-                                    <form method="post" action="{{ route('uploadCertificate', ['submissionCode' => $submissionInfo->submissionCode]) }}" enctype="multipart/form-data">
+                                    <form method="post" action="{{ route('uploadCertificate', ['submissionCode' => $submissionInfo->submissionCode]) }}" enctype="multipart/form-data" style="margin:auto;">
                                         @csrf
                                         <input type="file" name="file" accept="application/pdf">
-                                        <button type="submit">Upload Certificate</button>
+                                        <button type="submit"><i class="fas fa-cloud-upload-alt" style="padding: 5px;"></i>Upload Certificate</button>
                                     </form>
                                     @else
-                                        <p>Click To Download Certificate:</p>
+                                        <p class="status delivered">Click To Download Certificate:</p>
                                     @endif
                                 @else
-                                    <p>Not Ready</p>
+                                    <p class="status cancelled">Not Ready</p>
                                 @endif
                             </td>
                         </tr>
