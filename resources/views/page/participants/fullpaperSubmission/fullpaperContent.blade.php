@@ -45,7 +45,7 @@
                                                 <div class="form-group col-md-3">
                                                     <label class="category">Please CHOOSE your category :</label>
                                                     <select class="dropdown-option" id="category" name="category" onclick="removeChooseoption()" value="{{ $user -> category }}" required>
-                                                        <option selected disabled>Choose</option>
+                                                        <option value="" selected disabled>Choose</option>
                                                         <option value="Paper Presentation & Publication">Paper Presentation & Publication</option>
                                                         <option value="Paper Presentation ONLY">Paper Presentation ONLY</option>
                                                         <option value="Poster Presentation ONLY">Poster Presentation ONLY</option>
@@ -128,7 +128,7 @@
                                                 <div class="form-group col-md-3">
                                                     <label class="category">Sub-themes :</label>
                                                     <select class="dropdown-option" name="sub-theme" id="sub-theme" onclick="removeChooseoption()" required>
-                                                        <option selected disabled>Choose</option>
+                                                        <option value="" selected disabled>Choose</option>
                                                         <option value="Engineering & Technology">Engineering & Technology</option>
                                                         <option value="Social Science">Social Science</option>
                                                         <option value="Information Technology (IT) & Communication">Information Technology (IT) & Communication</option>
@@ -318,7 +318,7 @@
                                                         }
 
                                                         if(category !== null && presentMode !== null && presentMode !== null){
-                                                            form.unbind('submit').submit();
+                                                            form.unbind('submit').submit(); 
                                                         }
                                                     });
                                                 });
