@@ -384,6 +384,9 @@
 </style>
 <main class="table">
 @if($userSubmissionInfo)
+@php
+$count = 0;
+@endphp
         <section class="table__header">
             <h1>Submission Status</h1>
             <div class="search-container">
@@ -404,6 +407,9 @@
                 </thead>
                 <tbody>
                 @foreach($userSubmissionInfo as $submissionInfo)
+                @php
+                    $count++;
+                @endphp
                 <tr>
                     <td>
                         <a style="font-size:20px; font-weight:bold; color:black;  text-decoration:none;" href="#" class="submission-code" data-submission-code="{{$submissionInfo->submissionCode}}" data-submission-type="{{$submissionInfo->submissionType}}" data-submission-title="{{$submissionInfo->submissionTitle}}" data-submission-type="{{$submissionInfo->submissionTitle}}" data-sub-theme="{{$submissionInfo->subTheme}}" data-present-mode="{{$submissionInfo->presentMode}}">
@@ -695,6 +701,13 @@
                     </td> 
                 </tr>
             @endforeach
+            @if($count == 0)
+            <tr>
+                <td colspan="3">
+                    <h1 style="color: grey;">No submission found.</h1>
+                </td>
+            </tr>
+            @endif
         @else       
             <p style="color: black;">No submission found.</p>
         @endif
