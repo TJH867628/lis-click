@@ -57,7 +57,7 @@
                 </div>
             </div>
 
-            <li class="nav-item"><a class="nav-link" href="/account">My Profile</a></li>
+            <!-- <li class="nav-item"><a class="nav-link" href="/account">My Profile</a></li> -->
 
             <!-- Blog preview section-->
             <section class="py-5">
