@@ -5,175 +5,214 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Evaluation Form</title>
     <style>
-        body{
-            text-align: center;
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: 'Popins', sans-serif;
         }
 
-        table {
+        body {     
+            background: url("../images/tblBackground.jpg") center / cover;
+            background-attachment: fixed;
+            background-blend-mode: multiply;
+            font-size: 1.1em;
+            
+        }
+
+        .heading {
+            text-align: center;
+            width: 100%;
             margin: auto;
-            text-align: center;
-            border-collapse: collapse;
+            margin-top: 10px;
         }
 
-        table tr td{
-            padding: 10px;
+        #head {
+            font-size: 1.8em;
+            font-weight: bold;
+        }
+
+        #subheadinng {
+            font-size: 18px;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        #content1 {
+            width: 90%;
+            margin: auto;
+        }
+
+        form {
+            padding-top: 34px;
+            align-items: center;
+            justify-content: center;
+            width: 54%;
+            background-color: #fff5;
+            backdrop-filter: blur(7px);
+            box-shadow: 0 .4rem .8rem #0005;
+            border-radius: .8rem;
+            margin: auto;
+            margin-top: 10px;
+            padding-bottom: 60px;
+            margin-bottom: 5%;
+        }
+
+        form label {
+            font-weight: bold;
+            margin-left: 1%;
+        }
+
+        form .box {
+            left: 5px;
+            width: 98.5%;
+            height: 2.8em;
+            position: relative;
+            bottom: 10px;
+            border: 0;
+            border-radius: 5px;
+            background-color: #fff5;
         }
 
         textarea {
-            width: 500px;
-            height: 100px;
+            width: 98%;
+            height: 125px;
+            position: relative;
+            bottom: 17px;
+            color: black;
+            margin-left: 1%;
+            padding-left: 5px;
         }
 
-        #form-container{
-            margin: auto;
-            border: 3px solid black;
-            margin-bottom: 50px;
+        button {
+            margin-left: 5px;
+            width: 98.5%;
+            height: 3em;
+            position: relative;
+            background-color: #0062cc;
+            border: none;
+            color: rgb(255, 255, 2555);
+            cursor: pointer;
+            border-radius: 50px;
+        }
+
+        textarea::placeholder {
+            font-size: 1.4em;
+            position: relative;
+            top: 8px;
+            left: 5px;
+            width: 70%;
+        }
+
+        .larger {
+            width: 20px;
+            height: 20px;
+            margin-left: 2%;
+            /* Change the color of the radio button */
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            border: 2px solid #555;
+            border-radius: 50%;
+            outline: none;
+        }
+
+        /* Style the radio button when it's checked */
+        .larger:checked {
+            background-color: #0062cc;
+        }
+
+        @media screen and (max-width: 600px) {
+            form {
+                width: 100%;
+                margin: auto;
+            }
+        }
+
+        input {
+            color: black;
+        }
+
+        #reason {
+            margin-left: 2%;
         }
     </style>
 </head>
 <body>
 @foreach($dataEvaluationForm as $thisdataEvaluationForm)
-<div id="form-container">
-    <h2>8th INTERNATIONAL CONFERENCE</h2>
-    <h2>LIGA ILMU SERANTAU 2022 (LIS 2022)</h2>
-    <table border>
-        <tr>
-            <td><strong>Reviewer’s Name:</strong></td>
-            <td><input type="text" name="reviewer_name" value="{{ $thisdataEvaluationForm->reviewer_name}}" readonly></td>
-        </tr>
-        <tr>
-            <td><strong>Email:</strong></td>
-            <td><input type="text" name="email" value="{{ $thisdataEvaluationForm->email }}" readonly></td>
-        </tr>
-        <tr>
-            <td><strong>Paper Id Number:</strong></td>
-            <td><input type="text" name="paper_id_number" value="{{ $thisdataEvaluationForm->paper_id_number }}" readonly></td>
-        </tr>
-        <tr>
-            <td><strong>Title of Paper Reviewed:</strong></td>
-            <td><input type="text" name="title_of_paper_reviewed" value="{{ $thisdataEvaluationForm->title_of_paper_reviewed }}" readonly></td>
-        </tr>
-        <tr>
-            <td><strong>Date of Reviewed:</strong></td>
-            <td><input type="date" name="date_of_reviewed" value="{{ date('Y-m-d') }}" readonly></td>
-        </tr>
-    </table>
-
-    <h3>Comments per Section of Manuscript</h3>
-
-    <table border>
-        <tr>
-            <td><strong>Abstract:</strong></td>
-            <td><textarea name="comments_abstract" readonly>{{ $thisdataEvaluationForm->comments_abstract }}</textarea></td>
-        </tr>
-        <tr>
-            <td><strong>Introduction:</strong></td>
-            <td><textarea name="comments_introduction" readonly>{{ $thisdataEvaluationForm->comments_introduction }}</textarea></td>
-        </tr>
-        <tr>
-            <td><strong>Literature Review:</strong></td>
-            <td><textarea name="comments_literature_review" readonly>{{ $thisdataEvaluationForm->comments_literature_review }}</textarea></td>
-        </tr>
-        <tr>
-            <td><strong>Methodology:</strong></td>
-            <td><textarea name="comments_methodology" readonly>{{ $thisdataEvaluationForm->comments_methodology }}</textarea></td>
-        </tr>
-        <tr>
-            <td><strong>Results:</strong></td>
-            <td><textarea name="comments_results" readonly>{{ $thisdataEvaluationForm->comments_results }}</textarea></td>
-        </tr>
-        <tr>
-            <td><strong>Discussion:</strong></td>
-            <td><textarea name="comments_discussion" readonly>{{ $thisdataEvaluationForm->comments_discussion }}</textarea></td>
-        </tr>
-        <tr>
-            <td><strong>References:</strong></td>
-            <td><textarea name="comments_references" readonly>{{ $thisdataEvaluationForm->comments_references }}</textarea></td>
-        </tr>
-    </table>
-
-    <h3>Please rate the following: (1=Excellent) (2=Good) (3=Fair) (4=Poor)</h3>
-
-    <table border>
-        <tr>
-            <td><strong>Originality:</strong></td>
-            <td>
-                <label><input type="radio" name="originality" value="1" <?php echo ($thisdataEvaluationForm->originality == 1) ? 'checked' : ''; ?> disabled> Excellent</label>
-                <label><input type="radio" name="originality" value="2" <?php echo ($thisdataEvaluationForm->originality == 2) ? 'checked' : ''; ?> disabled> Good</label>
-                <label><input type="radio" name="originality" value="3" <?php echo ($thisdataEvaluationForm->originality == 3) ? 'checked' : ''; ?> disabled> Fair</label>
-                <label><input type="radio" name="originality" value="4" <?php echo ($thisdataEvaluationForm->originality == 4) ? 'checked' : ''; ?> disabled> Poor</label>
-            </td>
-        </tr>
-        <tr>
-            <td><strong>Contribution To The Field:</strong></td>
-            <td>
-                <label><input type="radio" name="contribution_to_field" value="1" <?php echo ($thisdataEvaluationForm->contribution_to_field == 1) ? 'checked' : ''; ?> disabled> Excellent</label>
-                <label><input type="radio" name="contribution_to_field" value="2" <?php echo ($thisdataEvaluationForm->contribution_to_field == 2) ? 'checked' : ''; ?> disabled> Good</label>
-                <label><input type="radio" name="contribution_to_field" value="3" <?php echo ($thisdataEvaluationForm->contribution_to_field == 3) ? 'checked' : ''; ?> disabled> Fair</label>
-                <label><input type="radio" name="contribution_to_field" value="4" <?php echo ($thisdataEvaluationForm->contribution_to_field == 4) ? 'checked' : ''; ?> disabled> Poor</label>
-            </td>
-        </tr>
-        <tr>
-            <td><strong>Technical Quality:</strong></td>
-            <td>
-                <label><input type="radio" name="technical_quality" value="1" <?php echo ($thisdataEvaluationForm->technical_quality == 1) ? 'checked' : ''; ?> disabled> Excellent</label>
-                <label><input type="radio" name="technical_quality" value="2" <?php echo ($thisdataEvaluationForm->technical_quality == 2) ? 'checked' : ''; ?> disabled> Good</label>
-                <label><input type="radio" name="technical_quality" value="3" <?php echo ($thisdataEvaluationForm->technical_quality == 3) ? 'checked' : ''; ?> disabled> Fair</label>
-                <label><input type="radio" name="technical_quality" value="4" <?php echo ($thisdataEvaluationForm->technical_quality == 4) ? 'checked' : ''; ?> disabled> Poor</label>
-            </td>
-        </tr>
-        <tr>
-            <td><strong>Clarity Of Presentation:</strong></td>
-            <td>
-                <label><input type="radio" name="clarity_of_presentation" value="1" <?php echo ($thisdataEvaluationForm->clarity_of_presentation == 1) ? 'checked' : ''; ?> disabled> Excellent</label>
-                <label><input type="radio" name="clarity_of_presentation" value="2" <?php echo ($thisdataEvaluationForm->clarity_of_presentation == 2) ? 'checked' : ''; ?> disabled> Good</label>
-                <label><input type="radio" name="clarity_of_presentation" value="3" <?php echo ($thisdataEvaluationForm->clarity_of_presentation == 3) ? 'checked' : ''; ?> disabled> Fair</label>
-                <label><input type="radio" name="clarity_of_presentation" value="4" <?php echo ($thisdataEvaluationForm->clarity_of_presentation == 4) ? 'checked' : ''; ?> disabled> Poor</label>
-            </td>
-        </tr>
-        <tr>
-            <td><strong>Depth Of Research:</strong></td>
-            <td>
-                <label><input type="radio" name="depth_of_research" value="1" <?php echo ($thisdataEvaluationForm->depth_of_research == 1) ? 'checked' : ''; ?> disabled> Excellent</label>
-                <label><input type="radio" name="depth_of_research" value="2" <?php echo ($thisdataEvaluationForm->depth_of_research == 2) ? 'checked' : ''; ?> disabled> Good</label>
-                <label><input type="radio" name="depth_of_research" value="3" <?php echo ($thisdataEvaluationForm->depth_of_research == 3) ? 'checked' : ''; ?> disabled> Fair</label>
-                <label><input type="radio" name="depth_of_research" value="4" <?php echo ($thisdataEvaluationForm->depth_of_research == 4) ? 'checked' : ''; ?> disabled> Poor</label>
-            </td>
-        </tr>
-    </table>
+<form>
+    <div class="heading">
+        <h1 id="head">8th INTERNATIONAL CONFERENCE</h1>
+        <h2 id="subheadinng"><i>LIGA ILMU SERANTAU 2022 (LIS 2022)</i></h2>
+    </div>
+    <div class="content1">
+        <label for="">Reviewer’s Name:</label> <br><br>
+        <input type="text" name="reviewer_name" value="{{ $thisdataEvaluationForm->reviewer_name}}" readonly class="box"> <br><br>
+        <label for="">Email:</label> <br><br>
+        <input type="text" name="email" value="{{ $thisdataEvaluationForm->email }}" readonly class="box"> <br><br>
+        <label for="">Paper Id Number:</label> <br><br>
+        <input type="text" name="paper_id_number" value="{{ $thisdataEvaluationForm->paper_id_number }}" readonly class="box"> <br><br>
+        <label for="">Title of Paper Reviewed:</label> <br><br>
+        <input type="text" name="title_of_paper_reviewed" value="{{ $thisdataEvaluationForm->title_of_paper_reviewed }}" readonly class="box"> <br><br>
+        <label for="">Date of Reviewed:</label> <br><br>
+        <input type="date" name="date_of_reviewed" value="{{ date('Y-m-d') }}" readonly class="box"> <br><br> 
+    </div>
     <br>
-    <br>
-    <br>
-    <table border>
-        <tr>
-            <td><h3>Recommendation: (mark with X)</h3></td>
-        </tr>
-        <tr>
-            <td><label for="accept">Accept As Is</label></td>
-            <td><input type="radio" id="accept" name="recommendation" value="accept" <?php echo ($thisdataEvaluationForm->recommendation == "accept") ? 'checked' : ''; ?> disabled></td>
-        </tr>
-        <tr>
-            <td><label for="minor">Requires Minor Corrections</label></td>
-            <td><input type="radio" id="minor" name="recommendation" value="minor" <?php echo ($thisdataEvaluationForm->recommendation == "minor") ? 'checked' : ''; ?> disabled></td>
-        </tr>
-        <tr>
-            <td><label for="moderate">Requires Moderate Revision</label></td>
-            <td><input type="radio" id="moderate" name="recommendation" value="moderate" <?php echo ($thisdataEvaluationForm->recommendation == "moderate") ? 'checked' : ''; ?> disabled></td>
-        </tr>
-        <tr>
-            <td><label for="major">Requires Major Revision</label></td>
-            <td><input type="radio" id="major" name="recommendation" value="major" <?php echo ($thisdataEvaluationForm->recommendation == "major") ? 'checked' : ''; ?> disabled></td>
-        </tr>
-        <tr>
-            <td><label for="reject">Reject On Ground of (Please Be Specific)</label></td>
-            <td><input type="radio" id="reject" name="recommendation" value="reject" <?php echo ($thisdataEvaluationForm->recommendation == "reject") ? 'checked' : ''; ?> disabled></td>
-        </tr>
-    </table>
-    <button>This is the button to generated pdf</button>
-    <br>
-    <br>
-    <br>
-</div>
+    <div class="heading">
+        <h1 id="head">Comments per Section of Manuscript</h1>
+    </div>
+    <label for="" id="head2">Abstact</label> <br><br>
+    <textarea name="comments_abstract" readonly>{{ $thisdataEvaluationForm->comments_abstract }}</textarea><br><br>
+    <label for="" id="head2">Introduction</label> <br><br>
+    <textarea name="comments_introduction" readonly>{{ $thisdataEvaluationForm->comments_introduction }}</textarea><br><br>
+    <label for="" id="head2">Literature Review</label> <br><br>
+    <textarea name="comments_literature_review" readonly>{{ $thisdataEvaluationForm->comments_literature_review }}</textarea><br><br>
+    <label for="" id="head2">Methodology</label> <br><br>
+    <textarea name="comments_methodology" readonly>{{ $thisdataEvaluationForm->comments_methodology }}</textarea><br><br>
+    <label for="" id="head2">Results</label> <br><br>
+    <textarea name="comments_results" readonly>{{ $thisdataEvaluationForm->comments_results }}</textarea><br><br>
+    <label for="" id="head2">Discussion</label> <br><br>
+    <textarea name="comments_discussion" readonly>{{ $thisdataEvaluationForm->comments_discussion }}</textarea><br><br>
+    <label for="" id="head2">References</label> <br><br>
+    <textarea name="comments_references" readonly>{{ $thisdataEvaluationForm->comments_references }}</textarea><br><br>
+    <div class="heading">
+        <h1 id="head">Please rate the following: (1=Excellent) (2=Good) (3=Fair) (4=Poor)</h1>
+    </div>
+    <label for="" id="head1">Originality:</label> <br><br>
+    <input input type="radio" class="larger" name="originality" value="1" <?php echo ($thisdataEvaluationForm->originality == 1) ? 'checked' : ''; ?> disabled>&nbsp&nbsp&nbspExcellent<br><br>
+    <input input type="radio" class="larger" name="originality" value="2" <?php echo ($thisdataEvaluationForm->originality == 2) ? 'checked' : ''; ?> disabled>&nbsp&nbsp&nbspGood<br><br>
+    <input input type="radio" class="larger" name="originality" value="3" <?php echo ($thisdataEvaluationForm->originality == 3) ? 'checked' : ''; ?> disabled>&nbsp&nbsp&nbspFair<br><br>
+    <input input type="radio" class="larger" name="originality" value="4" <?php echo ($thisdataEvaluationForm->originality == 4) ? 'checked' : ''; ?> disabled>&nbsp&nbsp&nbspPoor<br><br>
+    <label for="" id="head1">Contribution To The Field:</label> <br><br>
+    <input input type="radio" class="larger" name="contribution_to_field" value="1" <?php echo ($thisdataEvaluationForm->contribution_to_field == 1) ? 'checked' : ''; ?> disabled>&nbsp&nbsp&nbspExcellent<br><br>
+    <input input type="radio" class="larger" name="contribution_to_field" value="2" <?php echo ($thisdataEvaluationForm->contribution_to_field == 2) ? 'checked' : ''; ?> disabled>&nbsp&nbsp&nbspGood<br><br>
+    <input input type="radio" class="larger" name="contribution_to_field" value="3" <?php echo ($thisdataEvaluationForm->contribution_to_field == 3) ? 'checked' : ''; ?> disabled>&nbsp&nbsp&nbspFair<br><br>
+    <input input type="radio" class="larger" name="contribution_to_field" value="4" <?php echo ($thisdataEvaluationForm->contribution_to_field == 4) ? 'checked' : ''; ?> disabled>&nbsp&nbsp&nbspPoor<br><br>
+    <label for="" id="head1">Technical Quality:</label> <br><br>
+    <input input type="radio" class="larger" name="technical_quality" value="1" <?php echo ($thisdataEvaluationForm->technical_quality == 1) ? 'checked' : ''; ?> disabled>&nbsp&nbsp&nbspExcellent<br><br>
+    <input input type="radio" class="larger" name="technical_quality" value="2" <?php echo ($thisdataEvaluationForm->technical_quality == 2) ? 'checked' : ''; ?> disabled>&nbsp&nbsp&nbspGood<br><br>
+    <input input type="radio" class="larger" name="technical_quality" value="3" <?php echo ($thisdataEvaluationForm->technical_quality == 3) ? 'checked' : ''; ?> disabled>&nbsp&nbsp&nbspFair<br><br>
+    <input input type="radio" class="larger" name="technical_quality" value="4" <?php echo ($thisdataEvaluationForm->technical_quality == 4) ? 'checked' : ''; ?> disabled>&nbsp&nbsp&nbspPoor<br><br>
+    <label for="" id="head1">Clarity Of Presentation:</label> <br><br>
+    <input input type="radio" class="larger" name="clarity_of_presentation" value="1" <?php echo ($thisdataEvaluationForm->clarity_of_presentation == 1) ? 'checked' : ''; ?> disabled>&nbsp&nbsp&nbspExcellent<br><br>
+    <input input type="radio" class="larger" name="clarity_of_presentation" value="2" <?php echo ($thisdataEvaluationForm->clarity_of_presentation == 2) ? 'checked' : ''; ?> disabled>&nbsp&nbsp&nbspGood<br><br>
+    <input input type="radio" class="larger" name="clarity_of_presentation" value="3" <?php echo ($thisdataEvaluationForm->clarity_of_presentation == 3) ? 'checked' : ''; ?> disabled>&nbsp&nbsp&nbspFair<br><br>
+    <input input type="radio" class="larger" name="clarity_of_presentation" value="4" <?php echo ($thisdataEvaluationForm->clarity_of_presentation == 4) ? 'checked' : ''; ?> disabled>&nbsp&nbsp&nbspPoor<br><br>
+    <label for="" id="head1">Depth Of Research:</label> <br><br>
+    <input input type="radio" class="larger" name="depth_of_research" value="1" <?php echo ($thisdataEvaluationForm->depth_of_research == 1) ? 'checked' : ''; ?> disabled>&nbsp&nbsp&nbspExcellent<br><br>
+    <input input type="radio" class="larger" name="depth_of_research" value="2" <?php echo ($thisdataEvaluationForm->depth_of_research == 2) ? 'checked' : ''; ?> disabled>&nbsp&nbsp&nbspGood<br><br>
+    <input input type="radio" class="larger" name="depth_of_research" value="3" <?php echo ($thisdataEvaluationForm->depth_of_research == 3) ? 'checked' : ''; ?> disabled>&nbsp&nbsp&nbspFair<br><br>
+    <input input type="radio" class="larger" name="depth_of_research" value="4" <?php echo ($thisdataEvaluationForm->depth_of_research == 4) ? 'checked' : ''; ?> disabled>&nbsp&nbsp&nbspPoor<br><br>
+    <div class="heading">
+        <h1 id="head">Recommendation: (mark with X)</h1>
+    </div>
+    <input type="radio" class="larger" id="accept" name="recommendation" value="accept" <?php echo ($thisdataEvaluationForm->recommendation == "accept") ? 'checked' : ''; ?> disabled>&nbsp&nbsp&nbspAccept As Is<br><br>
+    <input type="radio" class="larger" id="minor" name="recommendation" value="minor" <?php echo ($thisdataEvaluationForm->recommendation == "minor") ? 'checked' : ''; ?> disabled>&nbsp&nbsp&nbspRequires Minor Corrections<br><br>
+    <input type="radio" class="larger" id="moderate" name="recommendation" value="moderate" <?php echo ($thisdataEvaluationForm->recommendation == "moderate") ? 'checked' : ''; ?> disabled>&nbsp&nbsp&nbspRequires Moderate Revision<br><br>
+    <input type="radio" class="larger" id="major" name="recommendation" value="major" <?php echo ($thisdataEvaluationForm->recommendation == "major") ? 'checked' : ''; ?> disabled>&nbsp&nbsp&nbspRequires Major Revision<br><br>
+    <input type="radio" class="larger" id="reject" name="recommendation" value="reject" <?php echo ($thisdataEvaluationForm->recommendation == "reject") ? 'checked' : ''; ?> disabled>&nbsp&nbsp&nbspReject On Ground of (Please Be Specific)<br><br>
+    
+    <button><h3><i class="fa-solid fa-save" style="padding: 5px;"></i>This is the button to generated pdf</h3></button>
+</form>
 @endforeach
 
 </body>
