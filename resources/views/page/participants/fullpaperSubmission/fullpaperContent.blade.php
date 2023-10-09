@@ -4,6 +4,8 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" wfd-invisible="true">
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="/css/styles.css" rel="stylesheet" wfd-invisible="true">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <head>
     <style>
         .error{
@@ -42,8 +44,8 @@
                                                 <!--Dropdown-->
                                                 <div class="form-group col-md-3">
                                                     <label class="category">Please CHOOSE your category :</label>
-                                                    <select class="dropdown-option" name="category" onclick="removeChooseoption()" value="{{ $user -> category }}" required="required">
-                                                        <option selected disabled>Choose</option>
+                                                    <select class="dropdown-option" id="category" name="category" onclick="removeChooseoption()" value="{{ $user -> category }}" required>
+                                                        <option value="" selected disabled>Choose</option>
                                                         <option value="Paper Presentation & Publication">Paper Presentation & Publication</option>
                                                         <option value="Paper Presentation ONLY">Paper Presentation ONLY</option>
                                                         <option value="Poster Presentation ONLY">Poster Presentation ONLY</option>
@@ -125,8 +127,8 @@
                                                 <!--Dropdown-->
                                                 <div class="form-group col-md-3">
                                                     <label class="category">Sub-themes :</label>
-                                                    <select class="dropdown-option" name="sub-theme" onclick="removeChooseoption()" required>
-                                                        <option selected disabled>Choose</option>
+                                                    <select class="dropdown-option" name="sub-theme" id="sub-theme" onclick="removeChooseoption()" required>
+                                                        <option value="" selected disabled>Choose</option>
                                                         <option value="Engineering & Technology">Engineering & Technology</option>
                                                         <option value="Social Science">Social Science</option>
                                                         <option value="Information Technology (IT) & Communication">Information Technology (IT) & Communication</option>
@@ -190,8 +192,8 @@
                                                 <!--Dropdown-->
                                                 <div class="form-group col-md-3 presentMode-Container">
                                                     <label class="category presentMode-label">Please select the presentation mode you will choose for the session :</label>
-                                                    <select class="dropdown-option" name="presentMode" onclick="removeChooseoption()">
-                                                        <option selected disabled>Choose</option>
+                                                    <select class="dropdown-option" id="presentMode" name="presentMode" onclick="removeChooseoption()" required>
+                                                        <option value="" selected disabled>Choose</option>
                                                         <option value="Face-to-Face">Face-to-Face</option>
                                                         <option value="Online">Online</option>
                                                     </select><br>
@@ -291,14 +293,44 @@
                                                     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                                                     return emailRegex.test(email);
                                                 }
+                                                $(document).ready(function(){
+                                                    
+                                                    var form = $("#fullpaper-form");
+
+                                                    form.on("submit", function(event) {
+                                                        event.preventDefault();
+                                                        var category = $("#category").val();
+                                                        var presentMode = $("#presentMode").val();
+                                                        var subTheme = $("#sub-theme").val();
+                                                        if (category === null) {
+                                                            event.preventDefault();
+                                                            alert("Please select a category.");
+                                                        }
+
+                                                        if (presentMode === null){
+                                                            event.preventDefault();
+                                                            alert("Please select a Presentation Mode.");
+                                                        }
+
+                                                        if (subTheme === null){
+                                                            event.preventDefault();
+                                                            alert("Please select a Sub-theme.");
+                                                        }
+
+                                                        if(category !== null && presentMode !== null && presentMode !== null){
+                                                            form.unbind('submit').submit(); 
+                                                        }
+                                                    });
+                                                });
+                                                
                                             </script>
                                             @if($message = Session::get('error'))
-                                            <div class="error">
-                                                <span class="error">{{ $message }}</span><br> 
+                                            <div class="alert alert-danger">
+                                                <strong>{{ $message }}</strong>
                                             </div>
                                             @elseif ($message = Session::get('success'))
-                                            <div class="success">
-                                                <span class="successText">{{ $message }}</span><br> 
+                                            <div class="alert alert-success">
+                                                <strong>{{ $message }}</strong>
                                             </div>
                                             @endif
                                         <!-- HTML button element that will trigger the modal popup -->
@@ -311,4 +343,5 @@
                     </div>
                 </div>
             </header>
+            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>

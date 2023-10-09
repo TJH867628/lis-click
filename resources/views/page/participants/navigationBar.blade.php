@@ -5,6 +5,11 @@
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="/css/styles.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<style>
+    nav{
+        z-index: 999;
+    }
+</style>
 <!-- Navigation-->
 <nav class="shadow-sm navbar navbar-expand-lg navbar-light bg-light fixed-top">
     <div class="container px-5">
