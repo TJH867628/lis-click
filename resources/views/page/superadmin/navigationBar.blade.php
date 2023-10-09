@@ -9,6 +9,7 @@
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="/css/styles.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
             <!-- Navigation-->
             <nav class="shadow-sm navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container px-5">
@@ -52,5 +53,9 @@
             }, preloaderDuration);
             }
             window.addEventListener("load", hidePreloader);
+
+            const button = document.getElementsByClassName('navbar-toggler');
+            const navBar = document.getElementsByClassName('navbar-collapse');
+            button.addEventListener("click", navBar.classList.toggle(""));
         </script>
             </nav>
