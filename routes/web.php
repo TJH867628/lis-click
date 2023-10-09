@@ -132,3 +132,4 @@ Route::post('/superadmin/pageList/conferencesDownload/uploadNewConferencesDownlo
 Route::post('/registration/emailVerification',[RegistrationController::class,'OTPSender'])->name('emailVerification');
 Route::post('/registration/validateOTP',[RegistrationController::class,'confirmOTP'])->name('emailVerification-confirmOTP');
 Route::post('faq/submit',[FaqController::class, 'sendFaq'])->name('sendEmailContactUs');
+Route::get('evaluationForm/generatePDFEvaluationForm/{id}',[ReviewerController::class, 'generatePDFEvaluationForm'])->name('generatePDFEvaluationForm');

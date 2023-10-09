@@ -174,7 +174,7 @@ class ReviewerController extends Controller
                 ->where('reviewer_name', $reviewer->name)
                 ->first();
                 if($dataEvaluationForm){
-                    return view('page.reviewer.evaluationForm.evaluationForm',['dataEvaluationForm' => $dataEvaluationForm]);
+                    return view('page.reviewer.evaluationForm.evaluationForm',['dataEvaluationForm' => $dataEvaluationForm , 'year' => $year]);
                 }else{
                     $data = array(
                         'reviewer_name' => $reviewer->name,
@@ -261,6 +261,16 @@ class ReviewerController extends Controller
         }
 
     }
+
+    public function generatePDFEvaluationForm($id){
+        $year = date('Y');
+        $dataEvaluationForm = tbl_evaluation_form::where('id', $id)->get();
+        $logo_lis = public_path('images/Logo1 (1).png');
+        $logo_pmj = public_path('images/logo_PMJ.png');
+        $pdf = PDF::loadView('page.reviewer.evaluationFormPdfTemplate.evaluationFormPdfTemplateContent',['dataEvaluationForm' => $dataEvaluationForm,'year' => $year,'logo_lis' => $logo_lis,'logo_pmj' => $logo_pmj]);
+        return response($pdf->stream('evaluationForm.pdf'))->header('Content-Type', 'application/pdf');
+    }
+
     public function submitEvaluationForm(Request $request,$submissionCode){
         if(session()->has("LoggedReviewer")){
             session()->start();
