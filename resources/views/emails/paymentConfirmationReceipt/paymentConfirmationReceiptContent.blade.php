@@ -29,15 +29,18 @@
 <body>
     <div class="receipt">
         <div class="header">
-            <h1>Payment Confirmation Receipt</h1>
+            <h2>Payment Confirmation Receipt</h2>
         </div>
         <div class="details">
-            <p><strong>Payment ID:</strong> [Recipient's Name]</p>
-            <p><strong>Date:</strong> [Date]</p>
-            <p><strong>Amount Paid:</strong> $[Amount]</p>
-        </div>
-        <div class="signature">
-            <p><strong>Date:</strong> [Date]</p>
+            <p><strong>Submission Code :</strong>{{ $submissionCode }}</p>
+            <p>
+                <strong>Payment ID:</strong>
+                @foreach($paymentDetails as $paymentDetails)
+                    {{ $paymentDetails->paymentID }}
+                @endforeach
+            </p>
+            <p><strong>Date:</strong>{{ $date }}</p>
+            <p>Your payment for <strong>{{ $submissionCode }}</strong> had been verified</p>
         </div>
     </div>
 </body>

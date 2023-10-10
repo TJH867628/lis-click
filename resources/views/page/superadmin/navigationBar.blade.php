@@ -1,45 +1,65 @@
-    <link rel="icon" type="image/x-icon" href="/images/Logo_Title.png" />
-    <style>
-    nav{
-        z-index: 999;
-    }
-</style>
-<!-- Bootstrap icons-->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-<!-- Core theme CSS (includes Bootstrap)-->
-<link href="/css/styles.css" rel="stylesheet" />
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-
-            <!-- Navigation-->
-            <nav class="shadow-sm navbar navbar-expand-lg navbar-light bg-light">
-                <div class="container px-5">
-                    <a class="navbar-brand" href="/homePage">
-                        <img src="/images/Logo1 (1).png" width="200px" alt="logoLIS2023" />
-                    </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                            <li class="nav-item"><a class="nav-link" href="/superAdminHomePage">Home</a></li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Admin</a>
-                                <ul class="dropdown-menu dropdown-menu-end bg-light" aria-labelledby="navbarDropdownBlog">
-                                    <li><a class="dropdown-item" href="/adminList">Admin List</a></li>
-                                    <li><a class="dropdown-item" href="/adminRegister">Register New Admin</a></li>
-                                </ul>
-                                </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Registration</a>
-                                    <ul class="dropdown-menu dropdown-menu-end bg-light" aria-labelledby="navbarDropdownBlog">
-                                        <li><a class="dropdown-item" href="/submissionStatus">Submission Status</a></li>
-                                    </ul>
-                                </li>
-                            <li class="nav-item"><a class="nav-link" href="/account">My Profile</a></li>
-                            </div>
-                            <a href="/logout" class="btn btn-primary">Logout</a>
-                        </ul>
-                    </div>
-                </div>
-                <div class="preloader">
+      <!-- partial:partials/_navbar.html -->
+      <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+        <div class="bgcolor">
+          <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+            <a class="navbar-brand brand-logo" href="/superAdminHomePage"><img src="assets/images/Logo1 (1).png" alt="logo" class="logo-image" /></a>
+            <a class="navbar-brand brand-logo-mini" href="/superAdminHomePage"><img src="assets/images/Logo1 (1).png" alt="logo" class="mini-logo-image" /></a>
+          </div>
+        </div>
+        <div class="navbar-menu-wrapper d-flex align-items-stretch">
+          <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+            <span class="mdi mdi-menu"></span>
+          </button>
+          <ul class="navbar-nav navbar-nav-right">
+            <li class="nav-item d-none d-lg-block full-screen-link">
+              <a class="nav-link">
+                <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="/logout">
+                <i class="mdi mdi-logout me-2 text-primary"></i> 
+                <span>Sign Out</span> 
+              </a>
+            </li>
+          </ul>
+          <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+            <span class="mdi mdi-menu"></span>
+          </button>
+        </div>
+      </nav>
+      <!-- partial -->
+      <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_sidebar.html -->
+        <nav class="sidebar sidebar-offcanvas" id="sidebar" style="position: fixed;">
+          <ul class="nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/superAdminHomePage">
+                <span class="menu-title">Home</span>
+                <i class="mdi mdi-home menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/pageList">
+                <span class="menu-title">Edit Page</span>
+                <i class="mdi mdi-crosshairs-gps menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/adminRegister">
+                <span class="menu-title">Register New Admin</span>
+                <i class="mdi mdi-contacts menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/adminList">
+                <span class="menu-title">Admin List</span>
+                <i class="mdi mdi-format-list-bulleted menu-icon"></i>
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="preloader">
             <div class="spinner"></div>
             <div class="preloader-text">Loading...</div>
         </div>
@@ -53,9 +73,4 @@
             }, preloaderDuration);
             }
             window.addEventListener("load", hidePreloader);
-
-            const button = document.getElementsByClassName('navbar-toggler');
-            const navBar = document.getElementsByClassName('navbar-collapse');
-            button.addEventListener("click", navBar.classList.toggle(""));
         </script>
-            </nav>

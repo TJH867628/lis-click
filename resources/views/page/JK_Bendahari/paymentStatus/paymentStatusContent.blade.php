@@ -304,9 +304,12 @@
                     <td>
                         <p> Payment ID : </p>
                         {{ $thisPaymentDetails->paymentID }}<br>
-                        <p> Amount Should Pay : </p>
-                        {{ $thisPaymentDetails->amountShouldPay }}<br>
-                        <p> Payment Date : </p>{{$thisPaymentDetails->paymentDate}}<br>
+                        <p> Payment Date : </p>
+                        @if($thisPaymentDetails->paymentDate != null)
+                        {{$thisPaymentDetails->paymentDate}}<br>
+                        @else
+                        unavailable
+                        @endif
                         <p> Payment Status : </p>
                         @if($thisPaymentDetails->paymentStatus == 'Complete')<br>
                             <p style="color: green;" name="Complete" id="complete" class="paymentStatus">Complete</p><br>
@@ -329,11 +332,10 @@
                         </form>
                     </td>
                     <td>
-                        <p> Payment Receipt : </p>
                         @if($thisPaymentDetails->proofOfPayment == 'unavailable')
-                            <p style="color: red;">Unavailable</p><br>
+                            <p style="color: red;">Payment Receipt Unavailable</p><br>
                         @else
-                            <a href="{{route('downloadPaymentReceipt', $thisPaymentDetails->proofOfPayment)}}">Download</a>
+                            <a href="{{route('downloadPaymentReceipt', $thisPaymentDetails->proofOfPayment)}}" style="text-decoration: none;"><i class="fas fa-download" style="padding: 1% ;"></i>Payment Receipt</a>
                         @endif
                     </td>
                 </tr>

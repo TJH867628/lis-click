@@ -9,6 +9,8 @@ use App\Models\tbl_submission;
 use App\Models\tbl_participants_info;
 use App\Models\tbl_conference;
 use Illuminate\Support\Facades\Storage;
+use App\Mail\paymentConfirmationReceipt;
+use Illuminate\Support\Facades\Mail;
 
 class JKBendahariController extends Controller
 {
@@ -90,16 +92,6 @@ class JKBendahariController extends Controller
                     $participantsInfo = tbl_participants_info::where('email',$participants)->first();
 
                     $paymentDetails[$key]->submissionInfo = $submissionInfo;
-                    if($submissionInfo->submissionType == "Paper Presentation & Publication"){
-                        $tbl_conference = tbl_conference::where('field_details','Presentation & Publication')->first();
-                    }elseif($submissionInfo->submissionType == "Poster / Paper Presentation"){
-                        $tbl_conference = tbl_conference::where('field_details','Poster / Paper Presentation')->first();
-                    }elseif($submissionInfo->submissionType == "Publication Only"){
-                        $tbl_conference = tbl_conference::where('field_details','Publication Only')->first();
-                    }else{
-                        $paymentDetails[$key]->amountShouldPay = "RM 250 / USD 60";
-                    }
-                    $paymentDetails[$key]->amountShouldPay = $tbl_conference->field_value;
                     $paymentDetails[$key]->participantsInfo = $participantsInfo;
                 }
             }
@@ -114,12 +106,21 @@ class JKBendahariController extends Controller
         $paymentDetails->paymentStatus = $paymentStatus;
         $now = now();
         if ($paymentDetails->paymentStatus == 'Complete') {
-            $paymentDetails->confirmPaymentDate = $now->format('Y-m-d H:i:s');
+            $date = $now->format('Y-m-d H:i:s');
+            $paymentDetails->confirmPaymentDate = $date;
+            $this->sendPaymentConfirmationReceipt($paymentDetails->submissionCode,$date); //
         }else{
             $paymentDetails->confirmPaymentDate = NULL;
         }
         $paymentDetails->save();
 
         return redirect()->back()->with('success','Payment Status Updated Successfully');
+    }
+
+    public function sendPaymentConfirmationReceipt($submissionCode,$date){
+        $paymentDetails = tbl_payment::where('submissionCode',$submissionCode)->get();
+        $userEmail = tbl_submission::where('submissionCode',$submissionCode)->first()->participants1;
+        $paymentMail = new paymentConfirmationReceipt($submissionCode,$paymentDetails,$date);
+        Mail::to($userEmail)->send($paymentMail);
     }
 }
