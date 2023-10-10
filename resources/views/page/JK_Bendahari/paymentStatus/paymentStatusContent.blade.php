@@ -293,7 +293,7 @@
             </thead>
             <tbody>
             @foreach($paymentDetails as $thisPaymentDetails)
-                @if(!(empty($thisPaymentDetails->paymentReceipt)))
+                @if(!(empty($thisPaymentDetails->paymentReceipt)) && $thisPaymentDetails->submissionInfo->correctionPhase == "readyForPresent" && $thisPaymentDetails->proofOfPayment != "unavailable")
                 <tr class="payment-row">
                     <td>
                         <p> Submission Code : </p>{{$thisPaymentDetails->submissionCode}}<br>
