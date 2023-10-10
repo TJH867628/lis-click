@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\tbl_account;
 use Illuminate\Http\Request;
 use App\Models\tbl_masterdata;
 use App\Models\tbl_payment;
@@ -119,8 +120,10 @@ class JKBendahariController extends Controller
 
     public function sendPaymentConfirmationReceipt($submissionCode,$date){
         $paymentDetails = tbl_payment::where('submissionCode',$submissionCode)->get();
-        $userEmail = tbl_submission::where('submissionCode',$submissionCode)->first()->participants1;
-        $paymentMail = new paymentConfirmationReceipt($submissionCode,$paymentDetails,$date);
+        $submissionInfo = tbl_submission::where('submissionCode',$submissionCode)->first();
+        $userEmail = $submissionInfo->participants1;
+        $userName = tbl_participants_info::where('email',$userEmail)->first()->name;
+        $paymentMail = new paymentConfirmationReceipt($submissionInfo,$paymentDetails,$date,$userName);
         Mail::to($userEmail)->send($paymentMail);
     }
 }

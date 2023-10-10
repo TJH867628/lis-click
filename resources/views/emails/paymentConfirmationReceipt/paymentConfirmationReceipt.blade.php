@@ -21,9 +21,6 @@
             border-radius: 5px;
         }
 
-        .content {
-            margin-top: 20px;
-        }
         .footer {
             background-color: #343a40;
             color: #ffffff;
@@ -34,7 +31,6 @@
 </head>
 <body>
     <div class="container">
-        @include('emails.header')
         @include('emails.paymentConfirmationReceipt.paymentConfirmationReceiptContent')
     </div>
 

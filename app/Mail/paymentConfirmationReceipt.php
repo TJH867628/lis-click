@@ -12,16 +12,17 @@ use Illuminate\Queue\SerializesModels;
 class paymentConfirmationReceipt extends Mailable
 {
     use Queueable, SerializesModels;
-    public $paymentDetails,$submissionCode,$date;
+    public $paymentDetails,$submissionInfo,$date,$userName;
     /**
      * Create a new message instance.
      */
-    public function __construct($submissionCode,$paymentDetails,$date)
+    public function __construct($submissionInfo,$paymentDetails,$date,$userName)
     {
         //
         $this->paymentDetails = $paymentDetails;
-        $this->submissionCode = $submissionCode;
+        $this->submissionInfo = $submissionInfo;
         $this->date = $date;
+        $this->userName = $userName;
     }
 
     /**
@@ -40,8 +41,9 @@ class paymentConfirmationReceipt extends Mailable
             ->subject('LIS Payment Confirmation Receipt')
             ->with([
                 'paymentDetails' => $this->paymentDetails,
-                'submissionCode' => $this->submissionCode,
+                'submissionCode' => $this->submissionInfo,
                 'date' => $this->date,
+                'userName' => $this->userName,
             ]);
             // ->attach(public_path('images/Logo1 (1).jpg'), [
             //     'as' => 'Logo.jpg',
