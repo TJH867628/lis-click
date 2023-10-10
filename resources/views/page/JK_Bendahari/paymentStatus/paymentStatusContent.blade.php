@@ -349,7 +349,7 @@
             @endforeach
             @if($count == 0)
             <tr>
-                <td colspan="3">
+                <td colspan="3" style="text-align: center; font-weight:bold;">
                     No Payment Receipt Found
                 </td>
             </tr>
