@@ -78,9 +78,12 @@
                     <th>
                         Updated At<br>
                     </th>
+                    <th>
+                      Action
+                    </th>
                 </tr>
                 </thead>
-                @if(isset($admin))
+              @if(isset($admin))
                 <tbody>
                 @foreach($admin as $admin)
                 <tr>
@@ -88,10 +91,9 @@
                     <td>{{ $admin->name }}</td>
                     <td>{{ $admin->phoneNumber }}</td>
                     @if($admin->status === 0)
-                        <td>Deactived</td>
-
+                      <td>Deactived</td>
                     @elseif($admin->status === 1)
-                        <td>Active</td>
+                      <td>Active</td>
                     @endif
                     <td>{{ $admin->adminRole }}</td>
                     <td>{{ $admin->IC_No }}</td>
@@ -137,7 +139,6 @@
       </script>
     <!-- container-scroller -->
     <!-- plugins:js -->
-    <script src="assets/vendors/js/vendor.bundle.base.js"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
     <script src="assets/vendors/chart.js/Chart.min.js"></script>
