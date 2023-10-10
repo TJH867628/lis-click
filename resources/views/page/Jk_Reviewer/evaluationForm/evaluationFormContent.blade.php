@@ -210,6 +210,9 @@
     <input type="radio" class="larger" id="moderate" name="recommendation" value="moderate" <?php echo ($thisdataEvaluationForm->recommendation == "moderate") ? 'checked' : ''; ?> disabled>&nbsp&nbsp&nbspRequires Moderate Revision<br><br>
     <input type="radio" class="larger" id="major" name="recommendation" value="major" <?php echo ($thisdataEvaluationForm->recommendation == "major") ? 'checked' : ''; ?> disabled>&nbsp&nbsp&nbspRequires Major Revision<br><br>
     <input type="radio" class="larger" id="reject" name="recommendation" value="reject" <?php echo ($thisdataEvaluationForm->recommendation == "reject") ? 'checked' : ''; ?> disabled>&nbsp&nbsp&nbspReject On Ground of (Please Be Specific)<br><br>   
+
+    <h2 for="" id="head2" style="text-align: left;">Additional Comment:</h2> <br><br>
+    <textarea name="additional_comments" placeholder="Enter......" maxlength="1500">{{ $thisdataEvaluationForm->additional_comments }}</textarea><br><br>
 </form>
 @endforeach
 
