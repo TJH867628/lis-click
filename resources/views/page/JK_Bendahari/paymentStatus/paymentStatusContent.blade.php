@@ -292,8 +292,14 @@
             </tr>
             </thead>
             <tbody>
+            @php
+                $count = 0;
+            @endphp
             @foreach($paymentDetails as $thisPaymentDetails)
                 @if(!(empty($thisPaymentDetails->paymentReceipt)) && $thisPaymentDetails->submissionInfo->correctionPhase == "readyForPresent" && $thisPaymentDetails->proofOfPayment != "unavailable")
+                @php
+                    $count++;
+                @endphp
                 <tr class="payment-row">
                     <td>
                         <p> Submission Code : </p>{{$thisPaymentDetails->submissionCode}}<br>
@@ -341,6 +347,13 @@
                 </tr>
                 @endif
             @endforeach
+            @if($count == 0)
+            <tr>
+                <td colspan="3">
+                    No Payment Receipt Found
+                </td>
+            </tr>
+            @endif
             </tbody>
         </table>
         </section>
