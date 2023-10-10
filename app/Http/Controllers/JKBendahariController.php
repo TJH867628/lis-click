@@ -7,6 +7,7 @@ use App\Models\tbl_masterdata;
 use App\Models\tbl_payment;
 use App\Models\tbl_submission;
 use App\Models\tbl_participants_info;
+use App\Models\tbl_conference;
 use Illuminate\Support\Facades\Storage;
 
 class JKBendahariController extends Controller
@@ -89,6 +90,16 @@ class JKBendahariController extends Controller
                     $participantsInfo = tbl_participants_info::where('email',$participants)->first();
 
                     $paymentDetails[$key]->submissionInfo = $submissionInfo;
+                    if($submissionInfo->submissionType == "Paper Presentation & Publication"){
+                        $tbl_conference = tbl_conference::where('field_details','Presentation & Publication')->first();
+                    }elseif($submissionInfo->submissionType == "Poster / Paper Presentation"){
+                        $tbl_conference = tbl_conference::where('field_details','Poster / Paper Presentation')->first();
+                    }elseif($submissionInfo->submissionType == "Publication Only"){
+                        $tbl_conference = tbl_conference::where('field_details','Publication Only')->first();
+                    }else{
+                        $paymentDetails[$key]->amountShouldPay = "RM 250 / USD 60";
+                    }
+                    $paymentDetails[$key]->amountShouldPay = $tbl_conference->field_value;
                     $paymentDetails[$key]->participantsInfo = $participantsInfo;
                 }
             }

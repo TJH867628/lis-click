@@ -382,6 +382,7 @@
             width: max-content;
         }
 </style>
+
 <main class="table">
 @if($userSubmissionInfo)
 @php
@@ -689,7 +690,7 @@ $count = 0;
                                 </tr>
                             </table>
                             @if(( $allComplete === false))
-                                <button onclick="showPopup()" style="margin: auto;">Show Payment Method</button>
+                                <button onclick="showPopup()" id="showPaymentMethod" style="margin: auto;">Show Payment Method</button>
 
                         <form style="width: fit-content;" action="{{ route('uploadReceipt', ['submissionCode' => $submissionInfo->submissionCode]) }}" method="POST" enctype="multipart/form-data" class="file-upload-form">
                             @csrf
@@ -723,27 +724,7 @@ $count = 0;
         </section>
     </main>
         <script>
-            function showPopup() {
-            // Create a new window
-            var popup = window.open("", "Payment QR", "width=400,height=400");
-            popup.document.write("<head><title>Payment</title></head>");
-            // Add styles
-            popup.document.write("<style>");
-            popup.document.write("body { font-family: Arial, sans-serif; text-align: center; background-color: #f2f2f2; }");
-            popup.document.write("h1 { color: #333; font-size: 24px; margin-top: -20px; }");
-            popup.document.write("img { height: 250px; width: 250px; margin: 0px auto; display: block; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); }");
-            popup.document.write("label { color: #555; font-size: 18px; margin-top: 10px; display: block; }");
-            popup.document.write("</style>");
-
-            // Add content
-            popup.document.write("<body>");
-            popup.document.write("@if(empty($paymentQR))<h1>Payment QR is not available, please contact customer service</h1>@else @if($paymentQR->masterdata_value != NULL) <img src='{{ asset('paymentQR/'.$paymentQR->masterdata_value) }}'><br> @endif @if($paymentQR->masterdata_details != NULL)<label>{{ $paymentQR->masterdata_details }}</label><br>@endif @if($paymentQR->masterdata_value == NULL && $paymentQR->masterdata_details == NULL) Payment QR is not available, please contact customer service @endif @endif");
-            popup.document.write("@if(empty($paymentQR->masterdata_value))@else <label style='color: red; font-weight: bold;'>Please save your receipt for upload</label>@endif");
-            popup.document.write("</body>");
-
-            // Center the window on the screen
-            popup.moveTo((screen.width - popup.outerWidth) / 2, (screen.height - popup.outerHeight) / 2);
-        }
+            
 
             // Get all submission code links
             const submissionCodeLinks = document.querySelectorAll('.submission-code');

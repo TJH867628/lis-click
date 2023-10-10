@@ -304,15 +304,16 @@
                     <td>
                         <p> Payment ID : </p>
                         {{ $thisPaymentDetails->paymentID }}<br>
+                        <p> Amount Should Pay : </p>
+                        {{ $thisPaymentDetails->amountShouldPay }}<br>
+                        <p> Payment Date : </p>{{$thisPaymentDetails->paymentDate}}<br>
                         <p> Payment Status : </p>
                         @if($thisPaymentDetails->paymentStatus == 'Complete')<br>
                             <p style="color: green;" name="Complete" id="complete" class="paymentStatus">Complete</p><br>
-                            <p> Payment Date : </p>{{$thisPaymentDetails->paymentDate}}<br>
                             <p> Confirm Payment Date : </p>{{$thisPaymentDetails->confirmPaymentDate}}<br>
                         @elseif($thisPaymentDetails->paymentStatus == 'Pending For Verification')
                             <p style="color: orange;" name="Pending" id="pending" class="paymentStatus">{{$thisPaymentDetails->paymentStatus}}</p><br>
                         @else
-                            <p> Payment Date : </p>{{ $thisPaymentDetails->paymentDate }}<br>
                             <p style="color: red;" name="Incomplete" id="incomplete" class="paymentStatus">{{$thisPaymentDetails->paymentStatus}}</p><br>
                         @endif
                         <form action="{{ route('paymentStatusControl', ['paymentID' => $thisPaymentDetails->paymentID]) }}" method="POST">
