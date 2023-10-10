@@ -21,7 +21,7 @@ return new class extends Migration
                 'pageName' => 'Payment Confirmation Receipt',
                 'pagePath' => 'emails.paymentConfirmationReceipt.paymentConfirmationReceiptContent',
                 'pageType' => 'email',
-                'editable' => true,
+                'editable' => false,
                 'createdAt' => now(),
                 'updatedAt' => now(),
             ],
