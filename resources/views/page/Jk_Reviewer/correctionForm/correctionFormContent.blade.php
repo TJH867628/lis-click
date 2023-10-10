@@ -685,7 +685,6 @@
         <a href="{{ route('unDoneCorrection', ['submissionCode' => $submission->submissionCode]) }}" class="btn btn-primary mb-4" style="margin-top: 2%; float:none;"><i class="fas fa-undo"></i>Undone Submission</a>
     @endif
 @endif
-        
     </section>
     </main>
     <div id="popup">
