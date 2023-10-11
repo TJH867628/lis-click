@@ -762,7 +762,7 @@
                         </tr>
                     </table>
                     <button type="submit" style="float:none;" class="btn btn-primary mb-4">Submit</button>
-                @else if($latestReturnCorrection->returnCorrectionLink != NULL)
+                @else
                     <table>
                     <tr>
                                 <td>
@@ -824,7 +824,11 @@
                                 Return File
                             </td>
                             <td>
-                            <a href="{{ route('downloadReturnCorrection', ['filename' => $latestReturnCorrection->returnCorrectionLink]) }}" class="btn btn-primary mb-4">Download Return File</a>
+                            @if($latestReturnCorrection->returnCorrectionLink != NULL)
+                                <a href="{{ route('downloadReturnCorrection', ['filename' => $latestReturnCorrection->returnCorrectionLink]) }}" class="btn btn-primary mb-4">Download Return File</a>
+                            @else
+                                Pending For Participants to Upload
+                            @endif
                             </td>
                         </tr>
                         <tr>
