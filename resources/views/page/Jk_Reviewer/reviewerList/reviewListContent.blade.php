@@ -432,12 +432,12 @@
                             </td>
                             <td>
                                 <p>Download Submission File</p>
-                                <a href="{{ route('downloadSubmission', ['filename' => $submissionInfo->file_name]) }}" class="btn btn-primary mb-4"><i class="fa-solid fa-download" style="padding: 5px;"></i>Download Orginal File</a>
+                                <a href="{{ route('downloadSubmission', ['filename' => $submissionInfo->file_name]) }}" target="_blank" class="btn btn-primary mb-4"><i class="fa-solid fa-download" style="padding: 5px;"></i>Download Orginal File</a>
                                 <p>Reviewed File</p>
                                 @if($submissionInfo->returnPaperLink == NULL)
                                     <p class="status cancelled">Return Paper Unavailable</p>
                                 @else
-                                    <a href="{{ route('downloadReviewedFile', ['filename' => $submissionInfo->returnPaperLink]) }}" class="btn btn-primary mb-4"><i class="fa-solid fa-download" style="padding: 5px;"></i>Download Return File</a>
+                                    <a href="{{ route('downloadReviewedFile', ['filename' => $submissionInfo->returnPaperLink]) }}" target="_blank" class="btn btn-primary mb-4"><i class="fa-solid fa-download" style="padding: 5px;"></i>Download Return File</a>
                                 @endif
                             </td>
 
@@ -449,13 +449,13 @@
                                     <a href="{{ route('evaluationForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4" style="float:left;"><i class="fas fa-calculator" style="padding: 5px; "></i>Evaluate Form</a><br>
                                 @endif
                                 @if($submissionInfo->evaluationFormLink != NULL)
-                                    <a href="{{ route('downloadEvaluationForm', ['filename' => $submissionInfo->evaluationFormLink]) }}" class="btn btn-primary mb-4" style="float:left;"><i class="fa-solid fa-download" style="padding: 5px;"></i>Evaluate Form(Reviewer 1)</a><br>
+                                    <a href="{{ route('downloadEvaluationForm', ['filename' => $submissionInfo->evaluationFormLink]) }}" target="_blank" class="btn btn-primary mb-4" style="float:left;"><i class="fa-solid fa-download" style="padding: 5px;"></i>Evaluate Form(Reviewer 1)</a><br>
                                 @else
                                     <label style="padding:1%;" class="status cancelled"><strong>Reviewer 1</strong>'s Evaluation Form haven't submitted </label><br>
                                 @endif
                                 @if($submissionInfo->reviewer2ID != null)
                                     @if($submissionInfo->evaluationFormLink2 != NULL)
-                                        <a href="{{ route('downloadEvaluationForm', ['filename' => $submissionInfo->evaluationFormLink2]) }}" class="btn btn-primary mb-4" style="float:left;"><i class="fa-solid fa-download" style="padding: 5px;"></i>Evaluate Form(Reviewer 2)</a><br>
+                                        <a href="{{ route('downloadEvaluationForm', ['filename' => $submissionInfo->evaluationFormLink2]) }}" target="_blank" class="btn btn-primary mb-4" style="float:left;"><i class="fa-solid fa-download" style="padding: 5px;"></i>Evaluate Form(Reviewer 2)</a><br>
                                     @else
                                         <label style="padding:1%;" class="status cancelled"><strong>Reviewer 2</strong>'s Evaluation Form haven't submitted</label><br>
                                     @endif
@@ -465,7 +465,7 @@
                             <td>
                                 @if($submissionInfo->turnInReport)
                                 <div class="downloadturnin">
-                                    <a href="{{ route('downloadTurnInReport', ['filename' => $submissionInfo->turnInReport]) }}" class="btn btn-primary mb-4"><i class="fa-solid fa-download" style="padding: 5px;"></i>Download Turn In Report</a>
+                                    <a href="{{ route('downloadTurnInReport', ['filename' => $submissionInfo->turnInReport]) }}" target="_blank" class="btn btn-primary mb-4"><i class="fa-solid fa-download" style="padding: 5px;"></i>Download Turn In Report</a>
                                 </div>
                                 @endif
                                 <form action="{{ route('uploadTurnInReport',['submissionCode' => $submissionInfo->submissionCode]) }}" method="POST" enctype="multipart/form-data" class="formturnin">
