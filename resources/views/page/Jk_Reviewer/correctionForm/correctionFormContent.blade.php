@@ -674,9 +674,9 @@
     </table>
     @endif
     @if($submission->correctionPhase == 'pending')
-        <a href="{{ route('doneCorrection', ['submissionCode' => $thisCorrection->submissionCode]) }}" class="btn btn-primary mb-4" style="margin-top: 2%; float:none;"><i class="fas fa-check"></i>Done Submission</a>
+        <a href="{{ route('doneCorrection', ['submissionCode' => $correction->submissionCode]) }}" class="btn btn-primary mb-4" style="margin-top: 2%; float:none;"><i class="fas fa-check"></i>Done Submission</a>
         @elseif($submission->correctionPhase == 'readyForPresent')
-        <a href="{{ route('unDoneCorrection', ['submissionCode' => $thisCorrection->submissionCode]) }}" class="btn btn-primary mb-4" style="margin-top: 2%; float:none;"><i class="fas fa-undo"></i>Undone Submission</a>
+        <a href="{{ route('unDoneCorrection', ['submissionCode' => $correction->submissionCode]) }}" class="btn btn-primary mb-4" style="margin-top: 2%; float:none;"><i class="fas fa-undo"></i>Undone Submission</a>
     @elseif($submission->correctionPhase == 'readyForPresent')
         <h5>Correction Phase is Done</h5>
         @if($submission->correctionPhase == 'pending')
@@ -693,7 +693,7 @@
                 @if($submission->correctionPhase == 'pending')
                 <form action="{{ route('uploadNewCorrection', ['submissionCode' => $submission->submissionCode]) }}" method="post">
                     @csrf
-                    @if(!$thisCorrection)
+                    @if(!$correction)
                         <h5>First Time Correction</h5>
                         <table>
                             <tr>
