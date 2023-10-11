@@ -48,7 +48,7 @@
           <form action="registerAdmin" method="post">
                 @csrf
                 <div class="form-group">
-                    <label for="role">Role</label>
+                    <label for="role">Role :</label>
                     <select class="form-control" name="role" id="role">
                         @foreach($adminRole as $role)
                             <option value="{{$role->roletype}}">{{$role->roletype}}</option>
@@ -57,7 +57,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="email">Email</label>
+                    <label for="email">Email :</label>
                     <input type="text" name="email" id="email" class="form-control" placeholder="Email Address" required>
                     @if($message = Session::get('error'))
                         <span class="error">{{ $message }}</span>
@@ -65,32 +65,32 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="name">Full Name</label>
+                    <label for="name">Full Name :</label>
                     <input type="text" name="name" id="name" class="form-control" placeholder="Name" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="IC_No">IC Number</label>
+                    <label for="IC_No">IC Number :</label>
                     <input type="text" name="IC_No" id="IC_No" class="form-control" placeholder="Enter IC Number" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="phoneNumber">Phone Number</label>
+                    <label for="phoneNumber">Phone Number :</label>
                     <input type="text" name="phoneNumber" id="phoneNumber" class="form-control" placeholder="Phone Number">
                 </div>
 
                 <div class="form-group">
-                    <label for="salutation">Salutation</label>
+                    <label for="salutation">Salutation :</label>
                     <input type="text" name="salutation" id="salutation" class="form-control" placeholder="Dr./Mr/Mrs">
                 </div>
 
                 <div class="form-group">
-                    <label for="organizationName">Organization Name</label>
+                    <label for="organizationName">Organization Name :</label>
                     <input type="text" name="organizationName" id="organizationName" class="form-control" placeholder="Organization Name">
                 </div>
 
                 <div class="form-group">
-                    <label for="password">Password</label>
+                    <label for="password">Password :</label>
                     <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
                 </div>
                 

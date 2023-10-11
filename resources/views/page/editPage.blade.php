@@ -86,8 +86,8 @@
   </style>
   
   <body style="background-color: white; text-align:center;">
-<a href="/pageList">Page List</a>
-<h3 style="margin-top: 5%; color:black; text-align:center;"> Page Name: <p style="justify-content: center; color:grey; font-weight:normal;">{{ $pageName }}</p></h3>
+<a id="originalBuild" href="/pageList">Page List</a>
+<h3 style="margin-top: 2%; color:black; text-align:center;"> Page Name: <p style="justify-content: center; color:grey; font-weight:normal;">{{ $pageName }}</p></h3>
 <!-- page.blade.php -->
 <form id="editForm" action="{{ route('saveEdit', ['pageName' => $pageName]) }}" method="POST" enctype="multipart/form-data">
   @csrf
