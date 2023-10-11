@@ -535,9 +535,9 @@
                             <button type="submit"><i class="fas fa-save" style="padding: 5px;"></i>Save</button>
                             
                             @if ($hasGroup != 0)
-                            <button class="deleteButton"><a href="{{ route('deleteSchedule',['group'=>$eachSchedule->presentationGroup]) }}" onclick="return showSecondConfirm(<?php echo $hasGroup ?>)" style="text-decoration: none; color: #fff;"><i class="fas fa-trash-alt" style="padding: 5px;"></i> Delete</a></button>
+                            <button class="deleteButton" type="button"><a href="{{ route('deleteSchedule',['group'=>$eachSchedule->presentationGroup]) }}" onclick="return showSecondConfirm(<?php echo $hasGroup ?>)" style="text-decoration: none; color: #fff;"><i class="fas fa-trash-alt" style="padding: 5px;"></i> Delete</a></button>
                             @else
-                            <button class="deleteButton"><a href="{{ route('deleteSchedule',['group'=>$eachSchedule->presentationGroup]) }}" onclick="return confirm('Are you sure you want to delete this schedule?')" style="text-decoration: none; color: #fff;"><i class="fas fa-trash-alt" style="padding: 5px;"></i> Delete</a></button>
+                            <button class="deleteButton" type="button"><a href="{{ route('deleteSchedule',['group'=>$eachSchedule->presentationGroup]) }}" onclick="return confirm('Are you sure you want to delete this schedule?')" style="text-decoration: none; color: #fff;"><i class="fas fa-trash-alt" style="padding: 5px;"></i> Delete</a></button>
                             @endif
                         </td>
                         <script>
