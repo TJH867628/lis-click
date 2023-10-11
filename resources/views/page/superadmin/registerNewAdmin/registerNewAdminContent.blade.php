@@ -45,40 +45,56 @@
         <!-- partial -->
         <div class="main-panel" id="mainPanel" style="margin-left: 260px;">
           <div class="content-wrapper">
-            <form  action="registerAdmin" method="post" style>
+          <form action="registerAdmin" method="post">
                 @csrf
-                <label for="role" class="role">Role</label><br>
-                <select name="role" id="role">
-                    @foreach($adminRole as $role)
-                        <option value="{{$role->roletype}}">{{$role->roletype}}</option>
-                    @endforeach
-                </select>
+                <div class="form-group">
+                    <label for="role">Role</label>
+                    <select class="form-control" name="role" id="role">
+                        @foreach($adminRole as $role)
+                            <option value="{{$role->roletype}}">{{$role->roletype}}</option>
+                        @endforeach
+                    </select>
+                </div>
 
-                <br><label for="email" class="">Email</label><br>
-                <input type="text" name="email" id="email" class="register" placeholder="Email Address" required><br>
-                @if($message = Session::get('error'))
-                    <span class="error">{{ $message }}</span><br>
-                @endif
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" name="email" id="email" class="form-control" placeholder="Email Address" required>
+                    @if($message = Session::get('error'))
+                        <span class="error">{{ $message }}</span>
+                    @endif
+                </div>
 
-                <label for="name" class="register">Full Name</label><br>
-                <input type="text" name="name" id="name" class="register" placeholder="Name" required><br>
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" name="name" id="name" class="form-control" placeholder="Name" required>
+                </div>
 
-                <label for="IC_No" class="register">IC Number</label><br>
-                <input type="text" name="IC_No" id="IC_No" class="register" placeholder="Enter IC Number" required><br>
+                <div class="form-group">
+                    <label for="IC_No">IC Number</label>
+                    <input type="text" name="IC_No" id="IC_No" class="form-control" placeholder="Enter IC Number" required>
+                </div>
 
-                <label for="phoneNumber" class="register">Phone Number</label><br>
-                <input type="text" name="phoneNumber" id="phoneNumber" placeholder="Phone Number"><br>
+                <div class="form-group">
+                    <label for="phoneNumber">Phone Number</label>
+                    <input type="text" name="phoneNumber" id="phoneNumber" class="form-control" placeholder="Phone Number">
+                </div>
 
-                <label for="title" class="register">Salutation</label><br>
-                <input type="text" name="salutation" id="salutation" placeholder="Dr./Mr/Mrs"><br>
+                <div class="form-group">
+                    <label for="salutation">Salutation</label>
+                    <input type="text" name="salutation" id="salutation" class="form-control" placeholder="Dr./Mr/Mrs">
+                </div>
+
+                <div class="form-group">
+                    <label for="organizationName">Organization Name</label>
+                    <input type="text" name="organizationName" id="organizationName" class="form-control" placeholder="Organization Name">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
+                </div>
                 
-                <label for="title" class="register">Organization Name</label><br>
-                <input type="text" name="organizationName" id="organizationName" placeholder="Organization Name"><br>
-
-                <label for="password" class="register">Password</label><br>
-                <input type="password" name="password" id="password" class="register" placeholder="Password" required><br><br>
-                
-                <button type="submit" class="register" name="signUp">Sign Up</button>
+                <button type="submit" class="btn btn-primary" name="signUp">Sign Up</button>
             </form>
           </div>
           <!-- content-wrapper ends -->
