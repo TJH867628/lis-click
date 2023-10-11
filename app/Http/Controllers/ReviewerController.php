@@ -204,7 +204,7 @@ class ReviewerController extends Controller
                     $dataEvaluationForm = tbl_evaluation_form::where('paper_id_number', $submissionCode)
                     ->where('reviewer_name', $reviewer->name)
                     ->first();
-                    return view('page.reviewer.evaluationForm.evaluationForm',['dataEvaluationForm' => $dataEvaluationForm]);
+                    return view('page.reviewer.evaluationForm.evaluationForm',['dataEvaluationForm' => $dataEvaluationForm , 'year' => $year]);
                 }
             }elseif($submissionInfo->reviewer2ID != null){
                 $dataEvaluationForm = tbl_evaluation_form::where('paper_id_number', $submissionCode)
@@ -212,7 +212,7 @@ class ReviewerController extends Controller
                     ->first();
                 if($dataEvaluationForm){
                     
-                    return view('page.reviewer.evaluationForm.evaluationForm',['dataEvaluationForm' => $dataEvaluationForm]);
+                    return view('page.reviewer.evaluationForm.evaluationForm',['dataEvaluationForm' => $dataEvaluationForm , 'year' => $year]);
                 }else{
                     $data = array(
                         'reviewer_name' => $reviewer->name,
@@ -242,7 +242,7 @@ class ReviewerController extends Controller
                     $dataEvaluationForm = tbl_evaluation_form::where('paper_id_number', $submissionCode)
                     ->where('reviewer_name', $reviewer->name)
                     ->first();
-                    return view('page.reviewer.evaluationForm.evaluationForm',['dataEvaluationForm' => $dataEvaluationForm]);
+                    return view('page.reviewer.evaluationForm.evaluationForm',['dataEvaluationForm' => $dataEvaluationForm , 'year' => $year]);
                 }
             }
         }elseif(session()->has("LoggedJKReviewer")){
