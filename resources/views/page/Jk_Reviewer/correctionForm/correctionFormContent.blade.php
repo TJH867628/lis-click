@@ -671,7 +671,7 @@
             </tr>
             @endforeach
         </tbody>
-    </table>
+
 @else
 <tr>
     <td colspan="4">
@@ -695,6 +695,7 @@
     @endif
     </td>
 </tr>
+</table>
     </section>
     </section>
     </main>
