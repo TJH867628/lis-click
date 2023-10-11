@@ -416,6 +416,9 @@
                                     @endif
                                 @elseif($submissionInfo->reviewer2ID === $reviewername)
                                     @if($submissionInfo->evaluationFormLink2)
+                                    @php
+                                            $count++;
+                                        @endphp
                                     <tr>
                                         <td>{{ $submissionInfo->submissionCode }}</td>
                                         <td>{{ $submissionInfo->submissionTitle }}</td>
@@ -439,6 +442,9 @@
                             @else
                                @if($submissionInfo->reviewerID === $reviewername)
                                     @if($submissionInfo->evaluationFormLink)
+                                    @php
+                                            $count++;
+                                        @endphp
                                         <tr>
                                             <td>{{ $submissionInfo->submissionCode }}</td>
                                             <td>{{ $submissionInfo->submissionTitle }}</td>
