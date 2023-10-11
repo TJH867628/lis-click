@@ -696,6 +696,7 @@
     </td>
 </tr>
     </section>
+    </section>
     </main>
     <div id="popup">
             <div id="popup-content">
@@ -760,12 +761,6 @@
                         </table>
                         <button type="submit" style="margin-right: 700px;" class="btn btn-primary mb-4">Submit</button>
                     <br><br><br>
-                    @if($submission->correctionPhase == 'pending')
-                        <a href="{{ route('doneCorrection', ['submissionCode' => $submission->submissionCode]) }}" class="btn btn-primary mb-4">Done Submission</a>
-                    @elseif($submission->correctionPhase == 'done')
-                        <a href="{{ route('unDoneCorrection', ['submissionCode' => $submission->submissionCode]) }}" class="btn btn-primary mb-4">Undone Submission</a>
-                    @endif
-                    @elseif(isset($latestReturnCorrection->returnCorrectionLink) && $latestReturnCorrection->returnCorrectionLink != NULL)
                     <table>
                         <tr>
                             <td>
