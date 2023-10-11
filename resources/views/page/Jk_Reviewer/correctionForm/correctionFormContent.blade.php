@@ -878,7 +878,7 @@
                             </td>
                         </tr>
                     </table>
-                    <button type="submit" style="margin-right: 700px;" class="btn btn-primary mb-4">Submit</button>
+                    <button type="submit" style="float:none;" class="btn btn-primary mb-4">Submit</button>
                 @endif
                 </form>
                 @elseif($submission->correctionPhase == 'done')
