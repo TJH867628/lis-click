@@ -341,7 +341,7 @@
                         @if($thisPaymentDetails->proofOfPayment == 'unavailable')
                             <p style="color: red;">Payment Receipt Unavailable</p><br>
                         @else
-                            <a href="{{route('downloadPaymentReceipt', $thisPaymentDetails->proofOfPayment)}}" style="text-decoration: none;"><i class="fas fa-download" style="padding: 1% ;"></i>Payment Receipt</a>
+                            <a href="{{route('downloadPaymentReceipt', $thisPaymentDetails->proofOfPayment)}}" style="text-decoration: none;" target="_blank"><i class="fas fa-download" style="padding: 1% ;"></i>Payment Receipt</a>
                         @endif
                     </td>
                 </tr>
