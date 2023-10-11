@@ -622,10 +622,9 @@
     </style>
 </head>
 <body>
-@if($correction->isNotEmpty())
 <main class="table">
-    <section class="table__header">
-        <h1>Correction History</h1>
+<section class="table__header">
+<h1>Correction History</h1>
         <button onclick="openPopup()" id="addButton">
             <div class="d-flex justify-content-center align-items-center">
                 <i class="material-icons text-center">add</i>
@@ -650,6 +649,7 @@
                     </th>
                 </tr>
             </thead>
+@if($correction->isNotEmpty())
             <tbody>
         @foreach($correction as $thisCorrection)
             <tr>
@@ -684,6 +684,12 @@
         @elseif($submission->correctionPhase == 'readyForPresent')
         <a href="{{ route('unDoneCorrection', ['submissionCode' => $submission->submissionCode]) }}" class="btn btn-primary mb-4" style="margin-top: 2%; float:none;"><i class="fas fa-undo"></i>Undone Submission</a>
     @endif
+@else
+<tr>
+    <td colspan="4">
+        No Record Found
+    </td>
+</tr>
 @endif
     </section>
     </main>
