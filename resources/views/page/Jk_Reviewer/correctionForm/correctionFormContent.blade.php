@@ -705,7 +705,7 @@
                 @if($submission->correctionPhase == 'pending')
                 <form action="{{ route('uploadNewCorrection', ['submissionCode' => $submission->submissionCode]) }}" method="post">
                     @csrf
-                    @if(!$correction)
+                    @if($correction == null)
                         <h5>First Time Correction</h5>
                         <table>
                             <tr>
@@ -815,7 +815,7 @@
                         </tr>
                     </table>
                     <button type="submit" style="margin-right: 700px;" class="btn btn-primary mb-4">Submit</button>
-                    @else
+                @else
                     <table>
                         <tr>
                             <td>
