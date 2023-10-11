@@ -46,7 +46,7 @@
         }
         
         th, td {
-            padding: 8px;
+            padding: 10px;
             border: 1px solid #ccc;
             text-align: left;
         }
@@ -121,6 +121,7 @@
                 <h2>POLITEKNIK MERSING (PMJ) JOHOR</h2><br>
                 <h1>EVALUATION FORM</h1>
             </div>
+            
 
             <div id="paper-details">
                 <table>
@@ -151,46 +152,21 @@
                 $count++;
             @endphp
             <div class="page-break"></div>
-            <div id="comment">
-                <table class="comment">
-                    <tr>
-                        <th colspan="4" style="font-size: small;">
-                            <h3>Comments per Section of Manuscript</h3>
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>Abstract:</th>
-                        <td><textarea name="comments_abstract" readonly>{{ $thisdataEvaluationForm->comments_abstract }}</textarea></td>
-
-                    </tr>
-                    <tr>
-                        <th><span>Introduction:</span></th>
-                        <td><textarea name="comments_introduction" readonly>{{ $thisdataEvaluationForm->comments_introduction }}</textarea></td>
-
-                    </tr>
-                    <tr>
-                        <th><span>Literature Review:</span></th>
-                        <td><textarea name="comments_literature_review" readonly>{{ $thisdataEvaluationForm->comments_literature_review }}</textarea></td>
-
-                    </tr>
-                    <tr>
-                        <th><span>References:</span></th>
-                        <td><textarea name="comments_references" readonly>{{ $thisdataEvaluationForm->comments_references }}</textarea></td>
-                    </tr>
-                    <tr>
-                        <th><span>Methodology:</span></th>
-                        <td><textarea name="comments_methodology" readonly>{{ $thisdataEvaluationForm->comments_methodology }}</textarea></td>
-                    </tr>
-                    <tr>
-                        <th><span>Results:</span></th>
-                        <td><textarea name="comments_results" readonly>{{ $thisdataEvaluationForm->comments_results }}</textarea></td>
-                    </tr>
-                    <tr>
-                        <th><span>Discussion:</span></th>
-                        <td><textarea name="comments_discussion" readonly>{{ $thisdataEvaluationForm->comments_discussion }}</textarea></td>
-                    </tr>
-                </table>
-            </div>
+            <h1>Comments per Section of Manuscript</h1>
+            <h2 for="" id="head2" style="text-align: left;">Abstract:</h2>
+            <textarea name="additional_comments" placeholder="Enter......" maxlength="1500" style="font-size:13px;" >{{ $thisdataEvaluationForm->comments_abstract }}</textarea><br><br>
+            <h2 for="" id="head2" style="text-align: left;">Introduction:</h2>
+            <textarea name="additional_comments" placeholder="Enter......" maxlength="1500" style="font-size:13px;" >{{ $thisdataEvaluationForm->comments_introduction }}</textarea><br><br>
+            <h2 for="" id="head2" style="text-align: left;">Literature Review:</h2>
+            <textarea name="additional_comments" placeholder="Enter......" maxlength="1500" style="font-size:13px;" >{{ $thisdataEvaluationForm->comments_literature_review }}</textarea><br><br>
+            <h2 for="" id="head2" style="text-align: left;">References:</h2>
+            <textarea name="additional_comments" placeholder="Enter......" maxlength="1500" style="font-size:13px;" >{{ $thisdataEvaluationForm->comments_references }}</textarea><br><br>
+            <h2 for="" id="head2" style="text-align: left;">Methodology:</h2>
+            <textarea name="additional_comments" placeholder="Enter......" maxlength="1500" style="font-size:13px;" >{{ $thisdataEvaluationForm->comments_methodology }}</textarea><br><br>
+            <h2 for="" id="head2" style="text-align: left;">Results:</h2>
+            <textarea name="additional_comments" placeholder="Enter......" maxlength="1500" style="font-size:13px;" >{{ $thisdataEvaluationForm->comments_results }}</textarea><br><br>
+            <h2 for="" id="head2" style="text-align: left;">Discussion:</h2>
+            <textarea name="additional_comments" placeholder="Enter......" maxlength="1500" style="font-size:13px;" >{{ $thisdataEvaluationForm->comments_discussion }}</textarea><br><br>
             <div class="page-break"></div>
             <div id="rating">
                 <table>

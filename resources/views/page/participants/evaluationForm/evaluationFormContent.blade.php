@@ -276,9 +276,11 @@
             </table>
 
             <label for="" id="head2">Additional Comment</label> <br><br>
-            <textarea name="additional_comments" placeholder="Enter......" maxlength="1500">{{ $dataEvaluationForm->additional_comments }}</textarea><br><br>
+            <textarea name="additional_comments" placeholder="Enter......" maxlength="1500">{{ $thisdataEvaluationForm->additional_comments }}</textarea><br><br>
         </div>
-
+        @if($count == 2)
+        <div class="page-break"></div>
+        @endif
         @endforeach
     </div>
 </body>
