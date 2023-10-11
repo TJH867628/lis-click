@@ -755,7 +755,7 @@
                     @elseif($submission->correctionPhase == 'done')
                         <a href="{{ route('unDoneCorrection', ['submissionCode' => $submission->submissionCode]) }}" class="btn btn-primary mb-4">Undone Submission</a>
                     @endif
-                    @elseif($latestReturnCorrection->returnCorrectionLink != NULL)
+                    @elseif(isset($latestReturnCorrection->returnCorrectionLink) && $latestReturnCorrection->returnCorrectionLink != NULL)
                     <table>
                         <tr>
                             <td>
