@@ -259,12 +259,12 @@
 
                                                 <div class="form-group col-md-4 pe-5" >
                                                     <label for="password1">Password:</label>
-                                                    <input type="password" name="password1" id="password1" class="form-control password" placeholder="Password" minlength="6" maxlength="30" required="required">
+                                                    <input type="password" name="password1" id="password1" class="form-control password" placeholder="Password" minlength="8" maxlength="30" required="required">
                                                 </div>
 
                                                 <div class="form-group col-md-4 pe-5" >
                                                     <label for="password2">Confirm Password:</label>
-                                                    <input type="password" name="password2" id="password2" class="form-control password" placeholder="Please Confirm Your Password" minlength="6" maxlength="30" required="required">
+                                                    <input type="password" name="password2" id="password2" class="form-control password" placeholder="Please Confirm Your Password" minlength="8" maxlength="30" required="required">
                                                     <i style="margin-top:3%;" class="bi-eye password-toggle" id="togglePassword1" style="color: black;"></i>
                                                     <span id="password2Error" class="text-danger" style="display: none;"></span>
                                                 </div>
