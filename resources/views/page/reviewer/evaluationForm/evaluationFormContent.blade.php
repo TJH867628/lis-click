@@ -231,7 +231,7 @@
         <textarea name="additional_comments" placeholder="Enter......" maxlength="1500">{{ $dataEvaluationForm->additional_comments }}</textarea><br><br>
         <div id="btnAction">
             <button type="submit"><h3><i class="fa-solid fa-save" style="padding: 5px;"></i>Submit</h3></button>
-            <a href="{{ route('generatePDFEvaluationForm' , ['id' => $dataEvaluationForm->id ]) }}" id="btnGeneratePdf"><h3><i class="fa-solid fa-save" style="padding: 5px;"></i>Generate PDF</h3></a>
+            <a href="{{ route('generatePDFEvaluationForm' , ['id' => $dataEvaluationForm->id ]) }}" target="_blank" id="btnGeneratePdf"><h3><i class="fa-solid fa-save" style="padding: 5px;"></i>Generate PDF</h3></a>
         </div>
         
     </form>

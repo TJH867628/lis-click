@@ -256,7 +256,7 @@ class ReviewerController extends Controller
             $logo_lis = public_path('images/Logo1 (1).png');
             $logo_pmj = public_path('images/logo_PMJ.png');
             $pdf = PDF::loadView('page.participants.evaluationForm.evaluationFormContent',['dataEvaluationForm' => $dataEvaluationForm,'year' => $year,'logo_lis' => $logo_lis,'logo_pmj' => $logo_pmj]);
-            return response($pdf->stream('evaluationForm.pdf'))->header('Content-Type', 'application/pdf');
+            return response($pdf->stream('evaluationForm.pdf'))->header('Content-Type', 'application/pdf')->header('target', '_blank');
 
         }else{
             return redirect('login')->with('fail','Login Session Expire,Please Login again');
@@ -282,7 +282,7 @@ class ReviewerController extends Controller
             $pdf = PDF::loadView('page.reviewer.evaluationFormPdfTemplate.evaluationFormPdfTemplateContent',['dataEvaluationForm' => $dataEvaluationForm,'year' => $year,'logo_lis' => $logo_lis,'logo_pmj' => $logo_pmj]);
         }
        
-        return response($pdf->stream('evaluationForm.pdf'))->header('Content-Type', 'application/pdf');
+        return response($pdf->stream('evaluationForm.pdf'))->header('Content-Type', 'application/pdf')->header('target', '_blank');
     }
 
     public function submitEvaluationForm(Request $request,$submissionCode){
