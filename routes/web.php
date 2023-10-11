@@ -135,3 +135,6 @@ Route::post('/registration/emailVerification',[RegistrationController::class,'OT
 Route::post('/registration/validateOTP',[RegistrationController::class,'confirmOTP'])->name('emailVerification-confirmOTP');
 Route::post('faq/submit',[FaqController::class, 'sendFaq'])->name('sendEmailContactUs');
 Route::get('evaluationForm/generatePDFEvaluationForm/{id}',[ReviewerController::class, 'generatePDFEvaluationForm'])->name('generatePDFEvaluationForm');
+Route::post('/superadmin/pageList/conferencesDownload/editExistingConferencesFees/{id}', [ConferencesController::class, 'editExistingConferencesFees'])->name('editExistingConferencesFees');
+Route::post('/superadmin/pageList/conferencesDownload/editExistingConferencesDate/{id}', [ConferencesController::class, 'editExistingConferencesDate'])->name('editExistingConferencesDate');
+Route::post('/superadmin/pageList/conferencesDownload/addNewConferencesDate', [ConferencesController::class, 'addNewConferencesDate'])->name('addNewConferencesDate');

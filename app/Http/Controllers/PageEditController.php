@@ -28,6 +28,17 @@ class PageEditController extends Controller
             $conferencesDownload = tbl_conference::where('field_name','Conferences Download')->get();
 
             return view('page.superadmin.editConferencesDownload.editConferencesDownload',['conferencesDownload' => $conferencesDownload]);
+        }elseif($pageName == 'Conferences Info'){
+            $conferencesFees = tbl_conference::where('field_name','Conferences Fees')->get();
+            foreach($conferencesFees as $thisConferencesFees){
+                $thisConferencesFees->field_id = substr($thisConferencesFees->field_id, 8);
+            }
+            $conferencesDate = tbl_conference::where('field_name','Conferences Dates')->get();
+            foreach($conferencesDate as $thisConferencesDate){
+                $thisConferencesDate->field_id = substr($thisConferencesDate->field_id, 9);
+            }
+
+            return view('page.superadmin.editConferencesInfo.editConferencesInfo',['conferencesFees' => $conferencesFees,'conferencesDate' => $conferencesDate]);
         }else{
             $page = tbl_page::where('pageName', $pageName)->first(); 
             $pagePath = $page->pagePath;

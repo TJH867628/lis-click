@@ -13,8 +13,16 @@ class ConferencesController extends Controller
         session()->start();
         if(session()->has('LoggedUser')){
             $userSession = session()->get('LoggedUser');
+            $conferencesFees = tbl_conference::where('field_name','Conferences Fees')->get();
+            foreach($conferencesFees as $thisConferencesFees){
+                $thisConferencesFees->field_id = substr($thisConferencesFees->field_id, 8);
+            }
+            $conferencesDate = tbl_conference::where('field_name','Conferences Dates')->get();
+            foreach($conferencesDate as $thisConferencesDate){
+                $thisConferencesDate->field_id = substr($thisConferencesDate->field_id, 9);
+            }
             
-            return view('page.participants.conferencesInfo.conferencesInfo',['userSession' => $userSession]);
+            return view('page.participants.conferencesInfo.conferencesInfo',['userSession' => $userSession,'conferencesFees' => $conferencesFees,'conferencesDate' => $conferencesDate]);
         }else
         {
             return redirect('login')->with('fail','Login expired,Please Login Again');
@@ -97,5 +105,51 @@ class ConferencesController extends Controller
         $conferencesDownload->save();
 
         return redirect()->back()->with('success','Publication Info Updated');
+    }
+
+    function editExistingConferencesFees(Request $request,$id){
+        $field_details = $request->input('title');
+        $field_value = $request->input('fees');
+        $visibility = $request->input('visibility') == 'on' ? 1 : 0;
+        $conferencesFees = tbl_conference::where('field_id',"CONFEES-" . $id)->first();
+
+        $conferencesFees->field_visibility = $visibility;
+        $conferencesFees->field_value = $field_value;
+        $conferencesFees->field_details = $field_details;
+        $conferencesFees->updated_at = now();
+        $conferencesFees->save();
+
+        return redirect()->back()->with('success','Conferences Info Updated');
+    }
+
+    function editExistingConferencesDate(Request $request,$id){
+        $field_details = $request->input('title');
+        $field_value = $request->input('date');
+        $visibility = $request->input('visibility') == 'on' ? 1 : 0;
+        $conferencesFees = tbl_conference::where('field_id',"CONDATES-" . $id)->first();
+
+        $conferencesFees->field_visibility = $visibility;
+        $conferencesFees->field_value = $field_value;
+        $conferencesFees->field_details = $field_details;
+        $conferencesFees->updated_at = now();
+        $conferencesFees->save();
+
+        return redirect()->back()->with('success','Conferences Date Updated');
+    }
+
+    function addNewConferencesDate(Request $request){
+        $field_details = $request->input('title');
+        $field_value = $request->input('date');
+        $count = tbl_conference::where('field_name','Conferences Dates')->count();
+        $conferencesFees = new tbl_conference;
+        $conferencesFees->field_id = "CONDATES-" . $count + 1;
+        $conferencesFees->field_name = 'Conferences Dates';
+        $conferencesFees->field_visibility = true;
+        $conferencesFees->field_value = $field_value;
+        $conferencesFees->field_details = $field_details;
+        $conferencesFees->updated_at = now();
+        $conferencesFees->save();
+
+        return redirect()->back()->with('success','Conferences Date Add Succesfully');
     }
 }

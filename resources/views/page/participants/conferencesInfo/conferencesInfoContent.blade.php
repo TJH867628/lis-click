@@ -405,31 +405,25 @@
                         </tr>
                     </thead>
                     <tbody>
+                    @php $feesCount =0 @endphp
+                    @foreach($conferencesFees as $conferencesFees)
+                        @if($conferencesFees->field_visibility == 1)
+                        @php
+                            $feesCount++
+                        @endphp
+                        <tr>
+                            <td scope="row">{{ $feesCount }}</td>
+                            <td>{{ $conferencesFees->field_details }}</td>
+                            <td>{{ $conferencesFees->field_value }}</td>
+                        </tr>
+
+                        @endif
+                    @endforeach
+                    @if($feesCount == 0)
                     <tr>
-                        <td scope="row">1</td>
-                        <td>Presentation &amp; Publication</td>
-                        <td>RM 300 / USD 70</td>
+                        <td colspan="3" style="text-align: center;">No Data Available</td>
                     </tr>
-                    <tr>
-                        <td scope="row">2</td>
-                        <td>Poster / Paper Presentation</td>
-                        <td>RM 250 / USD 60</td>
-                    </tr>
-                    <tr>
-                        <td scope="row">3</td>
-                        <td>Publication Only</td>
-                        <td>RM 250 / USD 60</td>
-                    </tr>
-                    <tr>
-                        <td scope="row">4</td>
-                        <td>Participant / Audience</td>
-                        <td>RM 250 / USD 60</td>
-                    </tr>
-                    <tr>
-                        <td scope="row">5</td>
-                        <td>Student Presenter</td>
-                        <td>RM 250 / USD 60</td>
-                    </tr>
+                    @endif
                     </tbody>
                 </table>
             </section>
@@ -450,26 +444,25 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @php $datesCount=0 @endphp
+                        @foreach($conferencesDate as $conferencesDate)
+                        @if($conferencesDate->field_visibility == 1)
+                        @php
+                        $datesCount++
+                        @endphp
                         <tr>
-                            <td scope="row">1</td>
-                            <td>Registration &amp; Abstract Submission</td>
-                            <td>12 Mac - 30 April 2023</td>
+                            <td scope="row">{{ $datesCount }}</td>
+                            <td>{{ $conferencesDate->field_details }}</td>
+                            <td>{{ $conferencesDate->field_value }}</td>
                         </tr>
+
+                        @endif
+                        @endforeach
+                        @if($datesCount == 0)
                         <tr>
-                            <td scope="row">2</td>
-                            <td>Full Paper Submission Deadline</td>
-                            <td>15 June 2023</td>
+                            <td colspan="3" style="text-align: center;">No Data Available</td>
                         </tr>
-                        <tr>
-                            <td scope="row">3</td>
-                            <td>Acceptance of Payment Deadline</td>
-                            <td>6 July 2023</td>
-                        </tr>
-                        <tr>
-                            <td scope="row">4</td>
-                            <td>Conference Date</td>
-                            <td>8 August 2023</td>
-                        </tr>
+                        @endif
                     </tbody>
                 </table>
             </section>
