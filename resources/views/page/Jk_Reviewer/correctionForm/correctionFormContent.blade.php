@@ -663,7 +663,7 @@
                 <td>{{ $thisCorrection->created_at }}</td>   
                 @if($thisCorrection->returnCorrectionLink != NULL)
                 <td>
-                    <a href="{{ route('downloadReturnCorrection', ['filename' => $thisCorrection->returnCorrectionLink]) }}" class="btn btn-primary mb-4"><i class="fa-solid fa-download" style="padding: 5px;"></i>Download</a>
+                    <a href="{{ route('downloadReturnCorrection', ['filename' => $thisCorrection->returnCorrectionLink]) }}" target="_blank" class="btn btn-primary mb-4"><i class="fa-solid fa-download" style="padding: 5px;"></i>Download</a>
                 </td>
                 @else
                 <td>
@@ -715,7 +715,7 @@
                                     Orginal File
                                 </td>
                                 <td>
-                                <a href="{{ route('downloadSubmission', ['filename' => $submission->file_name]) }}" class="btn btn-primary mb-4">Download Orginal File</a>
+                                <a href="{{ route('downloadSubmission', ['filename' => $submission->file_name]) }}" target="_blank" class="btn btn-primary mb-4">Download Orginal File</a>
                                 </td>
                             </tr>
                     <br><br><br>
@@ -726,10 +726,10 @@
                             </td>
                             <td>
                                 @if($submission->reviewer2ID == NULL)
-                                    <a href="{{ route('downloadEvaluationForm', ['filename' => $submission->evaluationFormLink]) }}" class="btn btn-primary mb-4">Download Evaluation Form</a>
+                                    <a href="{{ route('downloadEvaluationForm', ['filename' => $submission->evaluationFormLink]) }}" target="_blank" class="btn btn-primary mb-4">Download Evaluation Form</a>
                                 @else
-                                    <a href="{{ route('downloadEvaluationForm', ['filename' => $submission->evaluationFormLink2]) }}" class="btn btn-primary mb-4">Download Evaluation Form 2</a>
-                                    <a href="{{ route('downloadEvaluationForm', ['filename' => $submission->evaluationFormLink]) }}" class="btn btn-primary mb-4">Download Evaluation Form</a>
+                                    <a href="{{ route('downloadEvaluationForm', ['filename' => $submission->evaluationFormLink2]) }}" target="_blank" class="btn btn-primary mb-4">Download Evaluation Form 2</a>
+                                    <a href="{{ route('downloadEvaluationForm', ['filename' => $submission->evaluationFormLink]) }}" target="_blank" class="btn btn-primary mb-4">Download Evaluation Form</a>
                                 @endif
                             </td>
                         </tr>
@@ -737,16 +737,16 @@
                             <td>
                                 @if($submission->reviewer2ID == NULL)
                                     @if($submission->returnPaperLink != NULL)
-                                        <a href="{{ route('downloadReviewedFile', ['filename' => $submission->returnPaperLink]) }}" class="btn btn-primary mb-4">Download Reviewed Paper</a>
+                                        <a href="{{ route('downloadReviewedFile', ['filename' => $submission->returnPaperLink]) }}" target="_blank" class="btn btn-primary mb-4">Download Reviewed Paper</a>
                                     @else
                                         no file here
                                     @endif
                                 @else
                                     @if($submission->returnPaperLink != NULL)
-                                        <a href="{{ route('downloadReviewedFile', ['filename' => $submission->returnPaperLink]) }}" class="btn btn-primary mb-4">Download Reviewed Paper</a>
+                                        <a href="{{ route('downloadReviewedFile', ['filename' => $submission->returnPaperLink]) }}" target="_blank" class="btn btn-primary mb-4">Download Reviewed Paper</a>
                                     @endif
                                     @if($submission->returnPaperLink2 != NULL)
-                                        <a href="{{ route('downloadReviewedFile', ['filename' => $submission->returnPaperLink2]) }}" class="btn btn-primary mb-4">Download Reviewed Paper</a>
+                                        <a href="{{ route('downloadReviewedFile', ['filename' => $submission->returnPaperLink2]) }}" target="_blank" class="btn btn-primary mb-4">Download Reviewed Paper</a>
                                     @endif
                                     @if($submission->returnPaperLink == NULL && $submission->returnPaperLink2 == NULL)
                                         no file here
@@ -773,7 +773,7 @@
                             </td>
                             <td>
                             @if($latestReturnCorrection->returnCorrectionLink != NULL)
-                                <a href="{{ route('downloadReturnCorrection', ['filename' => $latestReturnCorrection->returnCorrectionLink]) }}" class="btn btn-primary mb-4">Download Return File</a>
+                                <a href="{{ route('downloadReturnCorrection', ['filename' => $latestReturnCorrection->returnCorrectionLink]) }}" target="_blank" class="btn btn-primary mb-4">Download Return File</a>
                             @else
                                 Pending For Participants to Upload
                             @endif
@@ -785,10 +785,10 @@
                             </td>
                             <td>
                                 @if($submission->reviewer2ID == NULL)
-                                    <a href="{{ route('downloadEvaluationForm', ['filename' => $submission->evaluationFormLink]) }}" class="btn btn-primary mb-4">Download Evaluation Form</a>
+                                    <a href="{{ route('downloadEvaluationForm', ['filename' => $submission->evaluationFormLink]) }}"  target="_blank"  class="btn btn-primary mb-4">Download Evaluation Form</a>
                                 @else
-                                    <a href="{{ route('downloadEvaluationForm', ['filename' => $submission->evaluationFormLink2]) }}" class="btn btn-primary mb-4">Download Evaluation Form 2</a>
-                                    <a href="{{ route('downloadEvaluationForm', ['filename' => $submission->evaluationFormLink]) }}" class="btn btn-primary mb-4">Download Evaluation Form</a>
+                                    <a href="{{ route('downloadEvaluationForm', ['filename' => $submission->evaluationFormLink2]) }}" target="_blank" class="btn btn-primary mb-4">Download Evaluation Form 2</a>
+                                    <a href="{{ route('downloadEvaluationForm', ['filename' => $submission->evaluationFormLink]) }}" target="_blank" class="btn btn-primary mb-4">Download Evaluation Form</a>
                                 @endif
                             </td>
                         </tr>
@@ -796,16 +796,16 @@
                             <td>
                                 @if($submission->reviewer2ID == NULL)
                                     @if($submission->returnPaperLink != NULL)
-                                        <a href="{{ route('downloadReviewedFile', ['filename' => $submission->returnPaperLink]) }}" class="btn btn-primary mb-4">Download Reviewed Paper</a>
+                                        <a href="{{ route('downloadReviewedFile', ['filename' => $submission->returnPaperLink]) }}" target="_blank" class="btn btn-primary mb-4">Download Reviewed Paper</a>
                                     @else
                                         no file here
                                     @endif
                                 @else
                                     @if($submission->returnPaperLink != NULL)
-                                        <a href="{{ route('downloadReviewedFile', ['filename' => $submission->returnPaperLink]) }}" class="btn btn-primary mb-4">Download Reviewed Paper</a>
+                                        <a href="{{ route('downloadReviewedFile', ['filename' => $submission->returnPaperLink]) }}" target="_blank" class="btn btn-primary mb-4">Download Reviewed Paper</a>
                                     @endif
                                     @if($submission->returnPaperLink2 != NULL)
-                                        <a href="{{ route('downloadReviewedFile', ['filename' => $submission->returnPaperLink2]) }}" class="btn btn-primary mb-4">Download Reviewed Paper</a>
+                                        <a href="{{ route('downloadReviewedFile', ['filename' => $submission->returnPaperLink2]) }}" target="_blank" class="btn btn-primary mb-4">Download Reviewed Paper</a>
                                     @endif
                                     @if($submission->returnPaperLink == NULL && $submission->returnPaperLink2 == NULL)
                                         no file here
