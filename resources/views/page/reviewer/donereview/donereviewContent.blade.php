@@ -471,6 +471,5 @@
                 </table>
                 @endif
             </div>
-        </section>
-        
+        </section>  
 </main>

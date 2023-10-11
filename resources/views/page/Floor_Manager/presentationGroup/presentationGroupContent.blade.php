@@ -166,36 +166,6 @@
         height: 0;
         transition: .2s ease-in-out .5s;
     }
-        /* body {
-            background-color: #f8f9fa;
-            font-family: Arial, sans-serif;
-        }
-
-        h1 {
-            text-align: center;
-            margin-top: 50px;
-            margin-bottom: 30px;
-        }
-
-        table {
-            margin: auto;
-            margin-top: 15%;
-            margin-bottom: 10%;
-            border-collapse: collapse;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            background-color: white;
-        }
-
-        th, td {
-            padding: 10px;
-            text-align: center;
-            border: 1px solid #dee2e6;
-        }
-
-        th {
-            background-color: #343a40;
-            color: white;
-        } */
 
         form {
             color: black;
@@ -203,7 +173,7 @@
             padding: 20px;
             border: 1px solid #dee2e6;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            background-color: white;
+            background-color: transparent;
         }
 
         input[type="text"], textarea {
@@ -262,7 +232,7 @@
             <h1>Presentation Arrangement</h1>
         </section>
         <section class="table__body">
-            <table>
+            <table id="presentationtable">
                 <thead>
                 <tr>
                     <th>
@@ -280,6 +250,7 @@
                             <td>
                                 <a style="font-size:20px; font-weight:bold; color:black;  text-decoration:none;" href="#" class="submission-code" data-submission-code="{{$submission->submissionCode}}" data-submission-type="{{$submission->submissionType}}" data-submission-title="{{$submission->submissionTitle}}" data-submission-type="{{$submission->submissionTitle}}" data-sub-theme="{{$submission->subTheme}}" data-present-mode="{{$submission->presentMode}}">
                                     <div class="submissionCode">
+                                    <i class="fa-solid fa-circle-info"></i>
                                         {{$submission->submissionCode}}
                                     </div>
                                 </a>
@@ -298,7 +269,7 @@
                                             <option value="{{ $thisSchedule->presentationGroup }}">{{ $thisSchedule->presentationGroup }}</option>
                                         @endforeach
                                     </select>  <br>
-                                    <button>Save Change</button>
+                                    <button><i class="fas fa-save" style="padding: 5px;"></i>Save Change</button>
                                 </form>
                             </td>
                         </tr>
@@ -330,7 +301,7 @@
                 popUpWindow.dataset.submissionCode = submissionCode;
                 popUpWindow.innerHTML = `
 
-                    <div class="submission-details-content">
+                <div class="submission-details-content">
                     <p>Submission Code</p>
                     <span style="font-weight:bold;">${submissionCode}</span>
                     <p>Title</p>
@@ -343,13 +314,11 @@
                     <span style="font-weight:bold;">${presentMode}</span>
                     </div>
                     <div class="submission-details-header" style=" text-align:center; margin:20px;">
-                    <span class="submission-details-close" style="color:white; font-size:20px; padding:3%; background-color: #007bff; cursor: pointer; border-radius:5px;">Close</span>
-                    </div>
-                `;
+                    <span class="submission-details-close" style="position: absolute;top: 0px;right: 0px;width: 45px;height: 45px;background: #0d6efd;font-size: 2em;color: #fff;display: flex;justify-content: center;align-items: center;border-bottom-left-radius: 20px;border-top-right-radius: 20px;cursor: pointer;z-index: 1;"><i class="fas fa-times"></i></span></div>`;
+
                 document.body.appendChild(popUpWindow);
                 submissionDetails = popUpWindow;
 
-                // Apply CSS styles for centering and layering the pop-up window
                 submissionDetails.style.position = 'fixed';
                 submissionDetails.style.top = '50%';
                 submissionDetails.style.left = '50%';
@@ -358,6 +327,7 @@
                 submissionDetails.style.backgroundColor = 'white';
                 submissionDetails.style.padding = '20px';
                 submissionDetails.style.border = '1px solid #ccc';
+                submissionDetails.style.borderRadius = '20px';
                 submissionDetails.style.boxShadow = '0 0 20px rgba(0, 0, 0, 0.5)';
                 submissionDetails.style.color = 'black';
                 submissionDetails.style.transition = '0.5s';
