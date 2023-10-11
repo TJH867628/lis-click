@@ -109,7 +109,7 @@ class submissionStatusController extends Controller
             $paymentInfo = tbl_payment::where('submissionCode',$submissionCode)->first();
             $totalPaymentReceipt = tbl_payment::where('submissionCode',$submissionCode)->get()->count();
             $thisPaymentID = $paymentID . "_" . $totalPaymentReceipt + 1;
-            if($totalPaymentReceipt == 0){
+            if($totalPaymentReceipt != 0){
                 $paymentInfo->submissionCode = $submissionCode;
                 $paymentInfo->paymentID = $thisPaymentID;
                 $paymentInfo->paymentStatus = "Pending For Verification";
