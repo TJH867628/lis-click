@@ -679,6 +679,8 @@
     </td>
 </tr>
 @endif
+<tr>
+    <td colspan="4">
     @if($submission->correctionPhase == 'pending')
         <a href="{{ route('doneCorrection', ['submissionCode' => $submission->submissionCode]) }}" class="btn btn-primary mb-4" style="margin-top: 2%; float:none;"><i class="fas fa-check"></i>Done Submission</a>
     @elseif($submission->correctionPhase == 'readyForPresent')
@@ -691,6 +693,8 @@
         <a href="{{ route('unDoneCorrection', ['submissionCode' => $submission->submissionCode]) }}" class="btn btn-primary mb-4" style="margin-top: 2%; float:none;"><i class="fas fa-undo"></i>Undone Submission</a>
         @endif
     @endif
+    </td>
+</tr>
     </section>
     </main>
     <div id="popup">
