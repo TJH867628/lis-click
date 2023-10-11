@@ -176,19 +176,19 @@
             <h2 id="subheadinng"><i>Max Length : 1000 Characters only</i></h2>
         </div>
         <label for="" id="head2">Abstact</label> <br><br>
-        <textarea name="" placeholder="Enter......" maxlength="1500" name="comments_abstract">{{ $dataEvaluationForm->comments_abstract }}</textarea><br><br>
+        <textarea placeholder="Enter......" maxlength="1500" name="comments_abstract">{{ $dataEvaluationForm->comments_abstract }}</textarea><br><br>
         <label for="" id="head2">Introduction</label> <br><br>
-        <textarea name="" placeholder="Enter......" maxlength="1500" name="comments_introduction">{{ $dataEvaluationForm->comments_introduction }}</textarea><br><br>
+        <textarea placeholder="Enter......" maxlength="1500" name="comments_introduction">{{ $dataEvaluationForm->comments_introduction }}</textarea><br><br>
         <label for="" id="head2">Literature Review</label> <br><br>
-        <textarea name="" placeholder="Enter......" maxlength="1500" name="comments_literature_review">{{ $dataEvaluationForm->comments_literature_review }}</textarea><br><br>
+        <textarea placeholder="Enter......" maxlength="1500" name="comments_literature_review">{{ $dataEvaluationForm->comments_literature_review }}</textarea><br><br>
         <label for="" id="head2">Methodology</label> <br><br>
-        <textarea name="" placeholder="Enter......" maxlength="1500" name="comments_methodology">{{ $dataEvaluationForm->comments_methodology }}</textarea><br><br>
+        <textarea placeholder="Enter......" maxlength="1500" name="comments_methodology">{{ $dataEvaluationForm->comments_methodology }}</textarea><br><br>
         <label for="" id="head2">Results</label> <br><br>
-        <textarea name="" placeholder="Enter......" maxlength="1500" name="comments_results">{{ $dataEvaluationForm->comments_results }}</textarea><br><br>
+        <textarea placeholder="Enter......" maxlength="1500" name="comments_results">{{ $dataEvaluationForm->comments_results }}</textarea><br><br>
         <label for="" id="head2">Discussion</label> <br><br>
-        <textarea name="" placeholder="Enter......" maxlength="1500" name="comments_discussion">{{ $dataEvaluationForm->comments_discussion }}</textarea><br><br>
+        <textarea placeholder="Enter......" maxlength="1500" name="comments_discussion">{{ $dataEvaluationForm->comments_discussion }}</textarea><br><br>
         <label for="" id="head2">References</label> <br><br>
-        <textarea name="" placeholder="Enter......" maxlength="1500" name="comments_references">{{ $dataEvaluationForm->comments_references }}</textarea><br><br>
+        <textarea placeholder="Enter......" maxlength="1500" name="comments_references">{{ $dataEvaluationForm->comments_references }}</textarea><br><br>
         <div class="heading">
             <h1 id="head">Please rate the following: (1=Excellent) (2=Good) (3=Fair) (4=Poor)</h1>
         </div>
