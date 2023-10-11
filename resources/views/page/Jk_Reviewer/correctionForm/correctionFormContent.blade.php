@@ -762,7 +762,7 @@
                         </tr>
                     </table>
                     <button type="submit" style="float:none;" class="btn btn-primary mb-4">Submit</button>
-                @else
+                @else if($latestReturnCorrection->returnCorrectionLink != NULL)
                     <table>
                     <tr>
                                 <td>
