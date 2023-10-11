@@ -655,7 +655,7 @@ $count = 0;
                                         $i++;
                                     @endphp
                                     <td>
-                                    <a href="{{route('downloadPaymentReceipt', $submissionInfo->paymentStatus->proofOfPayment)}}"><i class="fas fa-receipt"></i> Receipt {{ $i }}</a>
+                                    <a href="{{route('downloadPaymentReceipt', $submissionInfo->paymentStatus->proofOfPayment)}}" target="_blank"><i class="fas fa-receipt"></i> Receipt {{ $i }}</a>
                                     </td>
                                     <td>
                                     @if($submissionInfo->paymentStatus->paymentStatus === 'Complete')
