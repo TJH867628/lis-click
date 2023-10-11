@@ -680,7 +680,7 @@
 </tr>
 @endif
 <tr>
-    <td colspan="4">
+    <td colspan="4"  style="text-align: center;">
     @if($submission->correctionPhase == 'pending')
         <a href="{{ route('doneCorrection', ['submissionCode' => $submission->submissionCode]) }}" class="btn btn-primary mb-4" style="margin-top: 2%; float:none;"><i class="fas fa-check"></i>Done Submission</a>
     @elseif($submission->correctionPhase == 'readyForPresent')
