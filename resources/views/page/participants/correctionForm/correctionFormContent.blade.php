@@ -564,10 +564,6 @@
                                         </div>
                                     </button>
                                 </a>
-                            @else
-                                <td>
-                                    Waiting Participants To Upload
-                                </td>
                             @endif
                             </td>
                         </tr>
