@@ -469,11 +469,6 @@
                             @endif
                         @endforeach
                 @endif
-                @if($count==0)
-                    <tr>
-                        <td colspan="9">No record found.</td>
-                    </tr>
-                @endif
                 </tbody>
             </table>
             </div>
