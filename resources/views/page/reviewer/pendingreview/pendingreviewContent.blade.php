@@ -240,8 +240,7 @@
                 <h1>Pending Review List</h1>
             </section>
             <section class="table__body">
-                @if($submissionInfo)
-                <table id="reviewTable" class="display">
+            <table id="reviewTable" class="display">
                 <thead>
                     <tr>
                         <th>
@@ -273,6 +272,7 @@
                         </th>
                     </tr>
                 </thead>
+                @if($submissionInfo)
                 <tbody>
                     @php
                      $count = 0;
@@ -370,13 +370,13 @@
                             @endif
                         @endif
                     @endforeach
-                    @if($count == 0)
+                @endif
+                @if($count == 0)
                     <tr>
                         <td colspan="9" style="text-align: center;">
                             <p style="color: black;">No record found.</p>
                         </td>
                     </tr>
-                    @endif
                 @endif
                 </tbody>
                 </table>

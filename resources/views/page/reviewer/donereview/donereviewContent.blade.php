@@ -363,30 +363,31 @@
                 @php
                     $count = 0;
                 @endphp
+            <table id="reviewTable" class="display">
+            <thead>
+                <tr>
+                    <th>
+                        Submission Code<br>
+                    </th>
+                    <th>
+                        Submission Title<br>
+                    </th>
+                    <th>
+                        Submission Type<br>
+                    </th>
+                    <th>
+                        Sub Theme<br>
+                    </th>
+                    <th>
+                        Present Mode<br>
+                    </th>
+                    <th>    
+                        File<br>
+                    </th>
+                    </tr>
+                </thead>
                 @if($submissionInfo)
-                <table id="reviewTable" class="display">
-                <thead>
-                    <tr>
-                        <th>
-                            Submission Code<br>
-                        </th>
-                        <th>
-                            Submission Title<br>
-                        </th>
-                        <th>
-                            Submission Type<br>
-                        </th>
-                        <th>
-                            Sub Theme<br>
-                        </th>
-                        <th>
-                            Present Mode<br>
-                        </th>
-                        <th>    
-                            File<br>
-                        </th>
-                        </tr>
-                    </thead>
+                
                     <tbody>
                         @foreach($submissionInfo as $submissionInfo)
                             @if($submissionInfo->reviewer2ID)
@@ -473,9 +474,13 @@
                                 <td colspan="9">No record found.</td>
                             </tr>
                         @endif
-                    </tbody>
-                </table>
+                @else
+                    <tr>
+                        <td colspan="9">No record found.</td>
+                    </tr>  
                 @endif
+                </tbody>
+            </table>
             </div>
         </section>  
 </main>
