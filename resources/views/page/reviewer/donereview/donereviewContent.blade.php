@@ -417,8 +417,8 @@
                                 @elseif($submissionInfo->reviewer2ID === $reviewername)
                                     @if($submissionInfo->evaluationFormLink2)
                                     @php
-                                            $count++;
-                                        @endphp
+                                        $count++;
+                                    @endphp
                                     <tr>
                                         <td>{{ $submissionInfo->submissionCode }}</td>
                                         <td>{{ $submissionInfo->submissionTitle }}</td>
