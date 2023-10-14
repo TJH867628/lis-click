@@ -583,6 +583,10 @@ $count = 0;
                                             <a href="{{ route('correctionForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4 btn-download">
                                                 <i class="fas fa-file-alt"></i>Correction
                                             </a>
+                                        @else
+                                        <a href="{{ route('correctionForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4 btn-download">
+                                                <i class="fas fa-file-alt"></i>Correction
+                                            </a>
                                         @endif
                                     @else
                                         <p class="status shipped">Pending For Comment</p>
