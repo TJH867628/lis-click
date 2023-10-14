@@ -469,15 +469,11 @@
                             </tr>
                             @endif
                         @endforeach
-                        @if($count==0)
-                            <tr>
-                                <td colspan="9">No record found.</td>
-                            </tr>
-                        @endif
-                @else
+                @endif
+                @if($count==0)
                     <tr>
                         <td colspan="9">No record found.</td>
-                    </tr>  
+                    </tr>
                 @endif
                 </tbody>
             </table>

@@ -36,7 +36,7 @@ class ReviewerController extends Controller
 
             if(!isset($submissionInfo)){
                 $submissionInfo = null;
-            }
+            }   
             return view('page.reviewer.pendingreview.pendingreview',['reviewername'=>$reviewername,'submissionInfo' => $submissionInfo]);
         }else{
             return redirect('login')->with('fail','Login Session Expire,Please Login again');

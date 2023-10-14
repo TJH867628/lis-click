@@ -272,11 +272,11 @@
                         </th>
                     </tr>
                 </thead>
-                @if($submissionInfo)
-                <tbody>
-                    @php
+                @php
                      $count = 0;
                     @endphp
+                @if($submissionInfo)
+                <tbody>
                     @foreach($submissionInfo as $submissionInfo)
                         @php
                             $count++;
