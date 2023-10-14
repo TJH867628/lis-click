@@ -33,6 +33,10 @@ class ReviewerController extends Controller
             }elseif(tbl_submission::where('reviewer2ID', $reviewername)->first()){
                 $submissionInfo = tbl_submission::where('reviewer2ID', $reviewername)->get();
             }
+
+            if(!isset($submissionInfo)){
+                $submissionInfo = null;
+            }
             return view('page.reviewer.pendingreview.pendingreview',['reviewername'=>$reviewername,'submissionInfo' => $submissionInfo]);
         }else{
             return redirect('login')->with('fail','Login Session Expire,Please Login again');
