@@ -202,7 +202,7 @@
                                                     <label for="name">Verify Your Email</label>
                                                     <div class="input-group">
                                                         <input type="text" name="otp" id="otp" class="form-control otp" placeholder="OTP(One-Time Password)" minlength="6" maxlength="6" required="required" style='text-transform:uppercase'>
-                                                        <div class="input-group-append" style="margin-top:2%; margin-left:5%;">
+                                                        <div class="input-group-append" style="margin-top:2%; margin-left:5%; z-index: 0;">
                                                             <button href="#emailVerification" class="btn btn-primary" id="sendOtp">Send OTP</button>
                                                         </div>
                                                     </div>
