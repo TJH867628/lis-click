@@ -274,9 +274,9 @@
                 </thead>
                 @php
                      $count = 0;
-                    @endphp
-                @if($submissionInfo)
+                @endphp
                 <tbody>
+                @if($submissionInfo)
                     @foreach($submissionInfo as $submissionInfo)
                         @php
                             $count++;
@@ -380,5 +380,5 @@
                 @endif
                 </tbody>
                 </table>
-                </section>
-            </main>
+            </section>
+        </main>

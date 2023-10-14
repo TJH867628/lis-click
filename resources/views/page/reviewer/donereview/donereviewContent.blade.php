@@ -386,9 +386,8 @@
                     </th>
                     </tr>
                 </thead>
-                @if($submissionInfo)
-                
                     <tbody>
+                @if($submissionInfo)
                         @foreach($submissionInfo as $submissionInfo)
                             @if($submissionInfo->reviewer2ID)
                                 @if($submissionInfo->reviewerID === $reviewername)
