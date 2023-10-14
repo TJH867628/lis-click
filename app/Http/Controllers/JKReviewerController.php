@@ -74,7 +74,7 @@ class JKReviewerController extends Controller
                 $correction = tbl_correction::where('submissionCode',$submissionCode)->get();
                 $correctionCount = $correction->count();
                 $submission = tbl_submission::where('submissionCode',$submissionCode)->first();
-                $latestCorrection = tbl_correction::where('numberOfTimes',$correctionCount)->first();
+                $latestCorrection = tbl_correction::where('submissionCode',$submissionCode)->where('numberOfTimes',$correctionCount)->first();
 
                 return view('page.participants.correctionForm.correctionForm', ['correction' => $correction,'latestCorrection'=>$latestCorrection,'submissionInfo' => $submission,'submissionCode' => $submissionCode]);
 

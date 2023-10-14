@@ -509,7 +509,7 @@
                                     </button></a>
                                 </td>
                             </tr>
-                        @elseif(isset($latestCorrection) && $latestCorrection->returnCorrectionLink === null)
+                        @elseif(isset($latestCorrection) && $latestCorrection->returnCorrectionLink == null)
                             <tr style="background-color:#fff9ae;" onmouseover="this.style.backgroundColor= '#fff9ae'">
                                 <td scope="row" style="text-align:center;"><h5 style="font-weight: bold;"># {{ $correction->numberOfTimes }}</h5></td>
                                 <td>
