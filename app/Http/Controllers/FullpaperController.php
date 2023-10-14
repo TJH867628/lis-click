@@ -116,6 +116,13 @@ class FullpaperController extends Controller
                             $rows = 0;
                         }
                         $submissionCode = $currentYear . "_" . $categoryCode . str_pad( str($rows + 1), 4, '0', STR_PAD_LEFT);
+                    }else if($subTheme === "Others"){
+                        $categoryCode = "OTH";
+                        $rows = tbl_submission::where('categoryCode',$categoryCode)->count();
+                        if($rowsCurrentYear = tbl_submission::where('submissionCode', 'like', $currentYear . '%')->count() == 0){
+                            $rows = 0;
+                        }
+                        $submissionCode = $currentYear . "_" . $categoryCode . str_pad( str($rows + 1), 4, '0', STR_PAD_LEFT);
                     }
 
                     $participants1 = $user->email;//get name from user
@@ -134,7 +141,7 @@ class FullpaperController extends Controller
                     $mail = new submission();
                     $mail->setSubmissionCode($submissionCode);
                     Mail::to($user->email)->send($mail);
-                    return redirect()->back()->with('success','Submitted Succesfully');
+                    return redirect()->back()->with('success','Submitted Successfully');
                 }else{
                     return redirect()->back()->with('error','Submit Failed,Invalid File');
                 }

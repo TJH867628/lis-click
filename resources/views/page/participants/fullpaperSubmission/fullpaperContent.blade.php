@@ -57,7 +57,7 @@
                                                 
                                                 <div class="form-group col-md-12">
                                                     <label>Full Name:</label>
-                                                    <input type="text" name="name" class="form-control" placeholder="Presenter's Full Name (CAPITAL LETTER)" required="required" value="{{ $user -> name }}" readonly >
+                                                    <input type="text" name="name" class="form-control" placeholder="Presenter's Full Name (CAPITAL LETTER)" onload="this.value = this.value.toUpperCase()" required="required" value="{{ $user -> name }}" readonly >
                                                 </div>
                                                 <div class="form-group col-md-12">
                                                     <label>IC Number:</label>
@@ -81,7 +81,7 @@
                                                 </div>
                                                 <div class="form-group col-md-3">
                                                     <label>Postcode:</label>
-                                                    <input type="text" name="poscode" class="form-control" placeholder="Poscode" required="required" value="{{ $user -> postcode }}" readonly>
+                                                    <input type="text" name="poscode" class="form-control" placeholder="Poscode" required="required"  value="{{ $user -> postcode }}" readonly>
                                                 </div>
 
                                                 <!--Dropdown-->
@@ -105,7 +105,7 @@
                                                 </div>
                                                 <div class="form-group col-md-12">
                                                     <label>Second Author's Name:</label>
-                                                    <input type="text" name="participants2_name" class="form-control" placeholder="Second Author's Name">
+                                                    <input type="text" name="participants2_name" class="form-control" oninput="this.value = this.value.toUpperCase()" placeholder="Second Author's Name">
                                                     <div id="participants2-name-error" class="text-danger"></div>
                                                 </div>
                                                 <div class="form-group col-md-12">
@@ -115,7 +115,7 @@
                                                 </div>
                                                 <div class="form-group col-md-12">
                                                     <label>Third Author's Name:</label>
-                                                    <input type="text" name="participants3_name" class="form-control" placeholder="Third Author's Name">
+                                                    <input type="text" name="participants3_name" class="form-control" oninput="this.value = this.value.toUpperCase()" placeholder="Third Author's Name">
                                                     <div id="participants3-name-error" class="text-danger"></div>
                                                 </div>
 
@@ -137,6 +137,7 @@
                                                         <option value="Renewable Energy">Renewable Energy</option>
                                                         <option value="Commerce">Commerce</option>
                                                         <option value="Multi-Discipline">Multi-Discipline</option>
+                                                        <option value="Others">Others</option>
                                                     </select><br>
                                                 </div>
                                                 <!--End Dropdown-->
