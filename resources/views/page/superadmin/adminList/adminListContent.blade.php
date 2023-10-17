@@ -40,14 +40,75 @@
         margin-left: 70px !important; /* Adjust to match your sidebar width */
         transition: margin-left 0.3s ease; /* Smooth transition */
       }
+
+      main.table {
+        width: 97% !important;
+        height: 70vh;
+        margin-bottom: 100px !important;
+        background-color: #fff5;
+        backdrop-filter: blur(7px);
+        box-shadow: 0 .4rem .8rem #0005;
+        border-radius: .8rem;
+        overflow: hidden;
+      }
+
+      .table__header {
+          z-index:0;
+          width: 100%;
+          height: 15%;
+          background-color: #fff4;
+          padding: 1rem 1rem;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+      }
+
+      .table__body {
+        position: relative;
+        width: 95%;
+        max-height: calc(84% - 1.6rem);
+        background-color: #fffb;
+
+        margin: .8rem auto;
+        border-radius: .6rem;
+
+        overflow: auto;
+        overflow: overlay;
+    }
+
+    .table__body::-webkit-scrollbar{
+        width: 0.5rem;
+        height: 0.5rem;
+    }
+
+    .table__body::-webkit-scrollbar-thumb{
+        border-radius: .5rem;
+        background-color: #0004;
+        visibility: hidden;
+    }
+
+    .table__body:hover::-webkit-scrollbar-thumb{ 
+        visibility: visible;
+    }
+
+    table {
+        width: 100%;
+    }
+
+    tr{
+      border: solid 1px black;
+    }
   </style>
   </head>
   <body>
         <!-- partial -->
         <div class="main-panel" id="mainPanel" style="margin-left: 260px;">
           <div class="content-wrapper">
-            <div class="table-container">
-                <h2 style="color: black ;">Admin List</h2>
+            <main class="table">
+                <section class="table__header">
+                    <h1>Admin List</h1>
+                </section>
+                <section class="table__body">
                 @if($message = Session::get('updateSuccess'))
                     <span class="success">{{ $message }}</span>
                 @endif
@@ -119,9 +180,9 @@
               </tr>
             @endif
             </table>
-        </div>
+            </section>
+          </main>
         <br><br><br><br><br><br>
-          </div>
           <!-- content-wrapper ends -->
           <!-- partial:partials/_footer.html -->
 
