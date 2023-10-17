@@ -10,6 +10,6 @@
 <body>
     @include('page.superadmin.navigationBar')
     @include('page.superadmin.homePage.homePageContent(SuperAdmin)')
-    @include('page.footer')
+    <!-- @include('page.footer(Super)') -->
 </body>
 </html>

@@ -42,7 +42,7 @@
       }
 
       main.table {
-        width: 97% !important;
+        width: 100% !important;
         height: 70vh;
         margin-bottom: 100px !important;
         background-color: #fff5;
@@ -74,30 +74,30 @@
 
         overflow: auto;
         overflow: overlay;
-    }
+      }
 
-    .table__body::-webkit-scrollbar{
-        width: 0.5rem;
-        height: 0.5rem;
-    }
+      .table__body::-webkit-scrollbar{
+          width: 0.5rem;
+          height: 0.5rem;
+      }
 
-    .table__body::-webkit-scrollbar-thumb{
-        border-radius: .5rem;
-        background-color: #0004;
-        visibility: hidden;
-    }
+      .table__body::-webkit-scrollbar-thumb{
+          border-radius: .5rem;
+          background-color: #0004;
+          visibility: hidden;
+      }
 
-    .table__body:hover::-webkit-scrollbar-thumb{ 
-        visibility: visible;
-    }
+      .table__body:hover::-webkit-scrollbar-thumb{ 
+          visibility: visible;
+      }
 
-    table {
-        width: 100%;
-    }
+      table {
+          width: 100%;
+      }
 
-    tr{
-      border: solid 1px black;
-    }
+      tr{
+        border: solid 1px black;
+      }
   </style>
   </head>
   <body>
@@ -109,85 +109,85 @@
                     <h1>Admin List</h1>
                 </section>
                 <section class="table__body">
-                @if($message = Session::get('updateSuccess'))
-                    <span class="success">{{ $message }}</span>
-                @endif
-                <table id="adminTable" class="display">
-                <thead>
-                <tr>
-                    <th>
-                        Email<br>
-                    </th>
-                    <th>
-                        Name<br>
-                    </th>
-                    <th>
-                        Phone Number<br>
-                    </th>
-                    <th>
-                        Status<br>
-                    </th>
-                    <th>
-                        Role<br>
-                    </th>
-                    <th>
-                        Ic No<br>
-                    </th>
-                    <th>
-                        Created At<br>
-                    </th>
-                    <th>
-                        Updated At<br>
-                    </th>
-                    <th>
-                      Action
-                    </th>
-                </tr>
-                </thead>
-              @if(isset($admin))
-                <tbody>
-                @foreach($admin as $admin)
-                <tr>
-                    <td>{{ $admin->email }}</td>
-                    <td>{{ $admin->name }}</td>
-                    <td>{{ $admin->phoneNumber }}</td>
-                    @if($admin->status === 0)
-                      <td>Deactived</td>
-                    @elseif($admin->status === 1)
-                      <td>Active</td>
+                  @if($message = Session::get('updateSuccess'))
+                      <span class="success">{{ $message }}</span>
+                  @endif
+                  <table id="adminTable" class="display">
+                      <thead>
+                        <tr>
+                            <th>
+                                Email<br>
+                            </th>
+                            <th>
+                                Name<br>
+                            </th>
+                            <th>
+                                Phone Number<br>
+                            </th>
+                            <th>
+                                Status<br>
+                            </th>
+                            <th>
+                                Role<br>
+                            </th>
+                            <th>
+                                Ic No<br>
+                            </th>
+                            <th>
+                                Created At<br>
+                            </th>
+                            <th>
+                                Updated At<br>
+                            </th>
+                            <th>
+                              Action
+                            </th>
+                        </tr>
+                      </thead>
+                      @if(isset($admin))
+                      <tbody>
+                        @foreach($admin as $admin)
+                        <tr>
+                            <td>{{ $admin->email }}</td>
+                            <td>{{ $admin->name }}</td>
+                            <td>{{ $admin->phoneNumber }}</td>
+                            @if($admin->status === 0)
+                              <td>Deactived</td>
+                            @elseif($admin->status === 1)
+                              <td>Active</td>
+                            @endif
+                            <td>{{ $admin->adminRole }}</td>
+                            <td>{{ $admin->IC_No }}</td>
+                            <td>{{ $admin->created_at }}</td>
+                            <td>{{ $admin->updated_at }}</td>
+                            @if($admin->status === 0)
+                            <td><a href="{{ route('activeAdmin', ['adminEmail' => $admin->email]) }}" class="btn btn-primary mb-4">Active Admin</a></td>
+                            @elseif($admin->status === 1)
+                                @if($admin->adminRole === "Super")
+                                    <td><a href="#" class="btn btn-primary mb-4" style="background-color:gray; pointer-events: none;" >Deactive Admin</a></td>
+                                @else
+                                    <td><a href="{{ route('deactiveAdmin', ['adminEmail' => $admin->email]) }}" class="btn btn-primary mb-4">Deactive Admin</a></td>
+                                @endif
+                            @endif
+                        </tr>
+                        @endforeach
+                      </tbody>
+                    @else
+                      <tr style="color: black;">
+                        <td colspan="8">
+                          No record found.
+                        </td>
+                      </tr>
                     @endif
-                    <td>{{ $admin->adminRole }}</td>
-                    <td>{{ $admin->IC_No }}</td>
-                    <td>{{ $admin->created_at }}</td>
-                    <td>{{ $admin->updated_at }}</td>
-                    @if($admin->status === 0)
-                    <td><a href="{{ route('activeAdmin', ['adminEmail' => $admin->email]) }}" class="btn btn-primary mb-4">Active Admin</a></td>
-                    @elseif($admin->status === 1)
-                        @if($admin->adminRole === "Super")
-                            <td><a href="#" class="btn btn-primary mb-4" style="background-color:gray; pointer-events: none;" >Deactive Admin</a></td>
-                        @else
-                            <td><a href="{{ route('deactiveAdmin', ['adminEmail' => $admin->email]) }}" class="btn btn-primary mb-4">Deactive Admin</a></td>
-                        @endif
-                    @endif
-                </tr>
-                @endforeach
-                </tbody>
-            @else
-              <tr style="color: black;">
-                <td colspan="8">
-                  No record found.
-                </td>
-              </tr>
-            @endif
-            </table>
+                  </table>
             </section>
           </main>
-        <br><br><br><br><br><br>
           <!-- content-wrapper ends -->
           <!-- partial:partials/_footer.html -->
-
+          
           <!-- partial -->
         </div>
+        @include('page.footer(Super)')
         <!-- main-panel ends -->
       </div>
       <script>

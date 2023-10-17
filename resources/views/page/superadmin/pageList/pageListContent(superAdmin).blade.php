@@ -42,7 +42,7 @@
   </style>
   </head>
   <body>
-        <div class="main-panel" id="mainPanel" style="margin-left: 260px;">
+        <div class="main-panel" id="mainPanel" style="margin-left: 260px; margin-bottom: 50px;">
           <div class="content-wrapper">
             <div style="text-align: center; background-color: #EBF5FB; height: 100%; display: flex; overflow: auto; flex-wrap: wrap;">
                 <div style="margin: auto; max-width: 800px; padding: 20px; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); background-color: #f5f5f5;">
@@ -87,6 +87,7 @@
             </div>
           </div>
           <!-- content-wrapper ends -->
+          @include('page.footer(Super)')
           <!-- partial -->
         </div>
         <!-- main-panel ends -->
