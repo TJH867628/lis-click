@@ -18,7 +18,6 @@
     <body class="d-flex flex-column h-100">
         @include('page.superadmin.navigationBar')
         @include('page.superadmin.editPublicationInfo.editPublicationInfoContent')
-        @include('page.footer')
         <!-- Bootstrap core JS-->
         <!-- Core theme JS-->
         <!--<script src="js/scripts.js"></script>-->

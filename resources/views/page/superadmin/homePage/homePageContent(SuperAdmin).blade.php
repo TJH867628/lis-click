@@ -362,7 +362,6 @@
           <!-- content-wrapper ends -->
           <!-- partial:partials/_footer.html -->
           <!-- Footer-->
-          @include('page.footer(Super)')
           <!-- partial -->
         </div>
         <!-- main-panel ends -->
