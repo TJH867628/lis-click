@@ -40,93 +40,154 @@
         margin-left: 70px !important; /* Adjust to match your sidebar width */
         transition: margin-left 0.3s ease; /* Smooth transition */
       }
+
+      main.table {
+        width: 100% !important;
+        height: 70vh;
+        margin-bottom: 100px !important;
+        background-color: #fff5;
+        backdrop-filter: blur(7px);
+        box-shadow: 0 .4rem .8rem #0005;
+        border-radius: .8rem;
+        overflow: hidden;
+      }
+
+      .table__header {
+          z-index:0;
+          width: 100%;
+          height: 15%;
+          background-color: #fff4;
+          padding: 1rem 1rem;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+      }
+
+      .table__body {
+        position: relative;
+        width: 95%;
+        max-height: calc(84% - 1.6rem);
+        background-color: #fffb;
+
+        margin: .8rem auto;
+        border-radius: .6rem;
+
+        overflow: auto;
+        overflow: overlay;
+      }
+
+      .table__body::-webkit-scrollbar{
+          width: 0.5rem;
+          height: 0.5rem;
+      }
+
+      .table__body::-webkit-scrollbar-thumb{
+          border-radius: .5rem;
+          background-color: #0004;
+          visibility: hidden;
+      }
+
+      .table__body:hover::-webkit-scrollbar-thumb{ 
+          visibility: visible;
+      }
+
+      table {
+          width: 100%;
+      }
+
+      tr{
+        border: solid 1px black;
+      }
   </style>
   </head>
   <body>
         <!-- partial -->
         <div class="main-panel" id="mainPanel" style="margin-left: 260px;">
           <div class="content-wrapper">
-            <div class="table-container">
-                <h2 style="color: black ;">Admin List</h2>
-                @if($message = Session::get('updateSuccess'))
-                    <span class="success">{{ $message }}</span>
-                @endif
-                <table id="adminTable" class="display">
-                <thead>
-                <tr>
-                    <th>
-                        Email<br>
-                    </th>
-                    <th>
-                        Name<br>
-                    </th>
-                    <th>
-                        Phone Number<br>
-                    </th>
-                    <th>
-                        Status<br>
-                    </th>
-                    <th>
-                        Role<br>
-                    </th>
-                    <th>
-                        Ic No<br>
-                    </th>
-                    <th>
-                        Created At<br>
-                    </th>
-                    <th>
-                        Updated At<br>
-                    </th>
-                    <th>
-                      Action
-                    </th>
-                </tr>
-                </thead>
-              @if(isset($admin))
-                <tbody>
-                @foreach($admin as $admin)
-                <tr>
-                    <td>{{ $admin->email }}</td>
-                    <td>{{ $admin->name }}</td>
-                    <td>{{ $admin->phoneNumber }}</td>
-                    @if($admin->status === 0)
-                      <td>Deactived</td>
-                    @elseif($admin->status === 1)
-                      <td>Active</td>
+            <main class="table">
+                <section class="table__header">
+                    <h1>Admin List</h1>
+                </section>
+                <section class="table__body">
+                  @if($message = Session::get('updateSuccess'))
+                      <span class="success">{{ $message }}</span>
+                  @endif
+                  <table id="adminTable" class="display">
+                      <thead>
+                        <tr>
+                            <th>
+                                Email<br>
+                            </th>
+                            <th>
+                                Name<br>
+                            </th>
+                            <th>
+                                Phone Number<br>
+                            </th>
+                            <th>
+                                Status<br>
+                            </th>
+                            <th>
+                                Role<br>
+                            </th>
+                            <th>
+                                Ic No<br>
+                            </th>
+                            <th>
+                                Created At<br>
+                            </th>
+                            <th>
+                                Updated At<br>
+                            </th>
+                            <th>
+                              Action
+                            </th>
+                        </tr>
+                      </thead>
+                      @if(isset($admin))
+                      <tbody>
+                        @foreach($admin as $admin)
+                        <tr>
+                            <td>{{ $admin->email }}</td>
+                            <td>{{ $admin->name }}</td>
+                            <td>{{ $admin->phoneNumber }}</td>
+                            @if($admin->status === 0)
+                              <td>Deactived</td>
+                            @elseif($admin->status === 1)
+                              <td>Active</td>
+                            @endif
+                            <td>{{ $admin->adminRole }}</td>
+                            <td>{{ $admin->IC_No }}</td>
+                            <td>{{ $admin->created_at }}</td>
+                            <td>{{ $admin->updated_at }}</td>
+                            @if($admin->status === 0)
+                            <td><a href="{{ route('activeAdmin', ['adminEmail' => $admin->email]) }}" class="btn btn-primary mb-4">Active Admin</a></td>
+                            @elseif($admin->status === 1)
+                                @if($admin->adminRole === "Super")
+                                    <td><a href="#" class="btn btn-primary mb-4" style="background-color:gray; pointer-events: none;" >Deactive Admin</a></td>
+                                @else
+                                    <td><a href="{{ route('deactiveAdmin', ['adminEmail' => $admin->email]) }}" class="btn btn-primary mb-4">Deactive Admin</a></td>
+                                @endif
+                            @endif
+                        </tr>
+                        @endforeach
+                      </tbody>
+                    @else
+                      <tr style="color: black;">
+                        <td colspan="8">
+                          No record found.
+                        </td>
+                      </tr>
                     @endif
-                    <td>{{ $admin->adminRole }}</td>
-                    <td>{{ $admin->IC_No }}</td>
-                    <td>{{ $admin->created_at }}</td>
-                    <td>{{ $admin->updated_at }}</td>
-                    @if($admin->status === 0)
-                    <td><a href="{{ route('activeAdmin', ['adminEmail' => $admin->email]) }}" class="btn btn-primary mb-4">Active Admin</a></td>
-                    @elseif($admin->status === 1)
-                        @if($admin->adminRole === "Super")
-                            <td><a href="#" class="btn btn-primary mb-4" style="background-color:gray; pointer-events: none;" >Deactive Admin</a></td>
-                        @else
-                            <td><a href="{{ route('deactiveAdmin', ['adminEmail' => $admin->email]) }}" class="btn btn-primary mb-4">Deactive Admin</a></td>
-                        @endif
-                    @endif
-                </tr>
-                @endforeach
-                </tbody>
-            @else
-              <tr style="color: black;">
-                <td colspan="8">
-                  No record found.
-                </td>
-              </tr>
-            @endif
-            </table>
-        </div>
-        <br><br><br><br><br><br>
-          </div>
+                  </table>
+            </section>
+          </main>
           <!-- content-wrapper ends -->
           <!-- partial:partials/_footer.html -->
-
+          
           <!-- partial -->
         </div>
+        @include('page.footer(Super)')
         <!-- main-panel ends -->
       </div>
       <script>

@@ -43,7 +43,7 @@
   </head>
   <body>
         <!-- partial -->
-        <div class="main-panel" id="mainPanel" style="margin-left: 260px;">
+        <div class="main-panel" id="mainPanel" style="margin-left: 260px; margin-bottom: 50px;">
           <div class="content-wrapper">
           <form action="registerAdmin" method="post">
                 @csrf
@@ -99,6 +99,7 @@
           </div>
           <!-- content-wrapper ends -->
           <!-- partial:partials/_footer.html -->
+          @include('page.footer(Super)')
           <!-- partial -->
         </div>
         <!-- main-panel ends -->

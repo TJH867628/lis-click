@@ -67,7 +67,6 @@
         <br><br><br><br><br>
         @include('page.superadmin.registerNewAdmin.registerNewAdminContent')
         </main>
-        @include('page.footer')
         <!-- Bootstrap core JS-->
         <!-- Core theme JS-->
         <!--<script src="js/scripts.js"></script>-->
