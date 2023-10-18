@@ -30,6 +30,7 @@
         box-shadow: 0 .4rem .8rem #0005;
         border-radius: .8rem;
         overflow: hidden;
+        margin-top: 10%;
     }
 
     table th{
