@@ -98,6 +98,23 @@
       tr{
         border: solid 1px black;
       }
+      
+      @media screen and (max-width: 767px) {
+        .sidebar-minimized {
+          width: 70%; /* Adjust as needed */
+        }
+
+        .main-panel{
+          margin-left: 0 !important;
+        }
+
+        .main-panel-expanded {
+          margin-left: 0 !important; /* Adjust to match your sidebar width */
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a shadow */
+          transition: margin-left 0.3s ease; /* Smooth transition */
+        }
+
+      }
   </style>
   </head>
   <body>
