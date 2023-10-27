@@ -41,6 +41,13 @@
         transition: margin-left 0.3s ease; /* Smooth transition */
       }
 
+      @media screen and (max-width: 767px) {
+        .main-panel-expanded {
+          margin-left: 0 !important; /* Adjust to match your sidebar width */
+          transition: margin-left 0.3s ease; /* Smooth transition */
+        }
+      }
+
   </style>
   </head>
   <body>
