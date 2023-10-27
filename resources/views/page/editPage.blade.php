@@ -108,8 +108,9 @@
   form.addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent form submission
     var image = document.querySelector('img');
-    console.log(originalImage);
-    image.parentNode.replaceChild(originalImage, image);
+    if(image){
+      image.parentNode.replaceChild(originalImage, image);
+    }
     // Update the value of the editableContent input field with the HTML content
     var updatedContent = divContainer.innerHTML;
     var updatedContentInput = document.createElement('input');

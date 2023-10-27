@@ -37,7 +37,7 @@
     <br><br>
     <span class="table-Header"><strong>Your manuscript details are as follow:</strong></span>
     <br><br>
-                                                                                                                                @if(isset($submissionInfo))
+                                                                                                                                                                @if(isset($submissionInfo))
         <table id="acceptancLetterDetailsTable" style="border: 1px solid black; border-collapse: collapse;">
         <tr>
             <td style="border: 1px solid black; padding:1%;" >ID</td>
@@ -78,7 +78,7 @@
         </tr>
     </table>
             @endif
-                                                                            
+                                                                                        
     <br>
     <span name="content">Kindly make sure to complete the payment before the deadline and thank you for considering the 9th International Conference Liga Ilmu Serantau(LIS) 2023 as your preffered conference.We look forward to seeing you at the conference</span>
     <br><br>
