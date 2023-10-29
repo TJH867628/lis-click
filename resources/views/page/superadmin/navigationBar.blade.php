@@ -2,8 +2,8 @@
       <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="bgcolor">
           <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-            <a class="navbar-brand brand-logo" href="/superAdminHomePage"><img src="assets/images/Logo1 (1).png" alt="logo" class="logo-image" /></a>
-            <a class="navbar-brand brand-logo-mini" href="/superAdminHomePage"><img src="assets/images/Logo1 (1).png" alt="logo" class="mini-logo-image" /></a>
+            <a class="navbar-brand brand-logo" href="/superAdminHomePage"><img src="{{ $navigationBarLogo }}" alt="logo" class="logo-image" /></a>
+            <a class="navbar-brand brand-logo-mini" href="/superAdminHomePage"><img src="{{ $navigationBarLogo }}" alt="logo" class="mini-logo-image" /></a>
           </div>
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-stretch">

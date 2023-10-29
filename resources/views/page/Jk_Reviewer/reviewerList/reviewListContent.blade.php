@@ -18,14 +18,14 @@
     }
 
     body {
-        min-height: 100vh;
+        min-height: 125%;
         background: url("../images/tblBackground.jpg") center / cover;
         display: flex;
         justify-content: center;
     }
 
     main.table {
-        margin-top: 5%;
+        margin-top: 2%;
         width: 97vw !important;
         height: 70vh;
         background-color: #fff5;

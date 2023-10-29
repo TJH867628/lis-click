@@ -138,3 +138,4 @@ Route::get('evaluationForm/generatePDFEvaluationForm/{id}',[ReviewerController::
 Route::post('/superadmin/pageList/conferencesDownload/editExistingConferencesFees/{id}', [ConferencesController::class, 'editExistingConferencesFees'])->name('editExistingConferencesFees');
 Route::post('/superadmin/pageList/conferencesDownload/editExistingConferencesDate/{id}', [ConferencesController::class, 'editExistingConferencesDate'])->name('editExistingConferencesDate');
 Route::post('/superadmin/pageList/conferencesDownload/addNewConferencesDate', [ConferencesController::class, 'addNewConferencesDate'])->name('addNewConferencesDate');
+Route::post('/superadmin/pageList/websiteLogo/editLogo/{id}', [SuperAdminController::class, 'editLogo'])->name('editLogo');

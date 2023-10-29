@@ -7,7 +7,7 @@
         <meta name="author" content="" />
         <title>Edit Gallery</title>
         <!-- Favicon-->
-            <link rel="icon" type="image/x-icon" href="/images/Logo_Title.png" />
+            <link rel="icon" type="image/x-icon" href="{{ $favicon }}" />
 
         <!-- Bootstrap icons-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
@@ -18,7 +18,6 @@
     <body class="d-flex flex-column h-100">
         <main class="flex-shrink-0">
             @csrf
-        @include('page.superadmin.navigationBar')
         @include('page.superadmin.editGallery.editGalleryContent')
         @include('page.footer')
         <!-- Bootstrap core JS-->

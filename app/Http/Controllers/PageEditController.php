@@ -39,6 +39,11 @@ class PageEditController extends Controller
             }
 
             return view('page.superadmin.editConferencesInfo.editConferencesInfo',['conferencesFees' => $conferencesFees,'conferencesDate' => $conferencesDate]);
+            
+        }elseif($pageName == 'Website Logo'){
+            $allLogo = tbl_masterdata::where('masterdata_type','website_logo')->get();
+
+            return view('page.superadmin.editWebsiteLogo.editWebsiteLogo',['allLogo' => $allLogo]);
         }else{
             $page = tbl_page::where('pageName', $pageName)->first(); 
             $pagePath = $page->pagePath;

@@ -1,4 +1,4 @@
-    <link rel="icon" type="image/x-icon" href="/images/Logo_Title.png" />
+    <link rel="icon" type="image/x-icon" href="{{ $favicon }}" />
 
     <!-- Bootstrap icons-->
     <style>

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\tbl_account;
+use App\Models\tbl_masterdata;
 use App\Mail\emailVerficationOTP;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;

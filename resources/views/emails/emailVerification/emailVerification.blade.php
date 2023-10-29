@@ -19,6 +19,7 @@
     </style>
 </head>
 <body style="background-color: white;">
+    @include('emails.header')
     <h2>LIS-CLICK Email Verification</h2>
     <h3>LIS-CLICK</h3>
     <div class="otp">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\tbl_admin_info;
+use App\Models\tbl_masterdata;
 use App\Models\tbl_participants_info;
 use App\Models\tbl_page;
 use Illuminate\Http\Request;
@@ -68,6 +69,25 @@ class SuperAdminController extends Controller
             }else{
             return redirect('login')->with('fail','Login Session Expire,Please Login again');
         }
+    }
+
+    public function editLogo(Request $request,$id){
+        $img = $request->file('image');
+        $date = now();
+        $formatted_date = $date->format('YmdHis');
+        $logo = tbl_masterdata::where('id',$id)->first();
+
+        if($img != NULL && $img != ""){
+            $imgName = $formatted_date . "_" . $logo->masterdata_name  . "." . $img->getClientOriginalExtension();
+            $img->move(public_path('images'),$imgName);
+            $imgSrc = '/images/' . $imgName;
+            $logo->masterdata_value = $imgSrc;
+            $logo->updated_at = $date;
+        }
+
+        $logo->save();
+        
+        return redirect()->back()->with('success','Logo updated successfully');
     }
 
 }
