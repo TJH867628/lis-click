@@ -41,7 +41,7 @@
         transition: margin-left 0.3s ease; /* Smooth transition */
       }
 
-      @media screen and (max-width: 767px) {
+      @media screen and (max-width: 950px) {
         .sidebar-minimized {
           width: 70%; /* Adjust as needed */
         }

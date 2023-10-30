@@ -425,7 +425,7 @@
                                 <div class=btnreview>
                                     <button type="submit" class="btn btn-primary mb-4" style="margin-right: -1%;"><i class="fas fa-sync-alt" style="padding: 5px;"></i>Update Reviewer</button>
 
-                                    <a href="{{ route('cancelReviewer', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4" style="margin-right: 1%;"><i class="fas fa-times" style="padding: 5px;"></i>Cancel Reviewer</a>
+                                    <a href="{{ route('cancelReviewer', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4" style="margin-right: 1%; background-color: rgb(255, 102, 102);"><i class="fas fa-times" style="padding: 5px;"></i>Cancel Reviewer</a>
                                 </div>
                             </form>
                                 
@@ -446,16 +446,16 @@
                                 <p class="status shipped">Pending</p>
                             @else
                                 @if($submissionInfo->dataEvaluationForm->paper_id_number == $submissionInfo->submissionCode)
-                                    <a href="{{ route('evaluationForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4" style="float:left;"><i class="fas fa-calculator" style="padding: 5px; "></i>Evaluate Form</a><br>
+                                    <a href="{{ route('evaluationForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4" style="float:left; background-color: #4CAF50;"><i class="fas fa-calculator" style="padding: 5px;"></i>Evaluate Form</a><br>
                                 @endif
                                 @if($submissionInfo->evaluationFormLink != NULL)
-                                    <a href="{{ route('downloadEvaluationForm', ['filename' => $submissionInfo->evaluationFormLink]) }}" target="_blank" class="btn btn-primary mb-4" style="float:left;"><i class="fa-solid fa-download" style="padding: 5px;"></i>Evaluate Form(Reviewer 1)</a><br>
+                                    <a href="{{ route('downloadEvaluationForm', ['filename' => $submissionInfo->evaluationFormLink]) }}" target="_blank" class="btn btn-primary mb-4" style="float:left; background-color: #4CAF50;"><i class="fa-solid fa-download" style="padding: 5px;"></i>Evaluate Form(Reviewer 1)</a><br>
                                 @else
                                     <label style="padding:1%;" class="status cancelled"><strong>Reviewer 1</strong>'s Evaluation Form haven't submitted </label><br>
                                 @endif
                                 @if($submissionInfo->reviewer2ID != null)
                                     @if($submissionInfo->evaluationFormLink2 != NULL)
-                                        <a href="{{ route('downloadEvaluationForm', ['filename' => $submissionInfo->evaluationFormLink2]) }}" target="_blank" class="btn btn-primary mb-4" style="float:left;"><i class="fa-solid fa-download" style="padding: 5px;"></i>Evaluate Form(Reviewer 2)</a><br>
+                                        <a href="{{ route('downloadEvaluationForm', ['filename' => $submissionInfo->evaluationFormLink2]) }}" target="_blank" class="btn btn-primary mb-4" style="float:left; background-color: #4CAF50;"><i class="fa-solid fa-download" style="padding: 5px;"></i>Evaluate Form(Reviewer 2)</a><br>
                                     @else
                                         <label style="padding:1%;" class="status cancelled"><strong>Reviewer 2</strong>'s Evaluation Form haven't submitted</label><br>
                                     @endif

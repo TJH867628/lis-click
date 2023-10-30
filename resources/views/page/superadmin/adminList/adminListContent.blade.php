@@ -99,7 +99,7 @@
         border: solid 1px black;
       }
       
-      @media screen and (max-width: 767px) {
+      @media screen and (max-width: 950px) {
         .sidebar-minimized {
           width: 70%; /* Adjust as needed */
         }
