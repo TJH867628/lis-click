@@ -173,18 +173,18 @@
                                             
                                             </div>
                                             @if($message = Session::get('account-success'))
-                                            <div class="alert alert-success">
-                                                <strong>{{ $message }}</strong>
-                                            </div>
-                                        @elseif($message = Session::get('password-success'))
-                                            <div class="alert alert-success">
-                                                <strong>{{ $message }}</strong>
-                                            </div>
-                                        @elseif($message = Session::get('password-fail'))
-                                            <div class="alert alert-danger">
-                                                <strong>{{ $message }}</strong>
-                                            </div>
-                                        @endif
+                                                <div class="alert alert-success">
+                                                    <strong>{{ $message }}</strong>
+                                                </div>
+                                            @elseif($message = Session::get('password-success'))
+                                                <div class="alert alert-success">
+                                                    <strong>{{ $message }}</strong>
+                                                </div>
+                                            @elseif($message = Session::get('password-fail'))
+                                                <div class="alert alert-danger">
+                                                    <strong>{{ $message }}</strong>
+                                                </div>
+                                            @endif
                                             <div>
                                                 <button class="btn btn-primary">Update</button>
                                             </div>

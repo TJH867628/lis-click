@@ -1,7 +1,7 @@
       <!-- partial:partials/_navbar.html -->
       <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="bgcolor">
-          <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+          <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center ">
             <a class="navbar-brand brand-logo" href="/superAdminHomePage"><img src="{{ $navigationBarLogo }}" alt="logo" class="logo-image" /></a>
             <a class="navbar-brand brand-logo-mini" href="/superAdminHomePage"><img src="{{ $navigationBarLogo }}" alt="logo" class="mini-logo-image" /></a>
           </div>
@@ -54,6 +54,12 @@
             <li class="nav-item">
               <a class="nav-link" href="/adminList">
                 <span class="menu-title">Admin List</span>
+                <i class="mdi mdi-format-list-bulleted menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/submissionStatus">
+                <span class="menu-title">All Submission</span>
                 <i class="mdi mdi-format-list-bulleted menu-icon"></i>
               </a>
             </li>

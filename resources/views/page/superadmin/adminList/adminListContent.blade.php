@@ -127,7 +127,9 @@
                 </section>
                 <section class="table__body">
                   @if($message = Session::get('updateSuccess'))
-                      <span class="success">{{ $message }}</span>
+                    <div class="alert alert-success">
+                        <strong>{{ $message }}</strong>
+                    </div>
                   @endif
                   <table id="adminTable" class="display">
                       <thead>

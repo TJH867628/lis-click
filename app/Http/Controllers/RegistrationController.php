@@ -31,7 +31,9 @@ class RegistrationController extends Controller
             $password = $request -> input('password1');
             $name = $request -> input('name');//get name from user
             $IC_No = $request -> input('IC_No');//get IC_No from user
+            $countryCode = $request -> input('countryCode');//get Country Code from user
             $phoneNumber = $request -> input('phoneNumber');//get Phone Number from user
+            $phoneNumber = $countryCode .'-'. $phoneNumber;
             $salutation = $request -> input('salutation');//get title from user
             if($salutation == "Others"){
                 $salutation = $request -> input('salutationInput');

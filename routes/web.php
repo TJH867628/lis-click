@@ -127,6 +127,7 @@ Route::get('/floorManager/presentationSchedule/deleteSchedule/{group}', [FloorMa
 Route::get('/floorManager/presentationGroup', [FloorManagerController::class, 'presentationGroup'])->name('presentationGroup');
 Route::post('/floorManager/presentationGroup/editSubmissionPresentationGroup/{submissionCode}', [FloorManagerController::class, 'editSubmissionPresentationGroup'])->name('editSubmissionPresentationGroup');
 Route::get('/participants/presentationSchedule', [FloorManagerController::class, 'presentationSchedule']);
+Route::get('/visitor/presentationSchedule', [FloorManagerController::class, 'presentationSchedule']);
 Route::post('/superadmin/pageList/publicationList/editExistingPublication/{id}', [PublicationController::class, 'editExistingPublication'])->name('editExistingPublication');
 Route::post('/superadmin/pageList/publicationList/uploadNewPublication', [PublicationController::class, 'uploadNewPublication'])->name('uploadNewPublication');
 Route::post('/superadmin/pageList/conferencesDownload/editExistingConferencesDownload/{id}', [ConferencesController::class, 'editExistingConferencesDownload'])->name('editExistingConferencesDownload');
@@ -139,3 +140,4 @@ Route::post('/superadmin/pageList/conferencesDownload/editExistingConferencesFee
 Route::post('/superadmin/pageList/conferencesDownload/editExistingConferencesDate/{id}', [ConferencesController::class, 'editExistingConferencesDate'])->name('editExistingConferencesDate');
 Route::post('/superadmin/pageList/conferencesDownload/addNewConferencesDate', [ConferencesController::class, 'addNewConferencesDate'])->name('addNewConferencesDate');
 Route::post('/superadmin/pageList/websiteLogo/editLogo/{id}', [SuperAdminController::class, 'editLogo'])->name('editLogo');
+Route::post('/superadmin/submissionList/withdrawSubmission/{submissionCode}', [SuperAdminController::class, 'withdrawSubmission'])->name('withdrawSubmission');

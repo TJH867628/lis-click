@@ -42,7 +42,7 @@ class submissionStatusController extends Controller
             $allSubmissionInfo = tbl_submission::all();
             $allReviewerInfo = tbl_admin_info::where('adminRole','Reviewer')->get();
             foreach ($allSubmissionInfo as $key => $submissionInfo) {
-                $paymentStatus = tbl_payment::where('submissionCode', $submissionInfo->submissionCode)->first();
+                $paymentStatus = tbl_payment::where('submissionCode', $submissionInfo->submissionCode)->get();
                 $correction = tbl_correction::where('submissionCode',$submissionInfo->submissionCode)->get();
                 $correctionCount = $correction->count();
                 $latestReturnCorrection = tbl_correction::where('numberOfTimes',$correctionCount)->first();
@@ -53,10 +53,8 @@ class submissionStatusController extends Controller
                 $allSubmissionInfo[$key]->correction = $correction;
                 $allSubmissionInfo[$key]->latestReturnCorrection = $latestReturnCorrection;
             }
-
-
-
-            return view('page.submissionStatusPage(Super Admin)',['userSession'=>$userSession,'userSubmissionInfo' => $allSubmissionInfo,'allReviewerInfo' => $allReviewerInfo]);
+            
+            return view('page.superadmin.submissionStatus(SuperAdmin).submissionStatus',['userSession'=>$userSession,'userSubmissionInfo' => $allSubmissionInfo,'allReviewerInfo' => $allReviewerInfo]);
         }elseif(session()->has('LoggedJKReviewer')){
             $userSession = session()->get('LoggedJKReviewer');
             $allSubmissionInfo = tbl_submission::all();

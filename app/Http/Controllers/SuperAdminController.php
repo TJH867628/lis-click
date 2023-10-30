@@ -5,6 +5,7 @@ use App\Models\tbl_admin_info;
 use App\Models\tbl_masterdata;
 use App\Models\tbl_participants_info;
 use App\Models\tbl_page;
+use App\Models\tbl_submission;
 use Illuminate\Http\Request;
 
 class SuperAdminController extends Controller
@@ -88,6 +89,28 @@ class SuperAdminController extends Controller
         $logo->save();
         
         return redirect()->back()->with('success','Logo updated successfully');
+    }
+
+    public function withdrawSubmission(Request $request,$submissionCode){
+        $reason = $request->input('reason');
+        $submission = tbl_submission::where('submissionCode',$submissionCode)->first();
+        if($reason == '' || is_null($reason)){
+            return redirect()->back()->with('error','Please enter a reason for the withdraw of submission Code ' . $submissionCode);
+        }else if($reason == 'undoWithdraw'){
+            $submission->withdraw = false;
+            $submission->withdraw_reason = null;
+            $submission->save();
+            return redirect()->back()->with('success','Submission '. $submissionCode . ' undo withdraw successfully');
+        }
+
+        if(isset($submission)){
+            $submission->withdraw = true;
+            $submission->withdraw_reason = $reason;
+            $submission->save();
+            return redirect()->back()->with('success','Submission '. $submissionCode . ' withdraw successfully');
+        }else{
+            return redirect()->back()->with('error','Submission '. $submissionCode . ' not found');
+        }
     }
 
 }

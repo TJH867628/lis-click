@@ -217,12 +217,17 @@
                                                 
 
 
-                                                <div class="form-group col-md-6">
+                                                <div class="form-group col-md-5">
                                                     <label for="IC_No">IC Number:</label>
                                                     <input type="text" name="IC_No" id="IC_No" class="form-control IC_No" placeholder="IC Number" required="required">
                                                 </div>
 
-                                                <div class="form-group col-md-6">
+                                                <div class="form-group col-md-2">
+                                                    <label for="countryCode">Country Code:</label>
+                                                    <input type="text" name="countryCode" id="phoneNumber" class="form-control phoneNumber" placeholder="Country Code" required="required">
+                                                </div>
+
+                                                <div class="form-group col-md-5">
                                                     <label for="phoneNumber">Phone Number:</label>
                                                     <input type="text" name="phoneNumber" id="phoneNumber" class="form-control phoneNumber" placeholder="Phone Number" required="required">
                                                 </div>

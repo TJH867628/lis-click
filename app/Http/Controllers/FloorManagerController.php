@@ -24,7 +24,8 @@ class FloorManagerController extends Controller
             
             return view('page.participants.presentationSchedule.presentationSchedule',["schedule"=>$schedule]);
         }else{
-            return redirect('login')->with('fail','Login Session Expire,Please Login again');
+            $schedule = tbl_presentation_schedule::all();
+            return view('page.visitor.presentationSchedule.presentationSchedule',["schedule"=>$schedule]);
         }
     }
 

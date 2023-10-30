@@ -487,6 +487,23 @@ $count = 0;
                             </div>
                             @endif
                         @endif
+                        @if($submissionInfo->withdraw === 1)
+                        <div style="margin-top: 10%;">
+                            <table>
+                                <tr>
+                                    <td rowspan="2">
+                                        <label style="color:#FF6969; font-weight: bold; font-size: large;">Withdraw</label>
+                                    </td>
+                                    <td>
+                                        <strong>Reason</strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="max-width:10px; overflow-wrap: break-word;">{{ $submissionInfo->withdraw_reason }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        @endif
                     </td>
 
 
@@ -640,7 +657,6 @@ $count = 0;
                     </td>
                     
                     <td>
-                        @if($submissionInfo->correctionPhase == 'readyForPresent')
                             @php
                                 $i = 0;
                                 $allComplete = false;
@@ -693,23 +709,30 @@ $count = 0;
                                     @endif
                                 </tr>
                             </table>
-                            @if(( $allComplete === false))
+                            @if($allComplete === false)
+                                @if( $submissionInfo->withdraw === 0 || $submissionInfo->withdraw == null)
                                 <button onclick="showPopup()" id="showPaymentMethod" style="margin: auto;">Show Payment Method</button>
-
-                        <form style="width: fit-content;" action="{{ route('uploadReceipt', ['submissionCode' => $submissionInfo->submissionCode]) }}" method="POST" enctype="multipart/form-data" class="file-upload-form">
-                            @csrf
-                            <p style="color: black; font-size: large;">Upload New Receipt</p>
-                            <label for="file-upload" class="file-upload-label">
-                                <span>Choose a file</span>
-                                <i class="fas fa-upload"></i>
-                            </label>
-                            <input id="file-upload" type="file" name="file" accept=".jpeg,.jpg,.png,application/pdf" onchange="enableUploadButton()"/>
-                            <button type="submit" class="file-upload-button">Upload</button>
-                        </form>
+                                <form style="width: fit-content;" action="{{ route('uploadReceipt', ['submissionCode' => $submissionInfo->submissionCode]) }}" method="POST" enctype="multipart/form-data" class="file-upload-form">
+                                    @csrf
+                                    <p style="color: black; font-size: large;">Upload New Receipt</p>
+                                    <label for="file-upload" class="file-upload-label">
+                                        <span>Choose a file</span>
+                                        <i class="fas fa-upload"></i>
+                                    </label>
+                                    <input id="file-upload" type="file" name="file" accept=".jpeg,.jpg,.png,application/pdf" onchange="enableUploadButton()"/>
+                                    <button type="submit" class="file-upload-button">Upload</button>
+                                </form>
+                                @endif
                             @endif
-                        @else
-                            <p class="status shipped">Waiting To Done The Correction Phase</p>
-                        @endif
+                            @if( $submissionInfo->withdraw === 1)
+                            <table class="table__body">
+                                <tr>
+                                    <td style="color:#FF6969; font-weight: bold; font-size:large;">
+                                        This submission had been withdrawed
+                                    </td>
+                                </tr>
+                            </table>
+                            @endif
                     </td> 
                 </tr>
             @endforeach
