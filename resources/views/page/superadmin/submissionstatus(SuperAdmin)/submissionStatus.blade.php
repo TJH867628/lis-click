@@ -20,7 +20,6 @@
 </head>
         @include('page.superadmin.navigationBar')
         @include('page.superadmin.submissionStatus(SuperAdmin).submissionStatusContent')
-        @include('page.footer')
 
         <!-- Bootstrap core JS-->
         <!-- Core theme JS-->

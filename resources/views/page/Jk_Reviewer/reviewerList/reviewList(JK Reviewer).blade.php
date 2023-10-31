@@ -22,7 +22,6 @@
         @include('page.Jk_Reviewer.navigationBar')
         <br><br><br><br><br>
         @include('page.Jk_Reviewer.reviewerList.reviewListContent')
-        <br><br><br><br><br><br>
         @include('page.footer')
         <!-- Bootstrap core JS-->
         <!-- Core theme JS-->

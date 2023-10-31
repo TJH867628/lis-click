@@ -5,6 +5,10 @@
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="/css/styles.css" rel="stylesheet" wfd-invisible="true">
 <style>
+    .navbar{
+        position:sticky;
+        top:0;
+    }
     * {
         margin: 0;
         padding: 0;

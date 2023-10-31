@@ -27,7 +27,7 @@
     main.table {
         margin-top: 2%;
         width: 97vw !important;
-        height: 70vh;
+        height: 70%;
         background-color: #fff5;
         backdrop-filter: blur(7px);
         box-shadow: 0 .4rem .8rem #0005;

@@ -27,10 +27,8 @@
 
     </head>
     <body class="d-flex flex-column h-100" style="background-color: white;">
-        <main class="flex-shrink-0">   
         @include('page.reviewer.navigationBar')
         @include('page.reviewer.pendingreview.pendingreviewContent',['submissionInfo' => $submissionInfo])
-        </main>
         @include('page.footer')
         <!-- Bootstrap core JS-->
         <!-- Core theme JS-->

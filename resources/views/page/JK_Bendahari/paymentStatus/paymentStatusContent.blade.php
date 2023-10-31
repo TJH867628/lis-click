@@ -296,7 +296,7 @@
                 $count = 0;
             @endphp
             @foreach($paymentDetails as $thisPaymentDetails)
-                @if(!(empty($thisPaymentDetails->paymentReceipt)) && $thisPaymentDetails->submissionInfo->correctionPhase == "readyForPresent" && $thisPaymentDetails->proofOfPayment != "unavailable")
+                @if((!empty($thisPaymentDetails->paymentReceipt)) && $thisPaymentDetails->proofOfPayment != "unavailable")
                 @php
                     $count++;
                 @endphp
@@ -328,6 +328,7 @@
                         <form action="{{ route('paymentStatusControl', ['paymentID' => $thisPaymentDetails->paymentID]) }}" method="POST">
                             @csrf
                             <input type="hidden" name="statusInput" value="">
+                            <input type="text" name="amount" placeholder="Amount" value="@if($thisPaymentDetails->amount)RM {{ $thisPaymentDetails->amount }}@endif"><br><br>
                             <select class="statusOption" name="statusOption">
                                 <option value="Complete">Complete</option>
                                 <option value="Pending For Verification" selected>Pending For Verification</option>

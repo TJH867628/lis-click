@@ -29,7 +29,6 @@
     <body class="d-flex flex-column h-100">
         <main class="flex-shrink-0">
         @include('page.reviewer.navigationBar')
-        <br><br><br><br><br>
         @include('page.reviewer.donereview.donereviewContent')
         </main>
         @include('page.footer')

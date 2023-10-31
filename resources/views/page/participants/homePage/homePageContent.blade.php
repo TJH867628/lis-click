@@ -1,4 +1,4 @@
-    <link rel="icon" type="image/x-icon" href="{{ $favicon }}" />
+<link rel="icon" type="image/x-icon" href="/images/Logo_Title.png">
 
 <!-- Bootstrap icons-->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" wfd-invisible="true">
@@ -11,7 +11,7 @@
         <div class="row gx-5 align-items-center justify-content-center">
             <div class="col-lg-8 col-xl-7 col-xxl-6">
                 <div class="my-5 text-center text-xl-start">
-                    <h1 class="display-5 fw-bolder text-black mb-2" style="--bs-text-opacity: 1;">Liga Ilmu Serantau 2023 9th International Conference</h1>
+                    <h1 class="display-5 fw-bolder text-black mb-2" style="--bs-text-opacity: 1;">Liga Ilmu Serantau 2023 9th International Conference<br></h1>
                     <p class="lead fw-normal text-black-50 mb-4">Welcome to the 9th annual Liga Ilmu Serantau 2023, a milestone event that celebrates almost a decade of research, and collaboration. Since its inception, this conference has brought together experts, researchers, practitioners, and enthusiasts from across industries to explore the latest developments and trends in many fields. </p>
                 </div>
             </div>

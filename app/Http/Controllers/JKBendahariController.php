@@ -104,8 +104,11 @@ class JKBendahariController extends Controller
     public function paymentStatusControl(Request $request,$paymentID){
         $paymentStatus = $request->input('statusInput');
         $paymentDetails = tbl_payment::where('paymentID',$paymentID)->first();
+        $amount = (double)substr($request->input('amount'),$this->isDigit($request->input('amount')));
+        $paymentDetails->amount = $amount;
         $paymentDetails->paymentStatus = $paymentStatus;
         $now = now();
+        $paymentDetails->updated_at = $now;
         if ($paymentDetails->paymentStatus == 'Complete') {
             $date = $now->format('Y-m-d H:i:s');
             $paymentDetails->confirmPaymentDate = $date;
@@ -118,6 +121,11 @@ class JKBendahariController extends Controller
         return redirect()->back()->with('success','Payment Status Updated Successfully');
     }
 
+    function isDigit($str) {
+        preg_match('/\d/', $str, $matches, PREG_OFFSET_CAPTURE);
+        return $matches[0][1] ?? null;
+    }
+
     public function sendPaymentConfirmationReceipt($submissionCode,$date){
         $paymentDetails = tbl_payment::where('submissionCode',$submissionCode)->get();
         $submissionInfo = tbl_submission::where('submissionCode',$submissionCode)->first();
@@ -125,5 +133,63 @@ class JKBendahariController extends Controller
         $userName = tbl_participants_info::where('email',$userEmail)->first()->name;
         $paymentMail = new paymentConfirmationReceipt($submissionInfo,$paymentDetails,$date,$userName);
         Mail::to($userEmail)->send($paymentMail);
+    }
+
+    public function bendahariDashboard(){
+        $paymentDetails = tbl_payment::whereYear('created_at', date('Y'))->whereNotNull('amount')->get();
+        $amount = 0;
+        $amountENG = 0; // Initialize the total amount for category ITC
+        $amountSSC = 0; // Initialize the total amount for category SSC
+        $amountITC = 0; // Initialize the total amount for category ITC
+        $amountEHE = 0; // Initialize the total amount for category EHE
+        $amountTVT = 0; // Initialize the total amount for category TVT
+        $amountREE = 0; // Initialize the total amount for category REE
+        $amountCOM = 0; // Initialize the total amount for category COM
+        $amountMDC = 0; // Initialize the total amount for category MDC
+        $amountOTH = 0; // Initialize the total amount for category OTH
+        $amountEachCategory = new \stdClass(); // Initialize $amountEachCategory as an object
+
+        foreach ($paymentDetails as $payment) {
+            $amount += $payment->amount; // Calculate the total amount across all payments
+
+            $subTheme = $payment->subTheme;
+            $categoryCode = substr($payment->submissionCode,5,3); // Initialize category code variable
+
+            // Determine category code based on subTheme
+            if ($categoryCode === "ENG") {
+                $amountENG += $payment->amount; // Add to the total amount for category ENG
+            } elseif ($categoryCode === "SSC") {
+                $amountSSC += $payment->amount; // Add to the total amount for category SSC
+            } elseif ($categoryCode === "ITC") {
+                $amountITC += $payment->amount; // Add to the total amount for category ITC
+            } elseif ($categoryCode === "EHE") {
+                $amountEHE += $payment->amount; // Add to the total amount for category EHE
+            } elseif ($categoryCode === "TVT") {
+                $amountTVT += $payment->amount; // Add to the total amount for category TVT
+            } elseif ($categoryCode === "REE") {
+                $amountREE += $payment->amount; // Add to the total amount for category REE
+            } elseif ($categoryCode === "COM") {
+                $amountCOM += $payment->amount; // Add to the total amount for category COM
+            } elseif ($categoryCode === "MDC") {
+                $amountMDC += $payment->amount; // Add to the total amount for category MDC
+            } elseif ($categoryCode === "OTH") {
+                $amountOTH += $payment->amount; // Add to the total amount for category OTH
+            }
+
+        }
+
+            // Set the 'amountENG' property in the object
+            $amountEachCategory->amountENG = $amountENG;
+            $amountEachCategory->amountSSC = $amountSSC; 
+            $amountEachCategory->amountITC = $amountITC; 
+            $amountEachCategory->amountEHE = $amountEHE; 
+            $amountEachCategory->amountTVT = $amountTVT; 
+            $amountEachCategory->amountREE = $amountREE; 
+            $amountEachCategory->amountCOM = $amountCOM; 
+            $amountEachCategory->amountMDC = $amountMDC; 
+            $amountEachCategory->amountOTH = $amountOTH; 
+        
+        // Now, you have total amounts for each category code:
+        return view('page.JK_Bendahari.dashboard.dashboard',['paymentDetails'=>$paymentDetails,'amountEachCategory' => $amountEachCategory,'amount'=>$amount]);
     }
 }

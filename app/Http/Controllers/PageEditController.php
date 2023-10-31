@@ -51,7 +51,7 @@ class PageEditController extends Controller
             $fileContents = $view->render();
             $editableContent = $this->generateEditableHTML($fileContents);
             $wrappedContent = $editableContent;
-            return view('page.editPage', ['editableContent' => $wrappedContent,'pageName' => $pageName]);
+            return view('page.superadmin.editPage.editPage', ['editableContent' => $wrappedContent,'pageName' => $pageName]);
         }
 
     }

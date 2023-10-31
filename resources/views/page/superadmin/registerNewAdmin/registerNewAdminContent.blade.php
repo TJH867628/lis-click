@@ -59,12 +59,17 @@
   </style>
   </head>
   <body>
-        <!-- partial -->
-        <div class="main-panel" id="mainPanel" style="margin-left: 260px;">
-          <div class="content-wrapper">
-          <form action="registerAdmin" method="post">
-                @csrf
-                <div class="form-group">
+    <!-- partial -->
+    <div class="main-panel" id="mainPanel" style="margin-left: 260px;">
+      <div class="content-wrapper">
+        <form action="registerAdmin" method="post">
+          @csrf
+          <div class="form-group">
+              <label for="salutation">Salutation :</label>
+              <input type="text" name="salutation" id="salutation" class="form-control" placeholder="Dr./Mr/Mrs">
+          </div>
+          
+          <div class="form-group">
                     <label for="role">Role :</label>
                     <select class="form-control" name="role" id="role">
                         @foreach($adminRole as $role)
@@ -96,10 +101,6 @@
                     <input type="text" name="phoneNumber" id="phoneNumber" class="form-control" placeholder="Phone Number">
                 </div>
 
-                <div class="form-group">
-                    <label for="salutation">Salutation :</label>
-                    <input type="text" name="salutation" id="salutation" class="form-control" placeholder="Dr./Mr/Mrs">
-                </div>
 
                 <div class="form-group">
                     <label for="organizationName">Organization Name :</label>

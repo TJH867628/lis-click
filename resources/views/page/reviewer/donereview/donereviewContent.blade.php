@@ -5,6 +5,11 @@
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="/css/styles.css" rel="stylesheet" wfd-invisible="true">
 <style>
+
+    .navbar{
+        position:sticky;
+        top:0;
+    }
     * {
         margin: 0;
         padding: 0;
@@ -21,7 +26,7 @@
     }
 
     main.table {
-        margin-bottom: 10vh;
+        margin-top: 2%;
         width: 87vw !important;
         height: 60vh;
         background-color: #fff5;

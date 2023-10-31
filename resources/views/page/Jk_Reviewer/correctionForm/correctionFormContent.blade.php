@@ -59,7 +59,7 @@
         }
 
         main.table {
-            margin-top: -15%;
+            margin-top: 15%;
             width: 82vw;
             height: fit-content;
             background-color: #fff5;
@@ -684,18 +684,33 @@
 <tr>
     <td colspan="4"  style="text-align: center;">
     @if($submission->correctionPhase == 'pending')
-        <a href="{{ route('doneCorrection', ['submissionCode' => $submission->submissionCode]) }}" class="btn btn-primary mb-4" style="margin-top: 2%; float:none;"><i class="fas fa-check"></i>Done Submission</a>
+        <a href="{{ route('doneCorrection', ['submissionCode' => $submission->submissionCode]) }}" onclick="return confirm('Are you sure you want to mark this submission as done?')" id="doneCorrectionBtn" class="btn btn-primary mb-4" style="margin-top: 2%; float:none;"><i class="fas fa-check"></i>Done Submission</a>
     @elseif($submission->correctionPhase == 'readyForPresent')
-        <a href="{{ route('unDoneCorrection', ['submissionCode' => $submission->submissionCode]) }}" class="btn btn-primary mb-4" style="margin-top: 2%; float:none;"><i class="fas fa-undo"></i>Undone Submission</a>
+        <a href="{{ route('unDoneCorrection', ['submissionCode' => $submission->submissionCode]) }}" onclick="return confirm('Are you sure you want to undone this submission')" id="undoneCorrectionBtn" class="btn btn-primary mb-4" style="margin-top: 2%; float:none;"><i class="fas fa-undo"></i>Undone Submission</a>
     @elseif($submission->correctionPhase == 'readyForPresent')
         <h5>Correction Phase is Done</h5>
         @if($submission->correctionPhase == 'pending')
-        <a href="{{ route('doneCorrection', ['submissionCode' => $submission->submissionCode]) }}" class="btn btn-primary mb-4" style="margin-top: 2%; float:none;"><i class="fas fa-check"></i>Done Submission</a>
+        <a href="{{ route('doneCorrection', ['submissionCode' => $submission->submissionCode]) }}" onclick="return confirm('Are you sure you want to mark this submission as done?')" id="doneCorrectionBtn" class="btn btn-primary mb-4" style="margin-top: 2%; float:none;"><i class="fas fa-check"></i>Done Submission</a>
         @elseif($submission->correctionPhase == 'readyForPresent')
-        <a href="{{ route('unDoneCorrection', ['submissionCode' => $submission->submissionCode]) }}" class="btn btn-primary mb-4" style="margin-top: 2%; float:none;"><i class="fas fa-undo"></i>Undone Submission</a>
+        <a href="{{ route('unDoneCorrection', ['submissionCode' => $submission->submissionCode]) }}" onclick="return confirm('Are you sure you want to undone this submission')"  id="undoneCorrectionBtn" class="btn btn-primary mb-4" style="margin-top: 2%; float:none;"><i class="fas fa-undo"></i>Undone Submission</a>
         @endif
     @endif
     </td>
+    <script>
+        $(document).ready(function(e){
+            $('#undoneCorrection').click(function(e){
+                e.preventDefault();
+                if(!confirm('Are you sure you want to undone this submission?')){
+                }
+            });
+
+            $('#doneCorrection').click(function(e){
+                e.preventDefault();
+                if(!confirm('Are you sure you want to undone this submission?')){
+                }
+            });
+        });
+    </script>
 </tr>
 </table>
     </section>

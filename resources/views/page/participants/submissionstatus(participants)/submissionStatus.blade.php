@@ -104,6 +104,12 @@
         .title{
             margin-top: 10%;
         }
+
+        footer {
+            position:fixed !important;
+            bottom: 0;
+            width: 100%;
+        }
     </style>
     </head>
     <body class="d-flex flex-column h-100">

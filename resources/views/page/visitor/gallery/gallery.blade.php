@@ -15,6 +15,13 @@
         <link href="css/styles.css" rel="stylesheet"/>
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     </head>
+    <style>
+        footer {
+            position:fixed !important;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
     <body class="d-flex flex-column h-100">
         <main class="flex-shrink-0">
             @csrf

@@ -153,6 +153,9 @@
                                 Ic No<br>
                             </th>
                             <th>
+                                Organization<br>
+                            </th>
+                            <th>
                                 Created At<br>
                             </th>
                             <th>
@@ -177,6 +180,7 @@
                             @endif
                             <td>{{ $admin->adminRole }}</td>
                             <td>{{ $admin->IC_No }}</td>
+                            <td>{{ $admin->organizationName }}</td>
                             <td>{{ $admin->created_at }}</td>
                             <td>{{ $admin->updated_at }}</td>
                             @if($admin->status === 0)
@@ -213,7 +217,7 @@
         $(".navbar-toggler").click(function() {
           $("#sidebar").toggleClass("sidebar-minimized");
           $("#mainPanel").toggleClass("main-panel-expanded");
-        });
+        }); 
       });
       </script>
     <!-- container-scroller -->

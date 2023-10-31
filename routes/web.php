@@ -141,3 +141,4 @@ Route::post('/superadmin/pageList/conferencesDownload/editExistingConferencesDat
 Route::post('/superadmin/pageList/conferencesDownload/addNewConferencesDate', [ConferencesController::class, 'addNewConferencesDate'])->name('addNewConferencesDate');
 Route::post('/superadmin/pageList/websiteLogo/editLogo/{id}', [SuperAdminController::class, 'editLogo'])->name('editLogo');
 Route::post('/superadmin/submissionList/withdrawSubmission/{submissionCode}', [SuperAdminController::class, 'withdrawSubmission'])->name('withdrawSubmission');
+Route::get('/bendahari/dashboard', [JKBendahariController::class, 'bendahariDashboard'])->name('bendahariDashboard');
