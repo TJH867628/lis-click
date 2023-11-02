@@ -8,7 +8,7 @@
         <title>Contact Us</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="{{ $favicon }}" />
-        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+        <script src="https://www.google.com/recaptcha/api.js"></script>
             <!-- Bootstrap icons-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -44,7 +44,7 @@
                                                 <div class="form-group col-md-12">
                                                     <textarea rows="6" name="message" class="form-control" placeholder="Your Message" required="required"></textarea>
                                                 </div>
-                                                <div class="g-recaptcha" data-sitekey="{{ config('services.recaptcha.key') }}"></div>
+                                                <div class="g-recaptcha" data-sitekey="{{ config('services.recaptcha_v3.site_key') }}"></div>
                                                 @if($message = Session::get('success'))
                                                 <div class="alert alert-success" style="text-align: center;  font-size:large; font-weight:bold;">
                                                     <p style="color:black;">{{ $message }}</p>
@@ -55,7 +55,7 @@
                                                 </div>
                                                 @endif
                                                 <div class="col-md-12 text-center">
-                                                    <button type="submit" value="Send message" name="submit" id="submitButton" class="btn btn-primary btn-contact-bg" title="Submit Your Message!">Send Message</button>
+                                                    <button type="submit" value="Send message" name="submit" id="submitButton" class="btn btn-primary btn-contact-bg g-recaptcha" data-sitekey="reCAPTCHA_site_key" data-callback='onSubmit' data-action='submit' title="Submit Your Message!">Send Message</button>
                                                 </div>
                                             </div>
                                         </form>
