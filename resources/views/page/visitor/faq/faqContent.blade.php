@@ -49,7 +49,7 @@
                                                 <div class="alert alert-success" style="text-align: center;  font-size:large; font-weight:bold;">
                                                     <p style="color:black;">{{ $message }}</p>
                                                 </div>
-                                                @else
+                                                @elseif($message = Session::get('error'))
                                                 <div class="alert alert-error" style="text-align: center;  font-size:large; font-weight:bold;">
                                                     <p style="color:black;">{{ $message }}</p>
                                                 </div>
