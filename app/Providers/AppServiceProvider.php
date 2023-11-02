@@ -26,6 +26,12 @@ class AppServiceProvider extends ServiceProvider
             $favicon = tbl_masterdata::where('masterdata_name', 'websiteFavicon')->first()->masterdata_value;
             $view->with('favicon', $favicon);
         });
+
+
+
+
+
+        
         
     }
 }
