@@ -44,8 +44,13 @@
                                                 <div class="form-group col-md-12">
                                                     <textarea rows="6" name="message" class="form-control" placeholder="Your Message" required="required"></textarea>
                                                 </div>
+                                                <div class="g-recaptcha" data-sitekey="{{ env('RECAPTCHA_SITE_KEY') }}"></div>
                                                 @if($message = Session::get('success'))
                                                 <div class="alert alert-success" style="text-align: center;  font-size:large; font-weight:bold;">
+                                                    <p style="color:black;">{{ $message }}</p>
+                                                </div>
+                                                @elseif($message = Session::get('error'))
+                                                <div class="alert alert-danger" style="text-align: center;  font-size:large; font-weight:bold;">
                                                     <p style="color:black;">{{ $message }}</p>
                                                 </div>
                                                 @endif

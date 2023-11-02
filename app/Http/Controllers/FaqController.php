@@ -33,18 +33,18 @@ class FaqController extends Controller
 
         // Build the cURL command
         // Execute the cURL request and capture the response
-        $response = Http::post('https://www.google.com/recaptcha/api/siteverify', [
-            'secret' => $secretKey,
-            'response' => $request->input('g-recaptcha-response'),
-        ]);
-    
-        $data = $response->json();
+        $response = exec("curl --request POST --url 'https://www.google.com/recaptcha/api/siteverify' --data 'secret=$secretKey&response={$request->input('g-recaptcha-response')}'", $output, $status);
         
-        if (!$data['success']) {
+        // Join the lines to create a single string
+        $jsonResponse = implode('', $output);
+        
+        // Remove any unnecessary characters and decode as JSON
+        $responseArray = json_decode($jsonResponse, true);
+        
+        if (!$responseArray['success']) {
             // reCAPTCHA verification failed. Handle accordingly.
             return redirect()->back()->with('error', 'reCAPTCHA verification failed.');
         }
-        // Join the lines to create a single string
         
         $name = $request->get('name');
         $userEmail = $request->get('email');

@@ -50,7 +50,7 @@
                                                     <p style="color:black;">{{ $message }}</p>
                                                 </div>
                                                 @elseif($message = Session::get('error'))
-                                                <div class="alert alert-error" style="text-align: center;  font-size:large; font-weight:bold;">
+                                                <div class="alert alert-danger" style="text-align: center;  font-size:large; font-weight:bold;">
                                                     <p style="color:black;">{{ $message }}</p>
                                                 </div>
                                                 @endif
