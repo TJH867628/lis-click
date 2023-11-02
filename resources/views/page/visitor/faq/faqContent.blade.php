@@ -9,8 +9,7 @@
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="{{ $favicon }}" />
         <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-
-        <!-- Bootstrap icons-->
+            <!-- Bootstrap icons-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet"/>
@@ -48,6 +47,10 @@
                                                 <div class="g-recaptcha" data-sitekey="{{ config('services.recaptcha.site_key') }}"></div>
                                                 @if($message = Session::get('success'))
                                                 <div class="alert alert-success" style="text-align: center;  font-size:large; font-weight:bold;">
+                                                    <p style="color:black;">{{ $message }}</p>
+                                                </div>
+                                                @else
+                                                <div class="alert alert-error" style="text-align: center;  font-size:large; font-weight:bold;">
                                                     <p style="color:black;">{{ $message }}</p>
                                                 </div>
                                                 @endif
