@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\contactUs;
 use App\Models\tbl_masterdata;
+use Illuminate\Support\Facades\Http;
 
 class FaqController extends Controller
 {
@@ -24,6 +25,17 @@ class FaqController extends Controller
     }
 
     function sendFaq(Request $request){
+        $response = Http::post('https://www.google.com/recaptcha/api/siteverify', [
+            'secret' => config('services.recaptcha.secret'),
+            'response' => $request->input('g-recaptcha-response'),
+        ]);
+    
+        $data = $response->json();
+        if (!$data['success']) {
+            // reCAPTCHA verification failed. Handle accordingly.
+            return redirect()->back()->with('error', 'reCAPTCHA verification failed.');
+        }
+        
         $name = $request->get('name');
         $userEmail = $request->get('email');
         $subject = $request->get('subject');
