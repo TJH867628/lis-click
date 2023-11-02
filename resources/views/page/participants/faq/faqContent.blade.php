@@ -93,4 +93,30 @@
         <!-- Core theme JS-->
         <!--<script src="js/scripts.js"></script>-->
     </body>
+    <script>
+  // This function is called when reCAPTCHA is completed
+  function enableSubmitButton() {
+    document.getElementById('submitButton').removeAttribute('disabled');
+  }
+
+  // Disable the submit button by default
+  document.getElementById('submitButton').setAttribute('disabled', 'disabled');
+
+  // Attach a listener to the reCAPTCHA widget
+  grecaptcha.ready(function() {
+    grecaptcha.execute('{{ env('RECAPTCHA_SITE_KEY') }}', { action: 'submit' }).then(function(token) {
+      // reCAPTCHA has been loaded and executed, enable the submit button
+      enableSubmitButton();
+    });
+  });
+
+  // Add a listener to check for reCAPTCHA completion
+  document.getElementById('submitButton').addEventListener('click', function(e) {
+    if (grecaptcha.getResponse() === '') {
+      e.preventDefault(); // Prevent form submission if reCAPTCHA is not completed
+      alert('Please complete the reCAPTCHA before submitting the form.');
+    }
+  });
+</script>
+
 </html>
