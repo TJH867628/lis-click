@@ -26,11 +26,12 @@ class FaqController extends Controller
 
     function sendFaq(Request $request){
         $response = Http::post('https://www.google.com/recaptcha/api/siteverify', [
-            'secret' => config('services.recaptcha_v3.secret_key'),
+            'secret' => config('services.recaptcha.secret'),
             'response' => $request->input('g-recaptcha-response'),
         ]);
     
         $data = $response->json();
+        dd($response);
         
         if (!$data['success']) {
             // reCAPTCHA verification failed. Handle accordingly.
