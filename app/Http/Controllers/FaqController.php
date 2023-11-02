@@ -25,15 +25,23 @@ class FaqController extends Controller
     }
 
     function sendFaq(Request $request){
-        $response = Http::post('https://www.google.com/recaptcha/api/siteverify', [
-            'secret' => config('services.recaptcha.secret'),
-            'response' => $request->input('g-recaptcha-response'),
-        ]);
-    
-        $data = $response->json();
-        dd($response);
+       // Replace 'YOUR_SECRET_KEY' with your actual reCAPTCHA secret key
+        $secretKey = env('RECAPTCHA_SECRET_KEY');
+
+        // Get the reCAPTCHA response from the request
+        $recaptchaResponse = $request->input('g-recaptcha-response');
+
+        // Build the cURL command
+        // Execute the cURL request and capture the response
+        $response = exec("curl --request POST --url 'https://www.google.com/recaptcha/api/siteverify' --data 'secret=$secretKey&response={$request->input('g-recaptcha-response')}'", $output, $status);
         
-        if (!$data['success']) {
+        // Join the lines to create a single string
+        $jsonResponse = implode('', $output);
+        
+        // Remove any unnecessary characters and decode as JSON
+        $responseArray = json_decode($jsonResponse, true);
+        
+        if (!$responseArray['success']) {
             // reCAPTCHA verification failed. Handle accordingly.
             return redirect()->back()->with('error', 'reCAPTCHA verification failed.');
         }
