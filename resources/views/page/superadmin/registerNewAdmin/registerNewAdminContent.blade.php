@@ -117,6 +117,7 @@
           </div>
           <!-- content-wrapper ends -->
           <!-- partial:partials/_footer.html -->
+          @include('page.footer(Super)')
           <!-- partial -->
         </div>
         <!-- main-panel ends -->

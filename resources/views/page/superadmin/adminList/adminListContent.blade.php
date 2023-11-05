@@ -210,6 +210,7 @@
           
           <!-- partial -->
         </div>
+        @include('page.footer(Super)')
         <!-- main-panel ends -->
       </div>
       <script>
