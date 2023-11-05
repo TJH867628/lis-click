@@ -142,3 +142,5 @@ Route::post('/superadmin/pageList/conferencesDownload/addNewConferencesDate', [C
 Route::post('/superadmin/pageList/websiteLogo/editLogo/{id}', [SuperAdminController::class, 'editLogo'])->name('editLogo');
 Route::post('/superadmin/submissionList/withdrawSubmission/{submissionCode}', [SuperAdminController::class, 'withdrawSubmission'])->name('withdrawSubmission');
 Route::get('/bendahari/dashboard', [JKBendahariController::class, 'bendahariDashboard'])->name('bendahariDashboard');
+Route::post('/JKReviewer/uploadCleanedDocument/{submissionCode}', [JKReviewerController::class, 'uploadCleanedDocument'])->name('uploadCleanedDocument');
+Route::get('/downloadCleanedDocument/{filename}', [JKReviewerController::class, 'downloadCleanedDocument'])->name('downloadCleanedDocument');
