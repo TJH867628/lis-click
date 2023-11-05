@@ -439,7 +439,7 @@
                                 </div>
                             </form>
                             @else
-                            <p class="detailsBox">Please upload Cleaned File Before Assign Reviewer</p>
+                            <p class="detailsBox">Please upload Cleaned Document Before Assign Reviewer</p>
                             @endif
                             </td>
                             <td>
