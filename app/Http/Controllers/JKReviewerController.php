@@ -271,4 +271,40 @@ class JKReviewerController extends Controller
                 return response()->file($file);
             }
         }
+
+        public function uploadCleanedDocument(Request $request,$submissionCode){
+            if(session()->has('LoggedJKReviewer') || session()->has('LoggedSuperAdmin')){
+                session()->start();
+                $submission = tbl_submission::where('submissionCode',$submissionCode)->first();
+                if ($request->hasFile('file')) {
+                    $file = $request->file('file');
+                    $timestamp = time();
+                    $dateString = date('YmdHis', $timestamp);
+                    $filename = 'Cleaned_'. $submission->submissionCode . "_" . $dateString . ".". $file->getClientOriginalExtension();
+                    $submission->cleanedDocument = $filename;
+                    $file->storeAs('cleanedDocument', $filename, 'public');
+                    $submission->save();
+                    return redirect()->back()->with('success', 'File uploaded successfully.');
+                }else{
+                    return redirect()->back();
+                }
+            }else{
+                return redirect('login')->with('fail','Login Session Expire,Please Login again');
+            }
+        }
+
+        public function downloadCleanedDocument($filename)
+        {
+            $file = 'storage/cleanedDocument/' . $filename;
+            $extension = pathinfo($file, PATHINFO_EXTENSION);
+    
+            if ($extension == 'pdf') {
+                return response()->file($file, [
+                    'Content-Type' => 'application/pdf',
+                    'Content-Disposition' => 'inline',
+                ]);
+            } elseif ($extension == 'doc' || $extension == 'docx') {
+                return response()->file($file);
+            }
+        }
 }

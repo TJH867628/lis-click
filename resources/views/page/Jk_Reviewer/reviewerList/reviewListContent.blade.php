@@ -175,172 +175,181 @@
         transition: .2s ease-in-out .5s;
     }
 
-        form {
-            color: black;
-            margin: auto;
-            margin-top: 50px;
-            margin-bottom: 30px;
-            width: 170px;
-            padding-bottom: 150px;
-            padding-top: 10px;
-            border: 1px solid #dee2e6;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-        }
+    .detailsBox{
+        margin: auto;
+        margin-top: 50px;
+        margin-bottom: 30px;
+        width: 170px;
+        border: 1px solid #dee2e6;
+        padding: 2%;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
 
-        .formturnin{
-            width: 190px;
-            height: 180px;
-        }
+    form {
+        color: black;
+        margin: auto;
+        margin-top: 50px;
+        margin-bottom: 30px;
+        width: 170px;
+        padding-bottom: 150px;
+        padding-top: 10px;
+        border: 1px solid #dee2e6;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
 
-        input[type="text"]{
-            width: 100%;
-            padding: 10px;
-            border: 1px solid black;
-            border-radius: 4px;
-            box-sizing: border-box;
-            margin-bottom: 20px;
-            width: 300px;
-            margin-top: 15px;
-            margin-right: 75%;
-        }
+    .formturnin{
+        width: 190px;
+        height: 180px;
+    }
 
-        input[type="datetime-local"] {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ced4da;
-            border-radius: 4px;
-            box-sizing: border-box;
-            margin-bottom: 20px;
-        }
+    input[type="text"]{
+        width: 100%;
+        padding: 10px;
+        border: 1px solid black;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-bottom: 20px;
+        width: 300px;
+        margin-top: 15px;
+        margin-right: 75%;
+    }
 
-        button {
-            background-color: #007bff;
-            color: white;
-            padding: 7px 25px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
+    input[type="datetime-local"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-bottom: 20px;
+    }
 
-        .deleteButton {
-            background-color: red;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            text-decoration: none;
-        }
+    button {
+        background-color: #007bff;
+        color: white;
+        padding: 7px 25px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
 
-        button:hover {
-            background-color: #0069d9;
-        } 
-        
-        .title {
-            margin-top: 10%;
-            text-align: center;
-        }
+    .deleteButton {
+        background-color: red;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        text-decoration: none;
+    }
 
-        .title h2 {
-            font-size: 36px;
-            font-weight: bold;
-            color: #007bff;
-        }
+    button:hover {
+        background-color: #0069d9;
+    } 
+    
+    .title {
+        margin-top: 10%;
+        text-align: center;
+    }
 
-        .file-upload-form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            margin-top: 20px;
-        }
+    .title h2 {
+        font-size: 36px;
+        font-weight: bold;
+        color: #007bff;
+    }
 
-        .file-upload-label {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 200px;
-            height: 50px;
-            background-color: #007bff;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease-in-out;
-        }
+    .file-upload-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+    }
 
-        .file-upload-label:hover {
-            background-color: #0062cc;
-        }
+    .file-upload-label {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 200px;
+        height: 50px;
+        background-color: #007bff;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease-in-out;
+    }
 
-        .file-upload-label span {
-            margin-right: 10px;
-        }
+    .file-upload-label:hover {
+        background-color: #0062cc;
+    }
 
-        #file-upload {
-            display: none;
-        }
+    .file-upload-label span {
+        margin-right: 10px;
+    }
 
-        .file-upload-button {
-            margin-top: 10px;
-            padding: 10px 20px;
-            background-color: lightgray;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease-in-out;
-        }
+    #file-upload {
+        display: none;
+    }
 
-        .file-upload-button:hover {
-            background-color: grey;
-        }
+    .file-upload-button {
+        margin-top: 10px;
+        padding: 10px 20px;
+        background-color: lightgray;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease-in-out;
+    }
 
-        select {
-            margin: 10px;
-            padding: 3px;
-        }
+    .file-upload-button:hover {
+        background-color: grey;
+    }
 
-        .btnreview{
-            margin-top: 20px;
-        }
+    select {
+        margin: 10px;
+        padding: 3px;
+    }
 
-        .downloadturnin{
-            margin-left: 9px;
-        }
+    .btnreview{
+        margin-top: 20px;
+    }
 
-        .uploadturnin{
-            padding: 10px;
-        }
+    .downloadturnin{
+        margin-left: 9px;
+    }
 
-        .status {
-            padding: .4rem 0;
-            border-radius: 2rem;
-            text-align: center;
-        }
+    .uploadturnin{
+        padding: 10px;
+    }
 
-        .status.delivered {
-            background-color: #86e49d;
-            color: #006b21;
-        }
+    .status {
+        padding: .4rem 0;
+        border-radius: 2rem;
+        text-align: center;
+    }
 
-        .status.cancelled {
-            background-color: #d893a3;
-            color: #b30021;
-        }
+    .status.delivered {
+        background-color: #86e49d;
+        color: #006b21;
+    }
 
-        .status.pending {
-            background-color: #ebc474;
-        }
+    .status.cancelled {
+        background-color: #d893a3;
+        color: #b30021;
+    }
 
-        .status.shipped {
-            background-color: #6fcaea;
-        }
+    .status.pending {
+        background-color: #ebc474;
+    }
 
-        
+    .status.shipped {
+        background-color: #6fcaea;
+    }
+
     </style>
 </head>
 <body>
@@ -409,7 +418,8 @@
                                 {{ $submissionInfo->reviewStatus }}
                             </td>             
                             <td>
-                            <form action="{{ route('updateReviewer', ['submissionCode' => $submissionInfo->submissionCode]) }}" method="POST">
+                            @if( $submissionInfo->cleanedDocument != null)
+                            <form action="{{ route('updateReviewer', ['submissionCode' => $submissionInfo->submissionCode]) }}" method="POST" onsubmit="return confirm('Are you sure you want to update the reviewer?');">
                                 @csrf
                                 <select name="reviewer" id="reviewer">
                                     @foreach($allReviewerInfo as $reviewerInfo)
@@ -417,27 +427,49 @@
                                     @endforeach
                                 </select>
                                 <select name="reviewer2" id="reviewer2">
-                                        <option value="None">None</option>
-                                        @foreach($allReviewerInfo as $reviewerInfo)
-                                            <option value="{{ $reviewerInfo->email }}">{{ $reviewerInfo->name }}</option>
-                                        @endforeach
+                                    <option value="None">None</option>
+                                    @foreach($allReviewerInfo as $reviewerInfo)
+                                        <option value="{{ $reviewerInfo->email }}">{{ $reviewerInfo->name }}</option>
+                                    @endforeach
                                 </select>
                                 <div class=btnreview>
                                     <button type="submit" class="btn btn-primary mb-4" style="margin-right: -1%;"><i class="fas fa-sync-alt" style="padding: 5px;"></i>Update Reviewer</button>
 
-                                    <a href="{{ route('cancelReviewer', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4" style="margin-right: 1%; background-color: rgb(255, 102, 102);"><i class="fas fa-times" style="padding: 5px;"></i>Cancel Reviewer</a>
+                                    <a href="{{ route('cancelReviewer', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4" style="margin-right: 1%; background-color: rgb(255, 102, 102);" onclick="return confirm('Are you sure you want to cancel the reviewer?');"><i class="fas fa-times" style="padding: 5px;"></i>Cancel Reviewer</a>
                                 </div>
                             </form>
-                                
+                            @else
+                            <p class="detailsBox">Please upload Cleaned Document Before Assign Reviewer</p>
+                            @endif
                             </td>
                             <td>
-                                <p>Download Submission File</p>
+                                <p>Original File</p>
                                 <a href="{{ route('downloadSubmission', ['filename' => $submissionInfo->file_name]) }}" target="_blank" class="btn btn-primary mb-4"><i class="fa-solid fa-download" style="padding: 5px;"></i>Download Orginal File</a>
                                 <p>Reviewed File</p>
                                 @if($submissionInfo->returnPaperLink == NULL)
                                     <p class="status cancelled">Return Paper Unavailable</p>
                                 @else
                                     <a href="{{ route('downloadReviewedFile', ['filename' => $submissionInfo->returnPaperLink]) }}" target="_blank" class="btn btn-primary mb-4"><i class="fa-solid fa-download" style="padding: 5px;"></i>Download Return File</a>
+                                @endif
+                                <p>Cleaned File</p>
+                                @if( $submissionInfo->cleanedDocument == null)
+                                <label for="">Unavailable</label>
+                                <form method="post" action="{{ route('uploadCleanedDocument',['submissionCode' => $submissionInfo->submissionCode]) }}" style="margin-top:2%;" class="detailsBox" enctype="multipart/form-data">
+                                    @csrf
+                                    <label>Choose File To Upload</label>
+                                    <div class="choose-file">                            
+                                        <div style="display: flex; align-items: center; margin-top:3%;">
+                                            <label class="btn btn-primary" style="font-size:medium; padding:2%; width:20%; margin-left:5%;">
+                                                <i class="fa-solid fa-file-import"></i>
+                                                <input type="file" id="turnInReport" accept="application/pdf" name="file" style="display: none;">
+                                            </label>
+                                            <span class="file-name" id="turnInReport-file-name" style="font-style: italic; color: #999; font-size:small; padding:0; margin-top:2%;">No File Selected</span>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary mb-4"><i class="fas fa-cloud-upload-alt" style="padding: 5px;"></i></i>Submit</button>
+                                </form>
+                                @else
+                                <a href="{{ route('downloadCleanedDocument', ['filename' => $submissionInfo->cleanedDocument]) }}" target="_blank" class="btn btn-primary mb-4"><i class="fa-solid fa-download" style="padding: 5px;"></i>Download Cleaned Document</a>
                                 @endif
                             </td>
 

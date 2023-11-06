@@ -263,7 +263,7 @@
                             Present Mode<br>
                         </th>
                         <th>    
-                            Download<br>
+                            Submission Document<br>
                         </th>
                         <th>    
                             Updated At<br>
@@ -297,7 +297,7 @@
                                         <td>{{ $submissionInfo->submissionType }}</td>
                                         <td>{{ $submissionInfo->subTheme }}</td>
                                         <td>{{ $submissionInfo->presentMode }}</td>
-                                        <td><a href="{{ route('downloadSubmission', ['filename' => $submissionInfo->file_name]) }}" class="btn btn-primary mb-4"><i class="fa-solid fa-download" style="padding: 5px;"></i>Download</a></td>
+                                        <td><a href="{{ route('downloadSubmission', ['filename' => $submissionInfo->cleanedDocument]) }}" class="btn btn-primary mb-4"><i class="fa-solid fa-download" style="padding: 5px;"></i>Download</a></td>
                                         <td>{{ $submissionInfo->updated_at }}</td>
                                         <td>
                                             <form action="{{ route('uploadReviewSubmission',['submissionCode' => $submissionInfo->submissionCode]) }}" method="POST" enctype="multipart/form-data" class="file-upload-form">
@@ -324,7 +324,7 @@
                                         <td>{{ $submissionInfo->submissionType }}</td>
                                         <td>{{ $submissionInfo->subTheme }}</td>
                                         <td>{{ $submissionInfo->presentMode }}</td>
-                                        <td><a href="{{ route('downloadSubmission', ['filename' => $submissionInfo->file_name]) }}" class="btn btn-primary mb-4"><i class="fa-solid fa-download" style="padding: 5px;"></i>Download</a></td>
+                                        <td><a href="{{ route('downloadSubmission', ['filename' => $submissionInfo->cleanedDocument]) }}" class="btn btn-primary mb-4"><i class="fa-solid fa-download" style="padding: 5px;"></i>Download</a></td>
                                         <td>{{ $submissionInfo->updated_at }}</td>
                                         <td>
                                             <form action="{{ route('uploadReviewSubmission',['submissionCode' => $submissionInfo->submissionCode]) }}" method="POST" enctype="multipart/form-data">
@@ -345,14 +345,13 @@
                                     @endif
                                 @endif
                             @else
-
                             <tr>
                             <td>{{ $submissionInfo->submissionCode }}</td>
                             <td>{{ $submissionInfo->submissionTitle }}</td>
                             <td>{{ $submissionInfo->submissionType }}</td>
                             <td>{{ $submissionInfo->subTheme }}</td>
                             <td>{{ $submissionInfo->presentMode }}</td>
-                            <td><a href="{{ route('downloadSubmission', ['filename' => $submissionInfo->file_name]) }}" class="btn btn-primary mb-4"><i class="fa-solid fa-download" style="padding: 5px;"></i>Download</a></td>
+                            <td><a href="{{ route('downloadSubmission', ['filename' => $submissionInfo->cleanedDocument]) }}" class="btn btn-primary mb-4"><i class="fa-solid fa-download" style="padding: 5px;"></i>Download</a></td>
                             <td>{{ $submissionInfo->updated_at }}</td>
                             <td>
                                 <form action="{{ route('uploadReviewSubmission',['submissionCode' => $submissionInfo->submissionCode]) }}" method="POST" enctype="multipart/form-data">
