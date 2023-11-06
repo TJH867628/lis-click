@@ -126,4 +126,14 @@ class SuperAdminController extends Controller
             return redirect('login')->with('fail', 'Login Session Expire, Please Login again');
         }
     }
+
+    public function checksubmission(){
+        if(session()->has("LoggedSuperAdmin")){
+            session()->start();
+            $checksubmission  = tbl_submission::all();
+            return view('page.superadmin.homePage.homePage(SuperAdmin)',['checksubmission'=>$checksubmission]);
+        }else{
+            return redirect('login')->with('fail','Login Session Expire,Please Login again');
+        }
+    }
 }
