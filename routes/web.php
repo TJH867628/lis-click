@@ -142,9 +142,6 @@ Route::post('/superadmin/pageList/conferencesDownload/addNewConferencesDate', [C
 Route::post('/superadmin/pageList/websiteLogo/editLogo/{id}', [SuperAdminController::class, 'editLogo'])->name('editLogo');
 Route::post('/superadmin/submissionList/withdrawSubmission/{submissionCode}', [SuperAdminController::class, 'withdrawSubmission'])->name('withdrawSubmission');
 Route::get('/bendahari/dashboard', [JKBendahariController::class, 'bendahariDashboard'])->name('bendahariDashboard');
-<<<<<<< HEAD
-Route::get('/superAdminHomePage',[SuperAdminController::class,'shownumber']);
-=======
 Route::post('/JKReviewer/uploadCleanedDocument/{submissionCode}', [JKReviewerController::class, 'uploadCleanedDocument'])->name('uploadCleanedDocument');
 Route::get('/downloadCleanedDocument/{filename}', [JKReviewerController::class, 'downloadCleanedDocument'])->name('downloadCleanedDocument');
->>>>>>> e941a650110a02952a40071738f2231ac89866ba
+Route::get('/superAdminHomePage',[SuperAdminController::class,'shownumber']);
