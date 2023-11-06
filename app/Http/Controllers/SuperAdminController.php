@@ -6,6 +6,7 @@ use App\Models\tbl_masterdata;
 use App\Models\tbl_participants_info;
 use App\Models\tbl_page;
 use App\Models\tbl_submission;
+use App\Models\tbl_review_info;
 use Illuminate\Http\Request;
 
 class SuperAdminController extends Controller
@@ -113,4 +114,16 @@ class SuperAdminController extends Controller
         }
     }
 
+    public function shownumber()
+    {
+        if (session()->has("LoggedSuperAdmin")) {
+            session()->start();
+            $participantsCount = tbl_participants_info::all()->count();
+            $submissionsCount = tbl_submission::all()->count();
+            $reviewersCount = tbl_review_info::all()->count();
+            return view('page.superadmin.homePage.homePage(SuperAdmin)', ['participantsCount' => $participantsCount,'submissionsCount' => $submissionsCount,'reviewersCount' => $reviewersCount]);
+        } else {
+            return redirect('login')->with('fail', 'Login Session Expire, Please Login again');
+        }
+    }
 }
