@@ -167,17 +167,6 @@
                               </td>
                             </tr>
                           @endif
-                          <!-- <tr>
-                            <td> 2 </td>
-                            <td> Messsy Adam </td>
-                            <td> Jul 01, 2015 </td>
-                            <td>
-                              <div class="progress">
-                                <div class="progress-bar bg-gradient-danger" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                              </div>
-                            </td>
-                          </tr> -->
-                          
                         </tbody>
                       </table>
                     </div>
