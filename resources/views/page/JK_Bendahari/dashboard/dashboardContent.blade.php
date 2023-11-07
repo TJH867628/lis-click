@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link href="css/styles.css" rel="stylesheet" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-<style>
-    .navbar{
-        position:sticky !important;
-    }
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
     * {
         margin: 0;
         padding: 0;
 
         box-sizing: border-box;
         font-family: sans-serif;
+    }
+
+    .navbar{
+        position:sticky;
     }
 
     body {
@@ -198,9 +201,10 @@
             select {
             padding: 10px;
             border-radius: 5px;
-            border: none;
+            border: 1px solid black;
+            background-color: white;
             margin-right: 10px;
-            flex-grow: 1;
+            flex-grow: 0.5;
             }
 
             /* Style the form input */
@@ -269,7 +273,6 @@
             margin: auto;
             padding : 0.5%;
             text-align: center;
-            margin-top: 20px;
         }
 
         .total-amount-value {
@@ -281,112 +284,162 @@
         .card-body{
             background-color: white;
         }
-        </style>
-    </head>
+    </style>
+</head>
 <body>
-    <main class="table">
-        <div class="container">
-            <section class="table_header">
-                <h1>Bendahari Dashboard</h1>
-            </section>
-            <section class="row table_body">
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header">
-                            Payment Details in RM(Ringgit Malaysia) 
-                        </div>
-                        <div class="card-body">
-                            <canvas id="paymentChart" width="400" height="200"></canvas>
-                        </div>
+<main class="table">
+    <div class="container">
+        <section class="table_header">
+            <h1>Bendahari Dashboard</h1>
+        </section>
+            <div class="search-container">
+                <select id="yearFilter">
+                    <option value="">All Years</option>
+                    @foreach($uniqueYears as $year)
+                        <option value="{{ $year }}">{{ $year }}</option>
+                    @endforeach
+                </select>
+                <div class="total-amount-container" style="background-color:white;">
+                    Total Amount: <span id="totalAmount" class="total-amount-value">0.00</span>
+                </div>
+            </div>
+        <section class="row table_body">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        Payment Details in RM (Ringgit Malaysia)
+                    </div>
+                    <div class="card-body">
+                        <canvas id="paymentChart" width="400" height="200"></canvas>
                     </div>
                 </div>
-                <!-- Add a div for the pie chart -->
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header">
-                            Payment Breakdown in RM(Ringgit Malaysia)
-                        </div>
-                        <div class="card-body">
-                            <canvas id="paymentBreakdownChart" width="500" height="300"></canvas>
-                        </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        Payment Breakdown in RM (Ringgit Malaysia)
                     </div>
-                </section>
-            </section>
+                    <div class="card-body">
+                        <canvas id="paymentBreakdownChart" width="500" height="300"></canvas>
+                    </div>
+                </div>
+            </div>
         </section>
-    <!-- Add a div for displaying the total -->
-    <div class="total-amount-container">
-        Total Amount: <span id="totalAmount" class="total-amount-value">0.00</span>
     </div>
-    <br>
-    </main>
-    <script>
-            var amountEachCategory = @json($amountEachCategory);
+</main>
 
-            // Extract the category labels and corresponding amounts
-            var categoryLabels = Object.keys(amountEachCategory);
+<script>
+    var dataByYear = @json($dataByYear);
 
-            // Remove "amount" from each label
-            categoryLabels = categoryLabels.map(category => category.substring(6));
+    // Get the canvas elements for charts
+    var ctx = document.getElementById('paymentChart').getContext('2d');
+    var pieChartCtx = document.getElementById('paymentBreakdownChart').getContext('2d');
 
-            // Extract the corresponding amounts
-            var categoryAmounts = categoryLabels.map(category => amountEachCategory[`amount${category}`]);
+    // Initialize chart instances
+    var paymentChart = null;
+    var paymentBreakdownChart = null;
 
-            // Calculate the total amount
-            var totalAmount = categoryAmounts.reduce((total, amount) => total + amount, 0);
+    // Function to update the charts based on the selected year
+    function updateCharts(selectedYear) {
+        if(selectedYear == ''){
+            // Show data for all years if selectedYear is empty
+        dataForSelectedYear = {
+            amountEachCategory: {
+                'ENG': 0, // Initialize category amounts to 0
+                'SSC': 0,
+                'ITC': 0,
+                'EHE': 0,
+                'TVT': 0,
+                'REE': 0,
+                'COM': 0,
+                'MDC': 0,
+                'OTH': 0,
+            },
+            totalAmount: 0, // Initialize total amount to 0
+        };
 
-            // JavaScript code for rendering the bar chart
-            var ctx = document.getElementById('paymentChart').getContext('2d');
-            var paymentChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: categoryLabels, // X-axis labels as category names
-                    datasets: [{
-                        label: 'Payment Amount',
-                        data: categoryAmounts, // Y-axis data for each category
-                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
+        // Iterate through each year's data and aggregate it
+        Object.values(dataByYear).forEach((yearData) => {
+            Object.keys(dataForSelectedYear.amountEachCategory).forEach((category) => {
+                dataForSelectedYear.amountEachCategory[category] += yearData.amountEachCategory['amount' + category];
             });
+            dataForSelectedYear.totalAmount += yearData.totalAmount;
+        });
+        console.log(dataForSelectedYear);
+        }else{
+            var dataForSelectedYear = dataByYear[selectedYear];
+        }
+        // Update charts with data for the selected year
+        var categoryLabels = Object.keys(dataForSelectedYear.amountEachCategory);
+        var categoryAmounts = Object.values(dataForSelectedYear.amountEachCategory);
 
-            // JavaScript code for rendering the pie chart
-            var pieChartCtx = document.getElementById('paymentBreakdownChart').getContext('2d');
-            var pieChartData = categoryAmounts; // Exclude the total amount
-            var pieChartLabels = categoryLabels; // Exclude "Total" label
+        // Destroy the existing chart instances
+        if (paymentChart) {
+            paymentChart.destroy();
+        }
 
-            var paymentBreakdownChart = new Chart(pieChartCtx, {
-                type: 'pie',
-                data: {
-                    labels: pieChartLabels,
-                    datasets: [{
-                        data: pieChartData,
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.7)',
-                            'rgba(54, 162, 235, 0.7)',
-                            'rgba(255, 206, 86, 0.7)',
-                            'rgba(75, 192, 192, 0.7)',
-                            'rgba(153, 102, 255, 0.7)',
-                            'rgba(255, 159, 64, 0.7)',
-                            'rgba(0, 0, 139, 0.7)', 
-                        ]
-                    }]
+        if (paymentBreakdownChart) {
+            paymentBreakdownChart.destroy();
+        }
+
+        // Create a new paymentChart (Bar Chart)
+        paymentChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: categoryLabels,
+                datasets: [{
+                    label: 'Payment Amount',
+                    data: categoryAmounts,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1,
+                }],
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                    },
                 },
-                options: {
-                    responsive: true, // Allows resizing to fit the container
-                    maintainAspectRatio: false, // Allows custom aspect ratio
-                }
-            });
+            },
+        });
 
-            // Set the total amount in the HTML element
-            document.getElementById('totalAmount').textContent = 'RM' + totalAmount.toFixed(2);
-        </script>
+        // Create a new paymentBreakdownChart (Pie Chart)
+        paymentBreakdownChart = new Chart(pieChartCtx, {
+            type: 'pie',
+            data: {
+                labels: categoryLabels,
+                datasets: [{
+                    data: categoryAmounts,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.7)',
+                        'rgba(54, 162, 235, 0.7)',
+                        'rgba(255, 206, 86, 0.7)',
+                        'rgba(75, 192, 192, 0.7)',
+                        'rgba(153, 102, 255, 0.7)',
+                        'rgba(255, 159, 64, 0.7)',
+                        'rgba(0, 0, 139, 0.7)',
+                    ],
+                }],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+            },
+        });
+
+        // Update the total amount in the HTML element
+        document.getElementById('totalAmount').textContent = 'RM' + dataForSelectedYear.totalAmount.toFixed(2);
+    }
+
+    // Add an event listener to the Apply button
+    $("#yearFilter").change(function () {
+        var selectedYear = $("#yearFilter").val();
+        updateCharts(selectedYear);
+    });
+
+    // Initially update charts with data for all years
+    updateCharts('');
+</script>
 </body>
 </html>

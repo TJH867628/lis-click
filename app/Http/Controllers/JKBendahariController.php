@@ -135,61 +135,84 @@ class JKBendahariController extends Controller
         Mail::to($userEmail)->send($paymentMail);
     }
 
-    public function bendahariDashboard(){
-        $paymentDetails = tbl_payment::whereYear('created_at', date('Y'))->whereNotNull('amount')->get();
-        $amount = 0;
-        $amountENG = 0; // Initialize the total amount for category ITC
-        $amountSSC = 0; // Initialize the total amount for category SSC
-        $amountITC = 0; // Initialize the total amount for category ITC
-        $amountEHE = 0; // Initialize the total amount for category EHE
-        $amountTVT = 0; // Initialize the total amount for category TVT
-        $amountREE = 0; // Initialize the total amount for category REE
-        $amountCOM = 0; // Initialize the total amount for category COM
-        $amountMDC = 0; // Initialize the total amount for category MDC
-        $amountOTH = 0; // Initialize the total amount for category OTH
-        $amountEachCategory = new \stdClass(); // Initialize $amountEachCategory as an object
+    public function bendahariDashboard() {
+        $paymentDetails = tbl_payment::whereNotNull('amount')->get();
+    
+        // Group payments by year
+        $paymentsByYear = $paymentDetails->groupBy(function ($payment) {
+            return $payment->created_at->format('Y');
+        })->sortBy(function ($payment) {
+            return $payment->first()->created_at;
+        })->reverse();
+    
+        $dataByYear = [];
+    
+        foreach ($paymentsByYear as $year => $payments) {
+            $amountEachCategory = new \stdClass();
+            // Calculate category-wise totals for this year
 
-        foreach ($paymentDetails as $payment) {
-            $amount += $payment->amount; // Calculate the total amount across all payments
-
-            $subTheme = $payment->subTheme;
-            $categoryCode = substr($payment->submissionCode,5,3); // Initialize category code variable
-
-            // Determine category code based on subTheme
-            if ($categoryCode === "ENG") {
-                $amountENG += $payment->amount; // Add to the total amount for category ENG
-            } elseif ($categoryCode === "SSC") {
-                $amountSSC += $payment->amount; // Add to the total amount for category SSC
-            } elseif ($categoryCode === "ITC") {
-                $amountITC += $payment->amount; // Add to the total amount for category ITC
-            } elseif ($categoryCode === "EHE") {
-                $amountEHE += $payment->amount; // Add to the total amount for category EHE
-            } elseif ($categoryCode === "TVT") {
-                $amountTVT += $payment->amount; // Add to the total amount for category TVT
-            } elseif ($categoryCode === "REE") {
-                $amountREE += $payment->amount; // Add to the total amount for category REE
-            } elseif ($categoryCode === "COM") {
-                $amountCOM += $payment->amount; // Add to the total amount for category COM
-            } elseif ($categoryCode === "MDC") {
-                $amountMDC += $payment->amount; // Add to the total amount for category MDC
-            } elseif ($categoryCode === "OTH") {
-                $amountOTH += $payment->amount; // Add to the total amount for category OTH
+            $amountENG = 0; // Initialize the total amount for category ITC
+            $amountSSC = 0; // Initialize the total amount for category SSC
+            $amountITC = 0; // Initialize the total amount for category ITC
+            $amountEHE = 0; // Initialize the total amount for category EHE
+            $amountTVT = 0; // Initialize the total amount for category TVT
+            $amountREE = 0; // Initialize the total amount for category REE
+            $amountCOM = 0; // Initialize the total amount for category COM
+            $amountMDC = 0; // Initialize the total amount for category MDC
+            $amountOTH = 0;
+            $totalAmount = 0; // Initialize the total amount for category
+            foreach ($payments as $payment) {
+                $categoryCode = substr($payment->submissionCode,5,3); // Initialize category code variable
+                $totalAmount += $payment->amount; // Calculate the total amount across all payments
+    
+                $subTheme = $payment->subTheme;
+                $categoryCode = substr($payment->submissionCode,5,3); // Initialize category code variable
+    
+                // Determine category code based on subTheme
+                if ($categoryCode === "ENG") {
+                    $amountENG += $payment->amount; // Add to the total amount for category ENG
+                } elseif ($categoryCode === "SSC") {
+                    $amountSSC += $payment->amount; // Add to the total amount for category SSC
+                } elseif ($categoryCode === "ITC") {
+                    $amountITC += $payment->amount; // Add to the total amount for category ITC
+                } elseif ($categoryCode === "EHE") {
+                    $amountEHE += $payment->amount; // Add to the total amount for category EHE
+                } elseif ($categoryCode === "TVT") {
+                    $amountTVT += $payment->amount; // Add to the total amount for category TVT
+                } elseif ($categoryCode === "REE") {
+                    $amountREE += $payment->amount; // Add to the total amount for category REE
+                } elseif ($categoryCode === "COM") {
+                    $amountCOM += $payment->amount; // Add to the total amount for category COM
+                } elseif ($categoryCode === "MDC") {
+                    $amountMDC += $payment->amount; // Add to the total amount for category MDC
+                } elseif ($categoryCode === "OTH") {
+                    $amountOTH += $payment->amount; // Add to the total amount for category OTH
+                }
+    
             }
-
+    
+                // Set the 'amountENG' property in the object
+                $amountEachCategory->amountENG = $amountENG;
+                $amountEachCategory->amountSSC = $amountSSC; 
+                $amountEachCategory->amountITC = $amountITC; 
+                $amountEachCategory->amountEHE = $amountEHE; 
+                $amountEachCategory->amountTVT = $amountTVT; 
+                $amountEachCategory->amountREE = $amountREE; 
+                $amountEachCategory->amountCOM = $amountCOM; 
+                $amountEachCategory->amountMDC = $amountMDC; 
+                $amountEachCategory->amountOTH = $amountOTH; 
+    
+            $dataByYear[(string)$year] = [
+                'amountEachCategory' => $amountEachCategory,
+                'totalAmount' => $totalAmount,
+            ];
         }
-
-            // Set the 'amountENG' property in the object
-            $amountEachCategory->amountENG = $amountENG;
-            $amountEachCategory->amountSSC = $amountSSC; 
-            $amountEachCategory->amountITC = $amountITC; 
-            $amountEachCategory->amountEHE = $amountEHE; 
-            $amountEachCategory->amountTVT = $amountTVT; 
-            $amountEachCategory->amountREE = $amountREE; 
-            $amountEachCategory->amountCOM = $amountCOM; 
-            $amountEachCategory->amountMDC = $amountMDC; 
-            $amountEachCategory->amountOTH = $amountOTH; 
-        
-        // Now, you have total amounts for each category code:
-        return view('page.JK_Bendahari.dashboard.dashboard',['paymentDetails'=>$paymentDetails,'amountEachCategory' => $amountEachCategory,'amount'=>$amount]);
+    
+        $uniqueYears = array_keys($dataByYear);
+        return view('page.JK_Bendahari.dashboard.dashboard', [
+            'dataByYear' => $dataByYear,
+            'uniqueYears' => $uniqueYears,
+        ]);
     }
+    
 }

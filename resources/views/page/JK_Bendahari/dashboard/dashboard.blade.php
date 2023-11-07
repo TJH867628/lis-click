@@ -23,7 +23,7 @@
             }
 
             footer{
-                position:sticky !important;
+                position:static !important;
                 bottom: 0;
             }
         </style>
