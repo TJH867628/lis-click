@@ -55,7 +55,6 @@
                 preloader.classList.add("hide");
                 }, preloaderDuration);
                 }
-
                 
                 window.addEventListener("load", hidePreloader);
                 
