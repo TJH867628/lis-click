@@ -278,11 +278,11 @@
         .total-amount-value {
             font-size: 24px;
             font-weight: bold;
-            color: #007BFF; /* Change the color to your preference */
+            color: green; /* Change the color to your preference */
         }
 
         .card-body{
-            background-color: white;
+            background-color: #d3d3d3;
         }
     </style>
 </head>
@@ -390,8 +390,28 @@
                 datasets: [{
                     label: 'Payment Amount',
                     data: categoryAmounts,
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.7)', // Red
+                        'rgba(255, 205, 86, 0.7)', // Yellow
+                        'rgba(75, 192, 192, 0.7)', // Teal
+                        'rgba(54, 162, 235, 0.7)', // Blue
+                        'rgba(153, 102, 255, 0.7)', // Purple
+                        'rgba(255, 159, 64, 0.7)', // Orange
+                        'rgba(128, 0, 0, 0.7)', // Maroon
+                        'rgba(0, 128, 128, 0.7)', // Teal
+                        'rgba(34, 139, 34, 0.7)' // Green
+                    ],
+                    borderColor: [
+                        'rgba(200, 0, 0, 0.7)', // Darker Red
+                        'rgba(200, 150, 0, 0.7)', // Darker Yellow
+                        'rgba(0, 150, 150, 0.7)', // Darker Teal
+                        'rgba(0, 100, 200, 0.7)', // Darker Blue
+                        'rgba(100, 0, 200, 0.7)', // Darker Purple
+                        'rgba(200, 100, 0, 0.7)', // Darker Orange
+                        'rgba(100, 0, 0, 0.7)', // Darker Maroon
+                        'rgba(0, 100, 100, 0.7)', // Darker Teal
+                        'rgba(0, 100, 0, 0.7)' // Darker Green
+                    ],
                     borderWidth: 1,
                 }],
             },
@@ -412,13 +432,15 @@
                 datasets: [{
                     data: categoryAmounts,
                     backgroundColor: [
-                        'rgba(255, 99, 132, 0.7)',
-                        'rgba(54, 162, 235, 0.7)',
-                        'rgba(255, 206, 86, 0.7)',
-                        'rgba(75, 192, 192, 0.7)',
-                        'rgba(153, 102, 255, 0.7)',
-                        'rgba(255, 159, 64, 0.7)',
-                        'rgba(0, 0, 139, 0.7)',
+                        'rgba(255, 99, 132, 0.7)', // Red
+                        'rgba(255, 205, 86, 0.7)', // Yellow
+                        'rgba(75, 192, 192, 0.7)', // Teal
+                        'rgba(54, 162, 235, 0.7)', // Blue
+                        'rgba(153, 102, 255, 0.7)', // Purple
+                        'rgba(255, 159, 64, 0.7)', // Orange
+                        'rgba(128, 0, 0, 0.7)', // Maroon
+                        'rgba(0, 128, 128, 0.7)', // Teal
+                        'rgba(34, 139, 34, 0.7)' // Green
                     ],
                 }],
             },
