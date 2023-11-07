@@ -345,15 +345,15 @@
             // Show data for all years if selectedYear is empty
         dataForSelectedYear = {
             amountEachCategory: {
-                'ENG': 0, // Initialize category amounts to 0
-                'SSC': 0,
-                'ITC': 0,
-                'EHE': 0,
-                'TVT': 0,
-                'REE': 0,
-                'COM': 0,
-                'MDC': 0,
-                'OTH': 0,
+                'amountENG': 0, // Initialize category amounts to 0
+                'amountSSC': 0,
+                'amountITC': 0,
+                'amountEHE': 0,
+                'amountTVT': 0,
+                'amountREE': 0,
+                'amountCOM': 0,
+                'amountMDC': 0,
+                'amountOTH': 0,
             },
             totalAmount: 0, // Initialize total amount to 0
         };
@@ -361,7 +361,7 @@
         // Iterate through each year's data and aggregate it
         Object.values(dataByYear).forEach((yearData) => {
             Object.keys(dataForSelectedYear.amountEachCategory).forEach((category) => {
-                dataForSelectedYear.amountEachCategory[category] += yearData.amountEachCategory['amount' + category];
+                dataForSelectedYear.amountEachCategory[category] += yearData.amountEachCategory[category];
             });
             dataForSelectedYear.totalAmount += yearData.totalAmount;
         });
@@ -370,7 +370,9 @@
             var dataForSelectedYear = dataByYear[selectedYear];
         }
         // Update charts with data for the selected year
-        var categoryLabels = Object.keys(dataForSelectedYear.amountEachCategory);
+        var categoryLabels = Object.keys(dataForSelectedYear.amountEachCategory).map(function(label) {
+            return label.substr(6, label.length);
+        });
         var categoryAmounts = Object.values(dataForSelectedYear.amountEachCategory);
 
         // Destroy the existing chart instances
@@ -390,8 +392,24 @@
                 datasets: [{
                     label: 'Payment Amount',
                     data: categoryAmounts,
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: [
+                        'rgba(255, 0, 0, 0.7)',    // Red
+                        'rgba(0, 128, 255, 0.7)',  // Blue
+                        'rgba(255, 165, 0, 0.7)',  // Orange
+                        'rgba(50, 205, 50, 0.7)',  // Lime Green
+                        'rgba(186, 85, 211, 0.7)', // Medium Orchid
+                        'rgba(255, 215, 0, 0.7)',  // Gold
+                        'rgba(0, 0, 139, 0.7)',    // Dark Blue
+                    ],
+                    borderColor: [
+                        'rgba(255, 0, 0, 1)',
+                        'rgba(0, 128, 255, 1)',
+                        'rgba(255, 165, 0, 1)',
+                        'rgba(50, 205, 50, 1)',
+                        'rgba(186, 85, 211, 1)',
+                        'rgba(255, 215, 0, 1)',
+                        'rgba(0, 0, 139, 1)',
+                    ],
                     borderWidth: 1,
                 }],
             },
@@ -412,12 +430,12 @@
                 datasets: [{
                     data: categoryAmounts,
                     backgroundColor: [
-                        'rgba(255, 99, 132, 0.7)',
-                        'rgba(54, 162, 235, 0.7)',
-                        'rgba(255, 206, 86, 0.7)',
-                        'rgba(75, 192, 192, 0.7)',
-                        'rgba(153, 102, 255, 0.7)',
-                        'rgba(255, 159, 64, 0.7)',
+                        'rgba(255, 0, 0, 0.7)',
+                        'rgba(0, 128, 255, 0.7)',
+                        'rgba(255, 165, 0, 0.7)',
+                        'rgba(50, 205, 50, 0.7)',
+                        'rgba(186, 85, 211, 0.7)',
+                        'rgba(255, 215, 0, 0.7)',
                         'rgba(0, 0, 139, 0.7)',
                     ],
                 }],
