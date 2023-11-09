@@ -7,6 +7,7 @@ use App\Models\tbl_participants_info;
 use App\Models\tbl_page;
 use App\Models\tbl_submission;
 use App\Models\tbl_review_info;
+use App\Models\tbl_payment;
 use Illuminate\Http\Request;
 
 class SuperAdminController extends Controller
@@ -121,7 +122,41 @@ class SuperAdminController extends Controller
             $submissionsCount = tbl_submission::all()->count();
             $reviewersCount = tbl_review_info::all()->count();
             $checksubmission  = tbl_submission::all();
-            return view('page.superadmin.homePage.homePage(SuperAdmin)', ['participantsCount' => $participantsCount,'submissionsCount' => $submissionsCount,'reviewersCount' => $reviewersCount,'checksubmission'=>$checksubmission]);
+
+            
+
+            $submissionCounts = $checksubmission->groupBy('categoryCode')
+            ->map(function ($group) {
+                return $group->count();
+            });
+
+            $amountITC = $submissionCounts->get('ITC', 0);
+            $amountSSC = $submissionCounts->get('SSC', 0);
+            $amountEHE = $submissionCounts->get('EHE', 0);
+            $amountTVT = $submissionCounts->get('TVT', 0);
+            $amountREE = $submissionCounts->get('REE', 0);
+            $amountCOM = $submissionCounts->get('COM', 0);
+            $amountMDC = $submissionCounts->get('MDC', 0);
+            $amountOTH = $submissionCounts->get(null, 0);
+
+            $amounts = [
+                'ITC' => $amountITC,
+                'SSC' => $amountSSC,
+                'EHE' => $amountEHE,
+                'TVT' => $amountTVT,
+                'REE' => $amountREE,
+                'COM' => $amountCOM,
+                'MDC' => $amountMDC,
+                'OTH' => $amountOTH,
+            ];
+
+            return view('page.superadmin.homePage.homePage(SuperAdmin)', [
+                'participantsCount' => $participantsCount,
+                'submissionsCount' => $submissionsCount,
+                'reviewersCount' => $reviewersCount,
+                'checksubmission'=>$checksubmission,
+                'amounts' => $amounts,
+            ]);
         } else {
             return redirect('login')->with('fail', 'Login Session Expire, Please Login again');
         }
