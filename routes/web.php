@@ -144,5 +144,4 @@ Route::post('/superadmin/submissionList/withdrawSubmission/{submissionCode}', [S
 Route::get('/bendahari/dashboard', [JKBendahariController::class, 'bendahariDashboard'])->name('bendahariDashboard');
 Route::post('/JKReviewer/uploadCleanedDocument/{submissionCode}', [JKReviewerController::class, 'uploadCleanedDocument'])->name('uploadCleanedDocument');
 Route::get('/downloadCleanedDocument/{filename}', [JKReviewerController::class, 'downloadCleanedDocument'])->name('downloadCleanedDocument');
-Route::get('/superAdminHomePage',[SuperAdminController::class,'shownumber']);
-Route::get('/superAdminHomePage',[SuperAdminController::class,'checksubmission']);
+Route::get('/superAdminHomePage',[SuperAdminController::class,'indexHomePage']);

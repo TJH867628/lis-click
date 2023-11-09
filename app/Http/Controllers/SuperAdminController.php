@@ -114,26 +114,16 @@ class SuperAdminController extends Controller
         }
     }
 
-    public function shownumber()
-    {
+    public function indexHomePage(){
         if (session()->has("LoggedSuperAdmin")) {
             session()->start();
             $participantsCount = tbl_participants_info::all()->count();
             $submissionsCount = tbl_submission::all()->count();
             $reviewersCount = tbl_review_info::all()->count();
-            return view('page.superadmin.homePage.homePage(SuperAdmin)', ['participantsCount' => $participantsCount,'submissionsCount' => $submissionsCount,'reviewersCount' => $reviewersCount]);
+            $checksubmission  = tbl_submission::all();
+            return view('page.superadmin.homePage.homePage(SuperAdmin)', ['participantsCount' => $participantsCount,'submissionsCount' => $submissionsCount,'reviewersCount' => $reviewersCount,'checksubmission'=>$checksubmission]);
         } else {
             return redirect('login')->with('fail', 'Login Session Expire, Please Login again');
-        }
-    }
-
-    public function checksubmission(){
-        if(session()->has("LoggedSuperAdmin")){
-            session()->start();
-            $checksubmission  = tbl_submission::all();
-            return view('page.superadmin.homePage.homePage(SuperAdmin)',['checksubmission'=>$checksubmission]);
-        }else{
-            return redirect('login')->with('fail','Login Session Expire,Please Login again');
         }
     }
 }
