@@ -16,7 +16,6 @@
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     </head>
         @include('page.superadmin.editConferencesDownload.editConferencesDownloadContent')
-        @include('page.footer')
         <!-- Bootstrap core JS-->
         <!-- Core theme JS-->
         <!--<script src="js/scripts.js"></script>-->
