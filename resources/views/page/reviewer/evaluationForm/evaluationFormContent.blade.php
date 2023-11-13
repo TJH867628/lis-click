@@ -226,6 +226,7 @@
         <input type="radio" class="larger" id="major" name="recommendation" value="major" <?php echo ($dataEvaluationForm->recommendation == "major") ? 'checked' : ''; ?>>&nbsp&nbsp&nbspRequires Major Revision<br><br>
         <input type="radio" class="larger" id="reject" name="recommendation" value="reject" <?php echo ($dataEvaluationForm->recommendation == "reject") ? 'checked' : ''; ?>>&nbsp&nbsp&nbspReject On Ground of (Please Be Specific)<br><br>
         <input type="text"  name="specific_reject_reason" id="reason" placeholder="Reason for rejection" value="<?php echo $dataEvaluationForm->specific_reject_reason ?? ''; ?>" ><br>
+        <input type="checkbox" style="margin-left: 2%;" name="recommendedAsBestPaper" <?php echo ($dataEvaluationForm->recommended_as_best_paper === 1) ? 'checked' : ''; ?>>Recommended As Best Paper<br>
 
         <label for="" id="head2">Additional Comment</label> <br><br>
         <textarea name="additional_comments" placeholder="Enter......" maxlength="1500">{{ $dataEvaluationForm->additional_comments }}</textarea><br><br>

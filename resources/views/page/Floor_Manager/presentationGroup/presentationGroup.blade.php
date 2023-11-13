@@ -35,8 +35,12 @@
         <!--<script src="js/scripts.js"></script>-->
     </body>
     <script>
-        $(document).ready(function() {
-            $('#presentationtable').DataTable();
+    $(document).ready(function() {
+        $('#presentationtable').DataTable({
+            search: {
+                smart: false  // Disables smart search, enforcing exact match searches
+            }
         });
+    });
     </script>
 </html>

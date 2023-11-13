@@ -28,4 +28,10 @@ class MainPageController extends Controller
         return view('page.visitor.mainPage.mainPage');
     }
 
+    function indexUserManual(){
+        if(session()->has('LoggedUser')){
+            return view('page.participants.userManual.userManual');
+        }
+    }
+
 }

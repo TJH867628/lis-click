@@ -266,7 +266,7 @@
                             Submission Document<br>
                         </th>
                         <th>    
-                            Updated At<br>
+                            Pending Review Date<br>
                         </th>
                         <th>    
                             Upload Reviewed Document<br>
@@ -285,6 +285,18 @@
                         @php
                             $count++;
                         @endphp
+                        @php
+                            // Convert the submission's updated_at timestamp to a Carbon instance
+                            $submissionTimestamp = \Carbon\Carbon::parse($submissionInfo->updated_at);
+
+                            // Calculate the difference in days between the current date and the updated_at timestamp
+                            $daysRemaining = now()->diffInDays($submissionTimestamp);
+
+                            // Calculate the number of days remaining for one week (7 days)
+                            $daysRemainingForOneWeek = 7 - $daysRemaining;
+                            if($daysRemainingForOneWeek < 0)
+                                $daysRemainingForOneWeek = 0
+                        @endphp
                         @if($submissionInfo->reviewStatus === 'pending')
                             @if($submissionInfo->reviewer2ID != NULL)
                                 @if($submissionInfo->reviewerID === $reviewername)
@@ -298,7 +310,8 @@
                                         <td>{{ $submissionInfo->subTheme }}</td>
                                         <td>{{ $submissionInfo->presentMode }}</td>
                                         <td><a href="{{ route('downloadSubmission', ['filename' => $submissionInfo->cleanedDocument]) }}" class="btn btn-primary mb-4"><i class="fa-solid fa-download" style="padding: 5px;"></i>Download</a></td>
-                                        <td>{{ $submissionInfo->updated_at }}</td>
+
+                                        <td>{{(int) $daysRemainingForOneWeek }} Days Remaining</td>
                                         <td>
                                             <form action="{{ route('uploadReviewSubmission',['submissionCode' => $submissionInfo->submissionCode]) }}" method="POST" enctype="multipart/form-data" class="file-upload-form">
                                                 @csrf
@@ -325,7 +338,7 @@
                                         <td>{{ $submissionInfo->subTheme }}</td>
                                         <td>{{ $submissionInfo->presentMode }}</td>
                                         <td><a href="{{ route('downloadSubmission', ['filename' => $submissionInfo->cleanedDocument]) }}" class="btn btn-primary mb-4"><i class="fa-solid fa-download" style="padding: 5px;"></i>Download</a></td>
-                                        <td>{{ $submissionInfo->updated_at }}</td>
+                                        <td>{{(int) $daysRemainingForOneWeek }} Days Remaining</td>
                                         <td>
                                             <form action="{{ route('uploadReviewSubmission',['submissionCode' => $submissionInfo->submissionCode]) }}" method="POST" enctype="multipart/form-data">
                                                 @csrf
@@ -352,7 +365,7 @@
                             <td>{{ $submissionInfo->subTheme }}</td>
                             <td>{{ $submissionInfo->presentMode }}</td>
                             <td><a href="{{ route('downloadSubmission', ['filename' => $submissionInfo->cleanedDocument]) }}" class="btn btn-primary mb-4"><i class="fa-solid fa-download" style="padding: 5px;"></i>Download</a></td>
-                            <td>{{ $submissionInfo->updated_at }}</td>
+                            <td>{{(int) $daysRemainingForOneWeek }} Days Remaining</td>
                             <td>
                                 <form action="{{ route('uploadReviewSubmission',['submissionCode' => $submissionInfo->submissionCode]) }}" method="POST" enctype="multipart/form-data">
                                     @csrf

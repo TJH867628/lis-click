@@ -429,6 +429,7 @@
 
     </style>
     </head>
+    <a id="originalBuild" href="/pageList">Page List</a>
     <body class="d-flex flex-column h-100" style="background-color: white; text-align:center;">      
         <main class="table">
             <section class="table__header">

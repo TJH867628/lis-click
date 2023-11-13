@@ -35,9 +35,13 @@
         <!--<script src="js/scripts.js"></script>-->
     </body>
     <script>
-        $(document).ready(function() {
-            $('#reviewTable').DataTable();
+    $(document).ready(function() {
+        $('#reviewTable').DataTable({
+            search: {
+                smart: false  // Disables smart search, enforcing exact match searches
+            }
         });
+    });
     </script>
 
 </html>

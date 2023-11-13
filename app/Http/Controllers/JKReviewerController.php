@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\tbl_admin_info;
 use App\Models\tbl_correction;
+use App\Models\tbl_evaluation_form;
 use App\Models\tbl_submission;
 use App\Models\tbl_payment;
 use App\Models\tbl_participants_info;
@@ -306,5 +307,19 @@ class JKReviewerController extends Controller
             } elseif ($extension == 'doc' || $extension == 'docx') {
                 return response()->file($file);
             }
+        }
+
+        public function indexRecommendedSubmissionList(){
+            $recommendedSubmissionList = tbl_evaluation_form::where('recommended_as_best_paper',1)->get();
+            $recommendedSubmission = [];
+            foreach ($recommendedSubmissionList as $thisRecommendedSubmission) {
+                $submission = tbl_submission::where('submissionCode', $thisRecommendedSubmission->paper_id_number)->where('reviewStatus','done')->first();
+    
+                if ($submission && !isset($recommendedSubmission[$submission->submissionCode])) {
+                    $recommendedSubmission[] = $submission; // Add the result to the $recommendedSubmission collection
+                }
+            }
+
+            return view('page.Jk_Reviewer.recommendedSubmissionList.recommendedSubmissionList', ['recommendedSubmission'=>$recommendedSubmission]);
         }
 }

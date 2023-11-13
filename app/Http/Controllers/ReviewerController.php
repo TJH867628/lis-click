@@ -204,6 +204,7 @@ class ReviewerController extends Controller
                         'depth_of_research' => null,
                         'recommendation' => null,
                         'specific_reject_reason' => null,
+                        'recommended_as_best_paper' => false,
                         'additional_comments' => null,
                         'created_at' => now(),
                         'updated_at' => now()
@@ -242,6 +243,7 @@ class ReviewerController extends Controller
                         'depth_of_research' => null,
                         'recommendation' => null,
                         'specific_reject_reason' => null,
+                        'recommended_as_best_paper' => false,
                         'additional_comments' => null,
                         'created_at' => now(),
                         'updated_at' => now()
@@ -317,6 +319,10 @@ class ReviewerController extends Controller
             $depthOfResearch = $request->input('depth_of_research');
             $recommendation = $request->input('recommendation');
             $specificRejectReason = $request->input('specific_reject_reason');
+            $recommendedAsBestPaper = $request->input('recommendedAsBestPaper');
+            if($recommendedAsBestPaper === "on"){
+                $recommendedAsBestPaper = true;
+            }
             $additionalComments = $request->input('additional_comments');
             $dataEvaluationForm = tbl_evaluation_form::where('paper_id_number',$submissionCode)->first();
             $data = array(
@@ -339,6 +345,7 @@ class ReviewerController extends Controller
                 'depth_of_research' => $depthOfResearch,
                 'recommendation' => $recommendation,
                 'specific_reject_reason' => $specificRejectReason,
+                'recommended_as_best_paper' => $recommendedAsBestPaper,
                 'additional_comments' => $additionalComments,
                 'updated_at' => now()
             );

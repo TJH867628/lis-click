@@ -390,6 +390,19 @@
                 <tbody>
                 @if($userSubmissionInfo)
                     @foreach($userSubmissionInfo as $submissionInfo)
+                        @php
+                            // Convert the submission's updated_at timestamp to a Carbon instance
+                            $submissionTimestamp = \Carbon\Carbon::parse($submissionInfo->updated_at);
+
+                            // Calculate the difference in days between the current date and the updated_at timestamp
+                            $daysRemaining = now()->diffInDays($submissionTimestamp);
+
+                            // Calculate the number of days remaining for one week (7 days)
+                            $daysRemainingForOneWeek = 7 - $daysRemaining;
+                            if($daysRemainingForOneWeek < 0)
+                                $daysRemainingForOneWeek = 0
+                            
+                        @endphp
                         <tr>
                             <td>
                                 <p>Submission Code</p>
@@ -416,6 +429,9 @@
                                 @endif
                                 <br><p>Review Status</p>
                                 {{ $submissionInfo->reviewStatus }}
+                                <br><p>Updated Time</p>
+                                {{ date("Y-m-d", strtotime($submissionInfo->updated_at)) }}<br><br>
+                                {{(int) $daysRemainingForOneWeek }} Days Remaining For Review
                             </td>             
                             <td>
                             @if( $submissionInfo->cleanedDocument != null)
@@ -619,7 +635,11 @@
     });
 
     $(document).ready(function() {
-        $('#submissionTable').DataTable();
+        $('#submissionTable').DataTable({
+            search: {
+                smart: false  // Disables smart search, enforcing exact match searches
+            }
+        });
     });
 
 
