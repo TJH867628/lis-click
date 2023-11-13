@@ -354,6 +354,7 @@
                 'amountCOM': 0,
                 'amountMDC': 0,
                 'amountOTH': 0,
+                'amountAUD': 0,
             },
             totalAmount: 0, // Initialize total amount to 0
         };
@@ -401,7 +402,8 @@
                         'rgba(255, 159, 64, 0.7)', // Orange
                         'rgba(128, 0, 0, 0.7)', // Maroon
                         'rgba(0, 128, 128, 0.7)', // Teal
-                        'rgba(34, 139, 34, 0.7)' // Green
+                        'rgba(34, 139, 34, 0.7)', // Green
+                        'rgba(0, 0, 0, 0.7)'    
                     ],
                     borderColor: [
                         'rgba(200, 0, 0, 0.7)', // Darker Red
@@ -412,7 +414,8 @@
                         'rgba(200, 100, 0, 0.7)', // Darker Orange
                         'rgba(100, 0, 0, 0.7)', // Darker Maroon
                         'rgba(0, 100, 100, 0.7)', // Darker Teal
-                        'rgba(0, 100, 0, 0.7)' // Darker Green
+                        'rgba(0, 100, 0, 0.7)', // Darker Green
+                        'rgba(0, 0, 0, 0.7)'    
                     ],
                     borderWidth: 1,
                 }],
@@ -434,13 +437,16 @@
                 datasets: [{
                     data: categoryAmounts,
                     backgroundColor: [
-                        'rgba(255, 99, 132, 0.7)',
-                        'rgba(54, 162, 235, 0.7)',
-                        'rgba(255, 206, 86, 0.7)',
-                        'rgba(75, 192, 192, 0.7)',
-                        'rgba(153, 102, 255, 0.7)',
-                        'rgba(255, 159, 64, 0.7)',
-                        'rgba(0, 0, 139, 0.7)',
+                        'rgba(200, 0, 0, 0.7)', // Darker Red
+                        'rgba(200, 150, 0, 0.7)', // Darker Yellow
+                        'rgba(0, 150, 150, 0.7)', // Darker Teal
+                        'rgba(0, 100, 200, 0.7)', // Darker Blue
+                        'rgba(100, 0, 200, 0.7)', // Darker Purple
+                        'rgba(200, 100, 0, 0.7)', // Darker Orange
+                        'rgba(100, 0, 0, 0.7)', // Darker Maroon
+                        'rgba(0, 100, 100, 0.7)', // Darker Teal
+                        'rgba(0, 100, 0, 0.7)', // Darker Green
+                        'rgba(0, 0, 0, 0.7)'
                     ],
                 }],
             },

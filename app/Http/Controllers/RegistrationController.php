@@ -50,8 +50,7 @@ class RegistrationController extends Controller
             //create a set of data that will be insert to database
             $data1 = array('email'=>$email,'password'=>$hashedPassword,'created_at'=>$date,'updated_at'=>$date);
             //create a set of data that will be insert to database
-            $data2 = array('email'=>$email,'IC_No'=>$IC_No,'name'=>$name,'salutation'=>$salutation,'phoneNumber'=>$phoneNumber,'organizationName'=>$organizationName,'organizationAddress'=>$address,'postcode'=>$postcode,'state'=>$state,'country'=>$country,'participantsCategory'=>$category,'dateOfRegister'=>$date,'created_at'=>$date,'updated_at'=>$date);
-            dd(123);
+            $data2 = array('email'=>$email,'IC_No'=>$IC_No,'name'=>$name,'salutation'=>$salutation,'phoneNumber'=>$phoneNumber,'organizationName'=>$organizationName,'organizationAddress'=>$address,'postcode'=>$postcode,'state'=>$state,'country'=>$country,'dateOfRegister'=>$date,'created_at'=>$date,'updated_at'=>$date);
             //insert the data to database with specified table and the dataset that have been create
             DB::table('tbl_account')->insert($data1);
             //insert the data to database with specified table and the dataset that have been create

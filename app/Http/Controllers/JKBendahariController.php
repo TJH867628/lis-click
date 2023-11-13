@@ -89,10 +89,18 @@ class JKBendahariController extends Controller
                 if($eachPaymentStatus != NULL){
                     $paymentDetails[$key]->paymentReceipt = "Yes";
                     $submissionInfo = tbl_submission::where('submissionCode',$eachPaymentStatus->submissionCode)->first();
-                    $participants = $submissionInfo->participants1;
+                    if(isset($submissionInfo)){
+                        $participants = $submissionInfo->participants1;
+                    }else{
+                        $participants = $eachPaymentStatus->participantsEmail;
+                    }
                     $participantsInfo = tbl_participants_info::where('email',$participants)->first();
-
-                    $paymentDetails[$key]->submissionInfo = $submissionInfo;
+                    if(isset($submissionInfo)){
+                        $paymentDetails[$key]->submissionInfo = $submissionInfo;
+                    }else{
+                        $paymentDetails[$key]->submissionInfo = $participantsInfo;
+                        $paymentDetails[$key]->submissionInfo->participants1 = $participantsInfo->email;
+                    }
                     $paymentDetails[$key]->participantsInfo = $participantsInfo;
                 }
             }
@@ -129,7 +137,14 @@ class JKBendahariController extends Controller
     public function sendPaymentConfirmationReceipt($submissionCode,$date){
         $paymentDetails = tbl_payment::where('submissionCode',$submissionCode)->get();
         $submissionInfo = tbl_submission::where('submissionCode',$submissionCode)->first();
-        $userEmail = $submissionInfo->participants1;
+        if(isset($submissionInfo)){
+            $userEmail = $submissionInfo->participants1;
+        }else{
+            $submissionInfo = new \stdClass();
+            $userEmail = $paymentDetails[0]->participantsEmail;
+        }
+        $submissionInfo->participantsEmail = $userEmail;
+        $submissionInfo->submissionCode = $paymentDetails[0]->submissionCode;
         $userName = tbl_participants_info::where('email',$userEmail)->first()->name;
         $paymentMail = new paymentConfirmationReceipt($submissionInfo,$paymentDetails,$date,$userName);
         Mail::to($userEmail)->send($paymentMail);
@@ -160,6 +175,7 @@ class JKBendahariController extends Controller
             $amountCOM = 0; // Initialize the total amount for category COM
             $amountMDC = 0; // Initialize the total amount for category MDC
             $amountOTH = 0;
+            $amountAUD = 0;
             $totalAmount = 0; // Initialize the total amount for category
             foreach ($payments as $payment) {
                 $categoryCode = substr($payment->submissionCode,5,3); // Initialize category code variable
@@ -187,6 +203,8 @@ class JKBendahariController extends Controller
                     $amountMDC += $payment->amount; // Add to the total amount for category MDC
                 } elseif ($categoryCode === "OTH") {
                     $amountOTH += $payment->amount; // Add to the total amount for category OTH
+                } elseif ($categoryCode === "AUD") {
+                    $amountAUD += $payment->amount; // Add to the total amount for category OTH
                 }
     
             }
@@ -201,6 +219,7 @@ class JKBendahariController extends Controller
                 $amountEachCategory->amountCOM = $amountCOM; 
                 $amountEachCategory->amountMDC = $amountMDC; 
                 $amountEachCategory->amountOTH = $amountOTH; 
+                $amountEachCategory->amountAUD = $amountAUD; 
     
             $dataByYear[(string)$year] = [
                 'amountEachCategory' => $amountEachCategory,

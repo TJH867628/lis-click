@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\tbl_payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\tbl_participants_info;
@@ -149,5 +150,23 @@ class FullpaperController extends Controller
                 return redirect('/login')->with('Session Expired');
             }
         
+    }
+
+    public function indexRegisterAsAudience(){
+        if(session()->has('LoggedUser')){
+            $userSession = session()->get('LoggedUser');
+            $user = tbl_participants_info::where('email',$userSession)->first();
+            $isDonePayment = false;
+            $paymentForAudience = tbl_payment::where('paymentID', 'like', '%' . 'Receipt_AUD_'. $user->name . '%')->get();
+            $user->payment = $paymentForAudience;
+            foreach ($paymentForAudience as $payment) {
+                if ($payment->paymentStatus === 'Complete') {
+                    $isDonePayment = true;
+                }
+            }
+            $user->isDonePayment = $isDonePayment;
+
+            return view('page.participants.registerAsAudience.registerAsAudience',['user'=>$user]);
+        }
     }
 }

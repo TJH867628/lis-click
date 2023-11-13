@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\tbl_participants_info;
 use App\Models\tbl_submission;
 use App\Models\tbl_admin_info;
 use App\Models\tbl_evaluation_form;
@@ -8,6 +9,7 @@ use App\Models\tbl_correction;
 use App\Models\tbl_payment;
 use App\Models\tbl_masterdata;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Response;
@@ -103,11 +105,19 @@ class submissionStatusController extends Controller
             $now = $now->format('YmdHis');
             $filename = "Receipt_". $now . "_" . $submissionCode . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('storage/receipt'), $filename);
-
-            $paymentInfo = tbl_payment::where('submissionCode',$submissionCode)->first();
+            $currentYear= Carbon::now()->format('Y');
             $totalPaymentReceipt = tbl_payment::where('submissionCode',$submissionCode)->get()->count();
             $thisPaymentID = $paymentID . "_" . $totalPaymentReceipt + 1;
-            if($totalPaymentReceipt != 0){
+
+            if(tbl_participants_info::where('id',$submissionCode)->first()){
+                $categoryCode = "AUD";
+                $rows = tbl_payment::where('submissionCode', 'like', '%' . $categoryCode . '%')->count();
+                $userId = $submissionCode;
+                $submissionCode = $currentYear . "_" . $categoryCode . str_pad( str($rows + 1), 4, '0', STR_PAD_LEFT);
+                $paymentID =  "Receipt_AUD_".tbl_participants_info::where('id',$userId)->first()->name;
+                $thisPaymentID = $paymentID . "_" . $rows + 1;
+                $paymentInfo = new tbl_payment;
+                $paymentInfo->participantsEmail = tbl_participants_info::where('id',$userId)->first()->email;
                 $paymentInfo->submissionCode = $submissionCode;
                 $paymentInfo->paymentID = $thisPaymentID;
                 $paymentInfo->paymentStatus = "Pending For Verification";
@@ -116,15 +126,28 @@ class submissionStatusController extends Controller
                 $paymentInfo->updated_at = now();
                 $paymentInfo->save();
             }else{
-                $paymentInfo = new tbl_payment;
-                $paymentInfo->submissionCode = $submissionCode;
-                $paymentInfo->paymentID = $thisPaymentID;
-                $paymentInfo->paymentStatus = "Pending For Verification";
-                $paymentInfo->paymentDate = $now;
-                $paymentInfo->proofOfPayment = $filename;
-                $paymentInfo->updated_at = now();
-                $paymentInfo->save();
+                $paymentInfo = tbl_payment::where('submissionCode',$submissionCode)->first();
+                if($totalPaymentReceipt != 0){
+                    $paymentInfo->submissionCode = $submissionCode;
+                    $paymentInfo->paymentID = $thisPaymentID;
+                    $paymentInfo->paymentStatus = "Pending For Verification";
+                    $paymentInfo->paymentDate = $now;
+                    $paymentInfo->proofOfPayment = $filename;
+                    $paymentInfo->updated_at = now();
+                    $paymentInfo->save();
+                }else{
+                    $paymentInfo = new tbl_payment;
+                    $paymentInfo->submissionCode = $submissionCode;
+                    $paymentInfo->paymentID = $thisPaymentID;
+                    $paymentInfo->paymentStatus = "Pending For Verification";
+                    $paymentInfo->paymentDate = $now;
+                    $paymentInfo->proofOfPayment = $filename;
+                    $paymentInfo->updated_at = now();
+                    $paymentInfo->save();
+                }
             }
+            
+            
             return redirect()->back()->with('success', 'Receipt uploaded successfully.');
         }
 

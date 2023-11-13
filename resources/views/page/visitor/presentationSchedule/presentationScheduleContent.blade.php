@@ -257,7 +257,6 @@
                     <tr>
                         <th> Group</th>
                         <th> Time</th>
-                        <th> Link/Location</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -361,7 +360,6 @@
                     <tr>
                         <td><label type="text" name="group">{{ $eachSchedule->presentationGroup }}</label></td>
                         <td><label type="datetime-local" name="time" >{{ $eachSchedule->presentationTime }}</label></td>
-                        <td><label type="text" name="link" >{{ $eachSchedule->presentationLink }}</label></td>
                     </tr>
                     @endforeach
                     @if($scheduleCount == 0)

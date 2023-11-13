@@ -355,22 +355,11 @@
                     <tr>
                         <td><label type="text" name="group">{{ $eachSchedule->presentationGroup }}</label></td>
                         <td><label type="datetime-local" name="time" >{{ $eachSchedule->presentationTime }}</label></td>
+                        @if($hasPayment == true)
                         <td><label type="text" name="link" >{{ $eachSchedule->presentationLink }}</label></td>
-                    </tr>
-                    <tr>
-                        <td><label type="text" name="group">{{ $eachSchedule->presentationGroup }}</label></td>
-                        <td><label type="datetime-local" name="time" >{{ $eachSchedule->presentationTime }}</label></td>
-                        <td><label type="text" name="link" >{{ $eachSchedule->presentationLink }}</label></td>
-                    </tr>
-                    <tr>
-                        <td><label type="text" name="group">{{ $eachSchedule->presentationGroup }}</label></td>
-                        <td><label type="datetime-local" name="time" >{{ $eachSchedule->presentationTime }}</label></td>
-                        <td><label type="text" name="link" >{{ $eachSchedule->presentationLink }}</label></td>
-                    </tr>
-                    <tr>
-                        <td><label type="text" name="group">{{ $eachSchedule->presentationGroup }}</label></td>
-                        <td><label type="datetime-local" name="time" >{{ $eachSchedule->presentationTime }}</label></td>
-                        <td><label type="text" name="link" >{{ $eachSchedule->presentationLink }}</label></td>
+                        @else
+                        <td><label type="text" name="link" >This Field Only Visible For Verified Audience Or Participants</label></td>
+                        @endif
                     </tr>
                     @endforeach
                     @if($scheduleCount == 0)

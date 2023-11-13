@@ -159,8 +159,7 @@
                                                 <div class="form-group col-md-3">
                                                     <label for="salutation">Salutation :</label>
                                                     <select class="dropdown-option" id="salutation" name="salutation" required>
-                                                        <option selected disabled>Choose</option>
-                                                        <option value="Dr">Dr</option>
+                                                        <option value="Dr" selected>Dr</option>
                                                         <option value="Mr">Mr</option>
                                                         <option value="Mrs">Mrs</option>
                                                         <option value="Dato">Dato</option>
@@ -171,14 +170,6 @@
                                                         <option value="Others">Others</option>
                                                     </select>
                                                     <input type="text" name="salutationInput" id="salutationInput" style='display:none;' placeholder="Other Salutations"/><br>
-                                                </div>
-
-                                                <div class="form-group col-md-7">
-                                                    <label for="category">Participant Category :</label>
-                                                    <select class="dropdown-option category" name="category" id="" required>
-                                                        <option value="presenter">Presenter</option>
-                                                        <option value="Audience">Audience</option>
-                                                    </select><br>
                                                 </div>
 
                                                 <div class="form-group col-md-12">

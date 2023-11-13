@@ -146,3 +146,4 @@ Route::post('/JKReviewer/uploadCleanedDocument/{submissionCode}', [JKReviewerCon
 Route::get('/downloadCleanedDocument/{filename}', [JKReviewerController::class, 'downloadCleanedDocument'])->name('downloadCleanedDocument');
 Route::get('/superAdminHomePage',[SuperAdminController::class,'shownumber']);
 Route::get('/superAdminHomePage',[SuperAdminController::class,'checksubmission']);
+Route::get('/registerAsAudience',[FullpaperController::class,'indexRegisterAsAudience']);

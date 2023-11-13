@@ -30,10 +30,11 @@
                         <li><a class="dropdown-item" href="/participants/presentationSchedule">Presentation Schedule</a></li>
                     </ul>
                     <li class="nav-item"><a class="nav-link" href="/publicationInfo">Publication</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/registerAsAudience">Resigter As Audience</a></li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Paper Submission</a>
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Submission</a>
                             <ul class="dropdown-menu dropdown-menu-end bg-light" aria-labelledby="navbarDropdownBlog">
-                                <li><a class="dropdown-item" href="/registerSubmission">Full Paper Submission</a></li>
+                                <li><a class="dropdown-item" href="/registerSubmission">Register Submission</a></li>
                                 <li><a class="dropdown-item" href="/submissionStatus">Submission Status</a></li>
                             </ul>
                     <li class="nav-item"><a class="nav-link" href="/account">My Profile</a></li>
