@@ -137,7 +137,7 @@ class SuperAdminController extends Controller
             $amountREE = $submissionCounts->get('REE', 0);
             $amountCOM = $submissionCounts->get('COM', 0);
             $amountMDC = $submissionCounts->get('MDC', 0);
-            $amountOTH = $submissionCounts->get(null, 0);
+            $amountOTH = $submissionCounts->get('OTH', 0);
 
             $amounts = [
                 'ITC' => $amountITC,
