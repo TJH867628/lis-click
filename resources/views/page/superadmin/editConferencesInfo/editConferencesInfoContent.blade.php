@@ -473,7 +473,6 @@
     <body class="d-flex flex-column h-100" style="background-color: white; text-align:center;">      
         <main class="table" style="margin-top: 35%;">
         <a id="originalBuild" href="/pageList">Page List</a>
-
             <section class="table__header">
                 <h1>CONFERENCES FEES</h1>
             </section>
