@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\tbl_masterdata;
 use App\Models\tbl_payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -165,8 +166,10 @@ class FullpaperController extends Controller
                 }
             }
             $user->isDonePayment = $isDonePayment;
+            $paymentQR = tbl_masterdata::where('masterdata_name','paymentQR')->first();
 
-            return view('page.participants.registerAsAudience.registerAsAudience',['user'=>$user]);
+
+            return view('page.participants.registerAsAudience.registerAsAudience',['user'=>$user,'paymentQR'=>$paymentQR]);
         }
     }
 }
