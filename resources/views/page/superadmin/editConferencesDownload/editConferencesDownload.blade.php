@@ -15,11 +15,9 @@
         <link href="css/styles.css" rel="stylesheet"/>
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     </head>
-    <body class="d-flex flex-column h-100">
         @include('page.superadmin.editConferencesDownload.editConferencesDownloadContent')
         @include('page.footer')
         <!-- Bootstrap core JS-->
         <!-- Core theme JS-->
         <!--<script src="js/scripts.js"></script>-->
-    </body>
 </html>
