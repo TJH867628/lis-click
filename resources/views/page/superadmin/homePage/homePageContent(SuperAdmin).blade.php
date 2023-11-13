@@ -120,7 +120,7 @@
                 <div class="card">
                   <div class="card-body">
                     <div class="clearfix">
-                      <h4 class="card-title float-left">Visit And Sales Statistics</h4>
+                      <h4 class="card-title float-left"><br><br><br>Category Amount</h4>
                       <div id="visit-sale-chart-legend" class="rounded-legend legend-horizontal legend-top-right float-right"></div>
                     </div>
                     <canvas id="visit-sale-chart" class="mt-4"></canvas>
@@ -130,7 +130,7 @@
               <div class="col-md-5 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Traffic Sources</h4>
+                    <h4 class="card-title">Total Collect</h4>
                     <canvas id="traffic-chart"></canvas>
                     <div id="traffic-chart-legend" class="rounded-legend legend-vertical legend-bottom-left pt-4"></div>
                   </div>
@@ -366,38 +366,85 @@
           var gradientStrokeGreen = ctx.createLinearGradient(0, 0, 0, 300);
           gradientStrokeGreen.addColorStop(0, 'rgba(6, 185, 157, 1)');
           gradientStrokeGreen.addColorStop(1, 'rgba(132, 217, 210, 1)');
-          var gradientLegendGreen = 'linear-gradient(to right, rgba(6, 185, 157, 1), rgba(132, 217, 210, 1))';      
+          var gradientLegendGreen = 'linear-gradient(to right, rgba(6, 185, 157, 1), rgba(132, 217, 210, 1))';
+          
+          var gradientStrokePurple = ctx.createLinearGradient(0, 0, 0, 181);
+          gradientStrokePurple.addColorStop(0, 'rgba(159, 89, 204, 1)');
+          gradientStrokePurple.addColorStop(1, 'rgba(102, 51, 153, 1)');
+          var gradientLegendPurple = 'linear-gradient(to right, rgba(159, 89, 204, 1), rgba(102, 51, 153, 1))';
+
+          var gradientStrokeOrange = ctx.createLinearGradient(0, 0, 0, 181);
+          gradientStrokeOrange.addColorStop(0, 'rgba(255, 165, 0, 1)');
+          gradientStrokeOrange.addColorStop(1, 'rgba(255, 87, 34, 1)');
+          var gradientLegendOrange = 'linear-gradient(to right, rgba(255, 165, 0, 1), rgba(255, 87, 34, 1))';
+
+          var gradientStrokeGold = ctx.createLinearGradient(0, 0, 0, 181);
+          gradientStrokeGold.addColorStop(0, 'rgba(255, 215, 0, 1)');
+          gradientStrokeGold.addColorStop(1, 'rgba(218, 165, 32, 1)');
+          var gradientLegendGold = 'linear-gradient(to right, rgba(255, 215, 0, 1), rgba(218, 165, 32, 1))';
+
+          var gradientStrokePink = ctx.createLinearGradient(0, 0, 0, 181);
+          gradientStrokePink.addColorStop(0, 'rgba(255, 182, 193, 1)');
+          gradientStrokePink.addColorStop(1, 'rgba(255, 105, 180, 1)');
+          var gradientLegendPink = 'linear-gradient(to right, rgba(255, 182, 193, 1), rgba(255, 105, 180, 1))';
+          
+          var gradientStrokeTeal = ctx.createLinearGradient(0, 0, 0, 181);
+          gradientStrokeTeal.addColorStop(0, 'rgba(0, 128, 128, 1)');
+          gradientStrokeTeal.addColorStop(1, 'rgba(0, 206, 209, 1)');
+          var gradientLegendTeal = 'linear-gradient(to right, rgba(0, 128, 128, 1), rgba(0, 206, 209, 1))';
+
+          // var dataByYear = @json($dataByYear);
+
+          // var categoryAmounts = Object.values(dataForSelectedYear.amountEachCategory);
 
           var trafficChartData = {
             datasets: [{
-              data: [30, 30, 40],
+              data: [20,30,20,40,50,20,70,80],
               backgroundColor: [
                 gradientStrokeBlue,
                 gradientStrokeGreen,
-                gradientStrokeRed
+                gradientStrokeRed,
+                gradientStrokePurple,
+                gradientStrokeOrange,
+                gradientStrokeGold,
+                gradientStrokePink,
+                gradientStrokeTeal
               ],
               hoverBackgroundColor: [
                 gradientStrokeBlue,
                 gradientStrokeGreen,
-                gradientStrokeRed
+                gradientStrokeRed,
+                gradientStrokePurple,
+                gradientStrokeOrange,
+                gradientStrokeGold,
+                gradientStrokePink,
+                gradientStrokeTeal
               ],
               borderColor: [
                 gradientStrokeBlue,
                 gradientStrokeGreen,
-                gradientStrokeRed
+                gradientStrokeRed,
+                gradientStrokePurple,
+                gradientStrokeOrange,
+                gradientStrokeGold,
+                gradientStrokePink,
+                gradientStrokeTeal
               ],
               legendColor: [
                 gradientLegendBlue,
                 gradientLegendGreen,
-                gradientLegendRed
+                gradientLegendRed,
+                gradientLegendPurple,
+                gradientLegendOrange,
+                gradientLegendGold,
+                gradientLegendPink,
+                gradientLegendTeal
               ]
             }],
         
             // These labels appear in the legend and in the tooltips when hovering different arcs
             labels: [
-              'Search Engines',
-              'Direct Click',
-              'Bookmarks Click',
+              'TVT', 'SSC', 'ITC', 'EHE', 'REE', 'COM', 'MD','OTH'
             ]
           };
           var trafficChartOptions = {
