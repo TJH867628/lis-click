@@ -427,6 +427,21 @@
             font-size: 300%;
         }
 
+        #originalBuild {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            display: inline-block;
+            }
+
+            #originalBuild:hover, #saveChanges:hover {
+            background-color: #0069d9;
+            }
+
     </style>
     </head>
     <a id="originalBuild" href="/pageList">Page List</a>

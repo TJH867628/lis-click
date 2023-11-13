@@ -94,9 +94,8 @@
     {!! $editableContent !!}
   </div>
   <p style="margin: auto;">Maximum Image Size is 2MB</p>
-  <button id="saveChanges" type="submit">Save Changes</button>
+  <button id="saveChanges" type="submit" onclick="return confirm('Do you sure to Save Changes ?')">Save Changes</button>
 </form>
-<a id="originalBuild" type="submit" href="{{ route('reverseToLastEdition', ['pageName' => $pageName]) }}">Reverse to last build</a>
 <script>
   var form = document.getElementById('editForm');
   var divContainer = document.querySelector('div');

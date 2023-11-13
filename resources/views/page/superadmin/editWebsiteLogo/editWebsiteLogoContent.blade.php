@@ -452,6 +452,21 @@
         textarea{
             height: auto;
         }
+
+        #originalBuild {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            display: inline-block;
+            }
+
+            #originalBuild:hover, #saveChanges:hover {
+            background-color: #0069d9;
+            }
         </style>
     </head>
     <body class="d-flex flex-column h-100" style="background-color: white; text-align:center;">      
