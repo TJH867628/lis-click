@@ -122,8 +122,7 @@ class SuperAdminController extends Controller
             $submissionsCount = tbl_submission::all()->count();
             $reviewersCount = tbl_review_info::all()->count();
             $checksubmission  = tbl_submission::all();
-
-            
+            $paymentDetails = tbl_payment::whereNotNull('amount')->get();
 
             $submissionCounts = $checksubmission->groupBy('categoryCode')
             ->map(function ($group) {
@@ -150,12 +149,76 @@ class SuperAdminController extends Controller
                 'OTH' => $amountOTH,
             ];
 
+            $paymentsByYear = $paymentDetails->groupBy(function ($payment) {
+                return $payment->created_at->format('Y');
+            })->sortBy(function ($payment) {
+                return $payment->first()->created_at;
+            })->reverse();
+        
+            $dataByYear = [];
+        
+            foreach ($paymentsByYear as $year => $payments) {
+                $amountEachCategory = new \stdClass();
+
+                $totalSSC = 0; // Initialize the total amount for category SSC
+                $totalITC = 0; // Initialize the total total for category ITC
+                $totalEHE = 0; // Initialize the total total for category EHE
+                $totalTVT = 0; // Initialize the total total for category TVT
+                $totalREE = 0; // Initialize the total total for category REE
+                $totalCOM = 0; // Initialize the total total for category COM
+                $totalMDC = 0; // Initialize the total total for category MDC
+                $totalOTH = 0;
+                $totalAmount = 0;
+                foreach ($payments as $payment) {
+                    $categoryCode = substr($payment->submissionCode,5,3); // Initialize category code variable
+                    $totalAmount += $payment->amount; // Calculate the total amount across all payments
+        
+                    $subTheme = $payment->subTheme;
+                    $categoryCode = substr($payment->submissionCode,5,3); // Initialize category code variable
+        
+                    // Determine category code based on subTheme
+                    if ($categoryCode === "SSC") {
+                        $totalSSC += $payment->amount; // Add to the total amount for category SSC
+                    } elseif ($categoryCode === "ITC") {
+                        $totalITC += $payment->amount; // Add to the total amount for category ITC
+                    } elseif ($categoryCode === "EHE") {
+                        $totalEHE += $payment->amount; // Add to the total total for category EHE
+                    } elseif ($categoryCode === "TVT") {
+                        $totalTVT += $payment->amount; // Add to the total amount for category TVT
+                    } elseif ($categoryCode === "REE") {
+                        $totalREE += $payment->amount; // Add to the total total for category REE
+                    } elseif ($categoryCode === "COM") {
+                        $totalCOM += $payment->amount; // Add to the total total for category COM
+                    } elseif ($categoryCode === "MDC") {
+                        $totalMDC += $payment->amount; // Add to the total total for category MDC
+                    } elseif ($categoryCode === "OTH") {
+                        $totalOTH += $payment->amount; // Add to the total amount for category OTH
+                    }
+        
+                }
+
+                $amountEachCategory->totalSSC = $totalSSC; 
+                $amountEachCategory->totalITC = $totalITC; 
+                $amountEachCategory->totalEHE = $totalEHE; 
+                $amountEachCategory->totalTVT = $totalTVT; 
+                $amountEachCategory->totalREE = $totalREE; 
+                $amountEachCategory->totalCOM = $totalCOM; 
+                $amountEachCategory->totalMDC = $totalMDC; 
+                $amountEachCategory->totalOTH = $totalOTH; 
+    
+            $dataByYear[(string)$year] = [
+                'amountEachCategory' => $amountEachCategory,
+                'totalAmount' => $totalAmount,
+            ];
+        }
+
             return view('page.superadmin.homePage.homePage(SuperAdmin)', [
                 'participantsCount' => $participantsCount,
                 'submissionsCount' => $submissionsCount,
                 'reviewersCount' => $reviewersCount,
                 'checksubmission'=>$checksubmission,
                 'amounts' => $amounts,
+                'dataByYear' => $dataByYear,
             ]);
         } else {
             return redirect('login')->with('fail', 'Login Session Expire, Please Login again');
