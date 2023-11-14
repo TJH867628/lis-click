@@ -8,6 +8,7 @@ class LogoutController extends Controller
 {
     function logout(Request $request)
     {
+        session()->flush();
         if($request->session()->has('LoggedUser')){
             $request->session()->remove('LoggedUser');
             return redirect('mainPage');
