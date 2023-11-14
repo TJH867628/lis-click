@@ -393,7 +393,7 @@ thead th.active,tbody td.active {
 <!-- Header-->
 <header class="bg-light text text-dark py-5">
     @if($user->isDonePayment == false)
-                <div class="container px-5 py-5" id="formContainer">
+                <div class="container px-5 py-5" id="formContainer" >
                     <div id="contact" class="contact-area section-padding">
                         <div class="container">										
                             <div class="section-title text-center mt-5">

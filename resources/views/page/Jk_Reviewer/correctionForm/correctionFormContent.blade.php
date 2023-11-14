@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -624,8 +624,8 @@
 <body>
 <main class="table">
 <section class="table__header">
-<h1>Correction History</h1>
-@if($submission->correctionPhase == 'pending')
+<h1>Correction History</h1>s
+@if($submission->correctionPhase == 'pending' && $latestReturnCorrection->returnCorrectionLink != null)
         <button onclick="openPopup()" id="addButton">
             <div class="d-flex justify-content-center align-items-center">
                 <i class="material-icons text-center">add</i>
@@ -653,7 +653,7 @@
             </thead>
 @if($correction->isNotEmpty())
             <tbody>
-        @foreach($correction as $thisCorrection)
+        @foreach($correction->reverse() as $thisCorrection)
             <tr>
                 <td>
                     <p>Submission Code</p>

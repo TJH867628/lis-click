@@ -148,3 +148,8 @@ Route::get('/superAdminHomePage',[SuperAdminController::class,'indexHomePage']);
 Route::get('/registerAsAudience',[FullpaperController::class,'indexRegisterAsAudience']);
 Route::get('/recommendedSubmissionList',[JKReviewerController::class,'indexRecommendedSubmissionList'])->name('recommendedSubmissionList');
 Route::get('/userManual',[MainPageController::class,'indexUserManual'])->name('userManual');
+Route::get('/editOfficialContact/{id}',[PageEditController::class,'editOfficialContact'])->name('editOfficialContact');
+Route::post('/saveChangeOfficialContact/{id}',[PageEditController::class,'saveChangeOfficialContact'])->name('saveChangeOfficialContact');
+Route::get('/audienceList',[JKReviewerController::class,'audienceList'])->name('audienceList');
+Route::post('/uploadAudienceCertificate/{id}',[JKReviewerController::class,'uploadAudienceCertificate'])->name('uploadAudienceCertificate');
+Route::get('/downloadAudienceCertificate/{filename}',[JKReviewerController::class,'downloadAudienceCertificate'])->name('downloadAudienceCertificate');

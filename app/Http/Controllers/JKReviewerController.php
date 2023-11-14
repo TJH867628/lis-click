@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\correction_notification;
 use App\Models\tbl_admin_info;
+use App\Models\tbl_audience;
 use App\Models\tbl_correction;
 use App\Models\tbl_evaluation_form;
 use App\Models\tbl_submission;
@@ -97,6 +99,43 @@ class JKReviewerController extends Controller
                     'created_at' => now(),
                     'updated_at' => now(),
                 );
+                $submission = tbl_submission::where('submissionCode', $submissionCode)->first();
+                $participants1Name = tbl_participants_info::where('email',$submission->participants1)->first();
+                $mailToUser = new correction_notification;
+                $mailToUser->setSubmissionInfo($submission,$participants1Name);
+                $validator = Validator::make(['email' => $submission->participants1], [
+                    'email' => 'email',
+                ]); 
+
+                if ($validator->passes()) {
+
+                    Mail::to($submission->participants1)->send($mailToUser);
+                // Validate and send the email to participants2 or participants3
+                } 
+                    
+                if ($submission->participants2 != null) {
+                    
+                    $validator = Validator::make(['email' => $submission->participants2], [
+                        'email' => 'email',
+                    ]);
+
+                    if ($validator->passes()) {
+                        Mail::to($submission->participants2)->send($mailToUser);
+                    }
+                }
+
+                    
+                    if ($submission->participants3 != null) {
+
+                    $validator = Validator::make(['email' => $submission->participants3], [
+                        'email' => 'email',
+                    ]);
+
+                    if ($validator->passes()) {
+                        Mail::to($submission->participants3)->send($mailToUser);
+                    }
+                }
+
                 DB::table('tbl_correction')->insert($data);
                 return redirect()->back();
             }else{
@@ -321,5 +360,53 @@ class JKReviewerController extends Controller
             }
 
             return view('page.Jk_Reviewer.recommendedSubmissionList.recommendedSubmissionList', ['recommendedSubmission'=>$recommendedSubmission]);
+        }
+
+        public function audienceList(){
+            if(session()->has('LoggedJKReviewer')){
+                session()->start();
+                $audienceList = tbl_audience::all();
+
+                return view('page.Jk_Reviewer.audienceList.audienceList', ['audienceList'=>$audienceList]);
+            }else{
+                return redirect('login')->with('fail','Login Session Expire,Please Login again');
+            }
+            
+        }
+
+        public function uploadAudienceCertificate(Request $request,$id){
+            if(session()->has('LoggedJKReviewer') || session()->has('LoggedSuperAdmin')){
+                session()->start();
+                $audience = tbl_audience::where('id',$id)->first();
+                if ($request->hasFile('file')) {
+                    $file = $request->file('file');
+                    $timestamp = time();
+                    $dateString = date('YmdHis', $timestamp);
+                    $filename = 'certificate_'. $audience->id . "_" . $dateString . ".". $file->getClientOriginalExtension();
+                    $audience->certificate = $filename;
+                    $file->storeAs('certificate', $filename, 'public');
+                    $audience->save();
+                    return redirect()->back()->with('success', 'File uploaded successfully.');
+                }else{
+                    return redirect()->back();
+                }
+            }else{
+                return redirect('login')->with('fail','Login Session Expire,Please Login again');
+            }
+        }
+
+        public function downloadAudienceCertificate($filename)
+        {
+            $file = 'storage/certificate/' . $filename;
+            $extension = pathinfo($file, PATHINFO_EXTENSION);
+    
+            if ($extension == 'pdf') {
+                return response()->file($file, [
+                    'Content-Type' => 'application/pdf',
+                    'Content-Disposition' => 'inline',
+                ]);
+            } elseif ($extension == 'doc' || $extension == 'docx') {
+                return response()->file($file);
+            }
         }
 }

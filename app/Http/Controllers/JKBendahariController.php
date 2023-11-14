@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\tbl_account;
+use App\Models\tbl_audience;
 use Illuminate\Http\Request;
 use App\Models\tbl_masterdata;
 use App\Models\tbl_payment;
@@ -117,6 +118,11 @@ class JKBendahariController extends Controller
         $paymentDetails->paymentStatus = $paymentStatus;
         $now = now();
         $paymentDetails->updated_at = $now;
+        $audience = tbl_audience::where('email',$paymentDetails->participantsEmail)->first();
+        if(isset($audience)){
+            $audience->payment_status = $paymentStatus;
+            $audience->save();
+        }
         if ($paymentDetails->paymentStatus == 'Complete') {
             $date = $now->format('Y-m-d H:i:s');
             $paymentDetails->confirmPaymentDate = $date;
@@ -152,7 +158,6 @@ class JKBendahariController extends Controller
 
     public function bendahariDashboard() {
         $paymentDetails = tbl_payment::whereNotNull('amount')->get();
-    
         // Group payments by year
         $paymentsByYear = $paymentDetails->groupBy(function ($payment) {
             return $payment->created_at->format('Y');

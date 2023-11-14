@@ -44,6 +44,18 @@ class PageEditController extends Controller
             $allLogo = tbl_masterdata::where('masterdata_type','website_logo')->get();
 
             return view('page.superadmin.editWebsiteLogo.editWebsiteLogo',['allLogo' => $allLogo]);
+        }elseif($pageName == 'Official Contact Details'){
+            $officialEmail = tbl_masterdata::where('masterdata_name','officialEmail')->first();
+            $officialAddress = tbl_masterdata::where('masterdata_name','officialAddress')->first();
+            $officialWorkingTime = tbl_masterdata::where('masterdata_name','officialWorkingTime')->first();
+            $officialContactNumber = tbl_masterdata::where('masterdata_name','officialContactNumber')->first();
+            $officialDetails = new \stdClass();
+            $officialDetails->officialEmail = $officialEmail;
+            $officialDetails->officialAddress = $officialAddress;
+            $officialDetails->officialWorkingTime = $officialWorkingTime;
+            $officialDetails->officialContactNumber = $officialContactNumber;
+
+            return view('page.superadmin.editOfficialContact.editOfficialContact',['officialDetails'=>$officialDetails]);
         }else{
             $page = tbl_page::where('pageName', $pageName)->first(); 
             $pagePath = $page->pagePath;
@@ -236,5 +248,12 @@ class PageEditController extends Controller
         $updatedContent = preg_replace($search , $tableHtml, $updatedContent);
 
         return $updatedContent;
+    }
+
+    public function saveChangeOfficialContact(Request $request,$id){
+        $officialContact = tbl_masterdata::where('id',$id)->first();
+        $officialContact->masterdata_value = $request->input('data');
+        $officialContact->save();
+        return redirect()->back();
     }
 }

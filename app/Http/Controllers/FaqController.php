@@ -15,13 +15,32 @@ class FaqController extends Controller
         if(session()->has('LoggedUser')){
             $userSession = session()->get('LoggedUser');
             $user = tbl_participants_info::where('email',$userSession)->first();
-            return view('page.participants.faq.faq',['userSession' => $userSession,'user' => $user]);
+            $officialEmail = tbl_masterdata::where('masterdata_name','officialEmail')->first();
+            $officialAddress = tbl_masterdata::where('masterdata_name','officialAddress')->first();
+            $officialWorkingTime = tbl_masterdata::where('masterdata_name','officialWorkingTime')->first();
+            $officialContactNumber = tbl_masterdata::where('masterdata_name','officialContactNumber')->first();
+            $officialDetails = new \stdClass();
+            $officialDetails->officialEmail = $officialEmail;
+            $officialDetails->officialAddress = $officialAddress;
+            $officialDetails->officialWorkingTime = $officialWorkingTime;
+            $officialDetails->officialContactNumber = $officialContactNumber;
+
+            return view('page.participants.faq.faq',['userSession' => $userSession,'user' => $user,'officialDetails' => $officialDetails]);
 
         }
     }
 
     function visitor(){
-        return view('page.visitor.faq.faqVisitor');
+        $officialEmail = tbl_masterdata::where('masterdata_name','officialEmail')->first();
+        $officialAddress = tbl_masterdata::where('masterdata_name','officialAddress')->first();
+        $officialWorkingTime = tbl_masterdata::where('masterdata_name','officialWorkingTime')->first();
+        $officialContactNumber = tbl_masterdata::where('masterdata_name','officialContactNumber')->first();
+        $officialDetails = new \stdClass();
+        $officialDetails->officialEmail = $officialEmail;
+        $officialDetails->officialAddress = $officialAddress;
+        $officialDetails->officialWorkingTime = $officialWorkingTime;
+        $officialDetails->officialContactNumber = $officialContactNumber;
+        return view('page.visitor.faq.faqVisitor',['officialDetails' => $officialDetails]);
     }
 
     function sendFaq(Request $request){
@@ -57,4 +76,5 @@ class FaqController extends Controller
 
         return redirect()->back()->with('success','Your message has been submitted successfully');
     }
+
 }

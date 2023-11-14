@@ -39,7 +39,7 @@
 <body>
     <div class="container">
         @include('emails.header')
-        @include('emails.camera_ready.camera_ready_content')
+        @include('emails.correction_notification.correction_notification_content')
     </div>
 
     @include('page.footer')

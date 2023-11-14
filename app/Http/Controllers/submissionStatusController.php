@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\tbl_audience;
 use App\Models\tbl_participants_info;
 use App\Models\tbl_submission;
 use App\Models\tbl_admin_info;
@@ -125,6 +126,16 @@ class submissionStatusController extends Controller
                 $paymentInfo->proofOfPayment = $filename;
                 $paymentInfo->updated_at = now();
                 $paymentInfo->save();
+
+                $audience = tbl_audience::where('email',tbl_participants_info::where('id',$userId)->first()->email)->first();
+                if(!isset($audience)){
+                    $audience = new tbl_audience;
+                    $audience->email = tbl_participants_info::where('id',$userId)->first()->email;
+                    $audience->payment_status = "Pending For Verification";
+                    $audience->certificate = null;
+                    $audience->save();
+                }
+        
             }else{
                 $paymentInfo = tbl_payment::where('submissionCode',$submissionCode)->first();
                 if($totalPaymentReceipt != 0){

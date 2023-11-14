@@ -67,22 +67,22 @@
                                     <div class="single_address">
                                         <i class="fa fa-map-marker"></i>
                                         <h4>Our Address</h4>
-                                        <p>Jalan Nitar, 86800 Mersing Johor</p>
+                                        <p>{{$officialDetails->officialAddress->masterdata_value}}</p>
                                     </div>
                                     <div class="single_address">
                                         <i class="fa fa-envelope"></i>
                                         <h4>Send your message</h4>
-                                        <p>lis2023@pmj.edu.my</p>
+                                        <p>{{$officialDetails->officialEmail->masterdata_value}}</p>
                                     </div>
                                     <div class="single_address">
                                         <i class="fa fa-phone"></i>
                                         <h4>Call us on</h4>
-                                        <p>(+60) - 07798 0001</p>
+                                        <p>{{$officialDetails->officialContactNumber->masterdata_value}}</p>
                                     </div>
                                     <div class="single_address">
                                         <i class="fa fa-clock-o"></i>
                                         <h4>Work Time</h4>
-                                        <p>Mon - Fri: 08.00 - 16.00. <br>Sat: 10.00 - 14.00</p>
+                                        <p>{{$officialDetails->officialWorkingTime->masterdata_value}}</p>
                                     </div>					
                                 </div><!--- END COL --> 
                             </div><!--- END ROW -->
