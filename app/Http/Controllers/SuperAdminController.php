@@ -9,6 +9,7 @@ use App\Models\tbl_submission;
 use App\Models\tbl_review_info;
 use App\Models\tbl_payment;
 use Illuminate\Http\Request;
+use App\Models\tbl_superadmintask;
 
 class SuperAdminController extends Controller
 {
@@ -123,6 +124,7 @@ class SuperAdminController extends Controller
             $reviewersCount = tbl_review_info::all()->count();
             $checksubmission  = tbl_submission::all();
             $paymentDetails = tbl_payment::whereNotNull('amount')->get();
+            $tasks = tbl_superadmintask::latest()->get();
 
             $submissionCounts = $checksubmission->groupBy('categoryCode')
             ->map(function ($group) {
@@ -212,16 +214,39 @@ class SuperAdminController extends Controller
             ];
         }
 
-            return view('page.superadmin.homePage.homePage(SuperAdmin)', [
-                'participantsCount' => $participantsCount,
-                'submissionsCount' => $submissionsCount,
-                'reviewersCount' => $reviewersCount,
-                'checksubmission'=>$checksubmission,
-                'amounts' => $amounts,
-                'dataByYear' => $dataByYear,
-            ]);
+        return view('page.superadmin.homePage.homePage(SuperAdmin)', [
+            'participantsCount' => $participantsCount,
+            'submissionsCount' => $submissionsCount,
+            'reviewersCount' => $reviewersCount,
+            'checksubmission'=>$checksubmission,
+            'amounts' => $amounts,
+            'dataByYear' => $dataByYear,
+            'tasks' => $tasks
+        ]);
         } else {
             return redirect('login')->with('fail', 'Login Session Expire, Please Login again');
         }
     }
+
+    public function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            'task' => 'required|string|max:255',
+        ]);
+
+        $task = new tbl_superadmintask();
+        $task->task = $validatedData['task'];
+        $task->save();
+
+        return redirect()->route('superadminHomePage');
+    }
+
+    public function destroy($id)
+    {
+        $task = tbl_superadmintask::findOrFail($id);
+        $task->delete();
+
+        return response()->json(['message' => 'Task deleted successfully']);
+    }
+
 }

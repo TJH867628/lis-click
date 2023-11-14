@@ -176,56 +176,27 @@
               <div class="col-md-5 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title text-white">Todo</h4>
+                    <h4 class="card-title">Today Work</h4>
                     <div class="add-items d-flex">
-                      <input type="text" class="form-control todo-list-input" placeholder="What do you need to do today?">
+                      <input type="text" class="form-control todo-list-input" placeholder="What do you need to do today?" id="new-task-input">
                       <button class="add btn btn-gradient-primary font-weight-bold todo-list-add-btn" id="add-task">Add</button>
                     </div>
                     <div class="list-wrapper">
-                      <ul class="d-flex flex-column-reverse todo-list todo-list-custom">
-                        <li>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="checkbox" type="checkbox"> Meeting with Alisa </label>
-                          </div>
-                          <i class="remove mdi mdi-close-circle-outline"></i>
-                        </li>
-                        <li class="completed">
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="checkbox" type="checkbox" checked> Call John </label>
-                          </div>
-                          <i class="remove mdi mdi-close-circle-outline"></i>
-                        </li>
-                        <li>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="checkbox" type="checkbox"> Create invoice </label>
-                          </div>
-                          <i class="remove mdi mdi-close-circle-outline"></i>
-                        </li>
-                        <li>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="checkbox" type="checkbox"> Print Statements </label>
-                          </div>
-                          <i class="remove mdi mdi-close-circle-outline"></i>
-                        </li>
-                        <li class="completed">
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="checkbox" type="checkbox" checked> Prepare for presentation </label>
-                          </div>
-                          <i class="remove mdi mdi-close-circle-outline"></i>
-                        </li>
-                        <li>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="checkbox" type="checkbox"> Pick up kids from school </label>
-                          </div>
-                          <i class="remove mdi mdi-close-circle-outline"></i>
-                        </li>
-                      </ul>
+                    @if(isset($tasks) && count($tasks) > 0)
+                        <ul class="d-flex flex-column-reverse todo-list todo-list-custom">
+                        @foreach($tasks as $tasks)
+                          <li>
+                            <div class="form-check">
+                              <label class="form-check-label">
+                                <input class="checkbox" type="checkbox"> {{ $tasks->task }}</label>
+                            </div>
+                            <i class="remove mdi mdi-close-circle-outline" data-task-id="{{ $tasks->id }}"></i>
+                          </li>
+                          @endforeach
+                        </ul>
+                    @else
+                      <p>No tasks found.</p>
+                    @endif
                     </div>
                   </div>
                 </div>
@@ -240,8 +211,47 @@
         </div>
         <!-- main-panel ends -->
       </div>
+      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
       <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const addTaskBtn = document.getElementById("add-task");
+        const newTaskInput = document.getElementById("new-task-input");
+        const taskList = document.getElementById("task-list");
+
+        addTaskBtn.addEventListener("click", function () {
+            const taskText = newTaskInput.value.trim();
+
+            if (taskText !== "") {
+                axios.post('{{ route("tasks.store") }}', { task: taskText })
+                    .then(response => {
+                        // Reload the page to reflect the newly added task
+                        window.location.reload();
+                    })
+                    .catch(error => {
+                        console.error('Error adding task:', error);
+                    });
+            }
+        });
+
+        const removeButtons = document.querySelectorAll('.remove');
+
+        removeButtons.forEach(btn => {
+            btn.addEventListener('click', function (event) {
+                const taskId = event.target.getAttribute('data-task-id');
+
+                axios.delete(`/tasks/${taskId}`)
+                    .then(response => {
+                        // Reload the page after successful deletion to reflect the updated list
+                        window.location.reload();
+                    })
+                    .catch(error => {
+                        console.error('Error deleting task:', error);
+                    });
+            });
+        });
+      });
+
       $(document).ready(function() {
         $(".navbar-toggler").click(function() {
           $("#sidebar").toggleClass("sidebar-minimized");

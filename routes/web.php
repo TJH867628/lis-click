@@ -144,7 +144,9 @@ Route::post('/superadmin/submissionList/withdrawSubmission/{submissionCode}', [S
 Route::get('/bendahari/dashboard', [JKBendahariController::class, 'bendahariDashboard'])->name('bendahariDashboard');
 Route::post('/JKReviewer/uploadCleanedDocument/{submissionCode}', [JKReviewerController::class, 'uploadCleanedDocument'])->name('uploadCleanedDocument');
 Route::get('/downloadCleanedDocument/{filename}', [JKReviewerController::class, 'downloadCleanedDocument'])->name('downloadCleanedDocument');
-Route::get('/superAdminHomePage',[SuperAdminController::class,'indexHomePage']);
+Route::get('/superAdminHomePage',[SuperAdminController::class,'indexHomePage'])->name('superadminHomePage');
 Route::get('/registerAsAudience',[FullpaperController::class,'indexRegisterAsAudience']);
 Route::get('/recommendedSubmissionList',[JKReviewerController::class,'indexRecommendedSubmissionList'])->name('recommendedSubmissionList');
 Route::get('/userManual',[MainPageController::class,'indexUserManual'])->name('userManual');
+Route::post('/superAdminHomePage', [SuperAdminController::class, 'store'])->name('tasks.store');
+Route::delete('/tasks/{id}', [SuperAdminController::class, 'destroy'])->name('tasks.destroy');
