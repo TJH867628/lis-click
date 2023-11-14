@@ -224,6 +224,10 @@
             text-align: center;
             width: max-content;
         }
+
+        footer{
+            position: fixed;
+        }
     </style>
     </head>
     <body>
