@@ -26,6 +26,7 @@ class LoginController extends Controller
 
     function check(Request $request)
     {
+            session()->flush();
             $request->session()->start();
             $email = $request->input('email');
             $password = hash('sha512',$request->input('password'));
