@@ -403,12 +403,13 @@
           gradientStrokeTeal.addColorStop(1, 'rgba(0, 206, 209, 1)');
           var gradientLegendTeal = 'linear-gradient(to right, rgba(0, 128, 128, 1), rgba(0, 206, 209, 1))';
 
-          var total = @json($total); // Convert the PHP array to a JavaScript object
-
+          var dataByYear = @json($dataByYear); // Convert the PHP array to a JavaScript object
+          var categoryAmounts = Object.values(amountEachCategory);
+          
           var totals = Object.values(total);
           var trafficChartData = {
             datasets: [{
-              data: totals,
+              data: categoryAmounts,
               backgroundColor: [
                 gradientStrokeBlue,
                 gradientStrokeGreen,

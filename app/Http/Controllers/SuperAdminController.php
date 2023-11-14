@@ -157,8 +157,10 @@ class SuperAdminController extends Controller
                 return $payment->first()->created_at;
             })->reverse();
 
-            $total = [];
+            $dataByYear = [];
             foreach ($paymentsByYear as $year => $payments) {
+
+            $amountEachCategory = new \stdClass();
 
             $totalSSC = 0; // Initialize the total amount for category SSC
             $totalITC = 0; // Initialize the total total for category ITC
@@ -195,19 +197,20 @@ class SuperAdminController extends Controller
                 }
     
             }
-            $total = [
-                'ITC' => $totalSSC,
-                'SSC' => $totalITC,
-                'EHE' => $amountEHE,
-                'TVT' => $amountTVT,
-                'REE' => $amountREE,
-                'COM' => $amountCOM,
-                'MDC' => $amountMDC,
-                'OTH' => $amountOTH,
-            ];
-                
-        }
 
+                $amountEachCategory->amountSSC = $amountSSC; 
+                $amountEachCategory->amountITC = $amountITC; 
+                $amountEachCategory->amountEHE = $amountEHE; 
+                $amountEachCategory->amountTVT = $amountTVT; 
+                $amountEachCategory->amountREE = $amountREE; 
+                $amountEachCategory->amountCOM = $amountCOM; 
+                $amountEachCategory->amountMDC = $amountMDC; 
+                $amountEachCategory->amountOTH = $amountOTH; 
+                
+                $dataByYear[(string)$year] = [
+                    'amountEachCategory' => $amountEachCategory,
+                ];
+        }
         return view('page.superadmin.homePage.homePage(SuperAdmin)', [
             'participantsCount' => $participantsCount,
             'submissionsCount' => $submissionsCount,
@@ -215,7 +218,7 @@ class SuperAdminController extends Controller
             'checksubmission'=>$checksubmission,
             'amounts' => $amounts,
             'tasks' => $tasks,
-            'total'=>$total,
+            'dataByYear' => $dataByYear,
         ]);
         } else {
             return redirect('login')->with('fail', 'Login Session Expire, Please Login again');
