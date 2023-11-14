@@ -9,6 +9,7 @@ use App\Models\tbl_submission;
 use App\Models\tbl_review_info;
 use App\Models\tbl_payment;
 use Illuminate\Http\Request;
+use App\Models\tbl_superadmintask;
 
 class SuperAdminController extends Controller
 {
@@ -123,6 +124,7 @@ class SuperAdminController extends Controller
             $reviewersCount = tbl_review_info::all()->count();
             $checksubmission  = tbl_submission::all();
             $paymentDetails = tbl_payment::whereNotNull('amount')->get();
+            $tasks = tbl_superadmintask::latest()->get();
 
             $submissionCounts = $checksubmission->groupBy('categoryCode')
             ->map(function ($group) {
@@ -154,74 +156,94 @@ class SuperAdminController extends Controller
             })->sortBy(function ($payment) {
                 return $payment->first()->created_at;
             })->reverse();
-        
+
             $dataByYear = [];
-        
             foreach ($paymentsByYear as $year => $payments) {
-                $amountEachCategory = new \stdClass();
 
-                $totalSSC = 0; // Initialize the total amount for category SSC
-                $totalITC = 0; // Initialize the total total for category ITC
-                $totalEHE = 0; // Initialize the total total for category EHE
-                $totalTVT = 0; // Initialize the total total for category TVT
-                $totalREE = 0; // Initialize the total total for category REE
-                $totalCOM = 0; // Initialize the total total for category COM
-                $totalMDC = 0; // Initialize the total total for category MDC
-                $totalOTH = 0;
-                $totalAmount = 0;
-                foreach ($payments as $payment) {
-                    $categoryCode = substr($payment->submissionCode,5,3); // Initialize category code variable
-                    $totalAmount += $payment->amount; // Calculate the total amount across all payments
-        
-                    $subTheme = $payment->subTheme;
-                    $categoryCode = substr($payment->submissionCode,5,3); // Initialize category code variable
-        
-                    // Determine category code based on subTheme
-                    if ($categoryCode === "SSC") {
-                        $totalSSC += $payment->amount; // Add to the total amount for category SSC
-                    } elseif ($categoryCode === "ITC") {
-                        $totalITC += $payment->amount; // Add to the total amount for category ITC
-                    } elseif ($categoryCode === "EHE") {
-                        $totalEHE += $payment->amount; // Add to the total total for category EHE
-                    } elseif ($categoryCode === "TVT") {
-                        $totalTVT += $payment->amount; // Add to the total amount for category TVT
-                    } elseif ($categoryCode === "REE") {
-                        $totalREE += $payment->amount; // Add to the total total for category REE
-                    } elseif ($categoryCode === "COM") {
-                        $totalCOM += $payment->amount; // Add to the total total for category COM
-                    } elseif ($categoryCode === "MDC") {
-                        $totalMDC += $payment->amount; // Add to the total total for category MDC
-                    } elseif ($categoryCode === "OTH") {
-                        $totalOTH += $payment->amount; // Add to the total amount for category OTH
-                    }
-        
-                }
+            $amountEachCategory = new \stdClass();
 
-                $amountEachCategory->totalSSC = $totalSSC; 
-                $amountEachCategory->totalITC = $totalITC; 
-                $amountEachCategory->totalEHE = $totalEHE; 
-                $amountEachCategory->totalTVT = $totalTVT; 
-                $amountEachCategory->totalREE = $totalREE; 
-                $amountEachCategory->totalCOM = $totalCOM; 
-                $amountEachCategory->totalMDC = $totalMDC; 
-                $amountEachCategory->totalOTH = $totalOTH; 
+            $totalSSC = 0; // Initialize the total amount for category SSC
+            $totalITC = 0; // Initialize the total total for category ITC
+            $totalEHE = 0; // Initialize the total total for category EHE
+            $totalTVT = 0; // Initialize the total total for category TVT
+            $totalREE = 0; // Initialize the total total for category REE
+            $totalCOM = 0; // Initialize the total total for category COM
+            $totalMDC = 0; // Initialize the total total for category MDC
+            $totalOTH = 0;
+            
+            foreach ($payments as $payment) {
+                $categoryCode = substr($payment->submissionCode,5,3); // Initialize category code variable
     
-            $dataByYear[(string)$year] = [
-                'amountEachCategory' => $amountEachCategory,
-                'totalAmount' => $totalAmount,
-            ];
-        }
+                $subTheme = $payment->subTheme;
+                $categoryCode = substr($payment->submissionCode,5,3); // Initialize category code variable
+    
+                // Determine category code based on subTheme
+                if ($categoryCode === "SSC") {
+                    $totalSSC += $payment->amount; // Add to the total amount for category SSC
+                } elseif ($categoryCode === "ITC") {
+                    $totalITC += $payment->amount; // Add to the total amount for category ITC
+                } elseif ($categoryCode === "EHE") {
+                    $totalEHE += $payment->amount; // Add to the total total for category EHE
+                } elseif ($categoryCode === "TVT") {
+                    $totalTVT += $payment->amount; // Add to the total amount for category TVT
+                } elseif ($categoryCode === "REE") {
+                    $totalREE += $payment->amount; // Add to the total total for category REE
+                } elseif ($categoryCode === "COM") {
+                    $totalCOM += $payment->amount; // Add to the total total for category COM
+                } elseif ($categoryCode === "MDC") {
+                    $totalMDC += $payment->amount; // Add to the total total for category MDC
+                } elseif ($categoryCode === "OTH") {
+                    $totalOTH += $payment->amount; // Add to the total amount for category OTH
+                }
+    
+            }
 
-            return view('page.superadmin.homePage.homePage(SuperAdmin)', [
-                'participantsCount' => $participantsCount,
-                'submissionsCount' => $submissionsCount,
-                'reviewersCount' => $reviewersCount,
-                'checksubmission'=>$checksubmission,
-                'amounts' => $amounts,
-                'dataByYear' => $dataByYear,
-            ]);
+                $amountEachCategory->amountSSC = $amountSSC; 
+                $amountEachCategory->amountITC = $amountITC; 
+                $amountEachCategory->amountEHE = $amountEHE; 
+                $amountEachCategory->amountTVT = $amountTVT; 
+                $amountEachCategory->amountREE = $amountREE; 
+                $amountEachCategory->amountCOM = $amountCOM; 
+                $amountEachCategory->amountMDC = $amountMDC; 
+                $amountEachCategory->amountOTH = $amountOTH; 
+                
+                $dataByYear[(string)$year] = [
+                    'amountEachCategory' => $amountEachCategory,
+                ];
+        }
+        return view('page.superadmin.homePage.homePage(SuperAdmin)', [
+            'participantsCount' => $participantsCount,
+            'submissionsCount' => $submissionsCount,
+            'reviewersCount' => $reviewersCount,
+            'checksubmission'=>$checksubmission,
+            'amounts' => $amounts,
+            'tasks' => $tasks,
+            'dataByYear' => $dataByYear,
+        ]);
         } else {
             return redirect('login')->with('fail', 'Login Session Expire, Please Login again');
         }
     }
+
+    public function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            'task' => 'required|string|max:255',
+        ]);
+
+        $task = new tbl_superadmintask();
+        $task->task = $validatedData['task'];
+        $task->save();
+
+        return redirect()->route('superadminHomePage');
+    }
+
+    public function destroy($id)
+    {
+        $task = tbl_superadmintask::findOrFail($id);
+        $task->delete();
+
+        return response()->json(['message' => 'Task deleted successfully']);
+    }
+
 }

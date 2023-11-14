@@ -231,7 +231,6 @@ class JKBendahariController extends Controller
                 'totalAmount' => $totalAmount,
             ];
         }
-    
         $uniqueYears = array_keys($dataByYear);
         return view('page.JK_Bendahari.dashboard.dashboard', [
             'dataByYear' => $dataByYear,
