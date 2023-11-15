@@ -31,6 +31,7 @@
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="/visitor/presentationSchedule">Presentation Schedule</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/callForReviewer">Call For Reviewer</a></li>
                         <li class="nav-item dropdown">
                             <li class="nav-item"><a class="nav-link" href="/gallery">Gallery</a></li>
                             <li class="nav-item"><a class="nav-link" href="/faqVisitor">Contact Us</a></li>
