@@ -151,66 +151,38 @@ class SuperAdminController extends Controller
                 'OTH' => $amountOTH,
             ];
 
-            $paymentsByYear = $paymentDetails->groupBy(function ($payment) {
-                return $payment->created_at->format('Y');
-            })->sortBy(function ($payment) {
-                return $payment->first()->created_at;
-            })->reverse();
-
-            $dataByYear = [];
-            foreach ($paymentsByYear as $year => $payments) {
-
-            $amountEachCategory = new \stdClass();
-
-            $totalSSC = 0; // Initialize the total amount for category SSC
-            $totalITC = 0; // Initialize the total total for category ITC
-            $totalEHE = 0; // Initialize the total total for category EHE
-            $totalTVT = 0; // Initialize the total total for category TVT
-            $totalREE = 0; // Initialize the total total for category REE
-            $totalCOM = 0; // Initialize the total total for category COM
-            $totalMDC = 0; // Initialize the total total for category MDC
-            $totalOTH = 0;
-            
-            foreach ($payments as $payment) {
-                $categoryCode = substr($payment->submissionCode,5,3); // Initialize category code variable
-    
-                $subTheme = $payment->subTheme;
-                $categoryCode = substr($payment->submissionCode,5,3); // Initialize category code variable
-    
-                // Determine category code based on subTheme
-                if ($categoryCode === "SSC") {
-                    $totalSSC += $payment->amount; // Add to the total amount for category SSC
-                } elseif ($categoryCode === "ITC") {
-                    $totalITC += $payment->amount; // Add to the total amount for category ITC
-                } elseif ($categoryCode === "EHE") {
-                    $totalEHE += $payment->amount; // Add to the total total for category EHE
-                } elseif ($categoryCode === "TVT") {
-                    $totalTVT += $payment->amount; // Add to the total amount for category TVT
-                } elseif ($categoryCode === "REE") {
-                    $totalREE += $payment->amount; // Add to the total total for category REE
-                } elseif ($categoryCode === "COM") {
-                    $totalCOM += $payment->amount; // Add to the total total for category COM
-                } elseif ($categoryCode === "MDC") {
-                    $totalMDC += $payment->amount; // Add to the total total for category MDC
-                } elseif ($categoryCode === "OTH") {
-                    $totalOTH += $payment->amount; // Add to the total amount for category OTH
-                }
-    
-            }
-
-                $amountEachCategory->amountSSC = $amountSSC; 
-                $amountEachCategory->amountITC = $amountITC; 
-                $amountEachCategory->amountEHE = $amountEHE; 
-                $amountEachCategory->amountTVT = $amountTVT; 
-                $amountEachCategory->amountREE = $amountREE; 
-                $amountEachCategory->amountCOM = $amountCOM; 
-                $amountEachCategory->amountMDC = $amountMDC; 
-                $amountEachCategory->amountOTH = $amountOTH; 
-                
-                $dataByYear[(string)$year] = [
-                    'amountEachCategory' => $amountEachCategory,
-                ];
-        }
+            $codesContainingENG = tbl_payment::where('submissionCode', 'like', '%ENG%')->get();
+            $totalAmountENG = $codesContainingENG->sum('amount');
+            $codesContainingSSC = tbl_payment::where('submissionCode', 'like', '%SSC%')->get();
+            $totalAmountSSC = $codesContainingSSC->sum('amount');
+            $codesContainingITC = tbl_payment::where('submissionCode', 'like', '%ITC%')->get();
+            $totalAmountITC = $codesContainingITC->sum('amount');
+            $codesContainingEHE = tbl_payment::where('submissionCode', 'like', '%EHE%')->get();
+            $totalAmountEHE = $codesContainingEHE->sum('amount');
+            $codesContainingTVT = tbl_payment::where('submissionCode', 'like', '%TVT%')->get();
+            $totalAmountTVT = $codesContainingTVT->sum('amount');
+            $codesContainingREE = tbl_payment::where('submissionCode', 'like', '%REE%')->get();
+            $totalAmountREE = $codesContainingREE->sum('amount');
+            $codesContainingCOM = tbl_payment::where('submissionCode', 'like', '%COM%')->get();
+            $totalAmountCOM = $codesContainingCOM->sum('amount');
+            $codesContainingMDC = tbl_payment::where('submissionCode', 'like', '%MDC%')->get();
+            $totalAmountMDC = $codesContainingMDC->sum('amount');
+            $codesContainingOTH = tbl_payment::where('submissionCode', 'like', '%OTH%')->get();
+            $totalAmountOTH = $codesContainingOTH->sum('amount');
+            $codesContainingAUD = tbl_payment::where('submissionCode', 'like', '%AUD%')->get();
+            $totalAmountAUD = $codesContainingAUD ->sum('amount');
+            $total = [
+                'ENG' => $totalAmountENG,
+                'SSC' => $totalAmountSSC,
+                'ITC' => $totalAmountITC,
+                'EHE' => $totalAmountEHE,
+                'TVT' => $totalAmountTVT,
+                'REE' => $totalAmountREE,
+                'COM' => $totalAmountCOM,
+                'MDC' => $totalAmountMDC,
+                'OTH' => $totalAmountOTH,
+                'AUD' => $totalAmountAUD,
+            ];
         return view('page.superadmin.homePage.homePage(SuperAdmin)', [
             'participantsCount' => $participantsCount,
             'submissionsCount' => $submissionsCount,
@@ -218,7 +190,7 @@ class SuperAdminController extends Controller
             'checksubmission'=>$checksubmission,
             'amounts' => $amounts,
             'tasks' => $tasks,
-            'dataByYear' => $dataByYear,
+            'total' => $total,
         ]);
         } else {
             return redirect('login')->with('fail', 'Login Session Expire, Please Login again');
