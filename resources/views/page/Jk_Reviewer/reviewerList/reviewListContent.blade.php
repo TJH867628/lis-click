@@ -408,6 +408,7 @@
                                 <p>Submission Code</p>
                                 <a style="font-size:20px; font-weight:bold; color:black;  text-decoration:none;" href="#" class="submission-code" data-submission-code="{{$submissionInfo->submissionCode}}" data-submission-type="{{$submissionInfo->submissionType}}" data-submission-title="{{$submissionInfo->submissionTitle}}" data-submission-type="{{$submissionInfo->submissionTitle}}" data-sub-theme="{{$submissionInfo->subTheme}}" data-present-mode="{{$submissionInfo->presentMode}}">
                                     <div class="submissionCode">
+                                        <i class="fa-solid fa-circle-info"></i>
                                         {{$submissionInfo->submissionCode}}
                                     </div>
                                 </a>
@@ -641,6 +642,79 @@
             }
         });
     });
+
+    // Get all submission code links
+    const submissionCodeLinks = document.querySelectorAll('.submission-code');
+            
+            // Add click event listener to each link
+            submissionCodeLinks.forEach(link => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                const submissionCode = link.dataset.submissionCode;
+                const submissionTitle = link.dataset.submissionTitle;
+                const submissionType = link.dataset.submissionType;
+                const subTheme = link.dataset.subTheme;
+                const presentMode = link.dataset.presentMode;
+
+                let submissionDetails = document.querySelector(`.submission-details[data-submission-code="${submissionCode}"]`);
+                if (!submissionDetails) {
+                // Create pop-up window if it doesn't exist
+                const popUpWindow = document.createElement('div');
+                popUpWindow.classList.add('submission-details');
+                popUpWindow.dataset.submissionCode = submissionCode;
+                popUpWindow.innerHTML = `
+
+                    <div class="submission-details-content">
+                    <p>Submission Code</p>
+                    <span style="font-weight:bold;">${submissionCode}</span>
+                    <p>Title</p>
+                    <span style="font-weight:bold;">${submissionTitle}</span>
+                    <p>Type</p>
+                    <span style="font-weight:bold;">${submissionType}</span>
+                    <p>Theme</p>
+                    <span style="font-weight:bold;">${subTheme}</span>
+                    <p>Present Mode</p>
+                    <span style="font-weight:bold;">${presentMode}</span>
+                    </div>
+                    <div class="submission-details-header" style=" text-align:center; margin:20px;">
+                    <span class="submission-details-close" style="position: absolute;top: 0px;right: 0px;width: 45px;height: 45px;background: #0d6efd;font-size: 2em;color: #fff;display: flex;justify-content: center;align-items: center;border-bottom-left-radius: 20px;border-top-right-radius: 20px;cursor: pointer;z-index: 1;"><i class="fas fa-times"></i></span></div>`;
+                document.body.appendChild(popUpWindow);
+                submissionDetails = popUpWindow;
+
+                // Apply CSS styles for centering and layering the pop-up window
+                submissionDetails.style.position = 'fixed';
+                submissionDetails.style.top = '50%';
+                submissionDetails.style.left = '50%';
+                submissionDetails.style.transform = 'translate(-50%, -50%)';
+                submissionDetails.style.zIndex = '9999'; // Set a high z-index value to bring it to the top layer
+                submissionDetails.style.backgroundColor = 'white';
+                submissionDetails.style.padding = '20px';
+                submissionDetails.style.border = '1px solid #ccc';
+                submissionDetails.style.borderRadius = '20px';
+                submissionDetails.style.boxShadow = '0 0 20px rgba(0, 0, 0, 0.5)';
+                submissionDetails.style.color = 'black';
+                submissionDetails.style.transition = '0.5s';
+                submissionDetails.style.width = "15%";
+                submissionDetails.style.opacity = '0';
+                submissionDetails.style.display = 'block';
+                setTimeout(() => {
+                submissionDetails.style.opacity = '1';
+                },10);
+
+                // Add click event listener to the close button
+                const closeButton = submissionDetails.querySelector('.submission-details-close');
+                closeButton.addEventListener('click', () => {
+                    submissionDetails.style.opacity = '0';
+                    setTimeout(() => {
+                    submissionDetails.remove();
+                    }, 2000);
+                });
+                }
+                setTimeout(() => {
+                submissionDetails.style.opacity = '1';
+                }, 10);
+            });
+            });
 
 
     </script>

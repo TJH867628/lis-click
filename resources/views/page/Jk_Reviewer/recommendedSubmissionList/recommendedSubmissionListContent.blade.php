@@ -387,6 +387,7 @@
                                 <p>Submission Code</p>
                                 <a style="font-size:20px; font-weight:bold; color:black;  text-decoration:none;" href="#" class="submission-code" data-submission-code="{{$thisRecommendedSubmission->submissionCode}}" data-submission-type="{{$thisRecommendedSubmission->submissionType}}" data-submission-title="{{$thisRecommendedSubmission->submissionTitle}}" data-submission-type="{{$thisRecommendedSubmission->submissionTitle}}" data-sub-theme="{{$thisRecommendedSubmission->subTheme}}" data-present-mode="{{$thisRecommendedSubmission->presentMode}}">
                                     <div class="submissionCode">
+                                        <i class="fa-solid fa-circle-info"></i>
                                         {{$thisRecommendedSubmission->submissionCode}}
                                     </div>
                                 </a>
@@ -426,20 +427,20 @@
                                 @endif
                             </td>                    
                             <td>
-                            @if(empty($submissionInfo->dataEvaluationForm->paper_id_number))
+                            @if(empty($thisRecommendedSubmission->dataEvaluationForm->paper_id_number))
                                 <p class="status shipped">Pending</p>
                             @else
-                                @if($submissionInfo->dataEvaluationForm->paper_id_number == $submissionInfo->submissionCode)
-                                    <a href="{{ route('evaluationForm', ['submissionCode' => $submissionInfo->submissionCode]) }}" class="btn btn-primary mb-4" style="float:left; background-color: #4CAF50;"><i class="fas fa-calculator" style="padding: 5px;"></i>Evaluate Form</a><br>
+                                @if($thisRecommendedSubmission->dataEvaluationForm->paper_id_number == $thisRecommendedSubmission->submissionCode)
+                                    <a href="{{ route('evaluationForm', ['submissionCode' => $thisRecommendedSubmission->submissionCode]) }}" class="btn btn-primary mb-4" style="float:left; background-color: #4CAF50;"><i class="fas fa-calculator" style="padding: 5px;"></i>Evaluate Form</a><br>
                                 @endif
-                                @if($submissionInfo->evaluationFormLink != NULL)
-                                    <a href="{{ route('downloadEvaluationForm', ['filename' => $submissionInfo->evaluationFormLink]) }}" target="_blank" class="btn btn-primary mb-4" style="float:left; background-color: #4CAF50;"><i class="fa-solid fa-download" style="padding: 5px;"></i>Evaluate Form(Reviewer 1)</a><br>
+                                @if($thisRecommendedSubmission->evaluationFormLink != NULL)
+                                    <a href="{{ route('downloadEvaluationForm', ['filename' => $thisRecommendedSubmission->evaluationFormLink]) }}" target="_blank" class="btn btn-primary mb-4" style="float:left; background-color: #4CAF50;"><i class="fa-solid fa-download" style="padding: 5px;"></i>Evaluate Form(Reviewer 1)</a><br>
                                 @else
                                     <label style="padding:1%;" class="status cancelled"><strong>Reviewer 1</strong>'s Evaluation Form haven't submitted </label><br>
                                 @endif
-                                @if($submissionInfo->reviewer2ID != null)
-                                    @if($submissionInfo->evaluationFormLink2 != NULL)
-                                        <a href="{{ route('downloadEvaluationForm', ['filename' => $submissionInfo->evaluationFormLink2]) }}" target="_blank" class="btn btn-primary mb-4" style="float:left; background-color: #4CAF50;"><i class="fa-solid fa-download" style="padding: 5px;"></i>Evaluate Form(Reviewer 2)</a><br>
+                                @if($thisRecommendedSubmission->reviewer2ID != null)
+                                    @if($thisRecommendedSubmission->evaluationFormLink2 != NULL)
+                                        <a href="{{ route('downloadEvaluationForm', ['filename' => $thisRecommendedSubmission->evaluationFormLink2]) }}" target="_blank" class="btn btn-primary mb-4" style="float:left; background-color: #4CAF50;"><i class="fa-solid fa-download" style="padding: 5px;"></i>Evaluate Form(Reviewer 2)</a><br>
                                     @else
                                         <label style="padding:1%;" class="status cancelled"><strong>Reviewer 2</strong>'s Evaluation Form haven't submitted</label><br>
                                     @endif
@@ -495,7 +496,78 @@
         });
     });
 
+// Get all submission code links
+const submissionCodeLinks = document.querySelectorAll('.submission-code');
+            
+            // Add click event listener to each link
+            submissionCodeLinks.forEach(link => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                const submissionCode = link.dataset.submissionCode;
+                const submissionTitle = link.dataset.submissionTitle;
+                const submissionType = link.dataset.submissionType;
+                const subTheme = link.dataset.subTheme;
+                const presentMode = link.dataset.presentMode;
 
+                let submissionDetails = document.querySelector(`.submission-details[data-submission-code="${submissionCode}"]`);
+                if (!submissionDetails) {
+                // Create pop-up window if it doesn't exist
+                const popUpWindow = document.createElement('div');
+                popUpWindow.classList.add('submission-details');
+                popUpWindow.dataset.submissionCode = submissionCode;
+                popUpWindow.innerHTML = `
+
+                    <div class="submission-details-content">
+                    <p>Submission Code</p>
+                    <span style="font-weight:bold;">${submissionCode}</span>
+                    <p>Title</p>
+                    <span style="font-weight:bold;">${submissionTitle}</span>
+                    <p>Type</p>
+                    <span style="font-weight:bold;">${submissionType}</span>
+                    <p>Theme</p>
+                    <span style="font-weight:bold;">${subTheme}</span>
+                    <p>Present Mode</p>
+                    <span style="font-weight:bold;">${presentMode}</span>
+                    </div>
+                    <div class="submission-details-header" style=" text-align:center; margin:20px;">
+                    <span class="submission-details-close" style="position: absolute;top: 0px;right: 0px;width: 45px;height: 45px;background: #0d6efd;font-size: 2em;color: #fff;display: flex;justify-content: center;align-items: center;border-bottom-left-radius: 20px;border-top-right-radius: 20px;cursor: pointer;z-index: 1;"><i class="fas fa-times"></i></span></div>`;
+                document.body.appendChild(popUpWindow);
+                submissionDetails = popUpWindow;
+
+                // Apply CSS styles for centering and layering the pop-up window
+                submissionDetails.style.position = 'fixed';
+                submissionDetails.style.top = '50%';
+                submissionDetails.style.left = '50%';
+                submissionDetails.style.transform = 'translate(-50%, -50%)';
+                submissionDetails.style.zIndex = '9999'; // Set a high z-index value to bring it to the top layer
+                submissionDetails.style.backgroundColor = 'white';
+                submissionDetails.style.padding = '20px';
+                submissionDetails.style.border = '1px solid #ccc';
+                submissionDetails.style.borderRadius = '20px';
+                submissionDetails.style.boxShadow = '0 0 20px rgba(0, 0, 0, 0.5)';
+                submissionDetails.style.color = 'black';
+                submissionDetails.style.transition = '0.5s';
+                submissionDetails.style.width = "15%";
+                submissionDetails.style.opacity = '0';
+                submissionDetails.style.display = 'block';
+                setTimeout(() => {
+                submissionDetails.style.opacity = '1';
+                },10);
+
+                // Add click event listener to the close button
+                const closeButton = submissionDetails.querySelector('.submission-details-close');
+                closeButton.addEventListener('click', () => {
+                    submissionDetails.style.opacity = '0';
+                    setTimeout(() => {
+                    submissionDetails.remove();
+                    }, 2000);
+                });
+                }
+                setTimeout(() => {
+                submissionDetails.style.opacity = '1';
+                }, 10);
+            });
+            });
     </script>
 
 </html>
