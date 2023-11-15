@@ -209,7 +209,7 @@
 
 
                                                 <div class="form-group col-md-5">
-                                                    <label for="IC_No">IC Number:</label>
+                                                    <label for="IC_No">Identification Number / Passport:</label>
                                                     <input type="text" name="IC_No" id="IC_No" class="form-control IC_No" placeholder="IC Number" required="required">
                                                 </div>
 
