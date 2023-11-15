@@ -155,3 +155,5 @@ Route::post('/uploadAudienceCertificate/{id}',[JKReviewerController::class,'uplo
 Route::get('/downloadAudienceCertificate/{filename}',[JKReviewerController::class,'downloadAudienceCertificate'])->name('downloadAudienceCertificate');
 Route::post('/superAdminHomePage', [SuperAdminController::class, 'store'])->name('tasks.store');
 Route::delete('/tasks/{id}', [SuperAdminController::class, 'destroy'])->name('tasks.destroy');
+Route::get('/callForReviewer',[JKReviewerController::class,'callForReviewer'])->name('callForReviewer');
+Route::get('/downloadAudienceCertificate/{filename}',[JKReviewerController::class,'downloadAudienceCertificate'])->name('downloadAudienceCertificate');

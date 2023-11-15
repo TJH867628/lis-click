@@ -70,16 +70,18 @@ class AccountController extends Controller
             $postcode = $request -> input('postcode');//get postcode from user
             $country = $request -> input('country');//get country from user
             $state = $request -> input('state');//get state from user
-            $category = $request -> input('category');//get category from user
             $date = now();//get timestamp now
             $user = tbl_participants_info::where('email',$userSession)->first();
-
             if ($country == ""){
                 $country = $user->country;
             }
 
+            if ($state == ""){
+                $state = $user->state;
+            }
+
             //create a set of data that will be update to database
-            $updateData = array('IC_No'=>$IC_No,'name'=>$name,'salutation'=>$salutation,'phoneNumber'=>$phoneNumber,'organizationName'=>$organizationName,'organizationAddress'=>$address,'postcode'=>$postcode,'country'=>$country,'updated_at'=>$date);
+            $updateData = array('IC_No'=>$IC_No,'name'=>$name,'salutation'=>$salutation,'phoneNumber'=>$phoneNumber,'organizationName'=>$organizationName,'organizationAddress'=>$address,'postcode'=>$postcode,'state'=>$state,'country'=>$country,'updated_at'=>$date);
             //insert the data to database with specified table and the dataset that have been create
             DB::table('tbl_participants_info')->where('email',$userSession)->update($updateData);
             

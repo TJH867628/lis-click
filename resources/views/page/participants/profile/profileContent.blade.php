@@ -119,21 +119,21 @@
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                       <label>Country :</label>
-                                                      <select id="country" class="form-control" name="category">
+                                                      <select id="country" class="form-control" name="country">
                                                         <option selected disabled>Choose</option>
-                                                        <option value="malaysia">Malaysia</option>
-                                                        <option value="indonesia">Indonesia</option>
-                                                        <option value="taiwan">Taiwan</option>
-                                                        <option value="vietnam">Vietnam</option>
-                                                        <option value="singapore">Singapore</option>
+                                                        <option @if($user->country === "malaysia") selected @endif value="malaysia">Malaysia</option>
+                                                        <option @if($user->country === "indonesia") selected @endif value="indonesia">Indonesia</option>
+                                                        <option @if($user->country === "taiwan") selected @endif value="taiwan">Taiwan</option>
+                                                        <option @if($user->country === "vietnam") selected @endif value="vietnam">Vietnam</option>
+                                                        <option @if($user->country === "singapore") selected @endif value="singapore">Singapore</option>
                                                     </select><br>
                                                 </div>
                                             </div>
-
+                                            <div id="userState" hidden>{{ $user->state }}</div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                       <label>State :</label>
-                                                      <select id="state" class="form-control" name="category">
+                                                      <select id="state" class="form-control" name="state">
                                                         <option selected disabled>Choose</option>
                                                     </select><br>
                                                 </div>
@@ -205,6 +205,7 @@
 	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <script>
             $(document).ready(function() {
+                
             // Define an object that maps countries to states
             var stateOptions = {
             malaysia: ["Johor", "Kedah", "Kelantan", "Melaka", "Negeri Sembilan", "Pahang", "Perak", "Perlis", "Penang", "Sabah", "Sarawak", "Selangor", "Terengganu"],
@@ -213,7 +214,20 @@
             singapore: ["Central Region", "East Region", "North Region", "North-East Region", "West Region"],
             vietnam: ["Ho Chi Minh City", "Hanoi", "Can Tho", "Da Nang", "Hai Phong", "Ba Ria-Vung Tau", "Bac Giang", "Bac Kan", "Bac Lieu", "Bac Ninh", "Ben Tre", "Binh Dinh", "Binh Duong", "Binh Phuoc", "Binh Thuan", "Ca Mau", "Cao Bang", "Dak Lak", "Dak Nong", "Dien Bien", "Dong Nai", "Dong Thap", "Gia Lai", "Ha Giang", "Ha Nam", "Ha Tinh", "Hai Duong", "Hau Giang", "Hoa Binh", "Hung Yen", "Khanh Hoa", "Kien Giang", "Kon Tum", "Lai Chau", "Lam Dong", "Lang Son", "Lao Cai", "Long An", "Nam Dinh", "Nghe An", "Ninh Binh", "Ninh Thuan", "Phu Tho", "Quang Binh", "Quang Nam", "Quang Ngai", "Quang Ninh", "Quang Tri", "Soc Trang", "Son La", "Tay Ninh", "Thai Binh", "Thai Nguyen", "Thanh Hoa", "Thua Thien-Hue", "Tien Giang", "Tra Vinh", "Yen Bai"]
             };
-
+            var userState = $('#userState').text();
+            var selectedCountry = $('#country').val();
+            var stateOptionsHtml = '<option value="">-- Select State --</option>';
+            if (selectedCountry && stateOptions[selectedCountry]) {
+            var states = stateOptions[selectedCountry];
+            for (var i = 0; i < states.length; i++) {
+                if(states[i] == userState){
+                    stateOptionsHtml += '<option value="' + states[i] + '"selected >' + states[i] + '</option>';
+                }else{
+                    stateOptionsHtml += '<option value="' + states[i] + '">' + states[i] + '</option>';
+                }
+            }
+            }
+            $('#state').html(stateOptionsHtml);
             // When a country is selected, update the options in the state dropdown
             $('#country').change(function() {
                 var selectedCountry = $(this).val();
