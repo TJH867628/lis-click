@@ -156,4 +156,8 @@ Route::get('/downloadAudienceCertificate/{filename}',[JKReviewerController::clas
 Route::post('/superAdminHomePage', [SuperAdminController::class, 'store'])->name('tasks.store');
 Route::delete('/tasks/{id}', [SuperAdminController::class, 'destroy'])->name('tasks.destroy');
 Route::get('/callForReviewer',[JKReviewerController::class,'callForReviewer'])->name('callForReviewer');
-Route::get('/downloadAudienceCertificate/{filename}',[JKReviewerController::class,'downloadAudienceCertificate'])->name('downloadAudienceCertificate');
+Route::get('/callForReviewerList',[JKReviewerController::class,'callForReviewerList'])->name('callForReviewerList');
+Route::post('/applyForReviewer/{userId}',[JKReviewerController::class,'applyForReviewer'])->name('applyForReviewer');
+Route::get('/approveApplicationForReviewer/{userId}',[JKReviewerController::class,'approveApplicationForReviewer'])->name('approveApplicationForReviewer');
+Route::get('/downloadSupportDocument/{filename}',[JKReviewerController::class,'downloadSupportDocument'])->name('downloadSupportDocument');
+Route::get('/reviewerList',[JKReviewerController::class,'reviewerList'])->name('reviewerList');

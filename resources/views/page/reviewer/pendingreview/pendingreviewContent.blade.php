@@ -299,7 +299,7 @@
                         @endphp
                         @if($submissionInfo->reviewStatus === 'pending')
                             @if($submissionInfo->reviewer2ID != NULL)
-                                @if($submissionInfo->reviewerID === $reviewername)
+                                @if($submissionInfo->reviewerID === $reviewerEmail)
                                     @if($submissionInfo->evaluationFormLink == null)
                                     <tr>
                                         <div style="font-size:20px; font-weight:bold; color:black;  text-decoration:none;"!important;>
@@ -329,7 +329,7 @@
                                         </td>
                                     </tr>
                                     @endif
-                                @elseif($submissionInfo->reviewer2ID === $reviewername)
+                                @elseif($submissionInfo->reviewer2ID === $reviewerEmail)
                                     @if(!$submissionInfo->evaluationFormLink2)
                                     <tr>
                                         <td>{{ $submissionInfo->submissionCode }}</td>

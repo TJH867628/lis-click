@@ -395,7 +395,7 @@
                 @if($submissionInfo)
                         @foreach($submissionInfo as $submissionInfo)
                             @if($submissionInfo->reviewer2ID)
-                                @if($submissionInfo->reviewerID === $reviewername)
+                                @if($submissionInfo->reviewerID === $reviewerEmail)
                                     @if($submissionInfo->evaluationFormLink)
                                         @php
                                             $count++;
@@ -419,7 +419,7 @@
                                             <a href="{{ route('downloadEvaluationForm', ['filename' => $submissionInfo->evaluationFormLink]) }}" class="btn btn-primary mb-4"><i class="fa-solid fa-download" style="padding: 5px;"></i>Download Evaluation Form</a></td>
                                         </tr>
                                     @endif
-                                @elseif($submissionInfo->reviewer2ID === $reviewername)
+                                @elseif($submissionInfo->reviewer2ID === $reviewerEmail)
                                     @if($submissionInfo->evaluationFormLink2)
                                     @php
                                         $count++;
@@ -445,7 +445,7 @@
                                     @endif
                                 @endif
                             @else
-                               @if($submissionInfo->reviewerID === $reviewername)
+                               @if($submissionInfo->reviewerID === $reviewerEmail)
                                     @if($submissionInfo->evaluationFormLink)
                                     @php
                                             $count++;

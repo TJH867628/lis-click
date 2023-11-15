@@ -69,7 +69,7 @@ class submissionStatusController extends Controller
                 $dataEvaluationForm = tbl_evaluation_form::where('paper_id_number', $submissionInfo->submissionCode)->first();
                 $correction = tbl_correction::where('submissionCode',$submissionInfo->submissionCode)->get();
                 $correctionCount = $correction->count();
-                $latestReturnCorrection = tbl_correction::where('numberOfTimes',$correctionCount)->first();
+                $latestReturnCorrection = tbl_correction::where('submissionCode',$submissionInfo->submissionCode)->where('numberOfTimes',$correctionCount)->first();
 
                 $allSubmissionInfo[$key]->paymentStatus = $paymentStatus;
                 $allSubmissionInfo[$key]->dataEvaluationForm = $dataEvaluationForm;
@@ -77,7 +77,7 @@ class submissionStatusController extends Controller
                 $allSubmissionInfo[$key]->latestReturnCorrection = $latestReturnCorrection;
             }
 
-            return view('page.Jk_Reviewer.reviewerList.reviewList(JK Reviewer)',['userSession'=>$userSession,'userSubmissionInfo' => $allSubmissionInfo,'allReviewerInfo' => $allReviewerInfo]);
+            return view('page.Jk_Reviewer.reviewList.reviewList(JK Reviewer)',['userSession'=>$userSession,'userSubmissionInfo' => $allSubmissionInfo,'allReviewerInfo' => $allReviewerInfo]);
         }else{
             return redirect('login')->with('fail','Login Session Expire,Please Login again');
         }
@@ -93,7 +93,7 @@ class submissionStatusController extends Controller
                 'Content-Type' => 'application/pdf',
                 'Content-Disposition' => 'inline',
             ]);
-        } elseif ($extension == 'doc' || $extension == 'docx') {
+        } else{
             return response()->file($file);
         }
     }

@@ -31,7 +31,7 @@ class JKTurnInController extends Controller
                 'Content-Type' => 'application/pdf',
                 'Content-Disposition' => 'inline',
             ]);
-        } elseif ($extension == 'doc' || $extension == 'docx') {
+        } else{
             return response()->file($file);
         }
     }

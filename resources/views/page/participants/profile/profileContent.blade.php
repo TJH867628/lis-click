@@ -81,7 +81,7 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label>Mykad :</label>
+                                                    <label>Identification Number / Passport:</label>
                                                     <input type="text" name="IC_No" class="form-control" value="{{ $user -> IC_No }}">
                                                 </div>
                                             </div>

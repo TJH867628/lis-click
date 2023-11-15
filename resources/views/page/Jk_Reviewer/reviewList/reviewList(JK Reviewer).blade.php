@@ -21,7 +21,7 @@
     <body class="d-flex flex-column h-100">
         @include('page.Jk_Reviewer.navigationBar')
         <br><br><br><br><br>
-        @include('page.Jk_Reviewer.reviewerList.reviewListContent')
+        @include('page.Jk_Reviewer.reviewList.reviewListContent')
         @include('page.footer')
         <!-- Bootstrap core JS-->
         <!-- Core theme JS-->

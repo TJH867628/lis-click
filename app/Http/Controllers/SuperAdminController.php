@@ -38,7 +38,7 @@ class SuperAdminController extends Controller
 
     public function activeAdmin($adminEmail)
     {
-        if(session()->has("LoggedSuperAdmin")){
+        if(session()->has("LoggedSuperAdmin") || session()->has("LoggedJKReviewer")){
             session()->start();
             $admin = tbl_admin_info::where('email',$adminEmail)->first();
             $admin->status = 1;
@@ -51,11 +51,13 @@ class SuperAdminController extends Controller
 
     public function deactiveAdmin($adminEmail)
     {
-        if(session()->has("LoggedSuperAdmin")){
+        if(session()->has("LoggedSuperAdmin") || session()->has("LoggedJKReviewer")){
             session()->start();
             $admin = tbl_admin_info::where('email',$adminEmail)->first();
             $admin->status = 0;
             $admin->save();
+
+            $submission = tbl_submission::where('reviewerID',$admin->email)->orWhere('reviewer2ID',$admin->email)->get();
             return redirect()->back()->with('updateSuccess','Status Update Succesfully');
         }else{
             return redirect('login')->with('fail','Login Session Expire,Please Login again');

@@ -27,17 +27,17 @@ class ReviewerController extends Controller
             session()->start();
             $adminSession = session()->get('LoggedReviewer');
             $reviewer = tbl_admin_info::where('email',$adminSession)->first();
-            $reviewername = $reviewer->name;
-            if(tbl_submission::where('reviewerID', $reviewername)->first()){
-                $submissionInfo = tbl_submission::where('reviewerID', $reviewername)->get();
-            }elseif(tbl_submission::where('reviewer2ID', $reviewername)->first()){
-                $submissionInfo = tbl_submission::where('reviewer2ID', $reviewername)->get();
+            $reviewerEmail = $reviewer->email;
+            if(tbl_submission::where('reviewerID', $reviewerEmail)->first()){
+                $submissionInfo = tbl_submission::where('reviewerID', $reviewerEmail)->get();
+            }elseif(tbl_submission::where('reviewer2ID', $reviewerEmail)->first()){
+                $submissionInfo = tbl_submission::where('reviewer2ID', $reviewerEmail)->get();
             }
 
             if(!isset($submissionInfo)){
                 $submissionInfo = null;
             }   
-            return view('page.reviewer.pendingreview.pendingreview',['reviewername'=>$reviewername,'submissionInfo' => $submissionInfo]);
+            return view('page.reviewer.pendingreview.pendingreview',['reviewerEmail'=>$reviewerEmail,'submissionInfo' => $submissionInfo]);
         }else{
             return redirect('login')->with('fail','Login Session Expire,Please Login again');
         }
@@ -48,17 +48,17 @@ class ReviewerController extends Controller
             session()->start();
             $adminSession = session()->get('LoggedReviewer');
             $reviewer = tbl_admin_info::where('email',$adminSession)->first();
-            $reviewername = $reviewer->name;
-            if(tbl_submission::where('reviewerID', $reviewername)->first()){
-                $submissionInfo = tbl_submission::where('reviewerID', $reviewername)->get();
-            }elseif(tbl_submission::where('reviewer2ID', $reviewername)->first()){
-                $submissionInfo = tbl_submission::where('reviewer2ID', $reviewername)->get();
+            $reviewerEmail = $reviewer->email;
+            if(tbl_submission::where('reviewerID', $reviewerEmail)->first()){
+                $submissionInfo = tbl_submission::where('reviewerID', $reviewerEmail)->get();
+            }elseif(tbl_submission::where('reviewer2ID', $reviewerEmail)->first()){
+                $submissionInfo = tbl_submission::where('reviewer2ID', $reviewerEmail)->get();
             }
 
             if(!isset($submissionInfo)){
                 $submissionInfo = null;
             }
-            return view('page.reviewer.donereview.donereview',['reviewername'=>$reviewername,'submissionInfo' => $submissionInfo]);
+            return view('page.reviewer.donereview.donereview',['reviewerEmail'=>$reviewerEmail,'submissionInfo' => $submissionInfo]);
 
         }else{
             return redirect('login')->with('fail','Login Session Expire,Please Login again');
@@ -72,11 +72,11 @@ class ReviewerController extends Controller
 
             $adminSession = session()->get('LoggedReviewer');
             $reviewer = tbl_admin_info::where('email',$adminSession)->first();
-            $reviewername = $reviewer->name;
-            if($submissionInfo->reviewerID == $reviewername){
+            $reviewerEmail = $reviewer->email;
+            if($submissionInfo->reviewerID == $reviewerEmail){
                 $filename = $submissionInfo->file_name . '_Reviewed.'.$file->getClientOriginalExtension();
                 $submissionInfo->returnPaperLink = $filename;
-            }elseif($submissionInfo->reviewer2ID == $reviewername){
+            }elseif($submissionInfo->reviewer2ID == $reviewerEmail){
                 $filename = $submissionInfo->file_name . '_Reviewed2.'.$file->getClientOriginalExtension();
                 $submissionInfo->returnPaperLink2 = $filename;
             }
@@ -95,8 +95,8 @@ class ReviewerController extends Controller
             
             $adminSession = session()->get('LoggedReviewer');
             $reviewer = tbl_admin_info::where('email',$adminSession)->first();
-            $reviewername = $reviewer->name;
-            if($submissionInfo->reviewerID == $reviewername){
+            $reviewerEmail = $reviewer->email;
+            if($submissionInfo->reviewerID == $reviewerEmail){
                 $filename = $submissionInfo->file_name . '_EvaluationForm.'.$file->getClientOriginalExtension();
                 $submissionInfo->evaluationFormLink = $filename;
                 if($submissionInfo->reviewer2ID == null){
@@ -109,7 +109,7 @@ class ReviewerController extends Controller
                         $submissionInfo->correctionPhase = 'pending';
                 }
                 }
-            }elseif($submissionInfo->reviewer2ID == $reviewername){
+            }elseif($submissionInfo->reviewer2ID == $reviewerEmail){
                 $filename = $submissionInfo->file_name . '_EvaluationForm2.'.$file->getClientOriginalExtension();
                 $submissionInfo->evaluationFormLink2 = $filename;
                 if($submissionInfo->evaluationFormLink != null){
@@ -127,6 +127,7 @@ class ReviewerController extends Controller
 
     public function downloadEvaluationForm($filename){
         $file = 'storage/EvaluationForm/' . $filename;
+
         $extension = pathinfo($file, PATHINFO_EXTENSION);
     
         if ($extension == 'pdf') {
@@ -134,7 +135,7 @@ class ReviewerController extends Controller
                 'Content-Type' => 'application/pdf',
                 'Content-Disposition' => 'inline',
             ]);
-        } elseif ($extension == 'doc' || $extension == 'docx') {
+        } else{
             return response()->file($file);
         }
     }
@@ -147,7 +148,7 @@ class ReviewerController extends Controller
                 'Content-Type' => 'application/pdf',
                 'Content-Disposition' => 'inline',
             ]);
-        } elseif ($extension == 'doc' || $extension == 'docx') {
+        } else{
             return response()->file($file);
         }
     }
@@ -163,7 +164,7 @@ class ReviewerController extends Controller
                 'Content-Type' => 'application/pdf',
                 'Content-Disposition' => 'inline',
             ]);
-        } elseif ($extension == 'doc' || $extension == 'docx') {
+        } else{
             return response()->file($file);
         }
     }
@@ -179,7 +180,7 @@ class ReviewerController extends Controller
             $dataEvaluationForm = tbl_evaluation_form::where('paper_id_number',$submissionCode)->first();
             if($submissionInfo->reviewer2ID == null){
                 $dataEvaluationForm = tbl_evaluation_form::where('paper_id_number', $submissionCode)
-                ->where('reviewer_name', $reviewer->name)
+                ->where('email', $reviewer->name)
                 ->first();
                 if($dataEvaluationForm){
                     return view('page.reviewer.evaluationForm.evaluationForm',['dataEvaluationForm' => $dataEvaluationForm , 'year' => $year]);

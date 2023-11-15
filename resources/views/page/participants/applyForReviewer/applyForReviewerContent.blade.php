@@ -388,6 +388,18 @@ thead th.active,tbody td.active {
 #formContainer{
     margin-top: 45%;
 }
+
+#applyResult{
+    color: black;
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    width: 500px;
+    padding: 20px;
+    border: 1px solid #dee2e6;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    background-color: white;
+}
 </style>
 </head>
 <!-- Header-->
@@ -400,6 +412,8 @@ thead th.active,tbody td.active {
                                 <p>"DIGITAL TRANSFORMATION TOWARDS INFINITE POSSIBILITY"</p>
                                 <h2 style="margin: auto;">Apply For Reviewer</h2>
                             </div>					
+                            
+                            @if(!isset($hasApply) && $hasApply->isApprove == 0)
                             <div class="row-register">
                                 <div class="col-lg-7">	
                                     <div class="contact">
@@ -407,12 +421,16 @@ thead th.active,tbody td.active {
                                         @csrf
                                             <div class="row">
                                                 <div class="form-group col-md-12">
+                                                    <label>Highest Education:</label>
+                                                    <input type="text" name="highestEducation" class="form-control" placeholder="Highest Education Level" required="required">
+                                                </div>
+                                                <div class="form-group col-md-12">
                                                     <label>Full Name:</label>
                                                     <input type="text" name="name" class="form-control" placeholder="Presenter's Full Name (CAPITAL LETTER)" onload="this.value = this.value.toUpperCase()" required="required" value="{{ $user -> name }}" readonly >
                                                 </div>
                                                 <div class="form-group col-md-12">
-                                                    <label>IC Number:</label>
-                                                    <input type="text" name="IC" class="form-control" placeholder="Presenter's Identification Number (MyKad) *without -" required="required" value="{{ $user -> IC_No }}" readonly>
+                                                    <label>Identification Number / Passport:</label>
+                                                    <input type="text" name="IC" class="form-control" placeholder="Presenter's Identification Number *without -" required="required" value="{{ $user -> IC_No }}" readonly>
                                                 </div>
                                                 <div class="form-group col-md-12">
                                                     <label>Phone Number:</label>
@@ -429,23 +447,6 @@ thead th.active,tbody td.active {
                                                 <div class="form-group col-md-12">
                                                     <label>Address:</label>
                                                     <textarea rows="6" name="message" class="form-control" placeholder="Address" required="required" readonly>{{ $user -> organizationAddress }}</textarea>
-                                                </div>
-                                                <div class="form-group col-md-3">
-                                                    <label>Postcode:</label>
-                                                    <input type="text" name="poscode" class="form-control" placeholder="Poscode" required="required"  value="{{ $user -> postcode }}" readonly>
-                                                </div>
-
-                                                <!--Dropdown-->
-                                                <div class="form-group col-md-3">
-                                                    <label>Country:</label>
-                                                    <input type="text" name="poscode" class="form-control" placeholder="Poscode" required="required" value="{{ $user -> country }}" readonly>
-                                                </div>
-                                                <!--End Dropdown-->
-                                                
-                                                <!--Dropdown-->
-                                                <div class="form-group col-md-4">
-                                                    <label>State:</label>
-                                                    <input type="text" name="poscode" class="form-control" placeholder="Poscode" required="required" value="{{ $user -> state }}" readonly>
                                                 </div>
                                                 <!--End Dropdown-->
 
@@ -482,9 +483,7 @@ thead th.active,tbody td.active {
                                                 </script>
 
                                                 </div>
-                                                <!-- HTML button element that will trigger the modal popup -->
-                                                <button type="button" onclick="showPopup()" id="showPaymentMethod" style="margin: auto;">Show Payment Method</button>
-                                                <p style="color: black; font-size: large;">Upload New Receipt</p>
+                                                <p style="color: black; font-size: large;">Upload Support Document</p>
                                                 <label for="file-upload" class="file-upload-label">
                                                     <span>Choose a file</span>
                                                     <i class="fas fa-upload"></i>
@@ -506,63 +505,107 @@ thead th.active,tbody td.active {
                                         </div>
                                     </form>
                             </div><!--- END ROW -->
+                            @elseif(isset($hasApply) && $hasApply->isApprove == 1)
+                            <div id="applyResult">
+                                <h3>Apply Result:</h3><h3 style="color: green;"><strong>Approved</strong></h3>
+                                <p>Kindly please check your email inbox to get the username and password for reviewer account</p>
+                            </div>
                             @else
-                            <h1>You had complete the payment</h1>
-                            <a href="{{ route('presentationSchedule') }}" style="display: block; margin:auto; text-align:center;"><button>Presentation Schedule</button></a>
-                            @endif
-                            <table class="table__body">
-                            <thead>
-                                <tr>
-                                    <th style="color: black;"> Receipt</th>
-                                    <th style="color: black;"> Status</th>
-                                </tr>
-                            </thead>
-                            @php
-                                $i = 0;
-                                $isEmpty = true;
-                            @endphp
-                            @foreach($user->payment as $user->payment)
-                                <tr>
-                                    @php
-                                        $i++;
-                                    @endphp
-                                    <td>
-                                    <a href="{{route('downloadPaymentReceipt', $user->payment->proofOfPayment)}}" target="_blank"><i class="fas fa-receipt"></i> Receipt {{ $i }}</a>
-                                    </td>
-                                    <td>
-                                    @if($user->payment->paymentStatus === 'Complete')
-                                        <p class="status delivered">Verified</p>
-                                        @php
-                                            $allComplete = true;
-                                            $isEmpty = false;
-                                        @endphp
-                                    @elseif($user->payment->paymentStatus === "Pending For Verification")
-                                        <p class="status shipped">{{ $user->payment->paymentStatus }}</p>
-                                        @php
-                                            $allComplete = false;
-                                            $isEmpty = false;
-                                        @endphp
-                                    @else
-                                        <p class="status cancelled">{{ $user->payment->paymentStatus }}</p>
-                                        @php
-                                            $allComplete = false;
-                                            $isEmpty = false;
-                                        @endphp
-                                    @endif
+                            <div id="applyResult">
+                                <h3>Apply Result:</h3><h3 style="color: orange;">Pending For Verify and Approve</h3>
+                            </div> <form class="form" id="fullpaper-form" name="form" action="{{ route('applyForReviewer',['userId'=>$user->id]) }}" enctype="multipart/form-data" method="POST" onsubmit="return validateAdditionalAuthor(event)">
+                                        @csrf
+                                            <div class="row">
+                                                <h3>Update Apply Information</h3>
+                                                <div class="form-group col-md-12">
+                                                    <label>Highest Education:</label>
+                                                    <input type="text" name="highestEducation" class="form-control" placeholder="Highest Education Level" value="{{$hasApply->highest_education_level}}" required="required">
+                                                </div>
+                                                <div class="form-group col-md-12">
+                                                    <label>Full Name:</label>
+                                                    <input type="text" name="name" class="form-control" placeholder="Presenter's Full Name (CAPITAL LETTER)" onload="this.value = this.value.toUpperCase()" required="required" value="{{ $user -> name }}" readonly >
+                                                </div>
+                                                <div class="form-group col-md-12">
+                                                    <label>Identification Number / Passport:</label>
+                                                    <input type="text" name="IC" class="form-control" placeholder="Presenter's Identification Number *without -" required="required" value="{{ $user -> IC_No }}" readonly>
+                                                </div>
+                                                <div class="form-group col-md-12">
+                                                    <label>Phone Number:</label>
+                                                    <input type="text" name="number" class="form-control" placeholder="Presenter's Contact number" required="required" value="{{ $user -> phoneNumber }}" readonly>
+                                                </div>
+                                                <div class="form-group col-md-12">
+                                                    <label>Email:</label>
+                                                    <input type="text" name="email" class="form-control" placeholder="Presenter's Email Address" required="required" value="{{ $user -> email }}" readonly>
+                                                </div>
+                                                <div class="form-group col-md-12">
+                                                    <label>Organization Name:</label>
+                                                    <input type="text" name="address" class="form-control" placeholder="Presenter's Organization Name" value="{{ $user -> organizationName }}" required="required" readonly>
+                                                </div>
+                                                <div class="form-group col-md-12">
+                                                    <label>Address:</label>
+                                                    <textarea rows="6" name="message" class="form-control" placeholder="Address" required="required" readonly>{{ $user -> organizationAddress }}</textarea>
+                                                </div>
+                                                <!--End Dropdown-->
 
-                                    </td>
-                                </tr>
-                                @endforeach
-                                @if($isEmpty == true)
-                                <tr>
-                                <td colspan="2">
-                                    <p>Empty</p>
-                                </td>
-                                @endif
-                                </tr>
-                            </table>
-                        </td> 
-                    </tr>
+                                                <!-- JavaScript code that will create and show the popup -->
+                                                <script>
+                                                // Get a reference to the file upload input element
+                                                const fileUpload = document.getElementById("file-upload");
+
+                                                // Get a reference to the modal popup element and the close button
+                                                const modal = document.getElementById("myModal");
+                                                const closeButton = document.getElementsByClassName("close")[0];
+
+                                                // Add a change event listener to the file upload input
+                                                fileUpload.addEventListener("change", function() {
+                                                    // Get the selected file and its type
+                                                    const file = this.files[0];
+                                                    const fileType = file.type;
+
+                                                    // If the file type is not .docx, show the modal popup
+                                                    if (fileType == "application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
+                                                        null;
+                                                    }else{
+                                                        modal.style.display = "block";
+                                                        // Clear the file upload input
+                                                        this.value = null;
+                                                    }
+                                                });
+
+                                                // Add a click event listener to the close button
+                                                closeButton.addEventListener("click", function() {
+                                                    // Hide the modal popup
+                                                    modal.style.display = "none";
+                                                });
+                                                </script>
+
+                                                </div>
+                                                <p style="color: black; font-size: large;">Upload Support Document</p>
+                                                @if(isset($hasApply->file_to_support))
+                                                Existing File:
+                                                <a href="{{ route('downloadSupportDocument',['filename'=>$hasApply->file_to_support]) }}" target="_blank">{{ $hasApply->file_to_support }}</a>
+                                                @endif
+                                                <label for="file-upload" class="file-upload-label">
+                                                    <span>Choose a file</span>
+                                                    <i class="fas fa-upload"></i>
+                                                </label>
+                                                <input id="file-upload" type="file" name="file" accept=".jpeg,.jpg,.png,application/pdf" onchange="enableUploadButton()"/>
+                                            </div>                                                
+                                            </script>
+                                            @if($message = Session::get('error'))
+                                            <div class="alert alert-danger">
+                                                <strong>{{ $message }}</strong>
+                                            </div>
+                                            @elseif ($message = Session::get('success'))
+                                            <div class="alert alert-success">
+                                                <strong>{{ $message }}</strong>
+                                            </div>
+                                            @endif
+                                        <div class="col-md-12 text-center">
+                                            <button type="submit" id="submitButton" class="button-submit" title="Submit your form!">Submit</button>
+                                        </div>
+                                    </form>
+                            @endif
                         </div><!--- END CONTAINER -->	
                     </div>
                 </div>

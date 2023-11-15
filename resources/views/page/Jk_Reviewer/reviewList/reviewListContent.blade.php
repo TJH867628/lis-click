@@ -436,13 +436,13 @@
                                 @csrf
                                 <select name="reviewer" id="reviewer" style="width: -webkit-fill-available;">
                                     @foreach($allReviewerInfo as $reviewerInfo)
-                                        <option value="{{ $reviewerInfo->email }}">{{ $reviewerInfo->name }}</option>
+                                        <option value="{{ $reviewerInfo->email }}">{{ $reviewerInfo->email }}</option>
                                     @endforeach
                                 </select>
                                 <select name="reviewer2" id="reviewer2" style="width: -webkit-fill-available;">
                                     <option value="None">None</option>
                                     @foreach($allReviewerInfo as $reviewerInfo)
-                                        <option value="{{ $reviewerInfo->email }}">{{ $reviewerInfo->name }}</option>
+                                        <option value="{{ $reviewerInfo->email }}">{{ $reviewerInfo->email }}</option>
                                     @endforeach
                                 </select>
                                 <div class=btnreview>

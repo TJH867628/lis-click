@@ -412,7 +412,7 @@ thead th.active,tbody td.active {
                                                     <input type="text" name="name" class="form-control" placeholder="Presenter's Full Name (CAPITAL LETTER)" onload="this.value = this.value.toUpperCase()" required="required" value="{{ $user -> name }}" readonly >
                                                 </div>
                                                 <div class="form-group col-md-12">
-                                                    <label>IC Number:</label>
+                                                    <label>Identification Number / Passport:</label>
                                                     <input type="text" name="IC" class="form-control" placeholder="Presenter's Identification Number (MyKad) *without -" required="required" value="{{ $user -> IC_No }}" readonly>
                                                 </div>
                                                 <div class="form-group col-md-12">
