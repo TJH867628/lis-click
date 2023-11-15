@@ -196,7 +196,7 @@
                                             <div class="col-md-6" style="display: flex; position:relative;">
                                                 <div class="form-group">
                                                       <label>Current Password :</label>
-                                                      <input type="password" name="currentPassword" class="form-control" id="currentPassword" minlength="3" maxlength="50">
+                                                      <input type="password" name="currentPassword" class="form-control" id="currentPassword" minlength="8" maxlength="50">
                                                 </div>
                                                 <i style="height:fit-content; position:absolute; top:50%; left:45%;" class="bi-eye password-toggle" id="toggleCurrentPassword" style="color: black;"></i>
                                             </div>  
@@ -205,13 +205,13 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                       <label>New Password :</label>
-                                                      <input type="password" name="newPassword1" class="form-control" id="newPassword1" minlength="3" maxlength="50">
+                                                      <input type="password" name="newPassword1" class="form-control" id="newPassword1" minlength="8" maxlength="50">
                                                 </div>
                                             </div>
                                             <div class="col-md-6" style="position: relative;">
                                                 <div class="form-group">
                                                       <label>Confirm New Password :</label>
-                                                      <input type="password" name="newPassword2" class="form-control" id="newPassword2" minlength="3" maxlength="50">
+                                                      <input type="password" name="newPassword2" class="form-control" id="newPassword2" minlength="8" maxlength="50">
                                                 </div>
                                                 <i style="height:fit-content; position:absolute; top:50%; left:100%;" class="bi-eye password-toggle" id="toggleNewPassword" style="color: black;"></i>
                                             </div>

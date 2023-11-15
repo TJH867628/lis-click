@@ -437,12 +437,12 @@
                             @if( $submissionInfo->cleanedDocument != null)
                             <form action="{{ route('updateReviewer', ['submissionCode' => $submissionInfo->submissionCode]) }}" method="POST" onsubmit="return confirm('Are you sure you want to update the reviewer?');">
                                 @csrf
-                                <select name="reviewer" id="reviewer">
+                                <select name="reviewer" id="reviewer" style="width: -webkit-fill-available;">
                                     @foreach($allReviewerInfo as $reviewerInfo)
                                         <option value="{{ $reviewerInfo->email }}">{{ $reviewerInfo->name }}</option>
                                     @endforeach
                                 </select>
-                                <select name="reviewer2" id="reviewer2">
+                                <select name="reviewer2" id="reviewer2" style="width: -webkit-fill-available;">
                                     <option value="None">None</option>
                                     @foreach($allReviewerInfo as $reviewerInfo)
                                         <option value="{{ $reviewerInfo->email }}">{{ $reviewerInfo->name }}</option>

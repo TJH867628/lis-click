@@ -403,7 +403,7 @@ thead th.active,tbody td.active {
                             <div class="row-register">
                                 <div class="col-lg-7">	
                                     <div class="contact">
-                                        <form class="form" id="fullpaper-form" name="form" action="{{ route('uploadReceipt',['submissionCode'=>$user->id]) }}" enctype="multipart/form-data" method="POST" onsubmit="return validateAdditionalAuthor(event)">
+                                        <form class="form" id="fullpaper-form" name="form" action="{{ route('applyForReviewer',['userId'=>$user->id]) }}" enctype="multipart/form-data" method="POST" onsubmit="return validateAdditionalAuthor(event)">
                                         @csrf
                                             <div class="row">
                                                 <div class="form-group col-md-12">
