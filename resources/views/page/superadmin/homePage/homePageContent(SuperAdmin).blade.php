@@ -403,13 +403,23 @@
           gradientStrokeTeal.addColorStop(1, 'rgba(0, 206, 209, 1)');
           var gradientLegendTeal = 'linear-gradient(to right, rgba(0, 128, 128, 1), rgba(0, 206, 209, 1))';
 
-          var dataByYear = @json($dataByYear); // Convert the PHP array to a JavaScript object
-          var categoryAmounts = Object.values(amountEachCategory);
+          var gradientStrokeCyan = ctx.createLinearGradient(0, 0, 0, 181);
+          gradientStrokeCyan.addColorStop(0, 'rgba(0, 255, 255, 1)');
+          gradientStrokeCyan.addColorStop(1, 'rgba(70, 130, 180, 1)');
+          var gradientLegendCyan = 'linear-gradient(to right, rgba(0, 255, 255, 1), rgba(70, 130, 180, 1))';
+
+          var gradientStrokeSilver = ctx.createLinearGradient(0, 0, 0, 181);
+          gradientStrokeSilver.addColorStop(0, 'rgba(192, 192, 192, 1)');
+          gradientStrokeSilver.addColorStop(1, 'rgba(169, 169, 169, 1)');
+          var gradientLegendSilver = 'linear-gradient(to right, rgba(192, 192, 192, 1), rgba(169, 169, 169, 1))';
+
+          var total = @json($total); // Convert the PHP array to a JavaScript object
           
           var totals = Object.values(total);
+          
           var trafficChartData = {
             datasets: [{
-              data: categoryAmounts,
+              data: totals,
               backgroundColor: [
                 gradientStrokeBlue,
                 gradientStrokeGreen,
@@ -418,7 +428,9 @@
                 gradientStrokeOrange,
                 gradientStrokeGold,
                 gradientStrokePink,
-                gradientStrokeTeal
+                gradientStrokeTeal,
+                gradientStrokeCyan,
+                gradientStrokeSilver
               ],
               hoverBackgroundColor: [
                 gradientStrokeBlue,
@@ -428,7 +440,9 @@
                 gradientStrokeOrange,
                 gradientStrokeGold,
                 gradientStrokePink,
-                gradientStrokeTeal
+                gradientStrokeTeal,
+                gradientStrokeCyan,
+                gradientStrokeSilver
               ],
               borderColor: [
                 gradientStrokeBlue,
@@ -438,7 +452,9 @@
                 gradientStrokeOrange,
                 gradientStrokeGold,
                 gradientStrokePink,
-                gradientStrokeTeal
+                gradientStrokeTeal,
+                gradientStrokeCyan,
+                gradientStrokeSilver
               ],
               legendColor: [
                 gradientLegendBlue,
@@ -448,13 +464,15 @@
                 gradientLegendOrange,
                 gradientLegendGold,
                 gradientLegendPink,
-                gradientLegendTeal
+                gradientLegendTeal,
+                gradientLegendCyan,
+                gradientLegendSilver
               ]
             }],
         
             // These labels appear in the legend and in the tooltips when hovering different arcs
             labels: [
-              'TVT', 'SSC', 'ITC', 'EHE', 'REE', 'COM', 'MD','OTH'
+              'ENG','TVT', 'SSC', 'ITC', 'EHE', 'REE', 'COM', 'MD','OTH','AUD'
             ]
           };
           var trafficChartOptions = {
@@ -474,7 +492,7 @@
                   if (trafficChartData.labels[i]) { 
                       text.push(trafficChartData.labels[i]); 
                   }
-                  text.push('<span class="float-right">'+trafficChartData.datasets[0].data[i]+"%"+'</span>')
+                  text.push('<span class="float-right">'+' RM '+trafficChartData.datasets[0].data[i]+'</span>')
                   text.push('</li>'); 
               } 
               text.push('</ul>'); 
