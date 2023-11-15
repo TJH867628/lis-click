@@ -109,7 +109,7 @@
 
                 <div class="form-group">
                     <label for="password">Password :</label>
-                    <input type="password" name="password" id="password" class="form-control" placeholder="Password" minlength="8" maxlength="" required>
+                    <input type="password" name="password" id="password" class="form-control" placeholder="Password" minlength="8" maxlength="30" required>
                 </div>
                 
                 <button type="submit" class="btn btn-primary" name="signUp">Sign Up</button>
