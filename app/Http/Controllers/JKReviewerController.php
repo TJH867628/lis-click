@@ -151,7 +151,7 @@ class JKReviewerController extends Controller
                     $submissionInfo = tbl_submission::where('submissionCode',$submissionCode)->first();
                     $correction = tbl_correction::where('submissionCode',$submissionCode)->get();
                     $count = $correction->count();
-                    $latestCorrection = tbl_correction::where('numberOfTimes',$count)->first();
+                    $latestCorrection = $correction->where('numberOfTimes',$count)->first();
         
                     $filename = 'Correction_'. $latestCorrection->numberOfTimes . '_'. $submissionInfo->submissionCode . ".". $file->getClientOriginalExtension();
                     $latestCorrection->returnCorrectionLink = $filename;

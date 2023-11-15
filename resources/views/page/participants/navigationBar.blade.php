@@ -35,7 +35,7 @@
                             <ul class="dropdown-menu dropdown-menu-end bg-light" aria-labelledby="navbarDropdownBlog">
                                 <li><a class="dropdown-item" href="/registerSubmission">Register Submission</a></li>
                                 <li><a class="dropdown-item" href="/submissionStatus">Submission Status</a></li>
-                                <li><a class="dropdown-item" href="/registerAsAudience">Resigter As Audience</a></li>
+                                <li><a class="dropdown-item" href="/registerAsAudience">Register As Audience</a></li>
                             </ul>
                     <li class="nav-item"><a class="nav-link" href="/userManual">User Manual</a></li>
                     <li class="nav-item"><a class="nav-link" href="/account">My Profile</a></li>
