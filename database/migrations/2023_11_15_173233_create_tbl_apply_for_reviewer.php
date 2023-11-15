@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('tbl_apply_for_reviewer', function (Blueprint $table) {
             $table->id();
             $table->string('email');
+            $table->string('highest_level_education');
+            $table->string('file_to_support')->nullable();
             $table->string('accountName');
             $table->timestamps();
         });
