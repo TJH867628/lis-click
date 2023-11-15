@@ -625,7 +625,7 @@
 <main class="table">
 <section class="table__header">
 <h1>Correction History</h1>s
-@if($submission->correctionPhase == 'pending' && $latestReturnCorrection->returnCorrectionLink != null)
+@if($submission->correctionPhase == 'pending' && isset($latestReturnCorrection->returnCorrectionLink))
         <button onclick="openPopup()" id="addButton">
             <div class="d-flex justify-content-center align-items-center">
                 <i class="material-icons text-center">add</i>
