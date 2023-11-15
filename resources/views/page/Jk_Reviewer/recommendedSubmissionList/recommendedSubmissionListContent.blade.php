@@ -391,14 +391,10 @@
                                         {{$thisRecommendedSubmission->submissionCode}}
                                     </div>
                                 </a>
-                                <br><p>Title</p>
-                                {{$thisRecommendedSubmission->submissionTitle}}
-                                <br><br><p>Type</p>
-                                {{$thisRecommendedSubmission->submissionType}}
-                                <br><br><p>Theme</p>
-                                {{$thisRecommendedSubmission->subTheme}}
-                                <br><br><p>Present Mode</p>
-                                {{$thisRecommendedSubmission->presentMode}}
+                                <br><p>Participants</p>
+                                {{$thisRecommendedSubmission->participants1}}<br>
+                                {{$thisRecommendedSubmission->participants2}}<br>
+                                {{$thisRecommendedSubmission->participants3}}<br>
                             </td>
                             <td>
                                 <p>Reviewer</p>

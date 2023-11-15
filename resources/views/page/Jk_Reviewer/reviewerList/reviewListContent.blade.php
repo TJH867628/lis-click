@@ -412,14 +412,10 @@
                                         {{$submissionInfo->submissionCode}}
                                     </div>
                                 </a>
-                                <br><p>Title</p>
-                                {{$submissionInfo->submissionTitle}}
-                                <br><br><p>Type</p>
-                                {{$submissionInfo->submissionType}}
-                                <br><br><p>Theme</p>
-                                {{$submissionInfo->subTheme}}
-                                <br><br><p>Present Mode</p>
-                                {{$submissionInfo->presentMode}}
+                                <br><p>Participants</p>
+                                {{$submissionInfo->participants1}}<br>
+                                {{$submissionInfo->participants2}}<br>
+                                {{$submissionInfo->participants3}}<br>
                             </td>
                             <td>
                                 <p>Reviewer</p>
