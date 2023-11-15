@@ -131,6 +131,7 @@ class SuperAdminController extends Controller
                 return $group->count();
             });
 
+            $amountENG = $submissionCounts->get('ENG', 0);
             $amountITC = $submissionCounts->get('ITC', 0);
             $amountSSC = $submissionCounts->get('SSC', 0);
             $amountEHE = $submissionCounts->get('EHE', 0);
@@ -139,8 +140,10 @@ class SuperAdminController extends Controller
             $amountCOM = $submissionCounts->get('COM', 0);
             $amountMDC = $submissionCounts->get('MDC', 0);
             $amountOTH = $submissionCounts->get('OTH', 0);
+            $amountAUD = $submissionCounts->get('AUD', 0);
 
             $amounts = [
+                'ENG' => $amountENG,
                 'ITC' => $amountITC,
                 'SSC' => $amountSSC,
                 'EHE' => $amountEHE,
@@ -149,6 +152,7 @@ class SuperAdminController extends Controller
                 'COM' => $amountCOM,
                 'MDC' => $amountMDC,
                 'OTH' => $amountOTH,
+                'AUD' => $amountAUD,
             ];
 
             $codesContainingENG = tbl_payment::where('submissionCode', 'like', '%ENG%')->get();
