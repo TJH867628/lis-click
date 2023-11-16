@@ -414,6 +414,9 @@ thead th.active,tbody td.active {
                             </div>					
                             
                             @if(isset($hasApply) && $hasApply->isApprove == 0)
+                            <div id="applyResult">
+                                <h3>Apply Result:</h3><h3 style="color: orange;">Pending For Verify and Approve</h3>
+                            </div> <form class="form" id="fullpaper-form" name="form" action="{{ route('applyForReviewer',['userId'=>$user->id]) }}" enctype="multipart/form-data" method="POST" onsubmit="return validateAdditionalAuthor(event)">
                             <div class="row-register">
                                 <div class="col-lg-7">	
                                     <div class="contact">
@@ -515,9 +518,7 @@ thead th.active,tbody td.active {
                                 <p>Kindly please check your email inbox to get the username and password for reviewer account</p>
                             </div>
                             @else
-                            <div id="applyResult">
-                                <h3>Apply Result:</h3><h3 style="color: orange;">Pending For Verify and Approve</h3>
-                            </div> <form class="form" id="fullpaper-form" name="form" action="{{ route('applyForReviewer',['userId'=>$user->id]) }}" enctype="multipart/form-data" method="POST" onsubmit="return validateAdditionalAuthor(event)">
+                        
                                         @csrf
                                             <div class="row">
                                                 <h3>Update Apply Information</h3>
@@ -531,27 +532,27 @@ thead th.active,tbody td.active {
                                                 </div>
                                                 <div class="form-group col-md-12">
                                                     <label>Full Name:</label>
-                                                    <input type="text" name="name" class="form-control" placeholder="Full Name (CAPITAL LETTER)" onload="this.value = this.value.toUpperCase()" required="required" readonly >
+                                                    <input type="text" name="name" class="form-control" placeholder="Full Name (CAPITAL LETTER)" onload="this.value = this.value.toUpperCase()" required="required" value="{{ $user -> name }}" readonly >
                                                 </div>
                                                 <div class="form-group col-md-12">
                                                     <label>Identification Number / Passport:</label>
-                                                    <input type="text" name="IC" class="form-control" placeholder="Identification Number *without -" required="required" readonly>
+                                                    <input type="text" name="IC" class="form-control" placeholder="Identification Number *without -" required="required" value="{{ $user -> IC_No }}" readonly>
                                                 </div>
                                                 <div class="form-group col-md-12">
                                                     <label>Phone Number:</label>
-                                                    <input type="text" name="number" class="form-control" placeholder="Contact number" required="required" readonly>
+                                                    <input type="text" name="number" class="form-control" placeholder="Contact number" required="required" value="{{ $user -> phoneNumber }}" readonly>
                                                 </div>
                                                 <div class="form-group col-md-12">
                                                     <label>Email:</label>
-                                                    <input type="text" name="email" class="form-control" placeholder="Email Address" required="required" readonly>
+                                                    <input type="text" name="email" class="form-control" placeholder="Email Address" required="required" value="{{ $user -> email }}" readonly>
                                                 </div>
                                                 <div class="form-group col-md-12">
                                                     <label>Organization Name:</label>
-                                                    <input type="text" name="address" class="form-control" placeholder="Organization Name" required="required" readonly>
+                                                    <input type="text" name="address" class="form-control" placeholder="Organization Name" value="{{ $user -> organizationName }}" required="required" readonly>
                                                 </div>
                                                 <div class="form-group col-md-12">
                                                     <label>Address:</label>
-                                                    <textarea rows="6" name="message" class="form-control" placeholder="Address" required="required" readonly></textarea>
+                                                    <textarea rows="6" name="message" class="form-control" placeholder="Address" required="required" readonly>{{ $user -> organizationAddress }}</textarea>
                                                 </div>
                                                 <!--End Dropdown-->
 
