@@ -413,7 +413,7 @@ thead th.active,tbody td.active {
                                 <h2 style="margin: auto;">Apply For Reviewer</h2>
                             </div>					
                             
-                            @if(!isset($hasApply) && $hasApply->isApprove == 0)
+                            @if(isset($hasApply) && $hasApply->isApprove == 0)
                             <div class="row-register">
                                 <div class="col-lg-7">	
                                     <div class="contact">
