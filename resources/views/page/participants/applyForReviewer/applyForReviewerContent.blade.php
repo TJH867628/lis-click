@@ -403,8 +403,8 @@ thead th.active,tbody td.active {
 </style>
 </head>
 <!-- Header-->
-<header class="bg-light text text-dark py-5">
-                <div class="container px-5 py-5" id="formContainer" >
+<header class="bg-light text text-dark py-5" >
+                <div class="container px-5 py-5" id="formContainer" style="margin-top: 80%;">
                     <div id="contact" class="contact-area section-padding">
                         <div class="container">										
                             <div class="section-title text-center mt-5">

@@ -19,7 +19,6 @@
     <body class="d-flex flex-column h-100">
         <main class="flex-shrink-0">
         @include('page.participants.navigationBar')
-        <br><br><br><br><br><br><br><br<br><br><br><br><br><br><br><br><br><br><br><br>
         @include('page.participants.applyForReviewer.applyForReviewerContent')
         </main>
         @include('page.footer')
