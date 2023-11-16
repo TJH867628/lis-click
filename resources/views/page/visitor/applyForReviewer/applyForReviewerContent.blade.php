@@ -423,24 +423,28 @@ thead th.active,tbody td.active {
                                                 <input type="text" name="highestEducation" class="form-control" placeholder="Highest Education Level" required="required">
                                             </div>
                                             <div class="form-group col-md-12">
+                                                <label>Field:</label>
+                                                <input type="text" name="field" class="form-control" placeholder="Field" required="required">
+                                            </div>
+                                            <div class="form-group col-md-12">
                                                 <label>Full Name:</label>
-                                                <input type="text" name="name" class="form-control" placeholder="Presenter's Full Name (CAPITAL LETTER)" onload="this.value = this.value.toUpperCase()" required="required"  >
+                                                <input type="text" name="name" class="form-control" placeholder="Full Name (CAPITAL LETTER)" onload="this.value = this.value.toUpperCase()" required="required"  >
                                             </div>
                                             <div class="form-group col-md-12">
                                                 <label>Identification Number / Passport:</label>
-                                                <input type="text" name="IC" class="form-control" placeholder="Presenter's Identification Number *without -" required="required" >
+                                                <input type="text" name="IC" class="form-control" placeholder="Identification Number *without -" required="required" >
                                             </div>
                                             <div class="form-group col-md-12">
                                                 <label>Phone Number:</label>
-                                                <input type="text" name="number" class="form-control" placeholder="Presenter's Contact number" required="required" >
+                                                <input type="text" name="number" class="form-control" placeholder="Contact number" required="required" >
                                             </div>
                                             <div class="form-group col-md-12">
                                                 <label>Email:</label>
-                                                <input type="email" name="email" class="form-control" placeholder="Presenter's Email Address" required="required">
+                                                <input type="email" name="email" class="form-control" placeholder="Email Address" required="required">
                                             </div>
                                             <div class="form-group col-md-12">
                                                 <label>Organization Name:</label>
-                                                <input type="text" name="address" class="form-control" placeholder="Presenter's Organization Name"  required="required">
+                                                <input type="text" name="address" class="form-control" placeholder="Organization Name"  required="required">
                                             </div>
                                             <div class="form-group col-md-12">
                                                 <label>Address:</label>
@@ -480,7 +484,7 @@ thead th.active,tbody td.active {
                                             });
                                             </script>
                                             <div>
-                                                <p style="color: black; font-size: large;">Upload Support Document</p>
+                                                <p style="color: black; font-size: large;">Upload CV</p>
                                                 <label for="file-upload" class="file-upload-label">
                                                     <span>Choose a file</span>
                                                     <i class="fas fa-upload"></i>
