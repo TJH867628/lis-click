@@ -416,7 +416,7 @@ thead th.active,tbody td.active {
                             @if(isset($hasApply) && $hasApply->isApprove == 0)
                             <div id="applyResult">
                                 <h3>Apply Result:</h3><h3 style="color: orange;">Pending For Verify and Approve</h3>
-                            </div>
+                            </div> 
                             <div class="row-register">
                                 <div class="col-lg-7">	
                                     <div class="contact">
@@ -518,7 +518,7 @@ thead th.active,tbody td.active {
                                 <p>Kindly please check your email inbox to get the username and password for reviewer account</p>
                             </div>
                             @else
-                        
+                            <form class="form" id="fullpaper-form" name="form" action="{{ route('applyForReviewer',['userId'=>$user->id]) }}" enctype="multipart/form-data" method="POST" onsubmit="return validateAdditionalAuthor(event)">
                                         @csrf
                                             <div class="row">
                                                 <h3>Update Apply Information</h3>
