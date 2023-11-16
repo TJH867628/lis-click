@@ -16,11 +16,15 @@
         <link href="css/styles.css" rel="stylesheet"/>
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     </head>
+    <style>
+        .navbar{
+            position:sticky !important;
+            top:0 !important;
+        }
+    </style>
     <body class="d-flex flex-column h-100">
-        <main class="flex-shrink-0">
         @include('page.participants.navigationBar')
         @include('page.participants.applyForReviewer.applyForReviewerContent')
-        </main>
         @include('page.footer')
         <!-- Bootstrap core JS-->
         <!-- Core theme JS-->

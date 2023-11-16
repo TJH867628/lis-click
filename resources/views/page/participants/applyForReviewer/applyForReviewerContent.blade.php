@@ -34,9 +34,6 @@ th {
 form {
     color: black;
     margin: auto;
-    margin-top: 50px;
-    margin-bottom: 30px;
-    width: 500px;
     padding: 20px;
     border: 1px solid #dee2e6;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
@@ -160,7 +157,8 @@ button:hover {
 }
 
 body {
-    min-height: 100vh;
+    min-height: 120%;
+    width:  100%;
     background: url("../images/tblBackground.jpg") center / cover;
     display: flex;
     justify-content: center;
@@ -385,15 +383,9 @@ thead th.active,tbody td.active {
     width: max-content;
 }
 
-#formContainer{
-    margin-top: 45%;
-}
-
 #applyResult{
     color: black;
     margin: auto;
-    margin-top: 50px;
-    margin-bottom: 30px;
     width: 500px;
     padding: 20px;
     border: 1px solid #dee2e6;
@@ -513,7 +505,7 @@ thead th.active,tbody td.active {
                                     </form>
                             </div><!--- END ROW -->
                             @elseif(isset($hasApply) && $hasApply->isApprove == 1)
-                            <div id="applyResult">
+                            <div id="applyResult" style="margin-top: ;">
                                 <h3>Apply Result:</h3><h3 style="color: green;"><strong>Approved</strong></h3>
                                 <p>Kindly please check your email inbox to get the username and password for reviewer account</p>
                             </div>
@@ -661,6 +653,7 @@ thead th.active,tbody td.active {
                 uploadButton.disabled = true;
             }
         }
+
         </script>
             </header>
             <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
