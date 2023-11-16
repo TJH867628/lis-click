@@ -396,7 +396,13 @@ thead th.active,tbody td.active {
 </head>
 <!-- Header-->
 <header class="bg-light text text-dark py-5" >
+                @if(isset($hasApply) && $hasApply->isApprove == 0)
                 <div class="container px-5 py-5" id="formContainer" style="margin-top: 80%;">
+                @elseif(isset($hasApply) && $hasApply->isApprove == 1)
+                <div class="container px-5 py-5" id="formContainer" style="margin-top: 10%;">
+                @else
+                <div class="container px-5 py-5" id="formContainer" style="margin-top: 80%;">
+                @endif
                     <div id="contact" class="contact-area section-padding">
                         <div class="container">										
                             <div class="section-title text-center mt-5">
