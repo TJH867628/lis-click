@@ -422,7 +422,7 @@ thead th.active,tbody td.active {
                                             <div class="row">
                                                 <div class="form-group col-md-12">
                                                     <label>Highest Education:</label>
-                                                    <input type="text" name="highestEducation" class="form-control" placeholder="Highest Education Level" required="required">
+                                                    <input type="text" name="highestEducation" class="form-control" placeholder="Highest Education Level" value="{{$hasApply->highest_education_level}}" required="required">
                                                 </div>
                                                 <div class="form-group col-md-12">
                                                     <label>Field:</label>
@@ -523,7 +523,7 @@ thead th.active,tbody td.active {
                                                 <h3>Update Apply Information</h3>
                                                 <div class="form-group col-md-12">
                                                     <label>Highest Education:</label>
-                                                    <input type="text" name="highestEducation" class="form-control" placeholder="Highest Education Level" value="{{$hasApply->highest_education_level}}" required="required">
+                                                    <input type="text" name="highestEducation" class="form-control" placeholder="Highest Education Level"  required="required">
                                                 </div>
                                                 <div class="form-group col-md-12">
                                                     <label>Field:</label>
@@ -531,27 +531,27 @@ thead th.active,tbody td.active {
                                                 </div>
                                                 <div class="form-group col-md-12">
                                                     <label>Full Name:</label>
-                                                    <input type="text" name="name" class="form-control" placeholder="Full Name (CAPITAL LETTER)" onload="this.value = this.value.toUpperCase()" required="required" value="{{ $user -> name }}" readonly >
+                                                    <input type="text" name="name" class="form-control" placeholder="Full Name (CAPITAL LETTER)" onload="this.value = this.value.toUpperCase()" required="required" readonly >
                                                 </div>
                                                 <div class="form-group col-md-12">
                                                     <label>Identification Number / Passport:</label>
-                                                    <input type="text" name="IC" class="form-control" placeholder="Identification Number *without -" required="required" value="{{ $user -> IC_No }}" readonly>
+                                                    <input type="text" name="IC" class="form-control" placeholder="Identification Number *without -" required="required" readonly>
                                                 </div>
                                                 <div class="form-group col-md-12">
                                                     <label>Phone Number:</label>
-                                                    <input type="text" name="number" class="form-control" placeholder="Contact number" required="required" value="{{ $user -> phoneNumber }}" readonly>
+                                                    <input type="text" name="number" class="form-control" placeholder="Contact number" required="required" readonly>
                                                 </div>
                                                 <div class="form-group col-md-12">
                                                     <label>Email:</label>
-                                                    <input type="text" name="email" class="form-control" placeholder="Email Address" required="required" value="{{ $user -> email }}" readonly>
+                                                    <input type="text" name="email" class="form-control" placeholder="Email Address" required="required" readonly>
                                                 </div>
                                                 <div class="form-group col-md-12">
                                                     <label>Organization Name:</label>
-                                                    <input type="text" name="address" class="form-control" placeholder="Organization Name" value="{{ $user -> organizationName }}" required="required" readonly>
+                                                    <input type="text" name="address" class="form-control" placeholder="Organization Name" required="required" readonly>
                                                 </div>
                                                 <div class="form-group col-md-12">
                                                     <label>Address:</label>
-                                                    <textarea rows="6" name="message" class="form-control" placeholder="Address" required="required" readonly>{{ $user -> organizationAddress }}</textarea>
+                                                    <textarea rows="6" name="message" class="form-control" placeholder="Address" required="required" readonly></textarea>
                                                 </div>
                                                 <!--End Dropdown-->
 
