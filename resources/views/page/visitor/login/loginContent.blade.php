@@ -97,7 +97,7 @@
                 @csrf
                 <div class="txt_field">
                   <input type="text" required name="email" id="email">
-                  <label>Email Address</label>
+                  <label>User Id/Email Address</label>
                 </div>
                 <div class="txt_field">
                   <input type="password" required name="password" id="password">
