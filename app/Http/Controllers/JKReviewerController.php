@@ -442,6 +442,7 @@ class JKReviewerController extends Controller
             }else{
                 $applier = new tbl_apply_for_reviewer;
             }
+
             $applier->email = $email;
             $applier->highest_education_level = $highestEducation;
             if($request->hasFile('file')){

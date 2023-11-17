@@ -22,7 +22,6 @@ class FileController extends Controller
             
             return "File uploaded successfully.";
         }
-        
         return "No file was uploaded.";
     }
 }
