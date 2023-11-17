@@ -302,6 +302,15 @@
                 <div class="total-amount-container" style="background-color:white;">
                     Total Amount: <span id="totalAmount" class="total-amount-value">0.00</span>
                 </div>
+                <div class="total-amount-container" style="background-color:white;">
+                    Total Submission: <span id="totalSubmission" class="total-amount-value">
+                    @if(isset($totalSubmission))
+                        {{ $totalSubmission }}
+                    @else
+                        No Submission
+                    @endif
+                </span>
+                </div>
             </div>
         <section class="row table_body">
             <div class="col-md-6">
@@ -338,6 +347,10 @@
     // Initialize chart instances
     var paymentChart = null;
     var paymentBreakdownChart = null;
+
+    var types = @json($type);
+
+    var data = Object.values(types);
 
     // Function to update the charts based on the selected year
     function updateCharts(selectedYear) {
@@ -429,24 +442,22 @@
             },
         });
 
+        
+
         // Create a new paymentBreakdownChart (Pie Chart)
         paymentBreakdownChart = new Chart(pieChartCtx, {
             type: 'pie',
             data: {
-                labels: categoryLabels,
+                labels: ['Paper Presentation & Publication','Paper Presentation ONLY','Poster Presentation ONLY','Publication ONLY','Student Presenter','Audience'],
                 datasets: [{
-                    data: categoryAmounts,
+                    data: data,
                     backgroundColor: [
                         'rgba(200, 0, 0, 0.7)', // Darker Red
                         'rgba(200, 150, 0, 0.7)', // Darker Yellow
                         'rgba(0, 150, 150, 0.7)', // Darker Teal
                         'rgba(0, 100, 200, 0.7)', // Darker Blue
                         'rgba(100, 0, 200, 0.7)', // Darker Purple
-                        'rgba(200, 100, 0, 0.7)', // Darker Orange
-                        'rgba(100, 0, 0, 0.7)', // Darker Maroon
-                        'rgba(0, 100, 100, 0.7)', // Darker Teal
-                        'rgba(0, 100, 0, 0.7)', // Darker Green
-                        'rgba(0, 0, 0, 0.7)'
+                        'rgba(200, 100, 0, 0.7)'
                     ],
                 }],
             },

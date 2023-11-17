@@ -337,6 +337,12 @@
                     </td>
                 </tr>
                 @endforeach
+            @else
+                <tr style="color: black;">
+                    <td colspan="8">
+                    No record found.
+                    </td>
+                </tr>
             @endif
             </tbody>
         </table>
