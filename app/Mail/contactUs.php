@@ -34,8 +34,8 @@ class contactUs extends Mailable
 
     public function build()
     {
-        return $this->view('emails.faq.faq')
-            ->from($this->userEmail, $this->name)
+        return $this->from($this->userEmail, $this->name)
+            ->view('emails.faq.faq')
             ->subject($this->subject)
             ->with([
                 'name' => $this->name,
