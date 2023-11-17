@@ -97,12 +97,12 @@
                 @csrf
                 <div class="txt_field">
                   <input type="text" required name="email" id="email">
-                  <label>Email Address</label>
+                  <label>User Id/Email Address</label>
                 </div>
                 <div class="txt_field">
                   <input type="password" required name="password" id="password">
                   <label>Password</label>
-                  <i class="bi-eye password-toggle" id="togglePassword" style="color: black;"></i>
+                  <i class="bi-eye-slash password-toggle" id="togglePassword" style="color: black;"></i>
                 </div>
                 @if($message = Session::get('fail'))
                 <div class="error">
@@ -127,19 +127,36 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>
-    $(document).ready(function () {
-        var passwordVisible = false; // Track password visibility state
 
+
+    $(document).ready(function () {
+        var passwordVisible = false; 
+
+        // Toggle password visibility for password1
         $("#togglePassword").on("click", function () {
             var inputField = $("#password");
             var icon = $("#togglePassword");
-            passwordVisible = true; // Toggle visibility state
-            togglePasswordVisibility(inputField, icon);
+            if(passwordVisible == false){
+              passwordVisible = true;
+              togglePasswordVisibility(inputField,icon);
+            }
         });
 
-        $(".password-toggle").hover(
-            function () {
-              console.log(1);
+
+        function togglePasswordVisibility(inputField,icon) {
+            if (inputField.attr("type") === "password") {
+                inputField.attr("type", "text");
+                icon.addClass("bi-eye").removeClass("bi-eye-slash ");
+            } else {
+                inputField.attr("type", "password");
+                icon.addClass("bi-eye-slash ").removeClass("bi-eye");
+            }
+          }
+
+          
+      $("#togglePassword").hover(
+          function () {
+                console.log(123);
                 var inputField = $("#password");
                 var icon = $("#togglePassword");
                 if (passwordVisible == true) {
@@ -148,17 +165,7 @@
                 }
             },
         );
-
-        function togglePasswordVisibility(inputField, icon) {
-            if (inputField.attr("type") === "password") {
-                inputField.attr("type", "text");
-                icon.addClass("bi-eye-slash").removeClass("bi-eye");
-            } else {
-                inputField.attr("type", "password");
-                icon.addClass("bi-eye").removeClass("bi-eye-slash");
-            }
-        }
-    });
+      });
 </script>
 
 </html>

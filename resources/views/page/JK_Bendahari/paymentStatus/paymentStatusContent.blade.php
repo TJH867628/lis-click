@@ -277,7 +277,7 @@
         </div>
         </section>
         <section class="table__body">
-        <table id="paymenttable">
+        <table id="paymenttable" class="display">
             <thead>
             <tr>
                 <th>
@@ -361,7 +361,6 @@
     </main>
     </body>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    sc
     
     <script>
        document.addEventListener('DOMContentLoaded', function () {
@@ -408,5 +407,13 @@
             }
         });
         }
+
+        $(document).ready(function() {
+        $('#paymenttable').DataTable({
+            search: {
+                smart: false  // Disables smart search, enforcing exact match searches
+            }
+        });
+    });
     </script>
 </html>
