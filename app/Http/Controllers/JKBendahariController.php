@@ -10,6 +10,7 @@ use App\Models\tbl_payment;
 use App\Models\tbl_submission;
 use App\Models\tbl_participants_info;
 use App\Models\tbl_conference;
+use App\Models\tbl_spend;
 use Illuminate\Support\Facades\Storage;
 use App\Mail\paymentConfirmationReceipt;
 use Illuminate\Support\Facades\Mail;
@@ -238,4 +239,11 @@ class JKBendahariController extends Controller
         ]);
     }
     
+    public function spend(){
+        $spend = tbl_spend::all();
+
+        
+
+        return view('page.JK_Bendahari.spend.spend',['spend' => $spend]);
+    }
 }
