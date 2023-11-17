@@ -35,7 +35,6 @@ class submissionStatusController extends Controller
                 $userSubmissionInfo[$key]->correction = $correction;
                 $userSubmissionInfo[$key]->latestReturnCorrection = $latestReturnCorrection;
             }
-
             $correction = tbl_correction::all();
             $paymentQR = tbl_masterdata::where('masterdata_name','paymentQR')->first();
 
@@ -112,6 +111,7 @@ class submissionStatusController extends Controller
 
             if(tbl_participants_info::where('id',$submissionCode)->first()){
                 $categoryCode = "AUD";
+                dd(123);
                 $rows = tbl_payment::where('submissionCode', 'like', '%' . $categoryCode . '%')->count();
                 $userId = $submissionCode;
                 $submissionCode = $currentYear . "_" . $categoryCode . str_pad( str($rows + 1), 4, '0', STR_PAD_LEFT);
@@ -137,25 +137,15 @@ class submissionStatusController extends Controller
                 }
         
             }else{
-                $paymentInfo = tbl_payment::where('submissionCode',$submissionCode)->first();
-                if($totalPaymentReceipt != 0){
-                    $paymentInfo->submissionCode = $submissionCode;
-                    $paymentInfo->paymentID = $thisPaymentID;
-                    $paymentInfo->paymentStatus = "Pending For Verification";
-                    $paymentInfo->paymentDate = $now;
-                    $paymentInfo->proofOfPayment = $filename;
-                    $paymentInfo->updated_at = now();
-                    $paymentInfo->save();
-                }else{
-                    $paymentInfo = new tbl_payment;
-                    $paymentInfo->submissionCode = $submissionCode;
-                    $paymentInfo->paymentID = $thisPaymentID;
-                    $paymentInfo->paymentStatus = "Pending For Verification";
-                    $paymentInfo->paymentDate = $now;
-                    $paymentInfo->proofOfPayment = $filename;
-                    $paymentInfo->updated_at = now();
-                    $paymentInfo->save();
-                }
+                $paymentInfo = new tbl_payment;
+                $paymentInfo->submissionCode = $submissionCode;
+                $paymentInfo->paymentID = $thisPaymentID;
+                $paymentInfo->paymentStatus = "Pending For Verification";
+                $paymentInfo->paymentDate = $now;
+                $paymentInfo->proofOfPayment = $filename;
+                $paymentInfo->created_at = now();
+                $paymentInfo->updated_at = now();
+                $paymentInfo->save();
             }
             
             

@@ -25,6 +25,7 @@ use App\Http\Controllers\PageEditController;
 use App\Http\Controllers\JKTurnInController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\JKBendahariController;
+use App\Http\Controllers\SpendController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -161,3 +162,6 @@ Route::post('/applyForReviewer/{userId}',[JKReviewerController::class,'applyForR
 Route::get('/approveApplicationForReviewer/{userId}',[JKReviewerController::class,'approveApplicationForReviewer'])->name('approveApplicationForReviewer');
 Route::get('/downloadSupportDocument/{filename}',[JKReviewerController::class,'downloadSupportDocument'])->name('downloadSupportDocument');
 Route::get('/reviewerList',[JKReviewerController::class,'reviewerList'])->name('reviewerList');
+Route::get('/JKspend',[JKBendahariController::class,'spend'])->name('JKspend');
+Route::post('/submit-spend', [SpendController::class, 'store'])->name('submit-spend');
+Route::delete('/delete/{id}', [SpendController::class, 'delete'])->name('delete-item');

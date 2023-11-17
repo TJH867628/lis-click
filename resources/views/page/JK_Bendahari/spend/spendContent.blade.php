@@ -78,10 +78,9 @@
         position: relative;
         width: 95%;
         background-color: #fffb;
-        height: 55vh;
+        height: 43vh;
         margin: .3rem auto;
         border-radius: .6rem;
-        margin-top: 1%;
         overflow: auto;
         overflow: overlay;
     }
@@ -258,162 +257,90 @@
             border: none;
             outline: none;
         }
+
+        label{
+            margin-top: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .form-group{
+            display: flex;
+            justify-content: space-between;
+            margin-right: 420px;
+            margin-top: 10px;
+            
+        }
+
+        .insert{
+            width: 300px;
+        }
+
+        button{
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+
+        
         </style>
     </head>
     <body>
         
         <main class="table">
         <section class="table__header">
-            <h1>Payment Status</h1>
-        
-        <div class="search-container">
-            <select class="statusFilter" id="filter" onchange="filterTable()">
-                <option value="all" selected>All</option>
-                <option value="complete">Complete</option>
-                <option value="pending">Pending</option>
-                <option value="incomplete">Incomplete</option>
-            </select>
-            <!-- <button type="button" onclick="filterTable()"><i class="fas fa-search"></i></button> -->
-        </div>
+            <h1>JK Spend</h1>
         </section>
+        <div class="search-container">
+            <form action="{{ route('submit-spend') }}" method="post">
+                @csrf
+                <div class="form-group">
+                    <label for="item">Item :</label>
+                    <input type="text" name="item" id="item" class="insert" placeholder="Item" required>
+                    <label for="amount">Amount :</label>
+                    <input type="number" name="amount" id="amount" class="insert" placeholder="Amount" required>
+                    <button type="submit" class="btn btn-primary" name="insert">Submit</button>
+                </div>
+            </form>
+        </div>
         <section class="table__body">
-        <table id="paymenttable" class="display">
+        <table id="paymenttable">
             <thead>
             <tr>
                 <th>
-                    Submission Details
+                    Item
                 </th>
                 <th>
-                    Payment Details
+                    Amount
                 </th>
                 <th>
-                    Proof Of Payment
+                    Action
                 </th>
             </tr>
             </thead>
             <tbody>
-            @php
-                $count = 0;
-            @endphp
-            @foreach($paymentDetails as $thisPaymentDetails)
-                @if((!empty($thisPaymentDetails->paymentReceipt)) && $thisPaymentDetails->proofOfPayment != "unavailable")
-                @php
-                    $count++;
-                @endphp
-                <tr class="payment-row">
+            @if(isset($spend))
+                @foreach($spend as $spend)
+                <tr>
                     <td>
-                        <p> Submission Code : </p>{{$thisPaymentDetails->submissionCode}}<br>
-                        <p> Participant Email : </p>{{$thisPaymentDetails->submissionInfo->participants1}}<br>
-                        <p> Participant HP : </p>{{$thisPaymentDetails->participantsInfo->phoneNumber}}<br>
-
+                        {{ $spend->item }}
                     </td>
                     <td>
-                        <p> Payment ID : </p>
-                        {{ $thisPaymentDetails->paymentID }}<br>
-                        <p> Payment Date : </p>
-                        @if($thisPaymentDetails->paymentDate != null)
-                        {{$thisPaymentDetails->paymentDate}}<br>
-                        @else
-                        unavailable
-                        @endif
-                        <p> Payment Status : </p>
-                        @if($thisPaymentDetails->paymentStatus == 'Complete')<br>
-                            <p style="color: green;" name="Complete" id="complete" class="paymentStatus">Complete</p><br>
-                            <p> Confirm Payment Date : </p>{{$thisPaymentDetails->confirmPaymentDate}}<br>
-                        @elseif($thisPaymentDetails->paymentStatus == 'Pending For Verification')
-                            <p style="color: orange;" name="Pending" id="pending" class="paymentStatus">{{$thisPaymentDetails->paymentStatus}}</p><br>
-                        @else
-                            <p style="color: red;" name="Incomplete" id="incomplete" class="paymentStatus">{{$thisPaymentDetails->paymentStatus}}</p><br>
-                        @endif
-                        <form action="{{ route('paymentStatusControl', ['paymentID' => $thisPaymentDetails->paymentID]) }}" method="POST">
-                            @csrf
-                            <input type="hidden" name="statusInput" value="">
-                            <input type="text" name="amount" placeholder="Amount" value="@if($thisPaymentDetails->amount)RM {{ $thisPaymentDetails->amount }}@endif"><br><br>
-                            <select class="statusOption" name="statusOption">
-                                <option value="Complete">Complete</option>
-                                <option value="Pending For Verification" selected>Pending For Verification</option>
-                                <option value="Incomplete">Incomplete</option>
-                            </select>
-                            <input type="text" class="statusInput" id="statusInput" name="statusInput" style="display: none;">
-                            <br><button style="margin-top: 1%;">Submit</button>
-                        </form>
+                        RM {{ $spend->amount }}
                     </td>
                     <td>
-                        @if($thisPaymentDetails->proofOfPayment == 'unavailable')
-                            <p style="color: red;">Payment Receipt Unavailable</p><br>
-                        @else
-                            <a href="{{route('downloadPaymentReceipt', $thisPaymentDetails->proofOfPayment)}}" style="text-decoration: none;" target="_blank"><i class="fas fa-download" style="padding: 1% ;"></i>Payment Receipt</a>
-                        @endif
+                    <form action="{{ route('delete-item', $spend->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger" style="text-align: left;">Delete</button>
+                    </form>
                     </td>
                 </tr>
-                @endif
-            @endforeach
-            @if($count == 0)
-            <tr>
-                <td colspan="3" style="text-align: center; font-weight:bold;">
-                    No Payment Receipt Found
-                </td>
-            </tr>
+                @endforeach
             @endif
             </tbody>
         </table>
         </section>
     </main>
     </body>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    
-    <script>
-       document.addEventListener('DOMContentLoaded', function () {
-        const paymentRows = document.querySelectorAll('.payment-row');
-
-        paymentRows.forEach((paymentRow) => {
-            const statusOption = paymentRow.querySelector('.statusOption');
-            const statusInput = paymentRow.querySelector('.statusInput');
-
-            statusInput.value = statusOption.value;
-
-            statusOption.addEventListener('change', () => {
-            console.log(paymentRow);
-                if (statusOption.value === 'Complete' || statusOption.value === 'Pending For Verification') {
-                    statusInput.value = statusOption.value;
-                    statusInput.style.display = 'none';
-                    statusInput.required = false;
-                } else if (statusOption.value === 'Incomplete') {
-                    statusInput.value = '';
-                    statusInput.style.display = 'block';
-                    statusInput.required = true;
-                    }
-                console.log(statusInput.value);
-
-                });
-            });
-        });
-
-
-        function filterTable() {
-        var dropdown = document.getElementById("filter");
-        var selectedvalue = dropdown.value;
-        var table = document.getElementById("paymenttable");
-        var rows = table.querySelectorAll(".payment-row");
-        
-        rows.forEach(function(row) {
-            var payment = row.cells[1].getElementsByClassName("paymentStatus")[0];
-            var paymentid= payment.id
-            if(selectedvalue == "all" || paymentid == selectedvalue){
-            row.style.display = "";
-            }
-            else {
-            row.style.display = "none";
-            }
-        });
-        }
-
-        $(document).ready(function() {
-        $('#paymenttable').DataTable({
-            search: {
-                smart: false  // Disables smart search, enforcing exact match searches
-            }
-        });
-    });
-    </script>
 </html>

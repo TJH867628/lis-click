@@ -67,14 +67,14 @@
             <!-- Your form elements here -->
 
             <div class="txt_field">
-                <input type="password" name="password1" placeholder="Please Insert New Password" id="password1">
+                <input type="password" name="password1" minlength="8" maxlength="30" placeholder="Please Insert New Password" id="password1">
                 <label>New Password</label>
-                <i class="bi-eye password-toggle" id="togglePassword1" style="color: black;"></i>
+                <i class="bi-eye-slash password-toggle" id="togglePassword1" style="color: black;"></i>
             </div>
             <div class="txt_field">
-                <input type="password" name="password2" placeholder="Please Insert The Password Again" id="password2">
+                <input type="password" name="password2" minlength="8" maxlength="30" placeholder="Please Insert The Password Again" id="password2">
                 <label>Confirm New Password</label>
-                <i class="bi-eye password-toggle" id="togglePassword2" style="color: black;"></i>
+                <i class="bi-eye-slash password-toggle" id="togglePassword2" style="color: black;"></i>
             </div>
 
             <!-- Other form elements -->
@@ -117,10 +117,10 @@
         function togglePasswordVisibility(inputField,icon) {
             if (inputField.attr("type") === "password") {
                 inputField.attr("type", "text");
-                icon.addClass("bi-eye-slash").removeClass("bi-eye");
+                icon.addClass("bi-eye").removeClass("bi-eye-slash ");
             } else {
                 inputField.attr("type", "password");
-                icon.addClass("bi-eye").removeClass("bi-eye-slash ");
+                icon.addClass("bi-eye-slash ").removeClass("bi-eye");
             }
           }
 

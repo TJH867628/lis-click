@@ -168,7 +168,7 @@
                                                       <label>Current Password :</label>
                                                       <input type="password" name="currentPassword" class="form-control" id="currentPassword" minlength="8" maxlength="30">
                                                 </div>
-                                                <i style="height:fit-content; position:absolute; top:50%; left:45%;" class="bi-eye password-toggle" id="toggleCurrentPassword" style="color: black;"></i>
+                                                <i style="height:fit-content; position:absolute; top:50%; left:45%;" class="bi-eye-slash password-toggle" id="toggleCurrentPassword" style="color: black;"></i>
                                             </div>  
                                         </div>
                                         <div class="row">
@@ -183,7 +183,7 @@
                                                       <label>Confirm New Password :</label>
                                                       <input type="password" name="newPassword2" class="form-control" id="newPassword2" minlength="8" maxlength="30">
                                                 </div>
-                                                <i style="height:fit-content; position:absolute; top:50%; left:100%;" class="bi-eye password-toggle" id="toggleNewPassword" style="color: black;"></i>
+                                                <i style="height:fit-content; position:absolute; top:50%; left:100%;" class="bi-eye-slash password-toggle" id="toggleNewPassword" style="color: black;"></i>
                                             </div>
                                             <span id="password2Error" class="text-danger" style="display: none;"></span>
                                         </div>
@@ -252,6 +252,7 @@
                 $("#toggleCurrentPassword").on("click", function () {
                     var inputField1 = $("#currentPassword");
                     var icon = $("#toggleCurrentPassword");
+                    console.log(icon);
                     togglePasswordVisibility(inputField1,null,icon);
                 });
 
@@ -270,14 +271,18 @@
                         inputField1.attr("type", "text");
                         inputField1[0].style.color = "#232434";
                         inputField1[0].style.color = "black";
-                        inputField2.attr("type", "text");
-                        inputField2[0].style.color = "#232434";
-                        inputField2[0].style.color = "black";
-                        icon.addClass("bi-eye-slash").removeClass("bi-eye");
+                        if(inputField2){
+                            inputField2.attr("type", "text");
+                            inputField2[0].style.color = "#232434";
+                            inputField2[0].style.color = "black";
+                        }
+                        icon.addClass("bi-eye").removeClass("bi-eye-slash");
                     }else if (passwordVisible == false){
                         inputField1.attr("type", "password");
-                        inputField2.attr("type", "password");
-                        icon.addClass("bi-eye").removeClass("bi-eye-slash");
+                        if(inputField2){
+                            inputField2.attr("type", "password");
+                        }
+                        icon.addClass("bi-eye-slash").removeClass("bi-eye");
                     }
                 }
 

@@ -29,7 +29,7 @@
                             <div class="row">
                                 <div class="col-lg-7">	
                                     <div class="contact">
-                                        <form class="form" name="enq" method="post" action="{{ route('sendEmailContactUs') }}">
+                                        <form class="form" id="faqForm" name="enq" method="post" action="{{ route('sendEmailContactUs') }}">
                                         @csrf
                                             <div class="row">
                                                 <div class="form-group col-md-6">
@@ -45,6 +45,7 @@
                                                     <textarea rows="6" name="message" class="form-control" placeholder="Your Message" required="required"></textarea>
                                                 </div>
                                                 <div class="g-recaptcha" data-sitekey="{{ env('RECAPTCHA_SITE_KEY') }}"></div>
+                                                <div id="recaptcha-feedback"></div>
                                                 @if($message = Session::get('success'))
                                                 <div class="alert alert-success" style="text-align: center;  font-size:large; font-weight:bold;">
                                                     <p style="color:black;">{{ $message }}</p>
@@ -88,7 +89,21 @@
                         </div><!--- END CONTAINER -->	
                     </div>
                 </div>
-                
+                <script>
+                    document.getElementById('faqForm').addEventListener('submit', function (event) {
+
+                        event.preventDefault();
+                        var recaptchaResponse = grecaptcha.getResponse();
+                        console.log(recaptchaResponse);
+                        if (recaptchaResponse.length === 0) {
+                            event.preventDefault(); // Prevent form submission
+                            document.getElementById('g-recaptcha-response').innerHTML = 'Please complete the reCAPTCHA.';
+                        } else {
+                            // reCAPTCHA was completed, continue with form submission
+                            document.getElementById('g-recaptcha-response').innerHTML = ''; // Clear any previous error message
+                        }
+                    });
+                </script>
             </header>
         <!-- Bootstrap core JS-->
         <!-- Core theme JS-->

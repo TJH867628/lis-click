@@ -22,6 +22,7 @@
                     <li><a class="dropdown-item" href="/paymentStatus">Payment Status</a></li>
                     <li><a class="dropdown-item" href="/feesPaymentQR ">Change Payment QR</a></li>
                     <li><a class="dropdown-item" href="{{ route('bendahariDashboard') }} ">Dashboard</a></li>
+                    <li><a class="dropdown-item" href="/JKspend">Cost</a></li>
                 </ul>
             <li class="nav-item"><a class="nav-link" href="/account">My Profile</a></li>
             </ul>
