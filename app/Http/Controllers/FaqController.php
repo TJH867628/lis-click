@@ -69,6 +69,7 @@ class FaqController extends Controller
         $userEmail = $request->get('email');
         $subject = $request->get('subject');
         $userMessage = $request->get('message');
+        dd($userEmail, $name);
         $userMessage = (string) $userMessage; // Convert $message to a string
         $officialEmail = tbl_masterdata::where('masterdata_name','officialEmail')->first();
         $email = new contactUs($name,$userEmail,$subject,$userMessage);
