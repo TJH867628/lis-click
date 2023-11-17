@@ -41,6 +41,13 @@ form {
     background-color: white;
 }
 
+    @media (max-width: 523px) {
+        /* Adjust the margin-top for smaller screens */
+        form {
+            max-width: 300px;
+        }
+    }
+
 input[type="text"], textarea {
     width: 100%;
     padding: 10px;
@@ -403,21 +410,48 @@ thead th.active,tbody td.active {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     background-color: white;
 }
+
+.py-5 {
+    padding-top: 40rem !important;
+    padding-bottom: 3rem !important;
+}
+
+@media (max-width: 768px){
+    .py-5 {
+        padding-top: 40rem !important;
+        padding-bottom: 3rem !important;
+    }
+    
+}
+
+@media (max-width: 522px){
+    .py-5 {
+        padding-top: 50rem !important;
+        padding-bottom: 3rem !important;
+    } 
+}
+
+@media (max-width: 385px){
+    .py-5 {
+        padding-top: 60rem !important;
+        padding-bottom: 3rem !important;
+    } 
+}
+
 </style>
 </head>
 <!-- Header-->
-<header class="bg-light text text-dark py-5">
-                        <div class="container"  style="margin-top: 20%;">										
-                            <div class="section-title text-center mt-5">
-                                <h1>LIS (LIGA ILMU SERANTAU)</h1>
-                                <p>"DIGITAL TRANSFORMATION TOWARDS INFINITE POSSIBILITY"</p>
-                                <h2 style="margin: auto;">Apply For Reviewer</h2>
-                            </div>					
+        <header class="bg-light text text-dark py-5">
                             
                             <div class="row-register">
                                 <div class="col-lg-7">	
                                     <form class="form" id="fullpaper-form" name="form" action="{{ route('applyForReviewer',['userId'=>'visitor']) }}" enctype="multipart/form-data" method="POST" onsubmit="return validateAdditionalAuthor(event)">
                                         @csrf
+                                            <div class="section-title text-center mt-5">
+                                                <h1>LIS (LIGA ILMU SERANTAU)</h1>
+                                                <p>"DIGITAL TRANSFORMATION TOWARDS INFINITE POSSIBILITY"</p>
+                                                <h2 style="margin: auto;">Apply For Reviewer</h2>
+                                            </div>	
                                             <div class="form-group col-md-12">
                                                 <label>Highest Education:</label>
                                                 <input type="text" name="highestEducation" class="form-control" placeholder="Highest Education Level" required="required">
@@ -489,7 +523,7 @@ thead th.active,tbody td.active {
                                                     <span>Choose a file</span>
                                                     <i class="fas fa-upload"></i>
                                                 </label>
-                                                <input id="file-upload" type="file" name="file" accept=".jpeg,.jpg,.png,application/pdf" onchange="enableUploadButton()"/>
+                                                <input id="file-upload" type="file" name="file" accept="application/pdf" onchange="enableUploadButton()"/>
                                             </div>                                                
                                         @if($message = Session::get('error'))
                                         <div class="alert alert-danger">

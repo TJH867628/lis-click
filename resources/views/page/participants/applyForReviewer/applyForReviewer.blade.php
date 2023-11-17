@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Register As Audience</title>
+        <title>Call for Reviewer</title>
         <!-- Favicon-->
             <link rel="icon" type="image/x-icon" href="{{ $favicon }}" />
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -24,6 +24,7 @@
     </style>
     <body class="d-flex flex-column h-100">
         @include('page.participants.navigationBar')
+        <br><br><br><br><br><br>
         @include('page.participants.applyForReviewer.applyForReviewerContent')
         @include('page.footer')
         <!-- Bootstrap core JS-->
