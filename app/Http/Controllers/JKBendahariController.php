@@ -159,6 +159,8 @@ class JKBendahariController extends Controller
 
     public function bendahariDashboard() {
         $paymentDetails = tbl_payment::whereNotNull('amount')->get();
+        $submissiontype = tbl_submission::all();
+        $audience = tbl_audience::all()->count();
         // Group payments by year
         $paymentsByYear = $paymentDetails->groupBy(function ($payment) {
             return $payment->created_at->format('Y');
@@ -233,16 +235,41 @@ class JKBendahariController extends Controller
             ];
         }
         $uniqueYears = array_keys($dataByYear);
+
+        $submissiontype = $submissiontype->groupBy('submissionType')
+            ->map(function ($group) {
+                return $group->count();
+            });
+
+        $presentPublic = $submissiontype->get('Paper Presentation & Publication', 0);
+        $presentOnly = $submissiontype->get('Paper Presentation ONLY', 0);
+        $posterOnly = $submissiontype->get('Poster Presentation ONLY', 0);
+        $publicOnly = $submissiontype->get('Publication ONLY', 0);
+        $student = $submissiontype->get('Student Presenter', 0);
+
+        $totalSubmission = $audience + $presentPublic + $presentOnly + $posterOnly + $publicOnly + $student;
+
+        $type =[
+
+            'Paper Presentation & Publication'=>$presentPublic,
+            'Paper Presentation ONLY'=>$presentOnly,
+            'Poster Presentation ONLY'=>$posterOnly,
+            'Publication ONLY'=>$publicOnly,
+            'Student Presenter'=>$student,
+            'Audience'=>$audience
+        ];
         return view('page.JK_Bendahari.dashboard.dashboard', [
             'dataByYear' => $dataByYear,
             'uniqueYears' => $uniqueYears,
+            'type' => $type,
+            'totalSubmission' => $totalSubmission,
         ]);
     }
     
     public function spend(){
         $spend = tbl_spend::all();
 
-        
+
 
         return view('page.JK_Bendahari.spend.spend',['spend' => $spend]);
     }
