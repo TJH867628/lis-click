@@ -72,11 +72,7 @@ class FaqController extends Controller
         $userMessage = (string) $userMessage; // Convert $message to a string
         $officialEmail = tbl_masterdata::where('masterdata_name','officialEmail')->first();
         $email = new contactUs($name,$userEmail,$subject,$userMessage);
-        // Set the "From" address to the user's email address
-        $email->from($userEmail, $name); // You can set the sender's name as well if needed
-
         // Set the actual sender's email address (official email) in the headers
-        $email->getHeaders()->addTextHeader($userEmail, $officialEmail->masterdata_value);
         Mail::to($officialEmail->masterdata_value)->send($email);
 
         return redirect()->back()->with('success','Your message has been submitted successfully');
