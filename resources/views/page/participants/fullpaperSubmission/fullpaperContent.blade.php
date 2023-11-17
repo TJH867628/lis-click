@@ -148,7 +148,7 @@
                                                     <p><em>Format : ".docx(word)"</em></p>
                                                     <p><em>For more information, please <a href="/conferencesDownload">click here.</a></em></p>
                                                     <div class="upload-sect">
-                                                        <input type="file" id="file-upload" name="file_upload" required>
+                                                        <input type="file" id="file-upload" name="file_upload">
                                                     </div>
                                                 </div>
                                                 
@@ -157,7 +157,7 @@
                                                     <p><em>Format : ".pdf"</em></p>
                                                     <p><em>For more information, please <a href="/conferencesDownload">click here.</a></em></p>
                                                     <div class="upload-sect">
-                                                        <input type="file" id="poster-upload" name="file_upload" required>
+                                                        <input type="file" id="poster-upload" name="poster_upload">
                                                     </div>
                                                 </div>
 
@@ -360,8 +360,7 @@
                                                     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                                                     return emailRegex.test(email);
                                                 }
-                                                $(document).ready(function(){
-                                                    
+                                                $(document).ready(function() {
                                                     var form = $("#fullpaper-form");
 
                                                     form.on("submit", function(event) {
@@ -369,26 +368,40 @@
                                                         var category = $("#category").val();
                                                         var presentMode = $("#presentMode").val();
                                                         var subTheme = $("#sub-theme").val();
+                                                        var fileUpload = $("#file-upload")[0].files.length; // Get the number of files selected for file-upload
+                                                        var posterUpload = $("#poster-upload")[0].files.length; // Get the number of files selected for poster-upload
+
                                                         if (category === null) {
                                                             event.preventDefault();
                                                             alert("Please select a category.");
                                                         }
 
-                                                        if (presentMode === null){
+                                                        if (presentMode === null) {
                                                             event.preventDefault();
                                                             alert("Please select a Presentation Mode.");
                                                         }
 
-                                                        if (subTheme === null){
+                                                        if (subTheme === null) {
                                                             event.preventDefault();
                                                             alert("Please select a Sub-theme.");
                                                         }
 
-                                                        if(category !== null && presentMode !== null && presentMode !== null){
-                                                            form.unbind('submit').submit(); 
+                                                        if ($("#fileupload").is(":visible") && fileUpload === 0) {
+                                                            event.preventDefault();
+                                                            alert('Please select a file before submitting.');
+                                                        }
+
+                                                        if ($("#posterupload").is(":visible") && posterUpload === 0) {
+                                                            event.preventDefault();
+                                                            alert('Please select a poster before submitting.');
+                                                        }
+
+                                                        if (category !== null && presentMode !== null && subTheme !== null && ((fileUpload > 0 && $("#fileupload").is(":visible")) || (posterUpload > 0 && $("#posterupload").is(":visible")))) {
+                                                            form.unbind('submit').submit();
                                                         }
                                                     });
                                                 });
+
                                                 
                                             </script>
                                             @if($message = Session::get('error'))
