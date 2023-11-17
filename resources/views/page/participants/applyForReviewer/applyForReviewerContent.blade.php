@@ -457,7 +457,7 @@ thead th.active,tbody td.active {
                                                 
                                             @if(isset($hasApply) && $hasApply->isApprove == 0)
                                             <div id="applyResult">
-                                                <h3>Apply Result:</h3><h3 style="color: orange;">Pending For Verify and Approve</h3>
+                                                <h3>Status:</h3><h3 style="color: orange;">Pending For Approval</h3>
                                             </div> 
                                             <div class="row">
                                                 <div class="form-group col-md-12">
@@ -545,20 +545,24 @@ thead th.active,tbody td.active {
                                             </div>
                                             @endif
                                         <div class="col-md-12 text-center">
-                                            <button type="submit" id="submitButton" class="button-submit" title="Submit your form!">Submit</button>
+                                            <input type="checkbox" id="checkbox" name="checkbox">
+                                            <label for="checkbox" style="margin-top: 20px; margin-bottom: -20px;">Check this box</label>
+                                            <div style="display: flex; flex-direction: column; align-items: center;">
+                                                <span id="checkboxError" style="display: none; color: red;">Please check the box before submitting.</span>
+                                                <button type="submit" id="submitButton" class="button-submit" title="Submit your form!" style="margin-top: 5%;">Submit</button>
+                                            </div>
                                         </div>
                                     </form>
                             </div><!--- END ROW -->
                             @elseif(isset($hasApply) && $hasApply->isApprove == 1)
                             <div id="applyResult" style="margin-top: ;">
-                                <h3>Apply Result:</h3><h3 style="color: green;"><strong>Approved</strong></h3>
+                                <h3>Status:</h3><h3 style="color: green;"><strong>Approved</strong></h3>
                                 <p>Kindly please check your email inbox to get the username and password for reviewer account</p>
                             </div>
                             @else
                             <form class="form" id="fullpaper-form" name="form" action="{{ route('applyForReviewer',['userId'=>$user->id]) }}" enctype="multipart/form-data" method="POST" onsubmit="return validateAdditionalAuthor(event)">
                                         @csrf
                                             <div class="row">
-                                                <h3>Update Apply Information</h3>
                                                 <div class="form-group col-md-12">
                                                     <label>Highest Education:</label>
                                                     <input type="text" name="highestEducation" class="form-control" placeholder="Highest Education Level"  required="required">
@@ -648,7 +652,12 @@ thead th.active,tbody td.active {
                                             </div>
                                             @endif
                                         <div class="col-md-12 text-center">
-                                            <button type="submit" id="submitButton" class="button-submit" title="Submit your form!">Submit</button>
+                                            <input type="checkbox" id="checkbox" name="checkbox">
+                                            <label for="checkbox" style="margin-top: 20px; margin-bottom: -20px;">Check this box</label>
+                                            <div style="display: flex; flex-direction: column; align-items: center;">
+                                                <span id="checkboxError" style="display: none; color: red;">Please check the box before submitting.</span>
+                                                <button type="submit" id="submitButton" class="button-submit" title="Submit your form!" style="margin-top: 0%;">Submit</button>
+                                            </div>
                                         </div>
                                     </form>
                             @endif
@@ -656,7 +665,16 @@ thead th.active,tbody td.active {
                     </div>
                 </div>
                 <script>
-            
+            $(document).ready(function() {
+                $('#fullpaper-form').on('submit', function(e) {
+                    if (!$('#checkbox').is(':checked')) {
+                        e.preventDefault();
+                        $('#checkboxError').show();
+                    } else {
+                        $('#checkboxError').hide();
+                    }
+                });
+            });
 
             $(document).ready(function() {
                 $count = 0;
