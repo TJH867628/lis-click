@@ -49,7 +49,7 @@ class FaqController extends Controller
 
         // Get the reCAPTCHA response from the request
         $recaptchaResponse = $request->input('g-recaptcha-response');
-
+        
         // Build the cURL command
         // Execute the cURL request and capture the response
         $response = exec("curl --request POST --url 'https://www.google.com/recaptcha/api/siteverify' --data 'secret=$secretKey&response={$request->input('g-recaptcha-response')}'", $output, $status);
@@ -72,7 +72,7 @@ class FaqController extends Controller
         $userMessage = (string) $userMessage; // Convert $message to a string
         $officialEmail = tbl_masterdata::where('masterdata_name','officialEmail')->first();
         $email = new contactUs($name,$userEmail,$subject,$userMessage);
-        Mail::to($officialEmail->masterdata_value)->send($email);
+        Mail::send($email);
 
         return redirect()->back()->with('success','Your message has been submitted successfully');
     }

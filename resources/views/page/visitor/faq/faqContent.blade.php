@@ -45,6 +45,7 @@
                                                     <textarea rows="6" name="message" class="form-control" placeholder="Your Message" required="required"></textarea>
                                                 </div>
                                                 <div class="g-recaptcha" data-sitekey="{{ env('RECAPTCHA_SITE_KEY') }}"></div>
+                                                <div id="g-recaptcha-response"></div>
                                                 <div id="recaptcha-feedback"></div>
                                                 @if($message = Session::get('success'))
                                                 <div class="alert alert-success" style="text-align: center;  font-size:large; font-weight:bold;">
@@ -97,10 +98,10 @@
                         console.log(recaptchaResponse);
                         if (recaptchaResponse.length === 0) {
                             event.preventDefault(); // Prevent form submission
-                            document.getElementById('g-recaptcha-response').innerHTML = 'Please complete the reCAPTCHA.';
+                            document.getElementById('recaptcha-feedback').innerHTML = 'Please complete the reCAPTCHA.';
                         } else {
                             // reCAPTCHA was completed, continue with form submission
-                            document.getElementById('g-recaptcha-response').innerHTML = ''; // Clear any previous error message
+                            document.getElementById('recaptcha-feedback').innerHTML = ''; // Clear any previous error message
                         }
                     });
                 </script>

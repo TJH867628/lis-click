@@ -60,7 +60,7 @@
                                                     <input type="text" name="name" class="form-control" placeholder="Presenter's Full Name (CAPITAL LETTER)" onload="this.value = this.value.toUpperCase()" required="required" value="{{ $user -> name }}" readonly >
                                                 </div>
                                                 <div class="form-group col-md-12">
-                                                    <label>IC Number:</label>
+                                                    <label>Idenfication Number / Passport:</label>
                                                     <input type="text" name="IC" class="form-control" placeholder="Presenter's Identification Number (MyKad) *without -" required="required" value="{{ $user -> IC_No }}" readonly>
                                                 </div>
                                                 <div class="form-group col-md-12">
@@ -157,7 +157,7 @@
                                                     <p><em>Format : ".pdf"</em></p>
                                                     <p><em>For more information, please <a href="/conferencesDownload">click here.</a></em></p>
                                                     <div class="upload-sect">
-                                                        <input type="file" id="poster-upload" name="file_upload" required>
+                                                        <input type="file" id="poster-upload" name="poster_upload" required>
                                                     </div>
                                                 </div>
 

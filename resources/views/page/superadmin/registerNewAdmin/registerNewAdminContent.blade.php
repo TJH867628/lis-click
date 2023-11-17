@@ -92,8 +92,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="IC_No">IC Number :</label>
-                    <input type="text" name="IC_No" id="IC_No" class="form-control" placeholder="Enter IC Number" required>
+                    <label for="IC_No">Idenfication Number / Passport :</label>
+                    <input type="text" name="IC_No" id="IC_No" class="form-control" placeholder="Enter Idenfication Number / Passport" required>
                 </div>
 
                 <div class="form-group">

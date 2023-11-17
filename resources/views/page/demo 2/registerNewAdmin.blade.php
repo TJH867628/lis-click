@@ -77,8 +77,8 @@
                 <label for="name" class="register">Full Name</label><br>
                 <input type="text" name="name" id="name" class="register" placeholder="Name" required><br>
 
-                <label for="IC_No" class="register">IC Number</label><br>
-                <input type="text" name="IC_No" id="IC_No" class="register" placeholder="Enter IC Number" required><br>
+                <label for="IC_No" class="register">Idenfication Number / Passport</label><br>
+                <input type="text" name="IC_No" id="IC_No" class="register" placeholder="Enter Idenfication Number / Passport" required><br>
 
                 <label for="phoneNumber" class="register">Phone Number</label><br>
                 <input type="text" name="phoneNumber" id="phoneNumber" placeholder="Phone Number"><br>
