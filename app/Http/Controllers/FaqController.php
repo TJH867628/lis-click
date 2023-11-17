@@ -72,6 +72,7 @@ class FaqController extends Controller
         $userMessage = (string) $userMessage; // Convert $message to a string
         $officialEmail = tbl_masterdata::where('masterdata_name','officialEmail')->first();
         $email = new contactUs($name,$userEmail,$subject,$userMessage);
+        $email->subject("Contact Us Email From User");
         $email->from($userEmail);
         Mail::to($officialEmail->masterdata_value)->send($email);
 
