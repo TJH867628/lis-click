@@ -102,6 +102,9 @@
                         } else {
                             // reCAPTCHA was completed, continue with form submission
                             document.getElementById('recaptcha-feedback').innerHTML = ''; // Clear any previous error message
+                            var form = document.getElementById('faqForm');
+                            const submitFormFunction = Object.getPrototypeOf(form).submit;
+                            submitFormFunction.call(form);
                         }
                     });
                 </script>
