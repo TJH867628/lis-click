@@ -58,7 +58,7 @@ class FloorManagerController extends Controller
         if(session()->has('LoggedFloorManager')){
             session()->start();
 
-            $group = "Group " . $request->input('group');
+            $group = $request->input('group');
             $time = $request->input('time');
             $link = $request->input('link');
             $datetimeWithoutT = str_replace("T", " ", $time);
