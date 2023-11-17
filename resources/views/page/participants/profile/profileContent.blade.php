@@ -163,12 +163,12 @@
                                     @csrf
                                         <h3 class="mb-4">Password Settings</h3>
                                         <div class="row">
-                                            <div class="col-md-6" style="display: flex; position:relative;">
+                                            <div class="col-md-6" style="position:relative;">
                                                 <div class="form-group">
                                                       <label>Current Password :</label>
                                                       <input type="password" name="currentPassword" class="form-control" id="currentPassword" minlength="8" maxlength="30">
                                                 </div>
-                                                <i style="height:fit-content; position:absolute; top:50%; left:45%;" class="bi-eye-slash password-toggle" id="toggleCurrentPassword" style="color: black;"></i>
+                                                <i style="height:fit-content; position:absolute; top:50%; left:100%;" class="bi-eye-slash password-toggle" id="toggleCurrentPassword" style="color: black;"></i>
                                             </div>  
                                         </div>
                                         <div class="row">

@@ -484,7 +484,7 @@
 <body>
     <main class="table">
         <section class="table__header">
-            <h1>Schedule List</h1>
+            <h1>Parallel Session</h1>
             <button onclick="openPopup()" id="addButton">
             <div class="d-flex justify-content-center align-items-center">
                 <i class="material-icons text-center">add</i>
@@ -497,7 +497,7 @@
             <thead>
                 <tr>
                     <th>
-                        Group<br>
+                        Session<br>
                     </th>
                     <th>
                         Time<br>
@@ -566,9 +566,9 @@
     <div id="popup-content">
         <h2>Correction<i class="material-icons" onclick="closePopup()">close</i></h2>
         <form method="post" action="{{ route('newSchedule') }}" enctype="multipart/form-data">
-            <h5 for="group">Add New Presentation Shchedule</h5>
+            <h5 for="group">Add New Parallel Session</h5>
             @csrf
-            <label for="group">Group:</label>
+            <label for="group">Session:</label>
             <input type="text" name="group" id="group" required>
 
             <label for="time">Time:</label>

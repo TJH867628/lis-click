@@ -44,11 +44,11 @@
                                                 <!--Dropdown-->
                                                 <div class="form-group col-md-3">
                                                     <label class="category">Please CHOOSE your category :</label>
-                                                    <select class="dropdown-option" id="category" name="category" onclick="removeChooseoption()" value="{{ $user -> category }}" required>
-                                                        <option value="" selected disabled>Choose</option>
+                                                    <select class="dropdown-option" id="category" name="category" value="{{ $user -> category }}" required>
+                                                        <option value="" selected disabled style="color: #aaa">Choose</option>
                                                         <option value="Paper Presentation & Publication">Paper Presentation & Publication</option>
                                                         <option value="Paper Presentation ONLY">Paper Presentation ONLY</option>
-                                                        <option value="Poster Presentation ONLY">Poster Presentation ONLY</option>
+                                                        <option value="Poster Presentation ONLY" id="poster">Poster Presentation ONLY</option>
                                                         <option value="Publication ONLY">Publication ONLY</option>
                                                         <option value="Student Presenter">Student Presenter</option>
                                                     </select><br>
@@ -127,7 +127,7 @@
                                                 <!--Dropdown-->
                                                 <div class="form-group col-md-3">
                                                     <label class="category">Sub-themes :</label>
-                                                    <select class="dropdown-option" name="sub-theme" id="sub-theme" onclick="removeChooseoption()" required>
+                                                    <select class="dropdown-option" name="sub-theme" id="sub-theme" required>
                                                         <option value="" selected disabled>Choose</option>
                                                         <option value="Engineering & Technology">Engineering & Technology</option>
                                                         <option value="Social Science">Social Science</option>
@@ -143,19 +143,37 @@
                                                 <!--End Dropdown-->
 
                                                 <!-- HTML button element that will trigger the file upload -->
-                                                <label class="upload">Please Upload File :</label>
-                                                <p><em>Format : ".docx(word)"</em></p>
-                                                <p><em>For more information, please <a href="/conferencesDownload">click here.</a></em></p>
-                                                <div class="upload-sect">
-                                                    <input type="file" id="file-upload" name="file_upload" required>
+                                                <div id="fileupload">
+                                                    <label class="upload">Please Upload File :</label>
+                                                    <p><em>Format : ".docx(word)"</em></p>
+                                                    <p><em>For more information, please <a href="/conferencesDownload">click here.</a></em></p>
+                                                    <div class="upload-sect">
+                                                        <input type="file" id="file-upload" name="file_upload" required>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div id="posterupload">
+                                                    <label class="upload">Please Upload File :</label>
+                                                    <p><em>Format : ".pdf"</em></p>
+                                                    <p><em>For more information, please <a href="/conferencesDownload">click here.</a></em></p>
+                                                    <div class="upload-sect">
+                                                        <input type="file" id="poster-upload" name="file_upload" required>
+                                                    </div>
                                                 </div>
 
                                                 <!-- HTML modal popup element -->
                                                 <div id="myModal" class="modal">
-                                                <div class="modal-content">
-                                                    <span class="close">&times;</span>
-                                                    <p>Please upload .docx(word) file only.</p>
+                                                    <div class="modal-content">
+                                                        <span class="close">&times;</span>
+                                                        <p>Please upload .docx(word) file only.</p>
+                                                    </div>
                                                 </div>
+
+                                                <div id="myModal1" class="modal">
+                                                    <div class="modal-content">
+                                                        <span class="close1">&times;</span>
+                                                        <p>Please upload .pdf file only.</p>
+                                                    </div>
                                                 </div>
 
                                                 <!-- JavaScript code that will create and show the popup -->
@@ -188,6 +206,33 @@
                                                     // Hide the modal popup
                                                     modal.style.display = "none";
                                                 });
+
+                                                const posterUpload = document.getElementById("poster-upload");
+
+                                                const modal1 = document.getElementById("myModal1");
+                                                const closeButton1 = document.getElementsByClassName("close1")[0];
+
+                                                // Add a change event listener to the file upload input
+                                                posterUpload.addEventListener("change", function() {
+                                                    // Get the selected file and its type
+                                                    const file = this.files[0];
+                                                    const fileType = file.type;
+
+                                                    // If the file type is not .docx, show the modal popup
+                                                    if (fileType == "application/pdf") {
+                                                        null;
+                                                    }else{
+                                                        modal1.style.display = "block";
+                                                        // Clear the file upload input
+                                                        this.value = null;
+                                                    }
+                                                });
+
+                                                // Add a click event listener to the close button
+                                                closeButton1.addEventListener("click", function() {
+                                                    // Hide the modal popup
+                                                    modal1.style.display = "none";
+                                                });
                                                 </script>
 
                                                 <!--Dropdown-->
@@ -207,6 +252,27 @@
                                                 const categoryDropdown = document.querySelector('select[name="category"]');
                                                 const presentModeDropdown = document.querySelector('select[name="presentMode"]');
                                                 const presentModeFormGroup = document.querySelector('.presentMode-Container');
+                                                const fileUploadSection = document.getElementById('fileupload');
+                                                const posterUploadSection = document.getElementById('posterupload');
+
+                                                // Function to toggle visibility of upload sections
+                                                function toggleUploadSections() {
+                                                    const selectedCategory = categoryDropdown.value;
+
+                                                    if (selectedCategory === 'Poster Presentation ONLY') {
+                                                        fileUploadSection.style.display = 'none';
+                                                        posterUploadSection.style.display = 'block';
+                                                    } else {
+                                                        fileUploadSection.style.display = 'block';
+                                                        posterUploadSection.style.display = 'none';
+                                                    }
+                                                }
+
+                                                // Initial toggle on page load
+                                                toggleUploadSections();
+
+                                                // Add change event listener to category dropdown
+                                                categoryDropdown.addEventListener('change', toggleUploadSections);
 
                                                 // Add change event listener to category dropdown
                                                 categoryDropdown.addEventListener('change', () => {

@@ -233,7 +233,7 @@
     <body>
     <main class="table">
         <section class="table__header">
-            <h1>Presentation Arrangement</h1>
+            <h1>Parallel Session Arrangement</h1>
         </section>
         <section class="table__body">
             <table id="presentationtable">
