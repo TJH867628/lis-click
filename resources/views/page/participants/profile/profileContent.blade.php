@@ -168,7 +168,7 @@
                                                       <label>Current Password :</label>
                                                       <input type="password" name="currentPassword" class="form-control" id="currentPassword" minlength="8" maxlength="30">
                                                 </div>
-                                                <i style="height:fit-content; position:absolute; top:50%; left:45%;" class="bi-eye-slash password-toggle" id="toggleCurrentPassword" style="color: black;"></i>
+                                                <i style="height:fit-content; position:absolute; top:50%; left:100%;" class="bi-eye-slash password-toggle" id="toggleCurrentPassword" style="color: black;"></i>
                                             </div>  
                                         </div>
                                         <div class="row">
