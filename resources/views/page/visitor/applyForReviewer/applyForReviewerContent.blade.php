@@ -534,13 +534,28 @@ thead th.active,tbody td.active {
                                             <strong>{{ $message }}</strong>
                                         </div>
                                         @endif
-                                    <div class="col-md-12 text-center">
-                                        <button type="submit" id="submitButton" class="button-submit" title="Submit your form!">Submit</button>
-                                    </div>
+                                        
+                                        <div class="col-md-12 text-center">
+                                            <input type="checkbox" id="checkbox" name="checkbox">
+                                            <label for="checkbox" style="margin-top: 20px; margin-bottom: -20px;">Check this box</label>
+                                            <div style="display: flex; flex-direction: column; align-items: center;">
+                                                <span id="checkboxError" style="display: none; color: red;">Please check the box before submitting.</span>
+                                                <button type="submit" id="submitButton" class="button-submit" title="Submit your form!" style="margin-top: 5%;">Submit</button>
+                                            </div>
+                                        </div>
                                 </form>
                         </div><!--- END CONTAINER -->	
                 <script>
-            
+            $(document).ready(function() {
+                $('#fullpaper-form').on('submit', function(e) {
+                    if (!$('#checkbox').is(':checked')) {
+                        e.preventDefault();
+                        $('#checkboxError').show();
+                    } else {
+                        $('#checkboxError').hide();
+                    }
+                });
+            });
 
             $(document).ready(function() {
                 $count = 0;
