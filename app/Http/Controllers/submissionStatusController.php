@@ -111,7 +111,6 @@ class submissionStatusController extends Controller
 
             if(tbl_participants_info::where('id',$submissionCode)->first()){
                 $categoryCode = "AUD";
-                dd(123);
                 $rows = tbl_payment::where('submissionCode', 'like', '%' . $categoryCode . '%')->count();
                 $userId = $submissionCode;
                 $submissionCode = $currentYear . "_" . $categoryCode . str_pad( str($rows + 1), 4, '0', STR_PAD_LEFT);
@@ -124,6 +123,7 @@ class submissionStatusController extends Controller
                 $paymentInfo->paymentStatus = "Pending For Verification";
                 $paymentInfo->paymentDate = $now;
                 $paymentInfo->proofOfPayment = $filename;
+                $paymentInfo->created_at = now();
                 $paymentInfo->updated_at = now();
                 $paymentInfo->save();
 
