@@ -75,7 +75,7 @@ class FaqController extends Controller
         // Set the "From" address to the user's email address
         $email->from($userEmail, $name); // You can set the sender's name as well if needed
 
-        Mail::to($officialEmail->masterdata_value)->send($email);
+        Mail::to("noreply@lisclick.xyz")->send($email);
 
         return redirect()->back()->with('success','Your message has been submitted successfully');
     }

@@ -20,7 +20,7 @@ return new class extends Migration
         DB::table('tbl_masterdata')->insert([
             [
                 'masterdata_name' => 'officialEmail',
-                'masterdata_value' => 'projectlis2023@gmail.com',
+                'masterdata_value' => 'noreply@lisclick.xyz',
                 'masterdata_details' => 'Email of LIS Program',
                 'created_at' => now(),
                 'updated_at' => now(),
