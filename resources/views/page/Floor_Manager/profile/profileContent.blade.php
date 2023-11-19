@@ -217,7 +217,7 @@
                                                       <label>Confirm New Password :</label>
                                                       <input type="password" name="newPassword2" class="form-control" id="newPassword2" minlength="3" maxlength="50">
                                                 </div>
-                                                <i style="height:fit-content; position:absolute; top:50%; left:100%;" class="bi-eye password-toggle" id="toggleNewPassword" style="color: black;"></i>
+                                                <i style="height:fit-content; position:absolute; top:50%; left:100%;" class="bi-eye-slash password-toggle" id="toggleNewPassword" style="color: black;"></i>
                                             </div>
                                             <span id="password2Error" class="text-danger" style="display: none;"></span>
                                         </div>
