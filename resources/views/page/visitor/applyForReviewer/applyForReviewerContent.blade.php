@@ -536,9 +536,11 @@ thead th.active,tbody td.active {
                                         @endif
                                         
                                         <div class="col-md-12 text-center">
-                                            <input type="checkbox" id="checkbox" name="checkbox">
-                                            <label for="checkbox" style="margin-top: 20px; margin-bottom: -20px;">Accept terms,Understanding that your acceptance is limited to this event and does not authorize any actions outside of it.</label>
-                                            <div style="display: flex; flex-direction: column; align-items: center;">
+                                            <div style="display:flex; margin-top: 20px; margin-bottom: -20px;">
+                                                <input type="checkbox" id="checkbox" name="checkbox">
+                                                <div style=" margin-left: 2%; font-size:15px;">By selecting this, I agree to use the documents from this event solely within the event itself.</div>
+                                            </div>
+                                            <div style="display: flex; flex-direction: column; align-items: center; margin-top: 5%;">
                                                 <span id="checkboxError" style="display: none; color: red;">Please check the box before submitting.</span>
                                                 <button type="submit" id="submitButton" class="button-submit" title="Submit your form!" style="margin-top: 5%;">Submit</button>
                                             </div>
