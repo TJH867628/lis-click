@@ -537,7 +537,7 @@ thead th.active,tbody td.active {
                                         
                                         <div class="col-md-12 text-center">
                                             <input type="checkbox" id="checkbox" name="checkbox">
-                                            <label for="checkbox" style="margin-top: 20px; margin-bottom: -20px;">Check this box</label>
+                                            <label for="checkbox" style="margin-top: 20px; margin-bottom: -20px;">Please check the box to accept the terms, understanding that your acceptance is limited to this event and does not authorize any actions outside of it.</label>
                                             <div style="display: flex; flex-direction: column; align-items: center;">
                                                 <span id="checkboxError" style="display: none; color: red;">Please check the box before submitting.</span>
                                                 <button type="submit" id="submitButton" class="button-submit" title="Submit your form!" style="margin-top: 5%;">Submit</button>
