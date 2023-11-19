@@ -56,6 +56,10 @@
             background-color: rgba(128, 128, 128, 0.2); /* Grey with opacity */
             transition: color 0.5s, background-color 0.5s; /* Faster transition */
         }
+        .footer{
+            position: fixed;
+            bottom: 0;
+          }
     </style>
 </head>
 

@@ -41,6 +41,11 @@
               margin-top:10%; 
               margin-left:1%;
             }
+
+            footer{
+              position: fixed;
+              bottom: 0;
+            }
         </style>
     </head>
     <body class="d-flex flex-column h-100">

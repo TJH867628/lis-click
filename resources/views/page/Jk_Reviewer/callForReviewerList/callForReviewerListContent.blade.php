@@ -401,7 +401,7 @@
                             @if(isset($thisApply->file_to_support))
                             <td><a href="{{ route('downloadSupportDocument',['filename'=>$thisApply->file_to_support]) }}" target="_blank">{{ $thisApply->file_to_support }}</a></td>
                             @else
-                            Nothing Here..
+                            <td>Nothing Here..</td>
                             @endif
                             @if($thisApply->isApprove == 0)
                             <td><a href="{{ route('approveApplicationForReviewer',['userId'=>$thisApply->id]) }}" onclick="return confirm('Do you sure to approve this application?')"><button>Approve</button></a></td>

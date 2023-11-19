@@ -20,6 +20,11 @@
             text-align: center;
             margin-bottom: 10px;
           }
+
+          footer{
+            position: fixed;
+            bottom: 0;
+          }
     </style>
   </head>
   <body>
