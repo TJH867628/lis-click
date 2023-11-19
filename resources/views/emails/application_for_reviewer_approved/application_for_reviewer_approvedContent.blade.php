@@ -60,7 +60,7 @@
             <p>Below are your username and password for reviewer account : </p>
             <br><br>
             <div class="payment-details">
-                <p><strong>Payment Details:</strong></p>
+                <p><strong>Account username/password:</strong></p>
                 <ul>
                     <li>
                         <strong>Username:</strong>
