@@ -120,7 +120,7 @@
                 <div class="card">
                   <div class="card-body">
                     <div class="clearfix">
-                      <h4 class="card-title float-left"><br><br><br>Category Amount</h4>
+                      <h4 class="card-title float-left"><br><br><br>Total Submission by Category</h4>
                       <div id="visit-sale-chart-legend" class="rounded-legend legend-horizontal legend-top-right float-right"></div>
                     </div>
                     <canvas id="visit-sale-chart" class="mt-4"></canvas>
@@ -130,7 +130,7 @@
               <div class="col-md-5 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Total Collect</h4>
+                    <h4 class="card-title">Total Amount Collected</h4>
                     <canvas id="traffic-chart"></canvas>
                     <div id="traffic-chart-legend" class="rounded-legend legend-vertical legend-bottom-left pt-4"></div>
                   </div>
