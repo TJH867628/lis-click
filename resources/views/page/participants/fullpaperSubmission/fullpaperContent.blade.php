@@ -138,7 +138,7 @@
                                                 <!--End Dropdown-->
 
                                                 <div class="form-group col-md-12">
-                                                    <label>Resarch Title:</label>
+                                                    <label>Research Title:</label>
                                                     <input type="text" name="paper-title" class="form-control" placeholder="Title" required>
                                                 </div>
 
