@@ -384,6 +384,9 @@
                             Highest Education Level<br>
                         </th>
                         <th>    
+                            Field Of Study<br>
+                        </th>
+                        <th>    
                             Document To Support<br>
                         </th>
                         <th>    
@@ -398,6 +401,7 @@
                             <td>{{ $thisApply->id }}</td>
                             <td>{{ $thisApply->email }}</td>
                             <td>{{ $thisApply->highest_education_level }}</td>
+                            <td>{{ $thisApply->field_of_study }}</td>
                             @if(isset($thisApply->file_to_support))
                             <td><a href="{{ route('downloadSupportDocument',['filename'=>$thisApply->file_to_support]) }}" target="_blank">{{ $thisApply->file_to_support }}</a></td>
                             @else

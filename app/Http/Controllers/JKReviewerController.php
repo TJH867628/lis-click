@@ -436,6 +436,8 @@ class JKReviewerController extends Controller
 
         public function applyForReviewer(Request $request){
             $email = $request->input('email');
+            $field = $request->input('field');
+            $fieldString = implode(' , ', $field);
             $highestEducation = $request->input('highestEducation');
             if(tbl_apply_for_reviewer::where('email', $email)->first()){
                 $applier = tbl_apply_for_reviewer::where('email', $email)->first();
@@ -445,6 +447,7 @@ class JKReviewerController extends Controller
 
             $applier->email = $email;
             $applier->highest_education_level = $highestEducation;
+            $applier->field_of_study = $fieldString;
             if($request->hasFile('file')){
                 $file = $request->file('file');
                 $extension = $file->getClientOriginalExtension();

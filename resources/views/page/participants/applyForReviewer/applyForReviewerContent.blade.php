@@ -546,7 +546,7 @@ thead th.active,tbody td.active {
                                                         <label class="custom-control-label" for="field8">Multi-Discipline</label>
                                                     </div>
                                                     <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="field9" name="field" value="Others" style="height: 20px; width: 10%">
+                                                        <input type="checkbox" class="custom-control-input" id="field9" name="field" onchange="toggleSpecifyField()" value="Others" style="height: 20px; width: 10%">
                                                         <label class="custom-control-label" for="field9">Others</label>
                                                         <input type="text" name="field" class="form-control" placeholder="Please specify" style="width: 50%; margin-left: 5%;" value="{{ $hasApply->field_of_study }}" hidden>
                                                     </div>
@@ -650,7 +650,6 @@ thead th.active,tbody td.active {
                                                     <label>Highest Education:</label>
                                                     <select name="highestEducation" class="form-control" required="required">
                                                         <option value="" disabled selected>Select Highest Education Level</option>
-                                                        <option value="High School" {{ $hasApply->highest_education_level == 'High School' ? 'selected' : '' }}>High School</option>
                                                         <option value="Bachelor's Degree" {{ $hasApply->highest_education_level == 'Bachelor\'s Degree' ? 'selected' : '' }}>Bachelor's Degree</option>
                                                         <option value="Master's Degree" {{ $hasApply->highest_education_level == 'Master\'s Degree' ? 'selected' : '' }}>Master's Degree</option>
                                                         <option value="PhD" {{ $hasApply->highest_education_level == 'PhD' ? 'selected' : '' }}>PhD</option>
@@ -842,6 +841,17 @@ thead th.active,tbody td.active {
                 uploadButton.disabled = false;
             } else {
                 uploadButton.disabled = true;
+            }
+        }
+
+        function toggleSpecifyField() {
+            var specifyField = document.getElementById("specifyField");
+            var checkbox = document.getElementById("field9");
+
+            if (checkbox.checked) {
+                specifyField.removeAttribute("hidden");
+            } else {
+                specifyField.setAttribute("hidden", "true");
             }
         }
 
