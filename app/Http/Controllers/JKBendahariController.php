@@ -173,7 +173,6 @@ class JKBendahariController extends Controller
         foreach ($paymentsByYear as $year => $payments) {
             $amountEachCategory = new \stdClass();
             // Calculate category-wise totals for this year
-
             $amountENG = 0; // Initialize the total amount for category ITC
             $amountSSC = 0; // Initialize the total amount for category SSC
             $amountITC = 0; // Initialize the total amount for category ITC
@@ -248,7 +247,7 @@ class JKBendahariController extends Controller
         $student = $submissiontype->get('Student Presenter', 0);
 
         $totalSubmission = $audience + $presentPublic + $presentOnly + $posterOnly + $publicOnly + $student;
-
+        
         $type =[
 
             'Paper Presentation & Publication'=>$presentPublic,

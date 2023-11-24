@@ -312,7 +312,7 @@
                         {{ $thisPaymentDetails->paymentID }}<br>
                         <p> Payment Date : </p>
                         @if($thisPaymentDetails->paymentDate != null)
-                        {{$thisPaymentDetails->paymentDate}}<br>
+                        {{ date('d-m-Y H-i-s', strtotime($thisPaymentDetails->paymentDate)) }}<br>
                         @else
                         unavailable
                         @endif

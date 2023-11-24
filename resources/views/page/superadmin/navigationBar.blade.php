@@ -58,6 +58,12 @@
               </a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="/participantsList">
+                <span class="menu-title">Participants List</span>
+                <i class="mdi mdi-format-list-bulleted menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="/submissionStatus">
                 <span class="menu-title">All Submission</span>
                 <i class="mdi mdi-format-list-bulleted menu-icon"></i>

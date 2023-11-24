@@ -379,7 +379,6 @@
             });
             dataForSelectedYear.totalAmount += yearData.totalAmount;
         });
-        console.log(dataForSelectedYear);
         }else{
             var dataForSelectedYear = dataByYear[selectedYear];
         }

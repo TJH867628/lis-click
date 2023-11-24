@@ -25,8 +25,9 @@
                                 </ul>
                         <li class="nav-item dropdown">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Audience</a>
+                            <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Participants & Audience</a>
                                 <ul class="dropdown-menu dropdown-menu-end bg-light" aria-labelledby="navbarDropdownBlog">
+                                    <li><a class="dropdown-item" href="/participantsList">Participants List</a></li>
                                     <li><a class="dropdown-item" href="/audienceList">Audience List</a></li>
                                 </ul>
                             <li class="nav-item dropdown">

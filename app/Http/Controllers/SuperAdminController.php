@@ -30,7 +30,12 @@ class SuperAdminController extends Controller
             session()->start();
             $adminSession = session()->get('LoggedSuperAdmin');
             $participantsInfo  = tbl_participants_info::all();
-            return view('page.participantsList(Super Admin)',['adminSession'=>$adminSession,'participants' => $participantsInfo]);
+            return view('page.superadmin.participantsList.participantsList',['adminSession'=>$adminSession,'participants' => $participantsInfo]);
+        }else if(session()->has("LoggedJKReviewer")){
+            session()->start();
+            $adminSession = session()->get('LoggedJKReviewer');
+            $participantsInfo  = tbl_participants_info::all();
+            return view('page.Jk_Reviewer.participantsList.participantsList',['adminSession'=>$adminSession,'participants' => $participantsInfo]);
         }else{
             return redirect('login')->with('fail','Login Session Expire,Please Login again');
         }
@@ -223,5 +228,6 @@ class SuperAdminController extends Controller
 
         return response()->json(['message' => 'Task deleted successfully']);
     }
+
 
 }

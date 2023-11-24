@@ -123,7 +123,7 @@
           <div class="content-wrapper">
             <main class="table">
                 <section class="table__header">
-                    <h1>Admin List</h1>
+                    <h1>Pariticipants List</h1>
                 </section>
                 <section class="table__body">
                   @if($message = Session::get('updateSuccess'))
@@ -131,66 +131,52 @@
                         <strong>{{ $message }}</strong>
                     </div>
                   @endif
-                  <table id="adminTable" class="display">
+                  <table id="userTable" class="display">
                       <thead>
                         <tr>
+                          <th>
+                              Salutation<br>
+                          </th>
+                          <th>
+                          Name<br>
+                        </th>
+                          <th>
+                              Email<br>
+                          </th>
+                          <!-- <th>
+                                Idenfication Number / Passport<br>
+                            </th> -->
                             <th>
-                                Email<br>
-                            </th>
-                            <th>
-                                Name<br>
-                            </th>
-                            <th>
-                                Phone Number<br>
-                            </th>
-                            <th>
-                                Status<br>
-                            </th>
-                            <th>
-                                Role<br>
-                            </th>
-                            <th>
-                                Ic No<br>
+                                PhoneNumber<br>
                             </th>
                             <th>
                                 Organization<br>
                             </th>
                             <th>
-                                Created At<br>
-                            </th>
-                            <th>
-                                Updated At<br>
-                            </th>
-                            <th>
-                              Action
+                                Date Of Register<br>
                             </th>
                         </tr>
                       </thead>
-                      @if(isset($admin))
+                      @if(isset($participants))
                       <tbody>
-                        @foreach($admin as $admin)
+                        @foreach($participants as $participants)
                         <tr>
-                            <td>{{ $admin->email }}</td>
-                            <td>{{ $admin->name }}</td>
-                            <td>{{ $admin->phoneNumber }}</td>
-                            @if($admin->status === 0)
-                              <td>Deactived</td>
-                            @elseif($admin->status === 1)
-                              <td>Active</td>
-                            @endif
-                            <td>{{ $admin->adminRole }}</td>
-                            <td>{{ $admin->IC_No }}</td>
-                            <td>{{ $admin->organizationName }}</td>
-                            <td>{{ $admin->created_at->format('d-m-Y H:i:s') }}</td>
-                            @if($admin->status === 0)
-                            <td><a href="{{ route('activeAdmin', ['adminEmail' => $admin->email]) }}" class="btn btn-primary mb-4">Active Admin</a></td>
-                            @elseif($admin->status === 1)
-                                @if($admin->adminRole === "Super")
-                                    <td><a href="#" class="btn btn-primary mb-4" style="background-color:gray; pointer-events: none;" >Deactive Admin</a></td>
-                                @else
-                                    <td><a href="{{ route('deactiveAdmin', ['adminEmail' => $admin->email]) }}" class="btn btn-primary mb-4">Deactive Admin</a></td>
-                                @endif
-                            @endif
+                            <td>{{ $participants->salutation }}</td>
+                            <td>{{ $participants->name }}</td>
+                            <td>{{ $participants->email }}</td>
+                            <!-- <td>{{ $participants->IC_No }}</td> -->
+                            <td>{{ $participants->phoneNumber }}</td>
+                            <td> 
+                              <label style="font-size: 15px; font-weight:bold;">Organization Name :</label>
+                              {{ $participants->organizationName }}<br><br>
+                              <label style="font-size: 15px; font-weight:bold;" for="">Organization Address :</label>
+                              {{ $participants->organizationAddress }}<br><br>
+                              <label style="font-size: 15px; font-weight:bold;" for="">Postcode :</label>
+                              {{ $participants->postcode }}<br><br>
+                              <label style="font-size: 15px; font-weight:bold;" for="">Country :</label>
+                              {{ $participants->country }}
+                            </td>
+                            <td>{{ $participants->created_at->format('d-m-Y H:i:s') }}</td>
                         </tr>
                         @endforeach
                       </tbody>
@@ -209,7 +195,6 @@
           
           <!-- partial -->
         </div>
-        @include('page.footer(Super)')
         <!-- main-panel ends -->
       </div>
       <script>

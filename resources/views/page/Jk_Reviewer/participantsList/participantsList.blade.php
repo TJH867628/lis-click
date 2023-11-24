@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Audience List</title>
+        <title>Participants List</title>
         <!-- Favicon-->
             <link rel="icon" type="image/x-icon" href="{{ $favicon }}" />
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
@@ -21,7 +21,7 @@
     <body class="d-flex flex-column h-100">
         @include('page.Jk_Reviewer.navigationBar')
         <br><br><br><br><br>
-        @include('page.Jk_Reviewer.audienceList.audienceListContent')
+        @include('page.Jk_Reviewer.participantsList.participantsListContent')
         @include('page.footer')
         <!-- Bootstrap core JS-->
         <!-- Core theme JS-->
