@@ -377,7 +377,7 @@
                             View Evaluation Form<br>
                         </th>
                         <th>    
-                            Turn In Report<br>
+                            Turn It In Report<br>
                         </th>
                         <th>
                             Correction
@@ -510,7 +510,7 @@
                             <td>
                                 @if($submissionInfo->turnInReport)
                                 <div class="downloadturnin">
-                                    <a href="{{ route('downloadTurnInReport', ['filename' => $submissionInfo->turnInReport]) }}" target="_blank" class="btn btn-primary mb-4"><i class="fa-solid fa-download" style="padding: 5px;"></i>Download Turn In Report</a>
+                                    <a href="{{ route('downloadTurnInReport', ['filename' => $submissionInfo->turnInReport]) }}" target="_blank" class="btn btn-primary mb-4"><i class="fa-solid fa-download" style="padding: 5px;"></i>Download Turn It In Report</a>
                                 </div>
                                 @endif
                                 <form action="{{ route('uploadTurnInReport',['submissionCode' => $submissionInfo->submissionCode]) }}" method="POST" enctype="multipart/form-data" class="formturnin">
@@ -525,7 +525,7 @@
                                             <span class="file-name" id="turnInReport-file-name" style="font-style: italic; color: #999; font-size:small; padding:0; margin-top:2%;">No File Selected</span>
                                         </div>
                                     </div>
-                                    <br><button type="submit" class="uploadturnin"><i class="fas fa-cloud-upload-alt" style="padding: 5px;"></i>Upload Turn In Report</button>
+                                    <br><button type="submit" class="uploadturnin"><i class="fas fa-cloud-upload-alt" style="padding: 5px;"></i>Upload Turn It In Report</button>
                                 </form>
                             </td>
                             <td>

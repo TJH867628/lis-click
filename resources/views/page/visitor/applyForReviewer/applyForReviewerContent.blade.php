@@ -454,11 +454,53 @@ thead th.active,tbody td.active {
                                             </div>	
                                             <div class="form-group col-md-12">
                                                 <label>Highest Education:</label>
-                                                <input type="text" name="highestEducation" class="form-control" placeholder="Highest Education Level" required="required">
+                                                <select name="highestEducation" class="form-control" required="required">
+                                                    <option value="" disabled selected>Select Highest Education Level</option>
+                                                    <option value="High School" {{ $hasApply->highest_education_level == 'High School' ? 'selected' : '' }}>High School</option>
+                                                    <option value="Bachelor's Degree" {{ $hasApply->highest_education_level == 'Bachelor\'s Degree' ? 'selected' : '' }}>Bachelor's Degree</option>
+                                                    <option value="Master's Degree" {{ $hasApply->highest_education_level == 'Master\'s Degree' ? 'selected' : '' }}>Master's Degree</option>
+                                                    <option value="PhD" {{ $hasApply->highest_education_level == 'PhD' ? 'selected' : '' }}>PhD</option>
+                                                </select>
                                             </div>
                                             <div class="form-group col-md-12">
                                                 <label>Field:</label>
-                                                <input type="text" name="field" class="form-control" placeholder="Field" required="required">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="field1" name="field" value="Engineering & Technology" style="height: 20px; width: 10%">
+                                                    <label class="custom-control-label" for="field1">Engineering & Technology</label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="field2" name="field" value="Social Science" style="height: 20px; width: 10%">
+                                                    <label class="custom-control-label" for="field2">Social Science</label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="field3" name="field" value="Information Technology & Communication" style="height: 20px; width: 10%">
+                                                    <label class="custom-control-label" for="field3">Information Technology & Communication</label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="field4" name="field" value="Environment and Health" style="height: 20px; width: 10%">
+                                                    <label class="custom-control-label" for="field4">Environment and Health</label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="field5" name="field" value="Technical Vocational Education and Training(TVET)" style="height: 20px; width: 10%">
+                                                    <label class="custom-control-label" for="field5">Technical Vocational Education and Training(TVET)</label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="field6" name="field" value="Renewable Energy" style="height: 20px; width: 10%">
+                                                    <label class="custom-control-label" for="field6">Renewable Energy</label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="field7" name="field" value="Commerce" style="height: 20px; width: 10%">
+                                                    <label class="custom-control-label" for="field7">Commerce</label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="field8" name="field" value="Multi-Discipline" style="height: 20px; width: 10%">
+                                                    <label class="custom-control-label" for="field8">Multi-Discipline</label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="field9" name="field" value="Others" style="height: 20px; width: 10%">
+                                                    <label class="custom-control-label" for="field9">Others</label>
+                                                    <input type="text" name="field" class="form-control" placeholder="Please specify" style="width: 50%; margin-left: 5%;" value="{{ $hasApply->field_of_study }}" hidden>
+                                                </div>
                                             </div>
                                             <div class="form-group col-md-12">
                                                 <label>Full Name:</label>

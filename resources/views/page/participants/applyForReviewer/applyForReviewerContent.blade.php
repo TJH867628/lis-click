@@ -431,6 +431,47 @@ thead th.active,tbody td.active {
     }
 }
 
+/* Align items in a flex container */
+.custom-checkbox {
+    display: flex;
+    align-items: center; /* This will vertically align the checkbox and label */
+    margin-bottom: 0.5rem; /* Adjust the space between each checkbox */
+}
+
+/* Style for the checkbox input */
+.custom-control-input {
+    margin-right: 0.5rem; /* Space between the checkbox and the label */
+    cursor: pointer;
+    /* Adjust the size of the checkbox */
+    width: 1em; /* Smaller width */
+    height: 1em; /* Smaller height */
+    margin-bottom: 2px;
+    left: 0;
+}
+
+/* Style for the label */
+.custom-control-label {
+    order: 2; /* Ensures label is to the right */
+    text-align: left; /* Aligns the text to the left */
+    margin-bottom: 0; /* Removes any margin below the label */
+}
+
+/* Optional: Custom styles for the appearance of the checkbox */
+.custom-control-input:checked ~ .custom-control-label::before {
+    color: #fff;
+    border-color: #0d6efd; /* Color of the border */
+    background-color: #0d6efd; /* Background color when checked */
+}
+
+/* Ensuring that the line-height of the labels matches the height of the checkboxes */
+.custom-control-label {
+    line-height: 1em; /* Adjust this value to match the height of your checkboxes */
+}
+
+/* Optional: Add a hover effect to the checkboxes */
+.custom-control-input:hover:not(:disabled):not(:checked) ~ .custom-control-label::before {
+    border-color: #b3d7ff;
+}
 
 </style>
 </head>
@@ -462,11 +503,53 @@ thead th.active,tbody td.active {
                                             <div class="row">
                                                 <div class="form-group col-md-12">
                                                     <label>Highest Education:</label>
-                                                    <input type="text" name="highestEducation" class="form-control" placeholder="Highest Education Level" value="{{$hasApply->highest_education_level}}" required="required">
+                                                    <select name="highestEducation" class="form-control" required="required">
+                                                        <option value="" disabled selected>Select Highest Education Level</option>
+                                                        <option value="High School" {{ $hasApply->highest_education_level == 'High School' ? 'selected' : '' }}>High School</option>
+                                                        <option value="Bachelor's Degree" {{ $hasApply->highest_education_level == 'Bachelor\'s Degree' ? 'selected' : '' }}>Bachelor's Degree</option>
+                                                        <option value="Master's Degree" {{ $hasApply->highest_education_level == 'Master\'s Degree' ? 'selected' : '' }}>Master's Degree</option>
+                                                        <option value="PhD" {{ $hasApply->highest_education_level == 'PhD' ? 'selected' : '' }}>PhD</option>
+                                                    </select>
                                                 </div>
                                                 <div class="form-group col-md-12">
-                                                    <label>Field:</label>
-                                                    <input type="text" name="field" class="form-control" placeholder="Field" required="required">
+                                                    <label>Field of Study:</label>
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" id="field1" name="field" value="Engineering & Technology" style="height: 20px; width: 10%">
+                                                        <label class="custom-control-label" for="field1">Engineering & Technology</label>
+                                                    </div>
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" id="field2" name="field" value="Social Science" style="height: 20px; width: 10%">
+                                                        <label class="custom-control-label" for="field2">Social Science</label>
+                                                    </div>
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" id="field3" name="field" value="Information Technology & Communication" style="height: 20px; width: 10%">
+                                                        <label class="custom-control-label" for="field3">Information Technology & Communication</label>
+                                                    </div>
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" id="field4" name="field" value="Environment and Health" style="height: 20px; width: 10%">
+                                                        <label class="custom-control-label" for="field4">Environment and Health</label>
+                                                    </div>
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" id="field5" name="field" value="Technical Vocational Education and Training(TVET)" style="height: 20px; width: 10%">
+                                                        <label class="custom-control-label" for="field5">Technical Vocational Education and Training(TVET)</label>
+                                                    </div>
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" id="field6" name="field" value="Renewable Energy" style="height: 20px; width: 10%">
+                                                        <label class="custom-control-label" for="field6">Renewable Energy</label>
+                                                    </div>
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" id="field7" name="field" value="Commerce" style="height: 20px; width: 10%">
+                                                        <label class="custom-control-label" for="field7">Commerce</label>
+                                                    </div>
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" id="field8" name="field" value="Multi-Discipline" style="height: 20px; width: 10%">
+                                                        <label class="custom-control-label" for="field8">Multi-Discipline</label>
+                                                    </div>
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" id="field9" name="field" value="Others" style="height: 20px; width: 10%">
+                                                        <label class="custom-control-label" for="field9">Others</label>
+                                                        <input type="text" name="field" class="form-control" placeholder="Please specify" style="width: 50%; margin-left: 5%;" value="{{ $hasApply->field_of_study }}" hidden>
+                                                    </div>
                                                 </div>
                                                 <div class="form-group col-md-12">
                                                     <label>Full Name:</label>
@@ -565,12 +648,55 @@ thead th.active,tbody td.active {
                                             <div class="row">
                                                 <div class="form-group col-md-12">
                                                     <label>Highest Education:</label>
-                                                    <input type="text" name="highestEducation" class="form-control" placeholder="Highest Education Level"  required="required">
+                                                    <select name="highestEducation" class="form-control" required="required">
+                                                        <option value="" disabled selected>Select Highest Education Level</option>
+                                                        <option value="High School" {{ $hasApply->highest_education_level == 'High School' ? 'selected' : '' }}>High School</option>
+                                                        <option value="Bachelor's Degree" {{ $hasApply->highest_education_level == 'Bachelor\'s Degree' ? 'selected' : '' }}>Bachelor's Degree</option>
+                                                        <option value="Master's Degree" {{ $hasApply->highest_education_level == 'Master\'s Degree' ? 'selected' : '' }}>Master's Degree</option>
+                                                        <option value="PhD" {{ $hasApply->highest_education_level == 'PhD' ? 'selected' : '' }}>PhD</option>
+                                                    </select>
                                                 </div>
                                                 <div class="form-group col-md-12">
-                                                    <label>Field:</label>
-                                                    <input type="text" name="field" class="form-control" placeholder="Field" required="required" readonly>
+                                                    <label>Field of Study:</label>
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" id="field1" name="field" value="Engineering & Technology" style="height: 20px; width: 10%">
+                                                        <label class="custom-control-label" for="field1">Engineering & Technology</label>
+                                                    </div>
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" id="field2" name="field" value="Social Science" style="height: 20px; width: 10%">
+                                                        <label class="custom-control-label" for="field2">Social Science</label>
+                                                    </div>
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" id="field3" name="field" value="Information Technology & Communication" style="height: 20px; width: 10%">
+                                                        <label class="custom-control-label" for="field3">Information Technology & Communication</label>
+                                                    </div>
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" id="field4" name="field" value="Environment and Health" style="height: 20px; width: 10%">
+                                                        <label class="custom-control-label" for="field4">Environment and Health</label>
+                                                    </div>
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" id="field5" name="field" value="Technical Vocational Education and Training(TVET)" style="height: 20px; width: 10%">
+                                                        <label class="custom-control-label" for="field5">Technical Vocational Education and Training(TVET)</label>
+                                                    </div>
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" id="field6" name="field" value="Renewable Energy" style="height: 20px; width: 10%">
+                                                        <label class="custom-control-label" for="field6">Renewable Energy</label>
+                                                    </div>
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" id="field7" name="field" value="Commerce" style="height: 20px; width: 10%">
+                                                        <label class="custom-control-label" for="field7">Commerce</label>
+                                                    </div>
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" id="field8" name="field" value="Multi-Discipline" style="height: 20px; width: 10%">
+                                                        <label class="custom-control-label" for="field8">Multi-Discipline</label>
+                                                    </div>
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" id="field9" name="field" value="Others" style="height: 20px; width: 10%">
+                                                        <label class="custom-control-label" for="field9">Others</label>
+                                                        <input type="text" name="field" class="form-control" placeholder="Please specify" style="width: 50%; margin-left: 5%;" value="{{ $hasApply->field_of_study }}" hidden>
+                                                    </div>
                                                 </div>
+
                                                 <div class="form-group col-md-12">
                                                     <label>Full Name:</label>
                                                     <input type="text" name="name" class="form-control" placeholder="Full Name (CAPITAL LETTER)" onload="this.value = this.value.toUpperCase()" required="required" value="{{ $user -> name }}" readonly >

@@ -119,11 +119,6 @@
                                                     <div id="participants3-name-error" class="text-danger"></div>
                                                 </div>
 
-                                                <div class="form-group col-md-12">
-                                                    <label>Title:</label>
-                                                    <input type="text" name="paper-title" class="form-control" placeholder="Title" required>
-                                                </div>
-
                                                 <!--Dropdown-->
                                                 <div class="form-group col-md-3">
                                                     <label class="category">Sub-themes :</label>
@@ -141,6 +136,11 @@
                                                     </select><br>
                                                 </div>
                                                 <!--End Dropdown-->
+
+                                                <div class="form-group col-md-12">
+                                                    <label>Resarch Title:</label>
+                                                    <input type="text" name="paper-title" class="form-control" placeholder="Title" required>
+                                                </div>
 
                                                 <!-- HTML button element that will trigger the file upload -->
                                                 <div id="fileupload">
