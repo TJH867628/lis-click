@@ -13,7 +13,7 @@ class ConferencesController extends Controller
         session()->start();
         if(session()->has('LoggedUser')){
             $userSession = session()->get('LoggedUser');
-            $conferencesFees = tbl_conference::where('field_name','Conferences Fees')->get();
+            $conferencesFees = tbl_conference::where('field_name','Conferences Fees')->orderBy('field_value', 'desc')->get();
             foreach($conferencesFees as $thisConferencesFees){
                 $thisConferencesFees->field_id = substr($thisConferencesFees->field_id, 8);
             }
