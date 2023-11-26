@@ -182,6 +182,7 @@
                             <td>{{ $admin->IC_No }}</td>
                             <td>{{ $admin->organizationName }}</td>
                             <td>{{ $admin->created_at->format('d-m-Y H:i:s') }}</td>
+                            <td>{{ $admin->updated_at->format('d-m-Y H:i:s') }}</td>
                             @if($admin->status === 0)
                             <td><a href="{{ route('activeAdmin', ['adminEmail' => $admin->email]) }}" class="btn btn-primary mb-4">Active Admin</a></td>
                             @elseif($admin->status === 1)
