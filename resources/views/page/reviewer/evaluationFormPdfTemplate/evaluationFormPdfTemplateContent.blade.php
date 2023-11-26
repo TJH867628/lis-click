@@ -260,7 +260,7 @@
                 </tr>
                 @endif
             </table>
-            <input type="checkbox" style="margin-left: 2%;" name="recommendedAsBestPaper" <?php echo ($dataEvaluationForm->recommended_as_best_paper === 1) ? 'checked' : ''; ?>>Recommended As Best Paper<br>
+            <input type="checkbox" style="margin-left: 2%;" name="recommendedAsBestPaper" <?php echo ($thisdataEvaluationForm->recommended_as_best_paper === 1) ? 'checked' : ''; ?>>Recommended As Best Paper<br>
 
             <div class="page-break"></div>
 
