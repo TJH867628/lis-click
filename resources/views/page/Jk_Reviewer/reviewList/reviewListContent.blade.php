@@ -377,7 +377,7 @@
                             View Evaluation Form<br>
                         </th>
                         <th>    
-                            Turn It In Report<br>
+                            Turnitin Report<br>
                         </th>
                         <th>
                             Correction
@@ -510,7 +510,7 @@
                             <td>
                                 @if($submissionInfo->turnInReport)
                                 <div class="downloadturnin">
-                                    <a href="{{ route('downloadTurnInReport', ['filename' => $submissionInfo->turnInReport]) }}" target="_blank" class="btn btn-primary mb-4"><i class="fa-solid fa-download" style="padding: 5px;"></i>Download Turn It In Report</a>
+                                    <a href="{{ route('downloadTurnInReport', ['filename' => $submissionInfo->turnInReport]) }}" target="_blank" class="btn btn-primary mb-4"><i class="fa-solid fa-download" style="padding: 5px;"></i>Download Turnitin Report</a>
                                 </div>
                                 @endif
                                 <form action="{{ route('uploadTurnInReport',['submissionCode' => $submissionInfo->submissionCode]) }}" method="POST" enctype="multipart/form-data" class="formturnin">

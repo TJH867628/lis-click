@@ -569,12 +569,12 @@ $count = 0;
                            
                             <tr>
                                 <td style="width: max-content; color:black;">
-                                    Turn In Report
+                                    Turnitin Report
                                 </td>
                                 <td>
                                     @if($submissionInfo->turnInReport)
                                         <a href="{{ route('downloadTurnInReport', ['filename' => $submissionInfo->turnInReport]) }}" class="btn btn-primary mb-4 btn-download" target="_blank">
-                                            <i class="fas fa-download"></i>Turn In Report
+                                            <i class="fas fa-download"></i>Turnitin Report
                                         </a>
                                     @else
                                         <p class="status shipped"> Pending </p>
