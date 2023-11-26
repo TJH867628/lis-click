@@ -323,6 +323,8 @@ class ReviewerController extends Controller
             $recommendedAsBestPaper = $request->input('recommendedAsBestPaper');
             if($recommendedAsBestPaper === "on"){
                 $recommendedAsBestPaper = true;
+            }else{
+                $recommendedAsBestPaper = false;
             }
             $additionalComments = $request->input('additional_comments');
             $dataEvaluationForm = tbl_evaluation_form::where('paper_id_number',$submissionCode)->first();
