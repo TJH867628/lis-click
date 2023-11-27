@@ -369,7 +369,7 @@
         paymentRows.forEach((paymentRow) => {
             const statusOption = paymentRow.querySelector('.statusOption');
             const statusInput = paymentRow.querySelector('.statusInput');
-            const amount = paymentRow.querySelector('.amount');
+            const amount = paymentRow.querySelector('#amount');
 
             statusInput.value = statusOption.value;
 
@@ -379,14 +379,18 @@
                     statusInput.value = statusOption.value;
                     statusInput.style.display = 'none';
                     statusInput.required = false;
-                    amount.required = true;
                 } else if (statusOption.value === 'Incomplete') {
                     statusInput.value = '';
                     statusInput.style.display = 'block';
                     statusInput.required = true;
+                }
+
+                if (statusOption.value === 'Complete') {
+                    amount.required = true;
+                } else{
                     amount.required = false;
                     amount.value = "";
-                    }
+                }
 
                 });
             });
