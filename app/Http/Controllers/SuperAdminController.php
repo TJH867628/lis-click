@@ -128,7 +128,7 @@ class SuperAdminController extends Controller
             session()->start();
             $participantsCount = tbl_participants_info::all()->count();
             $submissionsCount = tbl_submission::all()->count();
-            $reviewersCount = tbl_review_info::all()->count();
+            $reviewersCount = tbl_admin_info::where('adminRole','Reviewer')->count();
             $checksubmission  = tbl_submission::all();
             $paymentDetails = tbl_payment::whereNotNull('amount')->get();
             $tasks = tbl_superadmintask::latest()->get();
