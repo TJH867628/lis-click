@@ -240,11 +240,11 @@ class JKBendahariController extends Controller
                 return $group->count();
             });
 
-        $presentPublic = $submissiontype->get('Paper Presentation & Publication', 0);
-        $presentOnly = $submissiontype->get('Paper Presentation ONLY', 0);
-        $posterOnly = $submissiontype->get('Poster Presentation ONLY', 0);
-        $publicOnly = $submissiontype->get('Publication ONLY', 0);
-        $student = $submissiontype->get('Student Presenter', 0);
+        $presentPublic = $submissiontype->get('Paper Presentation & Publication');
+        $presentOnly = $submissiontype->get('Paper Presentation ONLY');
+        $posterOnly = $submissiontype->get('Poster Presentation ONLY');
+        $publicOnly = $submissiontype->get('Publication ONLY');
+        $student = $submissiontype->get('Student Presenter');
 
         $amountPresentPublic = 0;
         $amountPresentOnly = 0;
