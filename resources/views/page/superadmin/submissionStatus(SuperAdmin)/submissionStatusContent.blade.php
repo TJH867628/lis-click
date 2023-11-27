@@ -830,8 +830,6 @@
     <script src="assets/js/dashboard.js"></script>
     <script src="assets/js/todolist.js"></script>
     <script>
-            
-
             // Get all submission code links
             const submissionCodeLinks = document.querySelectorAll('.submission-code');
             
