@@ -196,6 +196,7 @@
           <!-- partial -->
         </div>
         <!-- main-panel ends -->
+        @include('page.footer(Super)')
       </div>
       <script>
       $(document).ready(function() {
