@@ -449,7 +449,7 @@
             data: {
                 labels: ['Paper Presentation & Publication','Paper Presentation ONLY','Poster Presentation ONLY','Publication ONLY','Student Presenter','Audience'],
                 datasets: [{
-                    data:   ,
+                    data: data,
                     backgroundColor: [
                         'rgba(200, 0, 0, 0.7)', // Darker Red
                         'rgba(200, 150, 0, 0.7)', // Darker Yellow
