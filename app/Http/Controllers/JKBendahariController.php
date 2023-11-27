@@ -245,17 +245,53 @@ class JKBendahariController extends Controller
         $posterOnly = $submissiontype->get('Poster Presentation ONLY', 0);
         $publicOnly = $submissiontype->get('Publication ONLY', 0);
         $student = $submissiontype->get('Student Presenter', 0);
-        $amountPresentPublic = $presentPublic * 300;
-        $amountPresenOnly = $presentOnly * 250;
-        $amountPosterOnly = $posterOnly * 250;
-        $amountPublicationOnly = $publicOnly * 250;
-        $amountStudent = $student * 250;
+
+        $amountPresentPublic = 0;
+        $amountPresentOnly = 0;
+        $amountPosterOnly = 0;
+        $amountPublicationOnly = 0;
+        $amountStudent = 0;
+
+        foreach($presentPublic as $thisPresentPublic){
+            $payment = tbl_payment::where('submissionCode',$thisPresentPublic->submissionCode)->whereNotNull('amount')->get();
+            foreach($payment as $thisPayment){
+                $amountPresentPublic += $thisPayment->amount;
+            }
+        }
+        
+        foreach($presentOnly as $thisPresentOnly){
+            $payment = tbl_payment::where('submissionCode',$thisPresentOnly->submissionCode)->whereNotNull('amount')->get();
+            foreach($payment as $thisPayment){
+                $amountPresentOnly += $thisPayment->amount;
+            }
+        }
+
+        foreach($posterOnly as $thisPosterOnly){
+            $payment = tbl_payment::where('submissionCode',$thisPosterOnly->submissionCode)->whereNotNull('amount')->get();
+            foreach($payment as $thisPayment){
+                $amountPosterOnly += $thisPayment->amount;
+            }
+        }
+        
+        foreach($publicOnly as $thisPublicOnly){
+            $payment = tbl_payment::where('submissionCode',$thisPublicOnly->submissionCode)->whereNotNull('amount')->get();
+            foreach($payment as $thisPayment){
+                $amountPublicationOnly += $thisPayment->amount;
+            }
+        }
+
+        foreach($student as $thisStudent){
+            $payment = tbl_payment::where('submissionCode',$thisStudent->submissionCode)->whereNotNull('amount')->get();
+            foreach($payment as $thisPayment){
+                $amountStudent += $thisPayment->amount;
+            }
+        }
+
         $totalSubmission = $audience + $presentPublic + $presentOnly + $posterOnly + $publicOnly + $student;
         $amountAudience = $audience * 250;
         $type =[
-
             'Paper Presentation & Publication'=>$amountPresentPublic,
-            'Paper Presentation ONLY'=>$amountPresenOnly,
+            'Paper Presentation ONLY'=>$amountPresentOnly,
             'Poster Presentation ONLY'=>$amountPosterOnly,
             'Publication ONLY'=>$amountPublicationOnly,
             'Student Presenter'=>$amountStudent,
