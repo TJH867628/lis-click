@@ -316,7 +316,7 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
-                        Payment Details in RM (Ringgit Malaysia)
+                        Payment Details in MYR (Ringgit Malaysia)
                     </div>
                     <div class="card-body">
                         <canvas id="paymentChart" width="400" height="200"></canvas>
@@ -326,7 +326,7 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
-                        Payment Breakdown in RM (Ringgit Malaysia)
+                        Payment Breakdown in MYR (Ringgit Malaysia)
                     </div>
                     <div class="card-body">
                         <canvas id="paymentBreakdownChart" width="500" height="300"></canvas>
@@ -449,7 +449,7 @@
             data: {
                 labels: ['Paper Presentation & Publication','Paper Presentation ONLY','Poster Presentation ONLY','Publication ONLY','Student Presenter','Audience'],
                 datasets: [{
-                    data: data,
+                    data:   ,
                     backgroundColor: [
                         'rgba(200, 0, 0, 0.7)', // Darker Red
                         'rgba(200, 150, 0, 0.7)', // Darker Yellow
