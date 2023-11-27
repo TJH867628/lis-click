@@ -245,17 +245,21 @@ class JKBendahariController extends Controller
         $posterOnly = $submissiontype->get('Poster Presentation ONLY', 0);
         $publicOnly = $submissiontype->get('Publication ONLY', 0);
         $student = $submissiontype->get('Student Presenter', 0);
-
+        $amountPresentPublic = $presentPublic * 300;
+        $amountPresenOnly = $presentOnly * 250;
+        $amountPosterOnly = $posterOnly * 250;
+        $amountPublicationOnly = $publicOnly * 250;
+        $amountStudent = $student * 250;
         $totalSubmission = $audience + $presentPublic + $presentOnly + $posterOnly + $publicOnly + $student;
-        
+        $amountAudience = $audience * 250;
         $type =[
 
-            'Paper Presentation & Publication'=>$presentPublic,
-            'Paper Presentation ONLY'=>$presentOnly,
-            'Poster Presentation ONLY'=>$posterOnly,
-            'Publication ONLY'=>$publicOnly,
-            'Student Presenter'=>$student,
-            'Audience'=>$audience
+            'Paper Presentation & Publication'=>$amountPresentPublic,
+            'Paper Presentation ONLY'=>$amountPresenOnly,
+            'Poster Presentation ONLY'=>$amountPosterOnly,
+            'Publication ONLY'=>$amountPublicationOnly,
+            'Student Presenter'=>$amountStudent,
+            'Audience'=> $amountAudience,
         ];
         return view('page.JK_Bendahari.dashboard.dashboard', [
             'dataByYear' => $dataByYear,
