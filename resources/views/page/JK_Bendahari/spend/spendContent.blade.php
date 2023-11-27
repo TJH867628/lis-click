@@ -289,7 +289,7 @@
         
         <main class="table">
         <section class="table__header">
-            <h1>JK Spend</h1>
+            <h1>List Of Expenses</h1>
         </section>
         <div class="search-container">
             <form action="{{ route('submit-spend') }}" method="post">
