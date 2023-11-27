@@ -234,18 +234,13 @@ class JKBendahariController extends Controller
             ];
         }
         $uniqueYears = array_keys($dataByYear);
-
-        $submissiontype = $submissiontype->groupBy('submissionType')
-            ->map(function ($group) {
-                return $group->count();
-            });
-
-        $presentPublic = $submissiontype->get('Paper Presentation & Publication');
-        $presentOnly = $submissiontype->get('Paper Presentation ONLY');
-        $posterOnly = $submissiontype->get('Poster Presentation ONLY');
-        $publicOnly = $submissiontype->get('Publication ONLY');
-        $student = $submissiontype->get('Student Presenter');
-
+        
+        $presentPublic = $submissiontype->where('submissionType','Paper Presentation & Publication');
+        $presentOnly = $submissiontype->where('submissionType','Paper Presentation ONLY');
+        $posterOnly = $submissiontype->where('submissionType','Poster Presentation ONLY');
+        $publicOnly = $submissiontype->where('submissionType','Publication ONLY');
+        $student = $submissiontype->where('submissionType','Student Presenter');
+        
         $amountPresentPublic = 0;
         $amountPresentOnly = 0;
         $amountPosterOnly = 0;
@@ -287,7 +282,7 @@ class JKBendahariController extends Controller
             }
         }
 
-        $totalSubmission = $audience + $presentPublic + $presentOnly + $posterOnly + $publicOnly + $student;
+        $totalSubmission = $audience + $presentPublic->count() + $presentOnly->count() + $posterOnly->count() + $publicOnly->count() + $student->count();
         $amountAudience = $audience * 250;
         $type =[
             'Paper Presentation & Publication'=>$amountPresentPublic,
@@ -295,7 +290,7 @@ class JKBendahariController extends Controller
             'Poster Presentation ONLY'=>$amountPosterOnly,
             'Publication ONLY'=>$amountPublicationOnly,
             'Student Presenter'=>$amountStudent,
-            'Audience'=> $amountAudience,
+            'Audience'=> $amountAUD,
         ];
         return view('page.JK_Bendahari.dashboard.dashboard', [
             'dataByYear' => $dataByYear,
