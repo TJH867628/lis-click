@@ -328,7 +328,7 @@
                         <form action="{{ route('paymentStatusControl', ['paymentID' => $thisPaymentDetails->paymentID]) }}" method="POST">
                             @csrf
                             <input type="hidden" name="statusInput" value="">
-                            <input type="text" name="amount" placeholder="Amount" value="@if($thisPaymentDetails->amount)RM {{ $thisPaymentDetails->amount }}@endif"><br><br>
+                            <input type="text" name="amount" id="amount" placeholder="Amount" value="@if($thisPaymentDetails->amount)RM {{ $thisPaymentDetails->amount }}@endif"><br><br>
                             <select class="statusOption" name="statusOption">
                                 <option value="Complete">Complete</option>
                                 <option value="Pending For Verification" selected>Pending For Verification</option>
@@ -369,21 +369,24 @@
         paymentRows.forEach((paymentRow) => {
             const statusOption = paymentRow.querySelector('.statusOption');
             const statusInput = paymentRow.querySelector('.statusInput');
+            const amount = paymentRow.querySelector('.amount');
 
             statusInput.value = statusOption.value;
 
             statusOption.addEventListener('change', () => {
-            console.log(paymentRow);
+                console.log(amount);
                 if (statusOption.value === 'Complete' || statusOption.value === 'Pending For Verification') {
                     statusInput.value = statusOption.value;
                     statusInput.style.display = 'none';
                     statusInput.required = false;
+                    amount.required = true;
                 } else if (statusOption.value === 'Incomplete') {
                     statusInput.value = '';
                     statusInput.style.display = 'block';
                     statusInput.required = true;
+                    amount.required = false;
+                    amount.value = "";
                     }
-                console.log(statusInput.value);
 
                 });
             });
