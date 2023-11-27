@@ -428,6 +428,9 @@
         .content-wrapper{
           width: 110%;
         }
+        .fixfooter{
+            width: 110%;
+        }
 </style>
   </head>
   <body>
@@ -790,6 +793,10 @@
           
           <!-- partial -->
         </div>
+        <div class="fixfooter">
+            @include('page.footer(Super)')
+        </div>
+        
         <!-- main-panel ends -->
       </div>
       <script>
