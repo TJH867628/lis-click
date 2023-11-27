@@ -90,7 +90,7 @@ class FullpaperController extends Controller
                             $rows = 0;
                         }
                         $submissionCode = $currentYear . "_" . $categoryCode . str_pad( str($rows + 1), 4, '0', STR_PAD_LEFT);
-                    }else if($subTheme === "Technical Vocational Education and Training"){
+                    }else if($subTheme === "Technical Vocational Education and Training (TVET)"){
                         $categoryCode = "TVT";
                         $rows = tbl_submission::where('categoryCode',$categoryCode)->count();
                         if($rowsCurrentYear = tbl_submission::where('submissionCode', 'like', $currentYear . '%')->count() == 0){
