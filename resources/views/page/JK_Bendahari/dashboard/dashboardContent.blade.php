@@ -316,7 +316,7 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
-                        Payment Details in MYR (Ringgit Malaysia)
+                        Payment Details By Themes in MYR (Ringgit Malaysia)
                     </div>
                     <div class="card-body">
                         <canvas id="paymentChart" width="400" height="200"></canvas>
@@ -326,7 +326,7 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
-                        Payment Breakdown in MYR (Ringgit Malaysia)
+                        Payment Breakdown By Category in MYR (Ringgit Malaysia)
                     </div>
                     <div class="card-body">
                         <canvas id="paymentBreakdownChart" width="500" height="300"></canvas>
