@@ -634,14 +634,14 @@ $count = 0;
                                         @if($submissionInfo->participants_certificate == 'pending')
                                             <p class="status shipped">Pending</p>
                                         @else
-                                            <a href="{{ route('downloadParticipantsCertificate', ['filename' => $submissionInfo->certificate]) }}" class="btn btn-primary mb-4 btn-download" target="_blank">
+                                            <a href="{{ route('downloadParticipantsCertificate', ['filename' => $submissionInfo->participants_certificate]) }}" class="btn btn-primary mb-4 btn-download" target="_blank">
                                                 <i class="fas fa-download"></i>Participants Certificate
                                             </a>
                                         @endif
                                         @if($submissionInfo->presentation_certificate == 'pending')
                                             <p class="status shipped">Pending</p>
                                         @else
-                                            <a href="{{ route('downloadPresentationCertificate', ['filename' => $submissionInfo->certificate]) }}" class="btn btn-primary mb-4 btn-download" target="_blank">
+                                            <a href="{{ route('downloadPresentationCertificate', ['filename' => $submissionInfo->presentation_certificate]) }}" class="btn btn-primary mb-4 btn-download" target="_blank">
                                                 <i class="fas fa-download"></i>Presentation Certificate
                                             </a>
                                         @endif
