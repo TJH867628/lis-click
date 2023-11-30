@@ -288,7 +288,7 @@ class ReviewerController extends Controller
             session()->start();
             $reviewerSession = session()->get('LoggedReviewer');
             $dataEvaluationForm = tbl_evaluation_form::where('id', $id)->get();
-            $logo_lis = public_path('images/Logo1 (1).png');
+            $logo_lis = public_path('images/Logo1 (1).png');             
             $logo_pmj = public_path('images/logo_PMJ.png');
             $pdf = PDF::loadView('page.reviewer.evaluationFormPdfTemplate.evaluationFormPdfTemplateContent',['dataEvaluationForm' => $dataEvaluationForm,'year' => $year,'logo_lis' => $logo_lis,'logo_pmj' => $logo_pmj]);
         }

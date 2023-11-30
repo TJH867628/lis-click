@@ -326,10 +326,10 @@
               scales: {
                   yAxes: [{
                       ticks: {
-                          display: false,
+                          display: true,
                           min: 0,
-                          stepSize: 20,
-                          max: 80
+                          stepSize: 10,
+                          max: 30
                       },
                       gridLines: {
                         drawBorder: false,
