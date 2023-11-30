@@ -325,12 +325,7 @@
               },
               scales: {
                   yAxes: [{
-                      ticks: {
-                          display: true,
-                          min: 0,
-                          stepSize: 10,
-                          max: 30
-                      },
+                      ticks: {},
                       gridLines: {
                         drawBorder: false,
                         color: 'rgba(235,237,242,1)',
