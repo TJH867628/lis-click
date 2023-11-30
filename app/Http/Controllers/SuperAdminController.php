@@ -147,7 +147,7 @@ class SuperAdminController extends Controller
             $amountCOM = $submissionCounts->get('COM', 0);
             $amountMDC = $submissionCounts->get('MDC', 0);
             $amountOTH = $submissionCounts->get('OTH', 0);
-            $amountAUD = $submissionCounts->get('AUD', 0);
+            $amountAUD = tbl_payment::where('submissionCode', 'like', '%AUD%')->get()->count();
 
             $amounts = [
                 'ENG' => $amountENG,
