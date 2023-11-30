@@ -481,7 +481,7 @@
               animateScale: true,
               animateRotate: true
             },
-            legend: false,
+            legend: true,
             legendCallback: function(chart) {
               var text = []; 
               text.push('<ul>'); 
