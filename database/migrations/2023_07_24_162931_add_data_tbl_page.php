@@ -123,11 +123,18 @@ return new class extends Migration
                 'pageName' => 'Visitor FAQ',
                 'pagePath' => 'page.visitor.faq.faqContent',
                 'pageType' => 'Visitor',
+                'editable' => false,
+                'createdAt' => now(),
+                'updatedAt' => now(),
+            ],
+            [
+                'pageName' => 'Visitor Home Page',
+                'pagePath' => 'page.visitor.mainPage.mainPageContent',
+                'pageType' => 'Visitor',
                 'editable' => true,
                 'createdAt' => now(),
                 'updatedAt' => now(),
             ],
-
             
             //template
             // [

@@ -123,7 +123,7 @@
           <div class="content-wrapper">
             <main class="table">
                 <section class="table__header">
-                    <h1>Pariticipants List</h1>
+                    <h1>Participants List</h1>
                 </section>
                 <section class="table__body">
                   @if($message = Session::get('updateSuccess'))

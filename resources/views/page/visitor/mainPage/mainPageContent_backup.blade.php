@@ -16,7 +16,7 @@
                 </div>
             </div>
             <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img src="/resources/Img/backdrop1.jpg" class="img-fluid rounded-3 my-5"></div>
-            <a class="btn btn-primary btn-lg px-4 me-sm-3" href="/registration" style="color: white;">Register now</a>
+            <a class="btn btn-primary btn-lg px-4 me-sm-3" href="/registration" style="color: white;;">Register now</a>
         </div>
     </div>
 </header>

@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('tbl_page', function (Blueprint $table) {
-            $table->boolean('editable')->after('pageType');
+            $table->boolean('editable')->after('pageType')->default(false);
         });
     }
 
