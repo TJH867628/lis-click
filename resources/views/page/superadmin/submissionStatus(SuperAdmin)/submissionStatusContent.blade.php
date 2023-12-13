@@ -691,12 +691,8 @@
                                                 @endif
                                             </td>
                                         </tr>
-
-
-                                        
                                     </table>
                                 </td>
-                                
                                 <td>
                                     @if($submissionInfo->correctionPhase == 'readyForPresent')
                                         @php
@@ -770,6 +766,8 @@
                                     <button type="submit" class="btn btn-danger">
                                       <i class="fas fa-trash-alt"></i> Withdraw Submission
                                     </button>
+                                @else
+                                    Nothing here
                                   @endif
                                   </form>
                                 </td>
