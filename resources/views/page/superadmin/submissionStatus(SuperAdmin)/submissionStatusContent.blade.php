@@ -773,13 +773,6 @@
                                 </td>
                             </tr>
                         @endforeach
-                        @if($count == 0)
-                        <tr>
-                            <td colspan="4">
-                                <h1 style="color: grey;">No submission found.</h1>
-                            </td>
-                        </tr>
-                        @endif
                     @else       
                         <p style="color: black;">No submission found.</p>
                     @endif
