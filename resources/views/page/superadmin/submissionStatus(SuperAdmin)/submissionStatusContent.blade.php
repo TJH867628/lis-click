@@ -777,7 +777,7 @@
                         @endforeach
                         @if($count == 0)
                         <tr>
-                            <td colspan="3">
+                            <td colspan="4">
                                 <h1 style="color: grey;">No submission found.</h1>
                             </td>
                         </tr>
