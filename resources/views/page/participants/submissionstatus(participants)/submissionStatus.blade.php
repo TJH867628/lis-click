@@ -210,7 +210,7 @@ if (!foundMatch) {
 
     $(document).ready(function() {
         $count = 0;
-        button = $('#showPaymentMethod');
+        button = document.querySelectorAll("#showPaymentMethod");
         button.click(function showPopup() {
         // Create a new window
         var popup = window.open("", "Payment QR", "width=800,height=700");
