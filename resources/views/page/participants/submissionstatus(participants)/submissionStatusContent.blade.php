@@ -777,6 +777,10 @@ $count = 0;
                     // Center the window on the screen
                     popup.moveTo((screen.width - popup.outerWidth) / 2, (screen.height - popup.outerHeight) / 2);
                     $count++;
+
+                    popup.onbeforeunload = function () {
+                        $count--;
+                    };
                 }
             }
 
