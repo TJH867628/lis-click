@@ -208,35 +208,6 @@ if (!foundMatch) {
 }
     }
 
-    $(document).ready(function() {
-        $count = 0;
-        button = $('#showPaymentMethod');
-
-        function showPopup() {
-            // Create a new window
-            var popup = window.open("", "Payment QR", "width=800,height=700");
-            if($count == 0){ 
-                popup.document.write("<head><title>Payment</title></head>");
-                // Add styles
-                popup.document.write("<style>");
-                popup.document.write("body { font-family: Arial, sans-serif; text-align: center; background-color: #f2f2f2; }");
-                popup.document.write("h1 { color: #333; font-size: 24px; margin-top: -20px; }");
-                popup.document.write("img { height: 250px; width: 250px; margin: 0px auto; display: block; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); }");
-                popup.document.write("label { color: #555; font-size: 18px; margin-top: 10px; display: block; }");
-                popup.document.write("</style>");
-                
-
-                // Add content
-                popup.document.write("<body>");
-                popup.document.write(String.raw`@if(empty($paymentQR))<h1>Payment QR is not available, please contact customer service</h1>@else @if($paymentQR->masterdata_value != NULL) <img src='{{ asset('paymentQR/'.$paymentQR->masterdata_value) }}'><br> @endif @if($paymentQR->masterdata_details != NULL)<textarea column="20" row="10" style="width:100%; height:50%;" readonly>{{ $paymentQR->masterdata_details }}</textarea><br>@endif @if($paymentQR->masterdata_value == NULL && $paymentQR->masterdata_details == NULL) Payment QR is not available, please contact customer service @endif @endif`);        
-                popup.document.write("@if(empty($paymentQR->masterdata_value))@else <label style='color: red; font-weight: bold;'>Please save your receipt for upload</label>@endif");
-                popup.document.write("</body>");
-
-                // Center the window on the screen
-                popup.moveTo((screen.width - popup.outerWidth) / 2, (screen.height - popup.outerHeight) / 2);
-                $count++;
-            }
-        }
-    });
+    
     </script>
 </html>
